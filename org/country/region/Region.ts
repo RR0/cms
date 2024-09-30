@@ -15,7 +15,7 @@ import { ColombiaRegionCode } from "../../co/region/ColombiaRegionCode"
 import { NewZealandRegionCode } from "../../nz/region/NewZealandRegionCode"
 import { UkRegionCode } from "../../uk/region/UkRegionCode"
 import { RegionMessages } from "./RegionMessages"
-import { TitleMessage } from "../../index"
+import { TitleMessage } from "../../TitleMessage"
 import { IndiaRegionCode } from "../../in/region/IndiaRegionCode"
 
 export type RegionCode =

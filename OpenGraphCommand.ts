@@ -3,7 +3,7 @@ import { HtmlRR0SsgContext } from "./RR0SsgContext"
 import { Canvas, CanvasRenderingContext2D, createCanvas, loadImage } from "canvas"
 import fs from "fs"
 import path from "path"
-import { TimeTextBuilder } from "./time/TimeTextBuilder"
+import { TimeTextBuilder } from "./time"
 import { RR0ContentStep } from "./RR0ContentStep"
 import assert from "assert"
 

@@ -4,7 +4,7 @@ import path from "path"
 import { RR0SsgContext } from "../RR0SsgContext"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages"
-import { TitleMessage } from "./index"
+import { TitleMessage } from "./TitleMessage"
 import { RR0Event } from "../event/RR0Event"
 
 export enum OrganizationType {

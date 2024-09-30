@@ -1,5 +1,5 @@
 import { TimeContext } from "./time/TimeContext"
-import { ssgMessages } from "./lang"
+import { ssgMessages } from "./lang/ssgMessages"
 import { RR0Messages } from "./lang/RR0Messages"
 import { ConsoleLogger, FileContents, HtmlSsgContext, SsgConfig, SsgContext, SsgContextImpl } from "ssg-api"
 import { People } from "./people/People"

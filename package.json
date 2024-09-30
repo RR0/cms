@@ -20,11 +20,20 @@
     "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
     "prepublishOnly": "npm run build",
     "test": "testscript",
-    "test-one": "rm -Rf out && tsx time/datasource/baseovnifrance/BaseOvniFranceCaseSummaryRR0Mapper.test.ts",
+    "test-one": "rm -Rf out && tsx OpenGraphCommand.test.ts",
     "test-ci": "rm -Rf out && testscript"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
+    "@rr0/common": "^1.0.1",
+    "@rr0/lang": "^0.1.11",
+    "@rr0/time": "^0.5.0",
+    "canvas": "^2.11.2",
+    "csv-parser": "^3.0.0",
+    "glob": "^11.0.0",
+    "image-size": "^1.1.1",
+    "jsdom": "^24.1.0",
+    "selenium-webdriver": "^4.22.0",
     "ssg-api": "^1.16.1"
   },
   "devDependencies": {

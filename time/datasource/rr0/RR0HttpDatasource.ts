@@ -1,13 +1,13 @@
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { HttpSource } from "../HttpSource"
-import { UrlUtil } from "../../../util/url/UrlUtil"
+import { UrlUtil } from "../../../util"
 import { RR0Datasource } from "./RR0Datasource"
 import { TimeContext } from "../../TimeContext"
 import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary"
-import { Place } from "../../../place/Place"
-import { Publication, Source } from "../../../source/Source"
+import { Place } from "../../../place"
+import { Publication, Source } from "../../../source"
 import { CityService } from "../../../org/country/region/department/city/CityService"
-import { Organization } from "../../../org/Organization"
+import { Organization } from "../../../org"
 
 export class RR0HttpDatasource extends RR0Datasource {
 

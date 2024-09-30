@@ -1,6 +1,6 @@
 import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
 import { RR0HttpDatasource } from "./RR0HttpDatasource"
-import { cityService } from "../../../org/Cities"
+import { cityService } from "../../../org"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 import { RR0CaseMapping } from "./RR0CaseMapping"
 import { RR0CaseSummary } from "./RR0CaseSummary"
