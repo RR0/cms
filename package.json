@@ -1,0 +1,46 @@
+{
+  "name": "@rr0/cms",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Content Management System",
+  "author": "rr0@rr0.org",
+  "license": "MIT",
+  "homepage": "https://github.com/RR0/cms",
+  "exports": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RR0/cms.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prebuild": "npm install && npm test",
+    "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
+    "prepublishOnly": "npm run build",
+    "test": "testscript",
+    "test-one": "rm -Rf out && tsx time/datasource/baseovnifrance/BaseOvniFranceCaseSummaryRR0Mapper.test.ts",
+    "test-ci": "rm -Rf out && testscript"
+  },
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "ssg-api": "^1.16.1"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7",
+    "typescript": "^5.5.4",
+    "@types/node": "^22.7.4",
+    "tsx": "4.17.0",
+    "@javarome/testscript": "^0.10.7"
+  },
+  "keywords": [
+    "cms",
+    "time",
+    "place",
+    "organization"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
