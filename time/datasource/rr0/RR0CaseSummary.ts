@@ -1,7 +1,7 @@
-import { Place } from "../../../place/Place"
-import { Organization } from "../../../org/Organization"
-import { RR0Data } from "../../../data/RR0Data"
-import { RR0Event } from "../../../event/RR0Event"
+import { Place } from "../../../place"
+import { Organization } from "../../../org"
+import { RR0Data } from "../../../data"
+import { RR0Event } from "../../../event"
 
 export type NamedPlace = {
   readonly place?: Place

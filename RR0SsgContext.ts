@@ -1,8 +1,7 @@
-import { TimeContext } from "./time/TimeContext"
-import { ssgMessages } from "./lang/ssgMessages"
-import { RR0Messages } from "./lang/RR0Messages"
+import { TimeContext } from "./time"
+import { RR0Messages, ssgMessages } from "./lang"
 import { ConsoleLogger, FileContents, HtmlSsgContext, SsgConfig, SsgContext, SsgContextImpl } from "ssg-api"
-import { People } from "./people/People"
+import { People } from "./people"
 
 export interface RR0SsgContext extends SsgContext {
 

@@ -1,5 +1,7 @@
 import { Datasource } from "./Datasource"
 import { HtmlRR0SsgContext } from "../../RR0SsgContext"
+import { ContextFilter } from "./ContextFilter"
+import { TimeContextFilter } from "./TimeContextFilter"
 
 /**
  * Cache cases which were already fetched, and filter out cases in memory according to (time) context.
@@ -28,7 +30,9 @@ export abstract class AbstractDatasource<S> implements Datasource<S> {
     return summaries.filter(contextFilter.filter.bind(contextFilter))
   }
 
-  protected abstract createFilter(context: HtmlRR0SsgContext)
+  protected createFilter(context: HtmlRR0SsgContext): ContextFilter<S> {
+    return new TimeContextFilter<S>(context)  // By default
+  }
 
   protected contextKey(context: HtmlRR0SsgContext) {
     return context.time.toString()

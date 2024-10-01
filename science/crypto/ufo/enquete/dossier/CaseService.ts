@@ -1,9 +1,8 @@
-import { AllDataService } from "../../../../../data/AllDataService"
+import path from "path"
+import { AbstractDataService, AllDataService } from "../../../../../data"
 import { RR0Case } from "./RR0Case"
 import { HtmlRR0SsgContext } from "../../../../../RR0SsgContext"
-import path from "path"
-import { TimeElementFactory } from "../../../../../time/TimeElementFactory"
-import { AbstractDataService } from "../../../../../data/AbstractDataService"
+import { TimeElementFactory } from "../../../../../time"
 import { CaseFactory } from "./CaseFactory"
 
 export class CaseService extends AbstractDataService<RR0Case> {

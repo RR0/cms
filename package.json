@@ -16,7 +16,6 @@
     "node": ">=20"
   },
   "scripts": {
-    "prebuild": "npm install && npm test",
     "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
     "prepublishOnly": "npm run build",
     "test": "testscript",

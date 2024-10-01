@@ -1,23 +1,25 @@
-import { TimeContext } from "../../TimeContext"
 import { sceauDatasource } from "./SceauRR0Mapping"
 import { SceauCaseSummary } from "./SceauCaseSummary"
+import path from "path"
+
+const baseUrl = path.join(sceauDatasource.baseUrl.href, sceauDatasource.searchPath)
+const gueudelotPrefx = path.join(baseUrl, "fond_gueudelot/fiches_gueudelot/jpr/gueudelot-1430-1949/page_0001/")
 
 export const sceauTestCases: SceauCaseSummary[] = [
   {
-    id: "40",
-    url: new URL("ufodata.php?u=40&p=1&sid=", sceauDatasource.baseUrl).href,
-    sightingPlace: "Kotini kylänlahden VR:n talo, opiston lähellä",
-    city: "Pielisjärvi",
-    dateTime: new TimeContext(1970, 11, 1),
-    dateTimeRefinement: "Oli talvi, pimeä vuodenaika arvio marraskuu, mielestäni1970",
-    classification: "8LIV7Y3"
+    id: "18",
+    dateCas: "1430-06-10",
+    resume: "procession lumineuse",
+    pdf: gueudelotPrefx + "1430-06-10_es_jaen_procession_lumineuse.pdf",
+    texte: gueudelotPrefx + "1430-06-10_es_jaen_procession_lumineuse.txt",
+    json: gueudelotPrefx + "1430-06-10_es_jaen_procession_lumineuse.json"
   },
   {
-    id: "1818",
-    url: new URL("ufodata.php?u=1818&p=1&sid=", sceauDatasource.baseUrl).href,
-    sightingPlace: "Märjälahden ranta",
-    city: "Pielisjärvi Lieksa",
-    dateTime: new TimeContext(1970, 11, 1),
-    classification: "7VAP7Y3"
+    id: "19",
+    dateCas: "1574-08-23",
+    resume: "signalz de feug",
+    pdf: gueudelotPrefx + "1574-08-23_fr_besancon_signalz_de_feug.pdf",
+    texte: gueudelotPrefx + "1430-06-10_es_jaen_procession_lumineuse.txt",
+    json: gueudelotPrefx + "1430-06-10_es_jaen_procession_lumineuse.json"
   }
 ]

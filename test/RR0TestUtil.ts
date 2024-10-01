@@ -1,5 +1,5 @@
 import { HtmlRR0SsgContext, RR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext"
-import { TimeContext, TimeElementFactory, TimeService, TimeTextBuilder } from "../time"
+import { TimeContext, TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder } from "../time"
 import { FileContents, HtmlFileContents, SsgConfig, SsgContext } from "ssg-api"
 import path from "path"
 import { RR0EventFactory } from "../event"
@@ -10,6 +10,14 @@ import { PeopleFactory } from "../people"
 import { APIFactory } from "../tech"
 
 class RR0TestUtil {
+
+  readonly outDir = "out"
+
+  readonly config: SsgConfig = {
+    getOutputPath(context: SsgContext): string {
+      return path.join(this.outDir, context.file.name)
+    }
+  }
 
   readonly intlOptions: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -24,25 +32,31 @@ class RR0TestUtil {
   readonly timeService: TimeService
   readonly timeTextBuilder: TimeTextBuilder
   readonly timeElementFactory: TimeElementFactory
+  readonly dataService: AllDataService
+  readonly caseFactory: CaseFactory
 
   constructor() {
     const eventFactory = new RR0EventFactory()
     const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
     const orgFactory = new OrganizationFactory(eventFactory)
-    const caseFactory = new CaseFactory(eventFactory)
+    this.caseFactory = new CaseFactory(eventFactory)
     const peopleFactory = new PeopleFactory(eventFactory)
     const apiFactory = new APIFactory(eventFactory)
     const bookFactory = new TypedDataFactory(eventFactory, "book")
     const articleFactory = new TypedDataFactory(eventFactory, "article")
-    const dataService = new AllDataService(
-      [orgFactory, caseFactory, peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
-    dataService.getFromDir("", ["people", "case"]).then(data => {
+    this.dataService = new AllDataService(
+      [orgFactory, this.caseFactory, peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
+    this.dataService.getFromDir("", ["people", "case"]).then(data => {
       console.debug(data)
     })
 
     this.timeTextBuilder = new TimeTextBuilder(this.intlOptions)
-    this.timeService = new TimeService(dataService, this.timeTextBuilder)
+    this.timeService = new TimeService(this.dataService, this.timeTextBuilder)
     this.timeElementFactory = new TimeElementFactory(this.timeService.renderer)
+  }
+
+  get timeRenderer(): TimeRenderer {
+    return this.timeService.renderer
   }
 
   newContext(inputFileName: string, contents?: string): RR0SsgContext {

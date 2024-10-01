@@ -3,6 +3,7 @@ import { TimeContext } from "./TimeContext"
 import { RR0SsgContextImpl } from "../RR0SsgContext"
 import { FileContents, SsgConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
+import { rr0TestUtil } from "../test"
 
 describe("Time", () => {
 
@@ -20,7 +21,7 @@ describe("Time", () => {
   })
 
   describe("contextFromFile", () => {
-    const config: SsgConfig = {outDir: "out"}
+    const config: SsgConfig = rr0TestUtil.config
     const timeContext = new TimeContext()
     const context = new RR0SsgContextImpl("fr", timeContext, config)
 

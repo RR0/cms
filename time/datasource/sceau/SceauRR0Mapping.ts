@@ -1,6 +1,6 @@
 import { SceauHttpDatasource } from "./SceauHttpDatasource"
-import { cityService } from "../../../org/Cities"
-import { RR0CaseMapping } from "../rr0/RR0CaseMapping"
+import { cityService } from "../../../org"
+import { RR0CaseMapping } from "../rr0"
 import { SceauCaseSummary } from "./SceauCaseSummary"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper"

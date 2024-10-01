@@ -9,7 +9,7 @@ import path from "path"
 export class BaseReplaceCommand extends DomReplaceCommand {
 
   constructor(protected baseUrl: string) {
-    super("base")
+    super("base", undefined)
   }
 
   protected async createReplacer(context: HtmlRR0SsgContext): Promise<DomReplacer> {

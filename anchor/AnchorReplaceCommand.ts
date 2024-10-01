@@ -11,7 +11,7 @@ export class AnchorReplaceCommand extends DomReplaceCommand<HTMLAnchorElement> {
   protected readonly singleton: AnchorReplacer
 
   constructor(baseUrl: string, handlers: AnchorHandler[]) {
-    super("a")
+    super("a", undefined)
     this.singleton = new AnchorReplacer(baseUrl, handlers)
   }
 

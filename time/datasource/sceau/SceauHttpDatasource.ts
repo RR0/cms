@@ -9,7 +9,7 @@ export class SceauHttpDatasource extends SceauDatasource {
 
   protected readonly http = new HttpSource()
 
-  constructor(readonly baseUrl: URL, protected searchPath = "fonds") {
+  constructor(readonly baseUrl: URL, readonly searchPath = "fonds") {
     super()
   }
 
