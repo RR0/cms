@@ -1,7 +1,6 @@
 import { HtmlRR0SsgContext } from "../RR0SsgContext"
 import { Source } from "./Source"
-import { TimeContext } from "../time/TimeContext"
-import { TimeTextBuilder } from "../time/TimeTextBuilder"
+import { TimeContext, TimeTextBuilder } from "../time"
 
 /**
  * Render a case summary for a RR0 web page.

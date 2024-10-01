@@ -1,20 +1,20 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
-import { JsonMapper } from "./JsonMapper"
-import { ufoSearchFileDatasource } from "./ufo-search/UfoSearchMapping"
-import { rr0TestUtil } from "../../test/RR0TestUtil"
+import { UfoSearchCaseRR0Mapper, ufoSearchCaseRR0Mapper, ufoSearchFileDatasource } from "./ufo-search"
+import { rr0TestUtil } from "../../test"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases"
+import { RR0SsgContext } from "../../RR0SsgContext"
 
 describe("JsonMapper", () => {
 
   const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
 
   let context: RR0SsgContext
-  let mapper: JsonMapper<UfoSearchCaseSummary>
+  let mapper: UfoSearchCaseRR0Mapper
 
   beforeEach(() => {
     context = rr0TestUtil.newContext("time/1/9/7/0/03/index.html")
-    mapper = new JsonMapper()
+    mapper = ufoSearchCaseRR0Mapper
   })
 
   test("read", () => {

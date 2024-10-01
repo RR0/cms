@@ -1,6 +1,6 @@
 export * from "./GooglePlaceService.js"
 export * from "./Place.js"
-export * from "./PlaceForm.js"
+export * from "./PlaceForm.mjs"
 export * from "./PlaceLocation.js"
 export * from "./PlaceMessages.js"
 export * from "./PlaceMessages_en.js"

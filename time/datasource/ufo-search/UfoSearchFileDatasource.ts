@@ -4,11 +4,13 @@ import { FileContents } from "ssg-api"
 import { UfoSearchDatasource } from "./UfoSearchDatasource"
 import { JsonMapper } from "../JsonMapper"
 import { UfoSearchCase } from "./UfoSearchCase"
+import { ufoSearchCaseRR0Mapper } from "./UfoSearchMapping"
 
 class FileMapper extends JsonMapper<UfoSearchCase> {
+
   parse(context: RR0SsgContext, data: string): UfoSearchCase[] {
     const allData = super.parse(context, data)
-    return allData["Majestic Timeline"] as UfoSearchCase[]
+    return allData["Majestic Timeline"].map(ufoSearchCaseRR0Mapper.map)
   }
 }
 

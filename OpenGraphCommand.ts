@@ -142,7 +142,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
     canvasCtx.beginPath()
     {
       canvasCtx.strokeStyle = "transparent"
-      // draw rectablge towards right hand side
+      // draw rectangle towards right hand side
       canvasCtx.rect(0, 0, this.width, this.height)
       // create linear gradient
       const grdLinear = canvasCtx.createLinearGradient(0, 0, this.width, 0)

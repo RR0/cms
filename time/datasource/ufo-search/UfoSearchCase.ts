@@ -98,12 +98,12 @@ export type UfoSearchCaseKeyValues = {
 
   "State/Prov"?: string,
   Strangeness?: number,
-  url: URL
+  url: string
 }
 
 export interface UfoSearchCase {
   id: string
-  url: string
+  url?: string
   time: TimeContext
   location?: string
   desc: string,
@@ -119,5 +119,5 @@ export interface UfoSearchCase {
   source: string,
   source_id: string,
   type: UfoSearchCaseType
-  extraData: UfoSearchCaseExtraData
+  extraData?: UfoSearchCaseExtraData
 }

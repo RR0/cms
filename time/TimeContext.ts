@@ -33,9 +33,9 @@ export class TimeContext {
     approximate: boolean = false,
     approximateTime: boolean = false,
     /** @deprecated */
-    public from: TimeContext | undefined = undefined,
+    from: TimeContext | undefined = undefined,
     /** @deprecated */
-    public to: TimeContext | undefined = undefined,
+    to: TimeContext | undefined = undefined,
     duration: number | undefined = undefined
   ) {
     if (from) {
@@ -60,6 +60,14 @@ export class TimeContext {
         }
       }
     }
+  }
+
+  get from(): EdtfDate | undefined {
+    return this.interval?.start
+  }
+
+  get to(): EdtfDate | undefined {
+    return this.interval?.end
   }
 
   get approximate(): boolean {
@@ -126,28 +134,35 @@ export class TimeContext {
     return timeContext
   }
 
+  /**
+   * @param {string} timeStr
+   * @return If the string could be parsed
+   */
   updateFromStr(timeStr: string) {
-    if (timeStr) {
+    let valid = Boolean(timeStr)
+    if (valid) {
       try {
-        this.date = EdtfDate.fromString(timeStr)
+        this.interval = EdtfInterval.fromString(timeStr)
+        this.date = undefined
         this.duration = undefined
-        this.interval = undefined
       } catch (e) {
         try {
-          this.interval = EdtfInterval.fromString(timeStr)
+          this.duration = EdtfDuration.fromString(timeStr)
+          this.interval = undefined
           this.date = undefined
-          this.duration = undefined
         } catch (e) {
           try {
-            this.duration = EdtfDuration.fromString(timeStr)
+            this.date = EdtfDate.fromString(timeStr)
+            this.duration = undefined
             this.interval = undefined
-            this.date = undefined
           } catch (e) {
             console.warn("Could not resolve time string", timeStr, e.message)
+            valid = false
           }
         }
       }
     }
+    return valid
   }
 
   getYear(): number | undefined {
@@ -212,7 +227,14 @@ export class TimeContext {
     return this
   }
 
+  /**
+   * @deprecated
+   */
   getTimeZone(): string | undefined {
+    return this.date?.timeshift?.toString()
+  }
+
+  getTimeshift(): string | undefined {
     return this.date?.timeshift?.toString()
   }
 
@@ -241,7 +263,7 @@ export class TimeContext {
   clone(): TimeContext {
     return new TimeContext(this.date?.year?.value, this.date?.month?.value, this.date?.day?.value,
       this.date?.hour?.value, this.date?.minutes?.value, this.date?.timeshift?.value,
-      this.approximate, this.approximateTime, this.from, this.to, this.duration)
+      this.approximate, this.approximateTime, this.interval?.from, this.interval?.to, this.duration)
   }
 
   reset(): this {

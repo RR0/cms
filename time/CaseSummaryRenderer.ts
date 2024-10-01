@@ -1,8 +1,7 @@
-import { RR0CaseSummary } from "./datasource/rr0/RR0CaseSummary"
+import { RR0CaseSummary } from "./datasource"
 import { EventRenderer } from "./EventRenderer"
-import { SourceRenderer } from "../source/SourceRenderer"
-import { SourceFactory } from "../source/SourceFactory"
-import { NoteRenderer } from "../note/NoteRenderer"
+import { SourceFactory, SourceRenderer } from "../source"
+import { NoteRenderer } from "../note"
 import { TimeElementFactory } from "./TimeElementFactory"
 
 /**

@@ -20,7 +20,7 @@
     "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
     "prepublishOnly": "npm run build",
     "test": "testscript",
-    "test-one": "rm -Rf out && tsx OpenGraphCommand.test.ts",
+    "test-one": "rm -Rf out && tsx time/TimeReplacer.test.ts",
     "test-ci": "rm -Rf out && testscript"
   },
   "dependencies": {

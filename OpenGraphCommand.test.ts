@@ -1,9 +1,10 @@
 import { OpenGraphCommand } from "./OpenGraphCommand"
-import { rr0TestUtil } from "./test/RR0TestUtil"
+import { rr0TestUtil } from "./test"
 import { describe, expect, test } from "@javarome/testscript"
 import { TimeTextBuilder } from "./time"
 
 describe("OpenGraphCommand", () => {
+
   const outDir = "/out"
 
   test("time page", () => {

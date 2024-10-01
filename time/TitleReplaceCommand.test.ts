@@ -1,5 +1,5 @@
 import { SsiTitleReplaceCommand } from "./SsiTitleReplaceCommand"
-import { rr0TestUtil } from "../test/RR0TestUtil"
+import { rr0TestUtil } from "../test"
 import { describe, expect, test } from "@javarome/testscript"
 import { HtmlRR0SsgContext } from "../RR0SsgContext"
 import { Time } from "./Time"
@@ -17,17 +17,19 @@ describe("TitleReplaceCommand", () => {
 
   describe("Time page", () => {
 
+    const fileName = "time/1/9/5/4/index.html"
+
     test("default title with no handler", async () => {
       const command = new SsiTitleReplaceCommand()
-      const context = rr0TestUtil.newHtmlContext("time/1/9/5/4/index.html", `This is about <!--#echo var="title" -->!`)
+      const context = rr0TestUtil.newHtmlContext(fileName, `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
-      expect(context.file.title).toBe("time/1/9/5/4/index.html")
+      expect(context.file.title).toBe(fileName)
       expect(context.file.contents).toBe("This is about time/1/9/5/4/index.html!")
     })
 
     test("default title with handler", async () => {
       const command = new SsiTitleReplaceCommand([timeDefaultHandler])
-      const context = rr0TestUtil.newHtmlContext("time/1/9/5/4/index.html", `This is about <!--#echo var="title" -->!`)
+      const context = rr0TestUtil.newHtmlContext(fileName, `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe("1954")
       expect(context.file.contents).toBe("This is about 1954!")

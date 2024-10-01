@@ -1,18 +1,17 @@
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
+import { HtmlRR0SsgContext, RR0SsgContext } from "../../../RR0SsgContext"
 import { Datasource } from "../Datasource"
 import { CsvMapper } from "../CsvMapper"
 import { FileDatasource } from "../FileDatasource"
 import { CsvFileSource } from "../CsvFileSource"
 import { RR0CaseSummary } from "./RR0CaseSummary"
-import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
-import { rr0HttpDatasource } from "./RR0Mapping"
 import { RR0Datasource } from "./RR0Datasource"
+import { CaseMapper } from "../CaseMapper"
 
 export class RR0FileDatasource extends RR0Datasource implements Datasource<RR0CaseSummary>, FileDatasource<RR0CaseSummary> {
 
   protected readonly file = new CsvFileSource()
 
-  constructor(protected encoding: BufferEncoding = "utf-8") {
+  constructor(protected mapper: CaseMapper<RR0SsgContext, RR0CaseSummary, RR0CaseSummary>) {
     super()
   }
 
@@ -23,8 +22,6 @@ export class RR0FileDatasource extends RR0Datasource implements Datasource<RR0Ca
   protected async readCases(context: HtmlRR0SsgContext): Promise<RR0CaseSummary[]> {
     const fileMapper = new CsvMapper<RR0CaseSummary>()
     const file = await this.file.read(context, this)
-    const csvMapper = new RR0CaseSummaryMapper(rr0HttpDatasource.baseUrl, rr0HttpDatasource.searchPath,
-      rr0HttpDatasource.authors)
-    return fileMapper.parse(file.contents).map(csvCase => csvMapper.map(context, csvCase, file.lastModified))
+    return fileMapper.parse(file.contents).map(csvCase => this.mapper.map(context, csvCase, file.lastModified))
   }
 }

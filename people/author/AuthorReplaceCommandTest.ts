@@ -1,15 +1,13 @@
 import { AuthorReplaceCommand } from "./AuthorReplaceCommand"
-import { rr0TestUtil } from "../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../test"
 import { describe, expect, test } from "@javarome/testscript"
-import { RelativeTimeTextBuilder } from "../../time/RelativeTimeTextBuilder"
-import { TimeService } from "../../time/TimeService"
-import { TimeTextBuilder } from "../../time/TimeTextBuilder"
+import { RelativeTimeTextBuilder } from "../../time"
 
 describe("AuthorReplaceCommand", () => {
 
-  const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
+  const timeTextBuilder = rr0TestUtil.timeTextBuilder
   const relativeTimeTextBuilder = new RelativeTimeTextBuilder(timeTextBuilder)
-  const timeService = new TimeService(timeTextBuilder)
+  const timeService = rr0TestUtil.timeService
 
   test("no author", async () => {
     const timeFile = "time/1/9/5/4/index.html"

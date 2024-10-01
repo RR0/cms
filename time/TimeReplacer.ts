@@ -37,11 +37,11 @@ export class TimeReplacer implements DomReplacement<HtmlRR0SsgContext, HTMLTimeE
     } else {
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
-      context.time.updateFromStr(timeStr)
-      replacement = this.factory.create(context, previousContext)
+      const valid = context.time.updateFromStr(timeStr)
+      replacement = valid && this.factory.create(context, previousContext)
       if (!replacement) {
         replacement = origEl
-        replacement.setAttribute("datetime", context.time.toString())
+        // replacement.setAttribute("datetime", context.time.toString())
       }
       context.debug("\tReplacing time", origEl.outerHTML, "with", ObjectUtils.asSet<HTMLElement>(replacement).outerHTML)
     }

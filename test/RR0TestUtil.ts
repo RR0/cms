@@ -1,6 +1,13 @@
 import { HtmlRR0SsgContext, RR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext"
-import { TimeContext } from "../time/TimeContext"
-import { FileContents, HtmlFileContents } from "ssg-api"
+import { TimeContext, TimeElementFactory, TimeService, TimeTextBuilder } from "../time"
+import { FileContents, HtmlFileContents, SsgConfig, SsgContext } from "ssg-api"
+import path from "path"
+import { RR0EventFactory } from "../event"
+import { AllDataService, TypedDataFactory } from "../data"
+import { OrganizationFactory } from "../org"
+import { CaseFactory } from "../science"
+import { PeopleFactory } from "../people"
+import { APIFactory } from "../tech"
 
 class RR0TestUtil {
 
@@ -14,8 +21,38 @@ class RR0TestUtil {
     timeZoneName: "short"
   }
 
+  readonly timeService: TimeService
+  readonly timeTextBuilder: TimeTextBuilder
+  readonly timeElementFactory: TimeElementFactory
+
+  constructor() {
+    const eventFactory = new RR0EventFactory()
+    const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
+    const orgFactory = new OrganizationFactory(eventFactory)
+    const caseFactory = new CaseFactory(eventFactory)
+    const peopleFactory = new PeopleFactory(eventFactory)
+    const apiFactory = new APIFactory(eventFactory)
+    const bookFactory = new TypedDataFactory(eventFactory, "book")
+    const articleFactory = new TypedDataFactory(eventFactory, "article")
+    const dataService = new AllDataService(
+      [orgFactory, caseFactory, peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
+    dataService.getFromDir("", ["people", "case"]).then(data => {
+      console.debug(data)
+    })
+
+    this.timeTextBuilder = new TimeTextBuilder(this.intlOptions)
+    this.timeService = new TimeService(dataService, this.timeTextBuilder)
+    this.timeElementFactory = new TimeElementFactory(this.timeService.renderer)
+  }
+
   newContext(inputFileName: string, contents?: string): RR0SsgContext {
-    const context = new RR0SsgContextImpl("fr", new TimeContext(), {outDir: "out"})
+    const outDir = "out"
+    const config: SsgConfig = {
+      getOutputPath(context: SsgContext): string {
+        return path.join(outDir, context.file.name)
+      }
+    }
+    const context = new RR0SsgContextImpl("fr", new TimeContext(), config)
     if (contents !== undefined && contents != null) {
       const langInfo = FileContents.getLang(inputFileName)
       context.file = new FileContents(inputFileName, "utf8", contents, new Date(), langInfo)

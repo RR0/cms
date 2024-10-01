@@ -15,12 +15,15 @@ export class TimeElementFactory {
          options: TimeRenderOptions = {url: true}): HTMLElement | undefined {
     let replacement: HTMLElement | undefined
     const time = context.time
-    if (time.from) {
+    let interval = time.interval
+    if (interval) {
       const fromContext = context.clone()
-      fromContext.time = time.from
-      if (time.to) {
+      fromContext.time.date = interval.start
+      let end = interval.end
+      if (end) {
         const toContext = context.clone()
-        toContext.time = time.to
+        toContext.time.date = end
+        context.time = toContext.time // Latest date is current date
         replacement = this.createInterval(fromContext, toContext, previousContext, options)
       } else {
         replacement = this.createStarting(fromContext, previousContext, options)

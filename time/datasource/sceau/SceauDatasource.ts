@@ -4,11 +4,11 @@ import { HtmlRR0SsgContext, RR0SsgContext } from "../../../RR0SsgContext"
 import { ContextFilter } from "../ContextFilter"
 import { TimeContext } from "../../TimeContext"
 
-export type CaseMapping = { [key in keyof SceauCaseSummary]: string }
+export type SceauCaseMapping = { [key in keyof SceauCaseSummary]: string }
 
 export type FondMapping = {
   path: string
-  mapping: CaseMapping
+  mapping: SceauCaseMapping
 }
 
 export class SceauContextFilter extends ContextFilter<SceauCaseSummary> {

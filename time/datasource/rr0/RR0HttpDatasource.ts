@@ -6,8 +6,7 @@ import { TimeContext } from "../../TimeContext"
 import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary"
 import { Place } from "../../../place"
 import { Publication, Source } from "../../../source"
-import { CityService } from "../../../org/country/region/department/city/CityService"
-import { Organization } from "../../../org"
+import { CityService, Organization } from "../../../org"
 
 export class RR0HttpDatasource extends RR0Datasource {
 

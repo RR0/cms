@@ -1,18 +1,13 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { CaseSummaryRenderer } from "./CaseSummaryRenderer"
-import { rr0TestUtil } from "../test/RR0TestUtil"
-import { Place } from "../place/Place"
+import { rr0TestUtil } from "../test"
+import { Place } from "../place"
 import { franceCity } from "../org/eu/fr/region/FranceCity"
-import { NamedPlace, RR0CaseSummary } from "./datasource/rr0/RR0CaseSummary"
+import { HttpSource, NamedPlace, RR0CaseSummary } from "./datasource"
 import { TimeContext } from "./TimeContext"
-import { SourceRenderer } from "../source/SourceRenderer"
-import { Source } from "../source/Source"
-import { SourceFactory } from "../source/SourceFactory"
-import { NoteRenderer } from "../note/NoteRenderer"
-import { NoteFileCounter } from "../note/NoteFileCounter"
-import { AllDataService } from "../data/AllDataService"
-import { HttpSource } from "./datasource/HttpSource"
-import { TimeTextBuilder } from "./TimeTextBuilder"
+import { Source, SourceFactory, SourceRenderer } from "../source"
+import { NoteFileCounter, NoteRenderer } from "../note"
+import { AllDataService } from "../data"
 import { HautsDeSeineCityCode } from "../org/eu/fr/region/idf/92/HautsDeSeineCityCode"
 
 describe("TimeEventRenderer", () => {
@@ -21,9 +16,8 @@ describe("TimeEventRenderer", () => {
   const baseUrl = "https://rr0.org"
   const http = new HttpSource()
   const sourceFactory = new SourceFactory(dataService, http, baseUrl, rr0TestUtil.intlOptions)
-  const textBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
   const renderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
-    new SourceRenderer(textBuilder), timeElementFactory)
+    new SourceRenderer(rr0TestUtil.timeTextBuilder), rr0TestUtil.timeElementFactory)
 
   test("render event", async () => {
     const context = rr0TestUtil.newHtmlContext("time/1/9/7/0/03/index.html")

@@ -1,9 +1,27 @@
-import { TimeContext } from "./time/TimeContext"
-import { CaseDirectoryStep } from "./science/crypto/ufo/enquete/dossier/CaseDirectoryStep"
-import { GooglePlaceService } from "./place/GooglePlaceService"
-import { OrganizationService } from "./org/OrganizationService"
+import {
+  CaseSummaryRenderer,
+  ChronologyReplacerActions,
+  ChronologyReplacerFactory,
+  CsvMapper,
+  EventReplacer,
+  EventReplacerFactory,
+  HttpSource,
+  RR0Mapping,
+  SsiTitleReplaceCommand,
+  Time,
+  TimeContext,
+  TimeElementFactory,
+  TimeLinkDefaultHandler,
+  TimeReplacer,
+  TimeReplacerFactory,
+  TimeService,
+  TimeTextBuilder
+} from "./time"
+import { CaseDirectoryStep, CaseFactory, CaseService } from "./science"
+import { GooglePlaceService, PlaceReplacerFactory } from "./place"
+import { OrganizationFactory, OrganizationService } from "./org"
 import { HtmlRR0SsgContext, RR0SsgContextImpl } from "./RR0SsgContext"
-import { CLI } from "./util/cli/CLI"
+import { CLI, HtmlTable } from "./util"
 import {
   AngularExpressionReplaceCommand,
   ClassDomReplaceCommand,
@@ -28,67 +46,42 @@ import {
   SsiSetVarReplaceCommand,
   StringEchoVarReplaceCommand
 } from "ssg-api"
-import { LanguageReplaceCommand } from "./lang/LanguageReplaceCommand"
-import { SsiTitleReplaceCommand } from "./time/SsiTitleReplaceCommand"
-import { PeopleReplacerFactory } from "./people/PeopleReplacerFactory"
-import { SourceReplacerFactory } from "./source/SourceReplacerFactory"
-import { NoteReplacerFactory } from "./note/NoteReplacerFactory"
-import { WitnessReplacerFactory } from "./people/witness/WitnessReplacerFactory"
-import { AnchorReplaceCommand } from "./anchor/AnchorReplaceCommand"
-import { TimeLinkDefaultHandler } from "./time/TimeLinkDefaultHandler"
-import { AuthorReplaceCommand } from "./people/author/AuthorReplaceCommand"
-import { PlaceReplacerFactory } from "./place/PlaceReplacerFactory"
-import { TimeReplacerFactory } from "./time/TimeReplacerFactory"
+import { LanguageReplaceCommand } from "./lang"
+import {
+  AuthorReplaceCommand,
+  PeopleDirectoryStepFactory,
+  PeopleFactory,
+  PeopleReplacerFactory,
+  PeopleService,
+  WitnessReplacerFactory
+} from "./people"
+import {
+  PersistentSourceRegistry,
+  SourceFileCounter,
+  SourceIndexStep,
+  SourceRenderer,
+  SourceReplacer,
+  SourceReplacerFactory
+} from "./source"
+import { NoteFileCounter, NoteRenderer, NoteReplacer, NoteReplacerFactory } from "./note"
+import { AnchorReplaceCommand, CaseAnchorHandler, DataAnchorHandler } from "./anchor"
 import { MetaLinkReplaceCommand } from "./MetaLinkReplaceCommand"
-import { OutlineReplaceCommand } from "./outline/OutlineReplaceCommand"
+import { OutlineReplaceCommand } from "./outline"
 import { ImageCommand } from "./ImageCommand"
-import { SearchVisitor } from "./search/SearchVisitor"
-import { SearchIndexStep } from "./search/SearchIndexStep"
+import { SearchIndexStep, SearchVisitor } from "./search"
 import { BaseReplaceCommand } from "./BaseReplaceCommand"
 import { OpenGraphCommand } from "./OpenGraphCommand"
 import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand"
-import { BookDirectoryStep } from "./book/BookDirectoryStep"
+import { BookContentVisitor, BookDirectoryStep } from "./book"
 import path from "path"
 import { IndexedReplacerFactory } from "./index/IndexedReplacerFactory"
-import { CodeReplacerFactory } from "./tech/info/soft/proj/impl/lang/CodeReplacerFactory"
-import { ChronologyReplacerFactory } from "./time/datasource/ChronologyReplacerFactory"
-import { PeopleService } from "./people/PeopleService"
+import { APIFactory, CodeReplacerFactory } from "./tech"
 import { ContentVisitor, RR0ContentStep } from "./RR0ContentStep"
-import { CaseAnchorHandler } from "./anchor/CaseAnchorHandler"
-import { AllDataService } from "./data/AllDataService"
-import { DataAnchorHandler } from "./anchor/DataAnchorHandler"
-import { CaseSummaryRenderer } from "./time/CaseSummaryRenderer"
-import { EventReplacer, EventReplacerFactory } from "./time/EventReplacerFactory"
-import { HttpSource } from "./time/datasource/HttpSource"
-import { SourceRenderer } from "./source/SourceRenderer"
-import { TimeService } from "./time/TimeService"
-import { CaseService } from "./science/crypto/ufo/enquete/dossier/CaseService"
-import { TimeReplacer } from "./time/TimeReplacer"
-import { UnitReplaceCommand } from "./value/UnitReplaceCommand"
-import { BookContentVisitor } from "./book/BookContentVisitor"
-import { ChronologyReplacerActions } from "./time/datasource/ChronologyReplacerActions"
-import { SourceReplacer } from "./source/SourceReplacer"
-import { NoteReplacer } from "./note/NoteReplacer"
-import { NoteFileCounter } from "./note/NoteFileCounter"
-import { PersistentSourceRegistry } from "./source/PersistentSourceRegistry"
-import { SourceIndexStep } from "./source/SourceIndexStep"
-import { SourceFileCounter } from "./source/SourceFileCounter"
-import { TimeElementFactory } from "./time/TimeElementFactory"
+import { AllDataService, TypedDataFactory } from "./data"
+import { UnitReplaceCommand } from "./value"
 import { DefaultContentVisitor } from "./DefaultContentVisitor"
-import { PeopleFactory } from "./people/PeopleFactory"
-import { OrganizationFactory } from "./org/OrganizationFactory"
-import { APIFactory } from "./tech/info/soft/APIFactory"
-import { RR0EventFactory } from "./event/RR0EventFactory"
-import { TypedDataFactory } from "./data/TypedDataFactory"
-import { NoteRenderer } from "./note/NoteRenderer"
-import { PeopleDirectoryStepFactory } from "./people/PeopleDirectoryStepFactory"
-import { TimeTextBuilder } from "./time/TimeTextBuilder"
-import { Time } from "./time/Time"
-import { CaseFactory } from "./science/crypto/ufo/enquete/dossier/CaseFactory"
-import { RR0Mapping } from "./time/datasource/rr0/RR0Mapping"
-import { CsvMapper } from "./time/datasource/CsvMapper"
+import { RR0EventFactory } from "./event"
 import fs from "fs"
-import { HtmlTable } from "./util/html/HtmlTable"
 
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright"
 
