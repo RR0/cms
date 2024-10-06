@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { CoteDOrCityCode } from "./CoteDOrCityCode"
 import { vitteauxMessages } from "./Vitteaux/VitteauxMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { mirebeauSurBezeMessages } from "./MirebeauSurBeze/MirebeauSurBezeMessages"
 
 type DepMessages = { [key in CoteDOrCityCode]: CityMessages }

@@ -1,7 +1,7 @@
 import { vallonEnSullyMessages } from "./valonensully/VallonEnSullyMessages"
 import { AllierCityCode } from "./AllierCityCode"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { montmaraultMessages } from "./montmarault/MontmaraultMessages"
 
 const allierCityMessages: { [key in AllierCityCode]: CityMessages } = {

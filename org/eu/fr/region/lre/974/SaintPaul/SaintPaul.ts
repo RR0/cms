@@ -1,6 +1,6 @@
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { LaReunionCityCode } from "../LaReunionCityCode"
-import { City } from "../../../../../../country/region/department/city/City"
+import { City } from "../../../../../../country"
 import { laReunion974 } from "../LaReunion"
 
 export const saintPaul974 = City.create(LaReunionCityCode.SaintPaul, laReunion974,

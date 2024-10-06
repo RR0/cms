@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { IndiaMessages } from "./IndiaMessages"
 import { maharashtraMessages } from "./region/mh/MaharashtraMessages"
 import { telanganaMessages } from "./region/tg/TelanganaMessages"

@@ -71,14 +71,16 @@ export class EssexPoliceHttpDatasource extends EssexPoliceDatasource {
   }
 
   protected async getFromRow(context: RR0SsgContext, row: Element): Promise<EssexPoliceCaseSummary> {
-    const dateTime = this.getDate(context, "")
+    const time = this.getDate(context, "")
     let district = ""
     let comments = ""
     const url = new URL(this.searchPath, this.baseUrl)
     return {
+      city: "",
+      zoneCode: "",
       id: "",
-      url,
-      dateTime,
+      url: url.href,
+      time,
       district,
       comments
     }

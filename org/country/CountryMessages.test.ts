@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { france_fr } from "../eu/fr/France_fr"
-import { rr0TestUtil } from "../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../test"
 import { RR0SsgContext } from "../../RR0SsgContext"
 import { france_en } from "../eu/fr/France_en"
 import { usa_fr } from "../us/Usa_fr"

@@ -113,13 +113,14 @@ export class UfoSearchHttpDatasource extends UfoSearchDatasource {
     }
     let attributes
     let extraData
+    let href = url.href
     return {
       id: caseNumber,
       time,
-      url: url.href,
+      url: href,
       location,
       desc: type,
-      key_vals: {url},
+      key_vals: {url: href},
       attributes,
       ref: "",
       search: "",

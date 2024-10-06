@@ -1,7 +1,6 @@
-import { RegionMessages } from "../../../../country/region/RegionMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country"
 import { PaysDeLoireDepartementCode } from "./PaysDeLoireDepartementCode"
 import { sartheMessages } from "./72/SartheMessages"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
 import { maineEtLoireMessages } from "./49/MaineEtLoireMessages"
 import { loireAtlantiqueMessages } from "./44/LoireAtlantiqueMessages"
 import { mayenneMessages } from "./53/MayenneMessages"

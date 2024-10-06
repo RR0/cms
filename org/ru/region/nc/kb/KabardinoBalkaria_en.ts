@@ -1,5 +1,5 @@
 import { KabardinoBalkariaCityCode } from "./KabardinoBalkariaCityCode"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
+import { DepartmentMessages } from "../../../../country"
 import { KabardinoBalkariaCityMessagesList } from "./KabardinoBalkariaMessages"
 import { elbrusMessages_en } from "./elbrus/ElbrusMessages_en"
 

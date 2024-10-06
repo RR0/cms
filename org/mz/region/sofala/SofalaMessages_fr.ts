@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { SofalaDepartmentCityList } from "./SofalaMessages"
 import { beiraCityCode } from "./beira/Beira"
 import { OrganizationType } from "../../../Organization"

@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { SaoneEtLoireCityCode } from "./SaoneEtLoireCityCode"
 import { verosvresMessages } from "./Verosvres/VerosvresMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { joncyMessages } from "./Joncy/JoncyMessages"
 
 type DepMessages = { [key in SaoneEtLoireCityCode]: CityMessages }

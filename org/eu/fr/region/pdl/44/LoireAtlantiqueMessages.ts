@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { LoireAtlantiqueCityCode } from "./LoireAtlantiqueCityCode"
 import { leCroisicMessages } from "./LeCroisic/LeCroisicMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { lorouxBottereauMessages } from "./LorouxBottereau/LorouxBottereauMessages"
 import { rezeMessages } from "./Reze/RezeMessages"
 

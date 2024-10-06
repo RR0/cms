@@ -1,6 +1,6 @@
 import { RR0SsgContext } from "../../../RR0SsgContext"
 import { HttpSource } from "../HttpSource"
-import { UrlUtil } from "../../../util/url/UrlUtil"
+import { UrlUtil } from "../../../util"
 import { JSDOM } from "jsdom"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary"
 import { TimeContext } from "../../TimeContext"
@@ -100,18 +100,18 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
       `Case title "${caseLink.textContent}" does not match pattern ${BaseOvniFranceHttpDatasource.regExp.source}`)
     const place = linkParse[1]
     const depCode = linkParse[2].padStart(2, "0")
-    const dateTime = this.getDate(context, columns[1])
-    this.setTime(dateTime, columns[2])
+    const time = this.getDate(context, columns[1])
+    this.setTime(time, columns[2])
     const physicalEffect = this.getBoolean(columns[3])
     const witnessEffect = this.getBoolean(columns[4])
     const entities = this.getBoolean(columns[5])
     const landing = this.getBoolean(columns[6])
     return {
       id,
-      url,
+      url: url.href,
       city: place,
       depCode: depCode,
-      dateTime: dateTime,
+      time,
       physicalEffect,
       witnessEffect,
       entities,

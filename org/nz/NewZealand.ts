@@ -1,5 +1,4 @@
-import { Country } from "../country/Country"
-import { CountryCode } from "../country/CountryCode"
+import { Country, CountryCode } from "../country"
 import { Place } from "../../place/Place"
 import { NewZealandRegionCode } from "./region/NewZealandRegionCode"
 import { Region } from "../country/region/Region"

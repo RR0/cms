@@ -3,7 +3,7 @@ import { DepartmentMessages } from "../../../../../country/region/department/Dep
 import { barcelonnetteMessages } from "./Barcelonnette/BarcelonnetteMessages"
 import { lauzetUbayeMessages } from "./LauzetUbaye/LauzetUbayeMessages"
 import { entrevauxMessages } from "./Entrevaux/EntrevauxMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 
 type DepMessages = { [key in AlpesDeHauteProvenceCityCode]: CityMessages }
 export const alpesDeHauteProvenceMessages = DepartmentMessages.create<DepMessages>("Alpes-de-Haute-Provence", {

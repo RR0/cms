@@ -1,4 +1,4 @@
-import { CountryCode } from "../country/CountryCode"
+import { CountryCode } from "../country"
 import { Place } from "../../place/Place"
 import { BrazilRegionCode } from "./region/BrazilRegionCode"
 import { Organization, OrganizationType } from "../Organization"

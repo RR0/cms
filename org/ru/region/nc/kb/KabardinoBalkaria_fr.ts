@@ -1,6 +1,6 @@
 import { KabardinoBalkariaCityCode } from "./KabardinoBalkariaCityCode"
 import { elbrusMessages_fr } from "./elbrus/ElbrusMessages_fr"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
+import { DepartmentMessages } from "../../../../country"
 import { KabardinoBalkariaCityMessagesList } from "./KabardinoBalkariaMessages"
 
 const kabardinoBalkariaCityMessages: KabardinoBalkariaCityMessagesList = {

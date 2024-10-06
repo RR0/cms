@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../../country"
 
-export let pontLeveque14Messages = new CityMessages("Saint-Aubin-sur-Mer")
+export let pontLeveque14Messages = CityMessages.create("Saint-Aubin-sur-Mer")

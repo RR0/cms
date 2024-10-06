@@ -1,6 +1,4 @@
-import { genevaCities } from "./geneva/GenevaCities"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 
 export const illinoisCities: City[] = [
-  ...genevaCities
 ]

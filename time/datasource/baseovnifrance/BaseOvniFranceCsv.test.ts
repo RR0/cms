@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { RR0SsgContext } from "../../../RR0SsgContext"
 import { CsvMapper } from "../CsvMapper"
-import { rr0TestUtil } from "../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../test"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases"
 import fs from "fs"
@@ -31,7 +31,7 @@ describe("Base OVNI France CSV mapping", () => {
     const obj = baseOvniFranceTestCases[0]
     const csvRow = mapper.map(context, obj, dataDate)
     expect(csvRow).toBe(
-      `${obj.id},${obj.url},${obj.city},${obj.depCode},${obj.dateTime},${obj.landing},${obj.entities},${obj.witnessEffect},${obj.physicalEffect}`)
+      `${obj.id},${obj.url},${obj.city},${obj.depCode},${obj.time.toString()},${obj.landing},${obj.entities},${obj.witnessEffect},${obj.physicalEffect}`)
   })
 
   test("write", () => {

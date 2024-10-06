@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../../country"
 
-export let voidVaconMessages = new CityMessages("Void-Vacon")
+export let voidVaconMessages = CityMessages.create("Void-Vacon")

@@ -1,4 +1,4 @@
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 import { fayetteCities } from "./fayette/FayetteCities"
 import { masonCities } from "./mason/MasonCities"
 

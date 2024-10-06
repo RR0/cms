@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { honolulu_en } from "./honolulu/Honolulu_en"
 import { HawaiiMessages } from "./HawaiiMessages"
 import { HawaiiCountyCode } from "./HawaiiCountyCode"

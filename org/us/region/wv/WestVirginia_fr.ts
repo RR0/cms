@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { fayette_fr } from "./fayette/Fayette_fr"
 import { mason_fr } from "./mason/Mason_fr"
 

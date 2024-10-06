@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { CharenteMaritimeCityCode } from "../CharenteMaritimeCityCode"
 
 export const saujon = franceCity(CharenteMaritimeCityCode.Saujon,

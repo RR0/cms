@@ -1,3 +1,3 @@
-import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
+import { DepartmentMessages } from "../../../../../country"
 
-export const oceansideMessages = new DepartmentMessages("Oceanside")
+export const oceansideMessages = DepartmentMessages.create("Oceanside", {})

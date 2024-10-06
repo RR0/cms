@@ -1,9 +1,8 @@
 import { People } from "./People"
 import path from "path"
-import { StringUtil } from "../util/string/StringUtil"
-import { TypedDataFactory } from "../data/TypedDataFactory"
-import { RR0EventFactory } from "../event/RR0EventFactory"
-import { RR0Data } from "../data/RR0Data"
+import { StringUtil } from "../util"
+import { RR0Data, TypedDataFactory } from "../data"
+import { RR0EventFactory } from "../event"
 
 export class PeopleFactory extends TypedDataFactory<People> {
 

@@ -1,7 +1,8 @@
-import { Place } from "../../place/Place"
-import { Organization, OrganizationType } from "../Organization"
+import { Place } from "../../place"
+import { Organization } from "../Organization"
 import { EuropeRegionCode } from "./EuropeRegionCode"
+import { Region } from "../country"
 
 export function europeanRegion(code: EuropeRegionCode, country: Organization, place: Place) {
-  return new Organization(code, [place], OrganizationType.region, country)
+  return new Region(code, country, [place])
 }

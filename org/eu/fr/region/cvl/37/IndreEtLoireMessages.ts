@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { IndreEtLoireCityCode } from "./IndreEtLoireCityCode"
 import { blereMessages } from "./Blere/BlereMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { montsMessages } from "./Monts/MontsMessages"
 import { chambourgSurIndreMessages } from "./ChambourgSurIndre/ChambourgSurIndreMessages"
 

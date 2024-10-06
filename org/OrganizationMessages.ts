@@ -15,7 +15,7 @@ export class OrganizationMessages {
    * @param {string[]} titles The raw title.
    * @see toTitle() for more complex title strings.
    */
-  constructor(...titles: string[]) {
+  constructor(titles: string[]) {
     this.titles = titles
   }
 

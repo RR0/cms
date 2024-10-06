@@ -5,8 +5,8 @@ import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary"
 import { TimeContext } from "../../TimeContext"
 import { DepartmentService } from "../../../org/country/region/department/DepartmentService"
-import { CityService } from "../../../org/country/region/department/city/CityService"
-import { Source } from "../../../source/Source"
+import { CityService } from "../../../org/country"
+import { Source } from "../../../source"
 
 /**
  * Maps a Base OVNI France case to a RR0 case.

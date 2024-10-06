@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { IsereCityCode } from "../IsereCityCode"
 
 export const saintGeoireEnValdaine = franceCity(IsereCityCode.SaintGeoireEnValdaine,

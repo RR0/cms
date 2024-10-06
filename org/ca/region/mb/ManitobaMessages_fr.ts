@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { ManitobaDepartmentCode } from "./ManitobaDepartmentCode"
 import { eastmanMessages } from "./eastman/EastmanMessages"
 

@@ -1,5 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
-import { OrganizationMessages } from "../../../OrganizationMessages"
+import { RegionMessages } from "../../../country"
 
-const southAustraliaDepartments: OrganizationMessages = {}
+const southAustraliaDepartments = {}
 export const southAustralia_en = RegionMessages.create("South Australia", southAustraliaDepartments)

@@ -1,5 +1,5 @@
 import { daneCities } from "./dane/DaneCities"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 
 export const wisconsinCities: City[] = [
   ...daneCities

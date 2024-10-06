@@ -1,11 +1,10 @@
-import { RegionMessages } from "../../../../country/region/RegionMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country"
 import { PacaDepartementCode } from "./PacaDepartementCode"
 import { hautesAlpesMessages } from "./05/HautesAlpesMessages"
 import { vaucluseMessages } from "./84/VaucluseMessages"
 import { alpesMaritimesMessages } from "./06/AlpesMaritimesMessages"
 import { varMessages } from "./83/VarMessages"
 import { bouchesDuRhoneMessages } from "./13/BouchesDuRhoneMessages"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
 import { alpesDeHauteProvenceMessages } from "./04/AlpesDeHauteProvenceMessages"
 import { vendeeMessages } from "./85/VendeeMessages"
 

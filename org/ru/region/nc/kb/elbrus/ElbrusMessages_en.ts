@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 
-export const elbrusMessages_en = new CityMessages("Mount Elbrus")
+export const elbrusMessages_en = CityMessages.create("Mount Elbrus")

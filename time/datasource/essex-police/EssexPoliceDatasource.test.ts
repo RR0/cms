@@ -1,5 +1,5 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../test"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { EssexPoliceCaseSummary } from "./EssexPoliceCaseSummary"
 import { DatasourceTestCase } from "../DatasourceTestCase"
@@ -16,7 +16,7 @@ describe("EssexPoliceCaseSource", () => {
     }
 
     protected getTime(c: EssexPoliceCaseSummary): TimeContext {
-      return c.dateTime
+      return c.time
     }
 
     protected sortComparator(c1: EssexPoliceCaseSummary, c2: EssexPoliceCaseSummary): number {

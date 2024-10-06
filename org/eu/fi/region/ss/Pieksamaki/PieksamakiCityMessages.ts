@@ -1,6 +1,6 @@
 import { PieksamakiCityCode } from "./PieksamakiCityCode"
 import { pieksamakiMessages } from "./Pieksamaki/PieksamakiMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 
 type PkCityMessagesList = { [key in PieksamakiCityCode]: CityMessages }
 export const pieksamakiCityMessages: PkCityMessagesList = {

@@ -3,7 +3,7 @@ import { SartheCityCode } from "./SartheCityCode"
 import { leMansMessages } from "./LeMans/LeMansMessages"
 import { steCerotteMessages } from "./SteCerotte/SteCerotteMessages"
 import { bazogeMessages } from "./bazoge/BazogeMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { sougeLeGanelonMessages } from "./SougeLeGanelon/SougeLeGanelonMessages"
 
 type SartheCityMessagesList = { [key in SartheCityCode]: CityMessages }

@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../../country"
 import { GuadeloupeDepartementCode } from "./GuadeloupeDepartementCode"
 import { guadeloupe971Messages_en } from "./971/Guadeloupe_en"
 import { GuadeloupeDepartmentsMessages } from "./GuadeloupeDepartmentsMessages"

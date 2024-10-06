@@ -1,3 +1,5 @@
+import { DepartmentMessages } from "../../../country"
+
 export enum FranceDepartementCode {
   Ain = "01",
   Aisne = "02",
@@ -81,4 +83,8 @@ export enum FranceDepartementCode {
   Martinique = "972",
   LaReunion = "974",
   NouvelleCaledonie = "988",
+}
+
+export type FranceDepartmentMessagesList = {
+  [key in FranceDepartementCode]: DepartmentMessages
 }

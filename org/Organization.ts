@@ -1,11 +1,11 @@
-import { RR0Data } from "../data/RR0Data"
-import { Place } from "../place/Place"
 import path from "path"
 import { RR0SsgContext } from "../RR0SsgContext"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages"
 import { TitleMessage } from "./TitleMessage"
-import { RR0Event } from "../event/RR0Event"
+import { RR0Data } from "../data"
+import { RR0Event } from "../event"
+import { Place } from "../place"
 
 export enum OrganizationType {
   country = "country",

@@ -2,7 +2,7 @@ import path from "path"
 import { RR0Data } from "./RR0Data"
 import { AbstractDataFactory } from "./AbstractDataFactory"
 import { FileContents } from "ssg-api"
-import { RR0EventFactory } from "../event/RR0EventFactory"
+import { RR0EventFactory } from "../event"
 
 /**
  * A RR0Data factory which can read either <someType>.json files of index.json with a "type": "<someType>" property.

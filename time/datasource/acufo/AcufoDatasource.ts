@@ -1,12 +1,10 @@
 import { RR0SsgContext } from "../../../RR0SsgContext"
 import { HttpSource } from "../HttpSource"
 import { JSDOM } from "jsdom"
-import { ObjectUtil } from "../../../util/ObjectUtil"
+import { ObjectUtil } from "../../../util"
 import assert from "assert"
 import { AcufoCase } from "./AcufoCase"
-import { NuforcCountry } from "../nuforc/NuforcCountry"
-
-import { NuforcShape } from "../nuforc/NuforcShape"
+import { NuforcCountry, NuforcShape } from "../nuforc"
 import { AbstractDatasource } from "../AbstractDatasource"
 
 export class AcufoDatasource extends AbstractDatasource<AcufoCase> {

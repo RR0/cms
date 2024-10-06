@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { pinellasMessages_en } from "./pinellas/PinellasMessages_en"
 
 export const florida_en = RegionMessages.create(

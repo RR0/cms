@@ -2,7 +2,7 @@ import { SeineMaritimeCityCode } from "./SeineMaritimeCityCode"
 import { londeMessages } from "./Londe/LondeMessages"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { crielSurMerMessages } from "./CrielSurMer/CrielSurMerMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { dieppeMessages } from "./Dieppe/DieppeMessages"
 import { saintAubinSurMer76Messages } from "./SaintAubinSurMer/SaintAubinSurMerMessages"
 

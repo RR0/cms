@@ -1,14 +1,10 @@
-import { CountryMessages } from "../country/CountryMessages"
-import { westernAustralia_fr } from "./region/wa/WesternAustraliaMessages_fr"
-import { victoria_fr } from "./region/vic/VictoriaMessages_fr"
-import { AustraliaMessages } from "./AustraliaMessages"
-import { southAustralia_fr } from "./region/sa/SouthAustraliaMessages_fr"
-import { AustraliaRegionCode } from "./region/AustraliaRegionCode"
-import { newSouthWales_fr } from "./region/nsw/NewSouthWalesMessages_fr"
+import { CountryMessages } from "../country"
+import { newSouthWales_fr, southAustralia_fr, victoria_fr, westernAustralia_fr } from "./region"
+import { AustraliaRegionsMessages } from "./AustraliaRegionsMessages"
 
-export const australia_fr = CountryMessages.create<AustraliaMessages>("Australie",
+export const australia_fr = CountryMessages.create<AustraliaRegionsMessages>("Australie",
   {
-    [AustraliaRegionCode.nsw]: newSouthWales_fr,
+    nsw: newSouthWales_fr,
     sa: southAustralia_fr,
     wa: westernAustralia_fr,
     vic: victoria_fr

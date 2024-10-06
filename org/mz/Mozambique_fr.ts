@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { MozambiqueRegionMessagesList } from "./MozambiqueMessages"
 import { MozambiqueRegionCode } from "./region/MozambiqueRegionCode"
 import { sofalaMessages_fr } from "./region/sofala/SofalaMessages_fr"

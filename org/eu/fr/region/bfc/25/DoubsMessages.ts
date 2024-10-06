@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { DoubsCityCode } from "./DoubsCityCode"
 import { ouhansMessages } from "./Ouhans/OuhansMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { amathayVesigneuxMessages } from "./AmathayVesigneux/AmathayVesigneuxMessages"
 
 type DepMessagess = { [key in DoubsCityCode]: CityMessages }

@@ -1,9 +1,7 @@
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { OrganizationType } from "../../../Organization"
 import { AlgerCityCode } from "./AlgerCityCode"
 import { alger_en } from "./Alger/Alger_en"
+import { DepartmentMessages } from "../../../country"
 
-export const algerRegion_en = new OrganizationMessages("Algiers Province")
-algerRegion_en[OrganizationType.city] = {
+export const algerRegion_en = DepartmentMessages.create("Algiers Province", {
   [AlgerCityCode.Alger]: alger_en
-}
+})

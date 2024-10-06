@@ -1,7 +1,7 @@
 import { mauriacMessages } from "./mauriac/MauriacMessages"
 import { CantalCityCode } from "./CantalCityCode"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { pierrefortMessages } from "./pierrefort/PierrefortMessages"
 
 const cantalCityMessages: { [key in CantalCityCode]: CityMessages } = {

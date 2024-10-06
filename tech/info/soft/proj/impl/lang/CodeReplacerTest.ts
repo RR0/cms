@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { CodeReplacer } from "./CodeReplacer"
-import { rr0TestUtil } from "../../../../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../../../../test"
 import { HtmlCodeParser } from "./HtmlCodeParser"
 
 describe("CodeReplacer", () => {

@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { tarrant_fr } from "./tarrant/Tarrant_fr"
 import { houstonCityCode } from "./houston/Houston"
 import { houstonMessages } from "./houston/HoustonMessages"

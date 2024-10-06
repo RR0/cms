@@ -2,7 +2,7 @@ import { TimeContext } from "../../TimeContext"
 import { rr0HttpDatasource } from "./RR0Mapping"
 import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary"
 import { UrlUtil } from "../../../util/url/UrlUtil"
-import { Source } from "../../../source/Source"
+import { Source } from "../../../source"
 import { Book } from "../../../book/Book"
 import { Article } from "../../../source/Article"
 

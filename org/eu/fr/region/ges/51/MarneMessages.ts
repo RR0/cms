@@ -1,9 +1,7 @@
 import { MarneCityCode } from "./MarneCityCode"
 import { reimsMessages } from "./Reims/ReimsMessages"
-import { OrganizationMessages } from "../../../../../OrganizationMessages"
-import { OrganizationType } from "../../../../../Organization"
+import { DepartmentMessages } from "../../../../../country"
 
-export const marneMessages = new OrganizationMessages("Marne")
-marneMessages[OrganizationType.city] = {
+export const marneMessages = DepartmentMessages.create("Marne", {
   [MarneCityCode.Reims]: reimsMessages
-}
+})

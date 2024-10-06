@@ -1,6 +1,5 @@
-import { RegionMessages } from "../../../../country/region/RegionMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country"
 import { BourgogneFrancheComteDepartementCode } from "./BourgogneFrancheComteDepartementCode"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
 import { coteDOrMessages } from "./21/CoteDOrMessages"
 import { juraMessages } from "./39/JuraMessages"
 import { saoneEtLoireMessages } from "./71/SaoneEtLoireMessages"

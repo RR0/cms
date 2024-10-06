@@ -1,16 +1,16 @@
 import { Article } from "./Article"
-import { RR0Data } from "../data/RR0Data"
-import { TypedDataFactory } from "../data/TypedDataFactory"
+import { RR0Data, TypedDataFactory } from "../data"
+import { RR0EventFactory } from "../event"
 
 export class ArticleFactory extends TypedDataFactory<Article> {
 
-  constructor() {
+  constructor(eventFactory: RR0EventFactory) {
     super(eventFactory, "article", ["index", "article"])
   }
 
   createFromData(data: RR0Data): Article {
-    const api = new Article(data.id, data.dirName, data.url, data.events)
-    Object.assign(api, data)
-    return api
+    const article: Article = {...data, type: "article", previousSourceRefs: []}
+    Object.assign(article, data)
+    return article
   }
 }

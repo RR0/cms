@@ -1,7 +1,7 @@
 import { OiseCityCode } from "./OiseCityCode"
 import { pontLEveque60Messages } from "./PontLEveque/PontLEvequeMessages"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { compiegneMessages } from "./compiegne/CompiegneMessages"
 import { neuillyEnThelleMessages } from "./NeuillyEnThelle/NeuillyEnThelleMessages"
 import { ribecourtDreslincourtMessages } from "./RibecourtDreslincourt/RibecourtDreslincourtMessages"

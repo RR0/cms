@@ -1,3 +1,3 @@
-import { OrganizationMessages } from "../../../../../../OrganizationMessages"
+import { CityMessages } from "../../../../../../country"
 
-export const fortDeFranceMessages = new OrganizationMessages("Fort-de-France")
+export const fortDeFranceMessages = CityMessages.create("Fort-de-France")

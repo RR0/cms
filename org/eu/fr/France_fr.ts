@@ -18,7 +18,7 @@ import { martiniqueRegionMessage } from "./region/mtq/MartiniqueRegionMessage"
 import { FranceRegionCode } from "./region/FranceRegionCode"
 import { collectiviteOutreMerMessage_fr } from "./region/com/CollectiviteOutreMerMessage_fr"
 
-export const france_fr = new FranceMessages("France")
+export const france_fr = new FranceMessages(["France"])
 france_fr[OrganizationType.region] = {
   ara: auvergneRhoneAlpesMessages,
   bre: bretagneMessages_fr,

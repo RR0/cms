@@ -1,9 +1,7 @@
 import { VictoriaCityCode } from "./VictoriaCityCode"
-import { melbourneVicMessages } from "./melbourne/MelbourneMessages"
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { OrganizationType } from "../../../Organization"
+import { RegionMessages } from "../../../country"
+import { melbourneVicMessages } from "./melbourne"
 
-export const victoria_fr = new OrganizationMessages("Victoria")
-victoria_fr[OrganizationType.city] = {
+export const victoria_fr = RegionMessages.create("Victoria", {
   [VictoriaCityCode.Melbourne]: melbourneVicMessages
-}
+})

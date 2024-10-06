@@ -1,21 +1,15 @@
 import { People } from "./People"
 import { PeopleService } from "./PeopleService"
-import { beforeAll, describe, expect, test } from "@javarome/testscript"
-import { AllDataService } from "../data/AllDataService"
-import { PeopleFactory } from "./PeopleFactory"
-import { RR0EventFactory } from "../event/RR0EventFactory"
+import { describe, expect, test } from "@javarome/testscript"
+import { AllDataService } from "../data"
+import { rr0TestUtil } from "../test"
 
 describe("People", () => {
 
-  let service: PeopleService
-
-  beforeAll(async () => {
-    const peopleFactory = new PeopleFactory(new RR0EventFactory())
-    service = new PeopleService(new AllDataService([]), peopleFactory)
-  })
+  const service = new PeopleService(new AllDataService([]), rr0TestUtil.peopleFactory)
 
   test("age", async () => {
-    const hynek = service.createFromDirName("HynekJosefAllen")
+    const [hynek] = await service.getFromDir("HynekJosefAllen")
     expect(hynek.isDeceased()).toBe(false)
     expect(hynek.getAge()).toBe(undefined)
 

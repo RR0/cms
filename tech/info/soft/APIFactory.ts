@@ -1,7 +1,6 @@
 import { API } from "./API"
-import { RR0Data } from "../../../data/RR0Data"
-import { TypedDataFactory } from "../../../data/TypedDataFactory"
-import { RR0EventFactory } from "../../../event/RR0EventFactory"
+import { RR0Data, TypedDataFactory } from "../../../data"
+import { RR0EventFactory } from "../../../event"
 
 export class APIFactory extends TypedDataFactory<API> {
 

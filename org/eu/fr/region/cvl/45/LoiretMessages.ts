@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { LoiretCityCode } from "./LoiretCityCode"
 import { chateaurenardMessages } from "./chateaurenard/ChateaurenardMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { bouMessages } from "./bou/BouMessages"
 
 type IndreCityMessagesList = { [key in LoiretCityCode]: CityMessages }

@@ -1,6 +1,3 @@
-import { geneva } from "./geneva/Geneva"
 import { Organization } from "../../../Organization"
 
-export const ohioCounties: Organization[] = [
-  geneva
-]
+export const ohioCounties: Organization[] = []

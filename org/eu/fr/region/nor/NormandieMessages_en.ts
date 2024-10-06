@@ -1,7 +1,6 @@
-import { RegionMessages } from "../../../../country/region/RegionMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country"
 import { calvadosMessages } from "./14/CalvadosMessages"
 import { NormandieDepartmentCode } from "./NormandieDepartmentCode"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
 import { seineMaritimeMessages } from "./76/SeineMaritimeMessages"
 
 const normandyMessageList: { [key in NormandieDepartmentCode]: DepartmentMessages<any> } = {

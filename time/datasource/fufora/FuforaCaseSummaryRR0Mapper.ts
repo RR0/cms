@@ -4,8 +4,8 @@ import { FuforaCaseSummary } from "./FuforaCaseSummary"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary"
 import { TimeContext } from "../../TimeContext"
-import { CityService } from "../../../org/country/region/department/city/CityService"
-import { Source } from "../../../source/Source"
+import { CityService } from "../../../org/country"
+import { Source } from "../../../source"
 
 /**
  * Maps FUFORA cases to RR0 cases.

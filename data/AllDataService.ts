@@ -48,7 +48,7 @@ export class AllDataService {
           }
         }
         if (data) {
-          dataList.push(data)
+          dataList.push(data as T)
         } else {
           throw new Error("No factory to handle " + dataFile)
         }

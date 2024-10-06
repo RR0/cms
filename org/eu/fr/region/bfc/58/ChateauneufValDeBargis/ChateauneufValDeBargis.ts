@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { NievreCityCode } from "../NievreCityCode"
 
 export const chateauneufValDeBargis = franceCity(NievreCityCode.ChateauneufValDeBargis,

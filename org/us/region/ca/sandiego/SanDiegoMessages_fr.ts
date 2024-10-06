@@ -1,6 +1,6 @@
 import { oceansideMessages } from "./oceanside/OceansideMessages"
 import { campPendletonMessages } from "./camppendleton/CampPendletonMessages"
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
+import { DepartmentMessages } from "../../../../country"
 
 export const sanDiegoMessages_fr = DepartmentMessages.create(
   "Comté de San Diego",

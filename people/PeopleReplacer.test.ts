@@ -1,14 +1,15 @@
 import { PeopleReplacer } from "./PeopleReplacer"
-import { rr0TestUtil } from "../test/RR0TestUtil"
+import { rr0TestUtil } from "../test"
 import { PeopleService } from "./PeopleService"
 import { HtmlRR0SsgContext } from "../RR0SsgContext"
 import { describe, expect, test } from "@javarome/testscript"
-import { AllDataService } from "../data/AllDataService"
-import { TypedDataFactory } from "../data/TypedDataFactory"
+import { AllDataService } from "../data"
+import { RR0EventFactory } from "../event"
+import { PeopleFactory } from "./PeopleFactory"
 
 describe("PeopleReplacer", () => {
 
-  const peopleFactory = new TypedDataFactory("people")
+  const peopleFactory = new PeopleFactory(new RR0EventFactory())
 
   function createPeopleElement(context: HtmlRR0SsgContext, content: string, title?: string): HTMLSpanElement {
     const peopleElement = context.file.document.createElement("span") as HTMLSpanElement
@@ -20,9 +21,8 @@ describe("PeopleReplacer", () => {
   }
 
   test("ignore brackets", async () => {
-    const dirs = ["people/h/HynekJosefAllen"]
     const dataService = new AllDataService([peopleFactory])
-    const replacer = new PeopleReplacer(new PeopleService(dirs, dataService, peopleFactory))
+    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory))
     const context = rr0TestUtil.newHtmlContext("time/1/9/9/0/08/index.html", "")
     {
       const lastnameFirstElement = createPeopleElement(context,
@@ -41,10 +41,8 @@ describe("PeopleReplacer", () => {
   })
 
   test("replace people tags", async () => {
-    const dirs = ["people/b/BeauJerome", "people/r/ReaganRonald"]
     const dataService = new AllDataService([peopleFactory])
-    const replacer = new PeopleReplacer(
-      new PeopleService(dirs, dataService, peopleFactory))
+    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory))
     const context = rr0TestUtil.newHtmlContext("time/1/9/9/0/08/index.html", "")
     {
       const peopleWithTitle = createPeopleElement(context, "Ronald Reagan", "Ronald Wilson Reagan")

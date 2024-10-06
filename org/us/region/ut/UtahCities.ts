@@ -1,5 +1,5 @@
 import { uintahCities } from "./uintah/UintahCities"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 
 export const utahCities: City[] = [
   ...uintahCities

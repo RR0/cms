@@ -1,4 +1,4 @@
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
+import { DepartmentMessages } from "../../../../country"
 import { HonoluluCityCode } from "./HonoluluCityCode"
 import { helemanoMessages } from "./Helemano/HelemanoMessages"
 

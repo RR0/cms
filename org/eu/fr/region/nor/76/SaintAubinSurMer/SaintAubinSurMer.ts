@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { SeineMaritimeCityCode } from "../SeineMaritimeCityCode"
 
 export const saintAubinSurMer76 = franceCity(SeineMaritimeCityCode.SaintAubinSurMer,

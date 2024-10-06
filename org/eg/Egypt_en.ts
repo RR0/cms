@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { EgyptMessages } from "./EgyptMessages"
 
 export const egypt_en = CountryMessages.create<EgyptMessages>("Egypt", {})

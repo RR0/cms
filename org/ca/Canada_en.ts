@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { britishColumbiaMessages_en } from "./region/bc/BritishColumbiaMessages_en"
 import { CanadaRegionCode } from "./region/CanadaRegionCode"
 import { manitobaMessages_en } from "./region/mb/ManitobaMessages_en"

@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { AlgeriaRegionCode } from "./region/AlgeriaRegionCode"
 import { algerRegion_fr } from "./region/al/AlgerRegion_fr"
 

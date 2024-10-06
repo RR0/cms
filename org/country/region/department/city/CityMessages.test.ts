@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { RR0SsgContext } from "../../../../../RR0SsgContext"
-import { rr0TestUtil } from "../../../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../../../test"
 import { france_fr } from "../../../../eu/fr/France_fr"
 import { nanterreMessages } from "../../../../eu/fr/region/idf/92/Nanterre/NanterreMessages"
 import { nanterre92 } from "../../../../eu/fr/region/idf/92/Nanterre/Nanterre"

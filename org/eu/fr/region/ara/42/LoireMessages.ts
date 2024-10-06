@@ -1,7 +1,7 @@
 import { stEtienne42Messages } from "./SaintEtienne/SaintEtienneMessages"
 import { LoireCityCode } from "./LoireCityCode"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { roanneMessages } from "./Roanne/RoanneMessages"
 import { montbrison42Messages } from "./Montbrison/MontbrisonMessages"
 

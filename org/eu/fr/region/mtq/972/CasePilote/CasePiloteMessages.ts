@@ -1,3 +1,3 @@
-import { OrganizationMessages } from "../../../../../../OrganizationMessages"
+import { CityMessages } from "../../../../../../country"
 
-export const casePiloteMessages = new OrganizationMessages("Case-Pilote")
+export const casePiloteMessages = CityMessages.create("Case-Pilote")

@@ -1,8 +1,5 @@
 import path from "path"
-import { RegexReplaceCommand } from "../../RegexReplaceCommand.js"
-import { RegexReplacer } from "../../RegexReplacer.js"
-import { SsgContext } from "../../../../../SsgContext.js"
-import { FileContents } from "../../../../../util/index.js"
+import { FileContents, RegexReplaceCommand, RegexReplacer, SsgContext } from "ssg-api"
 
 /**
  * Replaces SSI's `<!-- #include virtual="myFileName" -->` by fileName's contents.

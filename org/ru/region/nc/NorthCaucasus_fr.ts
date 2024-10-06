@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { NorthCaucasusDepartementCode } from "./NorthCaucasusDepartementCode"
 import { kabardinoBalkaria_fr } from "./kb/KabardinoBalkaria_fr"
 

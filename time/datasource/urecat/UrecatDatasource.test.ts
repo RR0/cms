@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../test"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { UrecatCase } from "./UrecatCase"
 import { urecatRR0Mapping } from "./UrecatRR0Mapping"

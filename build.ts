@@ -193,13 +193,6 @@ const context = new RR0SsgContextImpl("fr", timeContext, config)
 context.setVar("mail", "rr0@rr0.org")
 
 const siteBaseUrl = "https://rr0.org/"
-const htAccessToNetlifyConfig: ContentStepConfig = {
-  replacements: [new HtAccessToNetlifyConfigReplaceCommand(siteBaseUrl)],
-  roots: [".htaccess"],
-  getOutputPath(_context: SsgContext): string {
-    return path.join(outDir, "netlify.toml")
-  }
-}
 const eventFactory = new RR0EventFactory()
 const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
 const orgFactory = new OrganizationFactory(eventFactory)
@@ -219,12 +212,12 @@ const timeService = new TimeService(dataService, timeTextBuilder)
 
 const peopleService = new PeopleService(dataService, peopleFactory)
 
-const apiKey = process.env.GOOGLE_MAPS_API_KEY
-if (!apiKey) {
+const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY
+if (!googleMapsApiKey) {
   throw Error("GOOGLE_MAPS_API_KEY is required")
 }
-context.setVar("mapsApiKey", apiKey)
-const placeService = new GooglePlaceService("place", apiKey)
+context.setVar("mapsApiKey", googleMapsApiKey)
+const placeService = new GooglePlaceService("place", googleMapsApiKey)
 
 const orgService = new OrganizationService([], "org", undefined)
 
@@ -329,6 +322,14 @@ timeService.getFiles().then(async (timeFiles) => {
       return HtmlTable.create(obj, headers)
     }
   }()
+
+  const htAccessToNetlifyConfig: ContentStepConfig = {
+    replacements: [new HtAccessToNetlifyConfigReplaceCommand(siteBaseUrl)],
+    roots: [".htaccess"],
+    getOutputPath(_context: SsgContext): string {
+      return path.join(outDir, "netlify.toml")
+    }
+  }
   const includeStep = new RR0ContentStep(
     [htAccessToNetlifyConfig, {
       roots: contentRoots,
@@ -341,7 +342,7 @@ timeService.getFiles().then(async (timeFiles) => {
   ssg.add(ufoCasesStep)
   ssg.add(...peopleSteps)
   if (contentRoots) {
-    const contentVisitor = new DefaultContentVisitor(dataService, caseRenderer, timeElementFactory)
+    const contentVisitor = new DefaultContentVisitor(dataService, caseRenderer as any, timeElementFactory)
     const contentVisitors: ContentVisitor[] = [contentVisitor, searchVisitor]
     if (args.books) {
       contentVisitors.push(new BookContentVisitor(bookMeta, bookLinks))

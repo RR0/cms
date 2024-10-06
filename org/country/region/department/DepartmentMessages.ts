@@ -1,5 +1,5 @@
 import { OrganizationMessages } from "../../../OrganizationMessages"
-import { CityMessagesList } from "./city/CityMessagesList"
+import { CityMessagesList } from "./city"
 
 export class DepartmentMessages<M = CityMessagesList> extends OrganizationMessages {
   /**
@@ -9,7 +9,7 @@ export class DepartmentMessages<M = CityMessagesList> extends OrganizationMessag
    * @see toTitle() for more complex title strings.
    */
   constructor(titles: string[], readonly city: M) {
-    super(...titles)
+    super(titles)
   }
 
   static create<M>(title: string, city: M): DepartmentMessages<M> {

@@ -12,7 +12,7 @@ import { westVirginaCounties } from "./wv/WestVirginiaCounties"
 import { virginiaCounties } from "./va/VirginiaCounties"
 import { hawaiiCounties } from "./hi/HawaiiCounties"
 import { nebraskaCounties } from "./ne/NebraskaCounties"
-import { arkansasCounties } from "./ak/ArkansasCounties"
+import { alaskaCounties } from "./ak/AlaskaCounties"
 import { connecticutCounties } from "./ct/ConnecticutCounties"
 import { coloradoCounties } from "./co/ColoradoCounties"
 import { delawareCounties } from "./de/DelawareCounties"
@@ -41,7 +41,7 @@ import { wyomingCounties } from "./wy/WyomingCounties"
 
 export const usaCounties: Organization[] = [
   ...alabamaCounties,
-  ...arkansasCounties,
+  ...alaskaCounties,
   ...californiaCounties,
   ...coloradoCounties,
   ...connecticutCounties,

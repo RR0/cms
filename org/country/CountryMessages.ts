@@ -1,5 +1,7 @@
 import { OrganizationMessages } from "../OrganizationMessages"
 
+export type RegionListMessages = { [k: string]: {} }
+
 /**
  * @template R The region messages type
  */
@@ -11,10 +13,10 @@ export class CountryMessages<R> extends OrganizationMessages {
    * @param {R} region The list of regions messages in this country.
    */
   constructor(titles: string[], readonly region?: R) {
-    super(...titles)
+    super(titles)
   }
 
-  static create<R>(title: string, regionMessages?: R) {
+  static create<R extends RegionListMessages>(title: string, regionMessages?: R) {
     return new CountryMessages<R>([title], regionMessages)
   }
 }

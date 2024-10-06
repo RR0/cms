@@ -1,7 +1,7 @@
 import { LotEtGaronneCityCode } from "./LotEtGaronneCityCode"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { laroqueTimbautMessages } from "./LaroqueTimbaut/LaroqueTimbautMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { pontDuCasseMessages } from "./PontDuCasse/PontDuCasseMessages"
 
 type LandesCityMessagesList = { [key in LotEtGaronneCityCode]: CityMessages }

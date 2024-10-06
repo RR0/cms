@@ -1,7 +1,5 @@
-import { genevaMessages_en } from "./geneva/GenevaMessages_en"
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 
 export const illinois_en = RegionMessages.create("Illinois", {
-    geneva: genevaMessages_en
   }
 )

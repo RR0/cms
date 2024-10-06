@@ -2,10 +2,10 @@ import assert from "assert"
 import { CaseMapper } from "../CaseMapper"
 import { SceauCaseSummary } from "./SceauCaseSummary"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
-import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary"
+import { NamedPlace, RR0CaseSummary } from "../rr0"
 import { TimeContext } from "../../TimeContext"
-import { CityService } from "../../../org/country/region/department/city/CityService"
-import { Source } from "../../../source/Source"
+import { Source } from "../../../source"
+import { CityService } from "../../../org"
 
 /**
  * Maps SCEAU cases to RR0 cases.
@@ -23,15 +23,15 @@ export class SceauCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, 
       url: sourceCase.url, title: "cas n° " + id, authors: this.authors,
       publication: {publisher: this.copyright, time: TimeContext.fromDate(sourceTime)}
     }
-    const cityName = sourceCase.city || sourceCase.sightingPlace
+    const cityName = sourceCase.ville
     const city = this.cityService.find(context, cityName, undefined)
-    assert.ok(city, `Could not find city "${cityName}" for case ${id} at ${sourceCase.dateTime}`)
+    assert.ok(city, `Could not find city "${cityName}" for case ${id} at ${sourceCase.dateCas}`)
     const place: NamedPlace = {name: city.getTitle(context), place: city.places[0]}
     return {
       type: "case",
       events: [],
       id,
-      time: sourceCase.time,
+      time: TimeContext.fromString(sourceCase.dateCas),
       place,
       description: this.getDescription(sourceCase),
       sources: [source]

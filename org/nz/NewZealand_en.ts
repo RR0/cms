@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { NewZealandMessages } from "./NewZealandMessages"
 import { gisborneMessages_en } from "./region/gisborne/GisborneMessages_en"
 import { NewZealandRegionCode } from "./region/NewZealandRegionCode"

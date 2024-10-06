@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { RussiaRegionCode } from "./region/RussiaRegionCode"
 import { northCaucasus_fr } from "./region/nc/NorthCaucasus_fr"
 

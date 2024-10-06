@@ -1,9 +1,7 @@
 import { RioDeJaneiroCityCode } from "./RioDeJaneiroCityCode"
-import { OrganizationMessages } from "../../../../OrganizationMessages"
-import { OrganizationType } from "../../../../Organization"
 import { rioDeJaneiroMessages } from "./20000-000/RioDeJaneiroMessages"
+import { DepartmentMessages } from "../../../../country"
 
-export let rioDeJaneiroMessages_en = new OrganizationMessages("State of Rio de Janeiro")
-rioDeJaneiroMessages_en[OrganizationType.city] = {
+export let rioDeJaneiroMessages_en = DepartmentMessages.create("State of Rio de Janeiro", {
   [RioDeJaneiroCityCode.RioDeJaneiro]: rioDeJaneiroMessages
-}
+})

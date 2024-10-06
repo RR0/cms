@@ -1,6 +1,6 @@
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { MartiniqueCityCode } from "../MartiniqueCityCode"
-import { City } from "../../../../../../country/region/department/city/City"
+import { City } from "../../../../../../country"
 import { martinique972 } from "../Martinique"
 
 export const fortDeFrance = City.create(MartiniqueCityCode.FortDeFrance, martinique972,

@@ -1,7 +1,7 @@
 import { PasDeCalaisCityCode } from "./PasDeCalaisCityCode"
 import { saintPolSurTernoiseMessages } from "./SaintPolSurTernoise/SaintPolSurTernoiseMessages"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { calaisMessages } from "./Calais/CalaisMessages"
 import { neuvilleSaintVaastMessages } from "./NeuvilleSaintVaast/NeuvilleSaintVaastMessages"
 

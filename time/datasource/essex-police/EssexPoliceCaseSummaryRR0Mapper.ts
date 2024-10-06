@@ -4,10 +4,10 @@ import { EssexPoliceCaseSummary } from "./EssexPoliceCaseSummary"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary"
 import { TimeContext } from "../../TimeContext"
-import { CityService } from "../../../org/country/region/department/city/CityService"
+import { CityService } from "../../../org/country"
 import { Organization } from "../../../org/Organization"
 import { france } from "../../../org/eu/fr/France"
-import { Source } from "../../../source/Source"
+import { Source } from "../../../source"
 
 export class EssexPoliceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, EssexPoliceCaseSummary, RR0CaseSummary> {
 

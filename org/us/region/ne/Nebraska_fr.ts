@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { scottsBluff_fr } from "./ScottsBluff/ScottsBluff_fr"
 import { NebraskaCountyCode } from "./NebraskaCountyCode"
 

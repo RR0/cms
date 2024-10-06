@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../../country"
 
-export const precyLeSecMessages = new CityMessages("Précy-le-Sec")
+export const precyLeSecMessages = CityMessages.create("Précy-le-Sec")

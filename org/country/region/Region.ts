@@ -1,7 +1,7 @@
-import { Place } from "../../../place/Place"
+import { Place } from "../../../place"
 import { UsaStates } from "../../us/region/UsaStates"
 import { CanadaRegionCode } from "../../ca/region/CanadaRegionCode"
-import { AustraliaRegionCode } from "../../au/region/AustraliaRegionCode"
+import { AustraliaRegionCode } from "../../au"
 import { BrazilRegionCode } from "../../br/region/BrazilRegionCode"
 import { Organization, OrganizationType } from "../../Organization"
 import { EuropeRegionCode } from "../../eu/EuropeRegionCode"
@@ -19,7 +19,7 @@ import { TitleMessage } from "../../TitleMessage"
 import { IndiaRegionCode } from "../../in/region/IndiaRegionCode"
 
 export type RegionCode =
-  | AustraliaRegionCode
+  AustraliaRegionCode
   | BrazilRegionCode
   | CanadaRegionCode
   | ColombiaRegionCode

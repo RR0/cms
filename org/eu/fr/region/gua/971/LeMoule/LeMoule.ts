@@ -1,6 +1,6 @@
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { GuadeloupeCityCode } from "../GuadeloupeCityCode"
-import { City } from "../../../../../../country/region/department/city/City"
+import { City } from "../../../../../../country"
 import { guadeloupe } from "../Guadeloupe"
 
 export const leMoule = City.create(GuadeloupeCityCode.LeMoule, guadeloupe,

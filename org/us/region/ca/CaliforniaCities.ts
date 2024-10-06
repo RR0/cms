@@ -1,5 +1,5 @@
 import { sandiegoCities } from "./sandiego/SanDiegoCities"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 
 export const californiaCities: City[] = [
   ...sandiegoCities

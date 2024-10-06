@@ -1,5 +1,5 @@
 import { AnchorReplacer } from "./AnchorReplacer"
-import { rr0TestUtil } from "../test/RR0TestUtil"
+import { rr0TestUtil } from "../test"
 
 import { JSDOM } from "jsdom"
 import { beforeEach, describe, expect, test } from "@javarome/testscript"

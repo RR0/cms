@@ -1,7 +1,7 @@
 import { HtmlRR0SsgContext } from "../RR0SsgContext"
 import { Source } from "./Source"
-import { AllDataService } from "../data/AllDataService"
-import { HttpSource } from "../time/datasource/HttpSource"
+import { AllDataService } from "../data"
+import { HttpSource } from "../time"
 import { SourceFactory } from "./SourceFactory"
 
 /**
@@ -9,7 +9,7 @@ import { SourceFactory } from "./SourceFactory"
  */
 export class SourceRegistry extends SourceFactory {
 
-  protected registry = {}
+  readonly registry = {}
 
   constructor(dataService: AllDataService, http: HttpSource, baseUrl: string, options: Intl.DateTimeFormatOptions) {
     super(dataService, http, baseUrl, options)

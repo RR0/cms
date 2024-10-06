@@ -7,7 +7,7 @@ import { florida_fr } from "./region/fl/Florida_fr"
 import { pennsylvania_fr } from "./region/pa/Pennsylvania_fr"
 import { washingtonState_fr } from "./region/wa/WashingtonState_fr"
 import { indiana_fr } from "./region/in/Indiana_fr"
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { UsaRegionMessagesList } from "./UsaMessages"
 import { northCarolina_fr } from "./region/nc/NorthCarolina_fr"
 import { newJersey_fr } from "./region/nj/NewJersey_fr"
@@ -16,7 +16,7 @@ import { westVirginia_fr } from "./region/wv/WestVirginia_fr"
 import { virginia_fr } from "./region/va/Virginia_fr"
 import { hawai_fr } from "./region/hi/Hawai_fr"
 import { nebraska_fr } from "./region/ne/Nebraska_fr"
-import { arkansas_fr } from "./region/ak/Arkansas_fr"
+import { arkansas_fr } from "./region/ar/Arkansas_fr"
 import { connecticut_fr } from "./region/ct/Connecticut_fr"
 import { colorado_fr } from "./region/co/Colorado_fr"
 import { delaware_fr } from "./region/de/Delaware_fr"
@@ -44,6 +44,15 @@ import { wisconsin_fr } from "./region/wi/Wisconsin_fr"
 import { wyoming_fr } from "./region/wy/Wyoming_fr"
 
 export const usa_fr = CountryMessages.create<UsaRegionMessagesList>("USA", {
+  ar: arkansas_fr,
+  az: undefined,
+  ga: undefined,
+  ia: undefined,
+  id: undefined,
+  ks: undefined,
+  la: undefined,
+  nd: undefined,
+  sd: undefined,
   ak: arkansas_fr,
   al: alabama_fr,
   ca: california_fr,

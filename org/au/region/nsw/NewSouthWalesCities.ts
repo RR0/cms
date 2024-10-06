@@ -1,4 +1,4 @@
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 import { dunmore } from "./dunmore/Dunmore"
 
 export const newSouthWalesCities: City[] = [

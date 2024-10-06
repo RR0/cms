@@ -1,4 +1,3 @@
-import { Country } from "../country/Country"
-import { CountryCode } from "../country/CountryCode"
+import { Country, CountryCode } from "../country"
 
 export const india = new Country(CountryCode.in)

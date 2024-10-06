@@ -1,7 +1,7 @@
 import { NordCityCode } from "./NordCityCode"
 import { aniche59Messages } from "./Aniche/AnicheMessages"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { thiantMessages } from "./Thiant/ThiantMessages"
 import { jeumontMessages } from "./Jeumont/JeumontMessages"
 import { avesnesLesAubertMessages } from "./AvesnesLesAubert/AvesnesLesAubertMessages"

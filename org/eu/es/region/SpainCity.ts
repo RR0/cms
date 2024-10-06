@@ -1,5 +1,5 @@
 import { Department } from "../../../country/region/department/Department"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 import { Place } from "../../../../place/Place"
 
 export function spainCity(code: string, province: Department, place: Place): City {

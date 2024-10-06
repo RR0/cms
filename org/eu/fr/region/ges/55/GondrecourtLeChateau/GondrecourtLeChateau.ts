@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { MeuseCityCode } from "../MeuseCityCode"
 
 export const gondrecourtLeChateau = franceCity(MeuseCityCode.GondrecourtLeChateau,

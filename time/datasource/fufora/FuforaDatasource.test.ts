@@ -1,5 +1,5 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../test"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { fuforaTestCases } from "./FuforaTestCases"
 import { DatasourceTestCase } from "../DatasourceTestCase"

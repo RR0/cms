@@ -2,13 +2,13 @@ import { beforeEach, describe, test } from "@javarome/testscript"
 import { DatasourceTestCase } from "../DatasourceTestCase"
 import { SceauCaseSummary } from "./SceauCaseSummary"
 import { TimeContext } from "../../TimeContext"
-import { Source } from "../../../source/Source"
-import { HtmlTag } from "../../../util/html/HtmlTag"
+import { Source } from "../../../source"
+import { HtmlTag } from "../../../util"
 import { SceauCaseMapping } from "./SceauCaseMapping"
 import { SceauDatasource } from "./SceauDatasource"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 import { TimeTextBuilder } from "../../TimeTextBuilder"
-import { rr0TestUtil } from "../../../test/RR0TestUtil"
+import { rr0TestUtil } from "../../../test"
 import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
 import { sceauDatasource, sceauRR0Mapper } from "./SceauRR0Mapping"
 import { sceauTestCases } from "./SceauTestCases"
@@ -43,12 +43,13 @@ describe("SCEAUCaseSource", () => {
     }
 
     protected getTime(c: SceauCaseSummary): TimeContext {
-      return c.time
+      return TimeContext.fromString(c.dateCas)
     }
 
     protected sortComparator(c1: SceauCaseSummary, c2: SceauCaseSummary): number {
-      return !c1.time || c2.time && c1.time.isBefore(
-        c2.time) ? -1 : !c2.time || c1.time.isAfter(c2.time) ? 1 : 0
+      const c1Time = this.getTime(c1)
+      const c2time = this.getTime(c2)
+      return !c1Time || c2time && c1Time.isBefore(c2time) ? -1 : !c2time || c1Time.isAfter(c2time) ? 1 : 0
     }
 
     /**

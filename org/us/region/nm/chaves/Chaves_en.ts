@@ -1,9 +1,8 @@
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
-import { OrganizationMessages } from "../../../../OrganizationMessages"
+import { CityMessages, DepartmentMessages } from "../../../../country"
 
 export const chaves_en = DepartmentMessages.create("Chaves County", {
-    88201: new OrganizationMessages("Roswell"),
-    88202: new OrganizationMessages("Roswell"),
-    88203: new OrganizationMessages("Roswell")
+  88201: CityMessages.create("Roswell"),
+  88202: CityMessages.create("Roswell"),
+  88203: CityMessages.create("Roswell")
   }
 )

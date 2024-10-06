@@ -18,7 +18,7 @@ import { westVirginia } from "./wv/WestVirginia"
 import { virginia } from "./va/Virginia"
 import { hawaii } from "./hi/Hawaii"
 import { nebraska } from "./ne/Nebraska"
-import { arkansas } from "./ak/Arkansas"
+import { alaska } from "./ak/Alaska"
 import { connecticut } from "./ct/Connecticut"
 import { colorado } from "./co/Colorado"
 import { illinois } from "./il/Illinois"
@@ -46,7 +46,7 @@ import { wisconsin } from "./wi/Wisconsin"
 
 export const usaRegions: Region[] = [
   alabama,
-  arkansas,
+  alaska,
   california,
   connecticut,
   colorado,

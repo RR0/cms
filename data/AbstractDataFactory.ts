@@ -17,8 +17,8 @@ export class AbstractDataFactory<T extends RR0Data> implements RR0DataFactory<T>
   }
 
   createTimeFromString(timeStr: string): TimeContext | undefined {
-    if (timeStr instanceof TimeContext) {
-      return timeStr
+    if (timeStr as any instanceof TimeContext) {
+      return timeStr as any
     }
     if (timeStr) {
       const time = new TimeContext()

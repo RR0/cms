@@ -3,7 +3,7 @@ import { FranceMessages } from "./FranceMessages"
 
 describe("FranceMessages", () => {
 
-  const fr = new FranceMessages("fr")
+  const fr = new FranceMessages(["fr"])
 
   test("cityName", () => {
     expect(fr.cityName("Paris")).toBe("Paris")

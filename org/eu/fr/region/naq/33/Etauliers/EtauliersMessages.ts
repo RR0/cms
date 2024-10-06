@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../../country"
 
-export const etauliersMessages = new CityMessages("Étauliers")
+export const etauliersMessages = CityMessages.create("Étauliers")

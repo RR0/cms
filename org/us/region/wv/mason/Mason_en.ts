@@ -1,4 +1,4 @@
-import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages"
+import { DepartmentMessages } from "../../../../country"
 import { MasonCityCode } from "./MasonCityCode"
 import { pointPleasantMessages } from "./PointPleasant/PointPleasantMessages"
 

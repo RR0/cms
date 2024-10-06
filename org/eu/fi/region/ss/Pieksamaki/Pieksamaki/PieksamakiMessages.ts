@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../../country"
 
-export const pieksamakiMessages = new CityMessages("Pieksämäki")
+export const pieksamakiMessages = CityMessages.create("Pieksämäki")

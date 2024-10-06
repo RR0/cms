@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../country/region/RegionMessages"
+import { RegionMessages } from "../../country"
 import { DenmarkRegionCode } from "./region/DenmarkRegionCode"
 import { CountryMessages } from "../../country/CountryMessages"
 

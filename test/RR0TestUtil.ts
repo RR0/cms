@@ -34,18 +34,19 @@ class RR0TestUtil {
   readonly timeElementFactory: TimeElementFactory
   readonly dataService: AllDataService
   readonly caseFactory: CaseFactory
+  readonly peopleFactory: PeopleFactory
 
   constructor() {
     const eventFactory = new RR0EventFactory()
     const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
     const orgFactory = new OrganizationFactory(eventFactory)
     this.caseFactory = new CaseFactory(eventFactory)
-    const peopleFactory = new PeopleFactory(eventFactory)
+    this.peopleFactory = new PeopleFactory(eventFactory)
     const apiFactory = new APIFactory(eventFactory)
     const bookFactory = new TypedDataFactory(eventFactory, "book")
     const articleFactory = new TypedDataFactory(eventFactory, "article")
     this.dataService = new AllDataService(
-      [orgFactory, this.caseFactory, peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
+      [orgFactory, this.caseFactory, this.peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
     this.dataService.getFromDir("", ["people", "case"]).then(data => {
       console.debug(data)
     })

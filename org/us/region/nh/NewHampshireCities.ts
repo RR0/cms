@@ -1,5 +1,5 @@
 import { kalamazooCities } from "./kalamazoo/KalamazooCities"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 
 export const newHampshireCities: City[] = [
   ...kalamazooCities

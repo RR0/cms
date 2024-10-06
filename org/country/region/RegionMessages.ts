@@ -1,13 +1,17 @@
 import { OrganizationMessages } from "../../OrganizationMessages"
+import { DepartmentMessagesList } from "./department"
 
-export class RegionMessages<D = OrganizationMessages> extends OrganizationMessages {
+/**
+ *
+ */
+export class RegionMessages<D = DepartmentMessagesList> extends OrganizationMessages {
   /**
    *
    * @param titles
    * @param {object} department The object holding departments in its properties.
    */
   constructor(titles: string[], readonly department?: D) {
-    super(...titles)
+    super(titles)
   }
 
   /**

@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { YonneCityCode } from "./YonneCityCode"
 import { provencyMessages } from "./Provency/ProvencyMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { avallonMessages } from "./Avallon/AvallonMessages"
 import { flognyLaChapelleMessages } from "./FlognyLaChapelle/FlognyLaChapelleMessages"
 import { villy89Messages } from "./Villy/VillyMessages"

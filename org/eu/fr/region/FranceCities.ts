@@ -13,7 +13,7 @@ import { centreValDeLoireCities } from "./cvl/CentreValDeLoireCities"
 import { bretagneCities } from "./bre/BretagneCities"
 import { martiniqueRegionCities } from "./mtq/MartiniqueRegionCities"
 import { collectiviteOutreMerCities } from "./com/CollectiviteOutreMerCities"
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 import { guadeloupeRegionCities } from "./gua/GuadeloupeRegionCities"
 
 export const franceCities: City[] = [

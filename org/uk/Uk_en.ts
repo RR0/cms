@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { UkRegionMessagesList } from "./UkMessages"
 import { englandMessages_en } from "./region/eng/EnglandMessages_en"
 import { UkRegionCode } from "./region/UkRegionCode"

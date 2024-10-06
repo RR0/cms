@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 import { arlington_fr } from "./arlington/Arlington_fr"
 import { OrganizationType } from "../../../Organization"
 import { bristolCityCode } from "./bristol/Bristol"

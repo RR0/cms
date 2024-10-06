@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { AlpesDeHauteProvenceCityCode } from "../AlpesDeHauteProvenceCityCode"
 
 export const barcelonnette = franceCity(AlpesDeHauteProvenceCityCode.Barcelonnette,

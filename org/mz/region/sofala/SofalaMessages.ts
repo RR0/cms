@@ -1,3 +1,7 @@
-import { CityMessages } from "../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../country"
 
-export type SofalaDepartmentCityList = { [key in SofalaCityCode]: CityMessages<any> }
+enum SofalaCityCode {
+  beiraCityCode
+}
+
+export type SofalaDepartmentCityList = { [key in SofalaCityCode]: CityMessages }

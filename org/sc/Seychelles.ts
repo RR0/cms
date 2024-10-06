@@ -1,5 +1,4 @@
-import { Country } from "../country/Country"
-import { CountryCode } from "../country/CountryCode"
+import { Country, CountryCode } from "../country"
 import { Place } from "../../place/Place"
 import { Region } from "../country/region/Region"
 import { SeychellesRegionCode } from "./region/SeychellesRegionCode"

@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { CharenteCityCode } from "../CharenteCityCode"
 
 export const villeboisLavalette16 = franceCity(CharenteCityCode.VilleboisLavalette,

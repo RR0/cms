@@ -1,4 +1,3 @@
-import { RegionMessages } from "../../country/region/RegionMessages"
 import { PacaDepartementCode } from "./region/pac/PacaDepartementCode"
 import { OccitanieDepartementCode } from "./region/occ/OccitanieDepartementCode"
 import { NouvelleAquitaineDepartmentCode } from "./region/naq/NouvelleAquitaineDepartmentCode"
@@ -9,12 +8,12 @@ import { PaysDeLoireDepartementCode } from "./region/pdl/PaysDeLoireDepartementC
 import { GrandEstDepartementCode } from "./region/ges/GrandEstDepartementCode"
 import { LaReunionDepartementCode } from "./region/lre/LaReunionDepartementCode"
 import { FrenchOrganizationMessages } from "./FrenchOrganization"
-import { DepartmentMessages } from "../../country/region/department/DepartmentMessages"
 import { CentreValDeLoireDepartementCode } from "./region/cvl/CentreValDeLoireDepartementCode"
 import { AuvergneRhoneAlpesDepartementCode } from "./region/ara/AuvergneRhoneAlpesDepartementCode"
 import { BourgogneFrancheComteDepartementCode } from "./region/bfc/BourgogneFrancheComteDepartementCode"
 import { BretagneDepartementCode } from "./region/bre/BretagneDepartementCode"
 import { CollectiviteOutreMerDepartementCode } from "./region/com/CollectiviteOutreMerDepartementCode"
+import { DepartmentMessages, RegionMessages } from "../../country"
 
 export type FranceRegionsMessagesList = {
   ara: RegionMessages<{ [key in AuvergneRhoneAlpesDepartementCode]: DepartmentMessages<any> }>
@@ -35,7 +34,7 @@ export type FranceRegionsMessagesList = {
 
 export class FranceMessages extends FrenchOrganizationMessages {
 
-  constructor(...titles: string[]) {
-    super(...titles)
+  constructor(titles: string[]) {
+    super(titles)
   }
 }

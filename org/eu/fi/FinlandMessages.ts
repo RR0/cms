@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../country/region/RegionMessages"
+import { RegionMessages } from "../../country"
 import { FinlandRegionCode } from "./region/FinlandRegionCode"
 import { CountryMessages } from "../../country/CountryMessages"
 

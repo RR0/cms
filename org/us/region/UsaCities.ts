@@ -13,7 +13,7 @@ import { westVirginiaCities } from "./wv/WestVirginiaCities"
 import { virginiaCities } from "./va/VirginiaCities"
 import { hawaiiCities } from "./hi/HawaiiCities"
 import { nebraskaCities } from "./ne/NebraskaCities"
-import { arkansasCities } from "./ak/ArkansasCities"
+import { alaskaCities } from "./ak/AlaskaCities"
 import { connecticutCities } from "./ct/ConnecticutCities"
 import { coloradoCities } from "./co/ColoradoCities"
 import { delawareCities } from "./de/DelawareCities"
@@ -42,7 +42,7 @@ import { wyomingCities } from "./wy/WyomingCities"
 
 export const usaCities: City[] = [
   ...alabamaCities,
-  ...arkansasCities,
+  ...alaskaCities,
   ...californiaCities,
   ...coloradoCities,
   ...connecticutCities,

@@ -20,7 +20,7 @@ export class CLI {
       if (dash >= 0) {
         let value = argv[i + 1]
         if (value.indexOf(",") > 0) {
-          value = value.split(",")
+          value = value.split(",") as any
         }
         args[arg.substring(dash + 1)] = value
         i++

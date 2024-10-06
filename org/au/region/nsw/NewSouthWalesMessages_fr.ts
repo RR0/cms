@@ -1,9 +1,7 @@
 import { NewSouthWalesCityCode } from "./NewSouthWalesCityCode"
-import { dunmoreNswMessages } from "./dunmore/DunmoreMessages"
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { OrganizationType } from "../../../Organization"
+import { dunmoreNswMessages } from "./dunmore"
+import { RegionMessages } from "../../../country"
 
-export const newSouthWales_fr = new OrganizationMessages("Nouvelle-Galles du Sud")
-newSouthWales_fr[OrganizationType.city] = {
+export const newSouthWales_fr = RegionMessages.create("Nouvelle-Galles du Sud", {
   [NewSouthWalesCityCode.Dunmore]: dunmoreNswMessages
-}
+})

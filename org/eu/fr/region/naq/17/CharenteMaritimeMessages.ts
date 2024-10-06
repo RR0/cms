@@ -2,7 +2,7 @@ import { CharenteMaritimeCityCode } from "./CharenteMaritimeCityCode"
 import { stMartinDeRe17Messages } from "./StMartinDeRe/StMartinDeReMessages"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
 import { saintJeanAngelyMessages } from "./SaintJeanAngely/SaintJeanAngelyMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { mathaMessages } from "./Matha/MathaMessages"
 import { saujonMessages } from "./Saujon/SaujonMessages"
 

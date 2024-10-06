@@ -1,9 +1,7 @@
-import { dunmoreNswMessages } from "./dunmore/DunmoreMessages"
+import { dunmoreNswMessages } from "./dunmore"
 import { NewSouthWalesCityCode } from "./NewSouthWalesCityCode"
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { OrganizationType } from "../../../Organization"
+import { RegionMessages } from "../../../country"
 
-export const newSouthWales_en = new OrganizationMessages("New South Wales")
-newSouthWales_en[OrganizationType.city] = {
+export const newSouthWales_en = RegionMessages.create("New South Wales", {
   [NewSouthWalesCityCode.Dunmore]: dunmoreNswMessages
-}
+})

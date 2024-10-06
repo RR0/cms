@@ -7,7 +7,7 @@ import { florida_en } from "./region/fl/Florida_en"
 import { pennsylvania_en } from "./region/pa/Pennsylvania_en"
 import { washingtonState_en } from "./region/wa/WashingtonState_en"
 import { indiana_en } from "./region/in/Indiana_en"
-import { CountryMessages } from "../country/CountryMessages"
+import { CountryMessages } from "../country"
 import { UsaRegionMessagesList } from "./UsaMessages"
 import { northCarolina_en } from "./region/nc/NorthCarolina_en"
 import { newJersey_en } from "./region/nj/NewJersey_en"
@@ -16,7 +16,7 @@ import { westVirginia_en } from "./region/wv/WestVirginia_en"
 import { virginia_en } from "./region/va/Virginia_en"
 import { hawai_en } from "./region/hi/Hawai_en"
 import { nebraska_en } from "./region/ne/Nebraska_en"
-import { arkansas_en } from "./region/ak/Arkansas_en"
+import { alaska_fr } from "./region/ak/Alaska_fr"
 import { connecticut_en } from "./region/ct/Connecticut_en"
 import { colorado_en } from "./region/co/Colorado_en"
 import { delaware_en } from "./region/de/Delaware_en"
@@ -42,9 +42,19 @@ import { vermont_en } from "./region/vt/Vermont_en"
 import { virginIslands_en } from "./region/vi/VirginIslands_en"
 import { wisconsin_en } from "./region/wi/Wisconsin_en"
 import { wyoming_en } from "./region/wy/Wyoming_en"
+import { arkansas_fr } from "./region/ar/Arkansas_fr"
 
 export const usa_en = CountryMessages.create<UsaRegionMessagesList>("USA", {
-  ak: arkansas_en,
+  ar: arkansas_fr,
+  az: undefined,
+  ga: undefined,
+  ia: undefined,
+  id: undefined,
+  ks: undefined,
+  la: undefined,
+  nd: undefined,
+  sd: undefined,
+  ak: alaska_fr,
   al: alabama_en,
   ca: california_en,
   co: colorado_en,

@@ -1,11 +1,11 @@
 import { ConsoleLogger, HtmlFileContents, Logger, SsgConfig, SsgContext } from "ssg-api"
-import { CLI } from "./util/cli/CLI"
-import { CSVFileReader } from "../../@javarome/ssg-api/src/file/CSVFileReader"
+import { CLI } from "./util"
 import fs from "fs"
-import { TimeContext } from "./time/TimeContext"
+import { TimeContext } from "./time"
 import { RR0SsgContextImpl } from "./RR0SsgContext"
 import { glob } from "glob"
 import path from "path"
+import { CSVFileReader } from "./CSVFileReader"
 
 interface WordFinderArgs {
   contents: string

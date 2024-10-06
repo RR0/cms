@@ -4,7 +4,7 @@ import { DepartmentMessages } from "../../../../../country/region/department/Dep
 import { meylanMessages } from "./Meylan/MeylanMessages"
 import { domeneMessages } from "./Domene/DomeneMessages"
 import { valbonnaisMessages } from "./Valbonnais/ValbonnaisMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { saintGeoireEnValdaineMessages } from "./SaintGeoireEnValdaine/SaintGeoireEnValdaineMessages"
 import { chirensMessages } from "./Chirens/ChirensMessages"
 import { saintVerandMessages } from "./SaintVerand/SaintVerandMessages"

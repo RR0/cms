@@ -1,9 +1,7 @@
 import { gisborneCityMessages } from "./gisborne/GisborneMessages"
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { OrganizationType } from "../../../Organization"
 import { GisborneCityCode } from "./GisborneCityCode"
+import { DepartmentMessages } from "../../../country"
 
-export const gisborneMessages_fr = new OrganizationMessages("Gisborne", "East Coast", "Eastland")
-gisborneMessages_fr[OrganizationType.city] = {
+export const gisborneMessages_fr = new DepartmentMessages(["Gisborne", "East Coast", "Eastland"], {
   [GisborneCityCode.Gisborne]: gisborneCityMessages
-}
+})

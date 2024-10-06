@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/region/RegionMessages"
+import { RegionMessages } from "../../../country"
 
 export const quebecMessages_fr = RegionMessages.create(
   "Québec",

@@ -1,6 +1,6 @@
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { GuadeloupeCityCode } from "../GuadeloupeCityCode"
-import { City } from "../../../../../../country/region/department/city/City"
+import { City } from "../../../../../../country"
 import { guadeloupe } from "../Guadeloupe"
 
 export const capesterreMarieGalante = City.create(GuadeloupeCityCode.CapesterreMarieGalante, guadeloupe,

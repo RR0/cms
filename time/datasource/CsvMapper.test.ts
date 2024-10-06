@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
 import { RR0SsgContext } from "../../RR0SsgContext"
 import { CsvMapper } from "./CsvMapper"
-import { rr0TestUtil } from "../../test/RR0TestUtil"
-import { GeipanCaseSummary } from "../../org/eu/fr/cnes/geipan/GeipanCaseSummary"
-import { geipanTestCaseSummaries } from "../../org/eu/fr/cnes/geipan/GeipanTestCases"
-import { GeipanCase } from "../../org/eu/fr/cnes/geipan/GeipanCase"
-import { geipanFileDatasource, geipanHttpDatasource } from "../../org/eu/fr/cnes/geipan/GeipanRR0Mapping"
-import { GeipanCaseToSummaryMapper } from "../../org/eu/fr/cnes/geipan/GeipanCaseToSummaryMapper"
+import { rr0TestUtil } from "../../test"
 import path from "path"
 import * as process from "node:process"
+import { GeipanCaseSummary } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCaseSummary"
+import { geipanTestCaseSummaries } from "../../org/eu/fr/cnes/geipan/geipan/GeipanTestCases"
+import { GeipanCase } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCase"
+import { geipanFileDatasource, geipanHttpDatasource } from "../../org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
+import { GeipanCaseToSummaryMapper } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCaseToSummaryMapper"
 
 describe("CsvMapper", () => {
 
@@ -33,7 +33,7 @@ describe("CsvMapper", () => {
     const obj = geipanTestCaseSummaries[0]
     const csvRow = mapper.map(context, obj, dataDate)
     expect(csvRow).toBe(
-      `${obj.id},${obj.url},${obj.city},${obj.zoneType},${obj.zoneCode},${obj.dateTime},${obj.postTime},${obj.classification}`)
+      `${obj.id},${obj.url},${obj.city},${obj.zoneType},${obj.zoneCode},${obj.time},${obj.postTime},${obj.classification}`)
   })
 
   test("write", () => {
@@ -41,7 +41,7 @@ describe("CsvMapper", () => {
     const expectedCsv = "id,url,city,zoneType,zoneCode,dateTime,postTime,classification\n"
       + geipanTestCaseSummaries
         .map(
-          c => `${c.id},${c.url},${c.city},${c.zoneType},${c.zoneCode},${c.dateTime},${c.postTime},${c.classification}`)
+          c => `${c.id},${c.url},${c.city},${c.zoneType},${c.zoneCode},${c.time},${c.postTime},${c.classification}`)
         .join("\n")
     expect(csvContents).toBe(expectedCsv)
   })

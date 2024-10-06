@@ -7,7 +7,7 @@ import { HtmlRR0SsgContext } from "../RR0SsgContext"
 export class UnitReplaceCommand extends DomReplaceCommand {
 
   constructor() {
-    super("*[itemscope]")
+    super("*[itemscope]", undefined)
   }
 
   protected async createReplacer(context: HtmlRR0SsgContext): Promise<DomReplacer> {

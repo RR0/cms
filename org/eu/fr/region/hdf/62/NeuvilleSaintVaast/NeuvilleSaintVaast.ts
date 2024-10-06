@@ -1,5 +1,5 @@
 import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place/Place"
+import { Place } from "../../../../../../../place"
 import { PasDeCalaisCityCode } from "../PasDeCalaisCityCode"
 
 export const neuvilleSaintVaast = franceCity(PasDeCalaisCityCode.NeuvilleSaintVaast,

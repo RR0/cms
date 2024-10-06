@@ -1,7 +1,7 @@
 import { MeuseCityCode } from "./MeuseCityCode"
 import { vaucouleursMessages } from "./Vaucouleurs/VaucouleursMessages"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../country"
 import { voidVaconMessages } from "./VoidVacon/VoidVaconMessages"
 import { gondrecourtLeChateauMessages } from "./GondrecourtLeChateau/GondrecourtLeChateauMessages"
 

@@ -1,3 +1,3 @@
-import { CityMessages } from "../../../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../../../country"
 
-export const binicMessages = new CityMessages("Binic", "Étables-sur-Mer", "Binic-Étables-sur-Mer")
+export const binicMessages = new CityMessages(["Binic", "Étables-sur-Mer", "Binic-Étables-sur-Mer"])

@@ -1,4 +1,4 @@
-import { City } from "../../../country/region/department/city/City"
+import { City } from "../../../country"
 import { sussexCities } from "./sussex/SussexCities"
 
 export const englandCities: City[] = [

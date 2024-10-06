@@ -1,3 +1,4 @@
-import { CityMessages } from "../../../../country/region/department/city/CityMessages"
+import { CityMessages } from "../../../../country"
 
-export let gisborneCityMessages = new CityMessages("Gisborne")
+
+export let gisborneCityMessages = CityMessages.create("Gisborne")

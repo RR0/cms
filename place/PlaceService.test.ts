@@ -1,16 +1,12 @@
 import { GooglePlaceService } from "./GooglePlaceService"
-import { beforeAll, beforeEach, describe, expect, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "@javarome/testscript"
 
 describe("PlaceService", () => {
 
-  let apiKey: any
-
-  beforeAll(() => {
-    apiKey = process.env.GOOGLE_MAPS_API_KEY
-    if (!apiKey) {
-      throw Error("GOOGLE_MAPS_API_KEY is required")
-    }
-  })
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY
+  if (!apiKey) {
+    throw Error("GOOGLE_MAPS_API_KEY is required")
+  }
 
   let service: GooglePlaceService
 

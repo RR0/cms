@@ -2,8 +2,8 @@ import { OrganizationMessages } from "../../OrganizationMessages"
 
 export class FrenchOrganizationMessages extends OrganizationMessages {
 
-  constructor(...titles: string[]) {
-    super(...titles)
+  constructor(titles: string[]) {
+    super(titles)
   }
 
   cityName(cityStr: string): string {

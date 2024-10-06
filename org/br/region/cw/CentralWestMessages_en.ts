@@ -1,8 +1,6 @@
 import { federalDistrictMessages_en } from "./federaldistrict/FederalDistrictMessages_en"
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { OrganizationType } from "../../../Organization"
+import { RegionMessages } from "../../../country"
 
-export const centralWestMessages_en = new OrganizationMessages("Central-West Region")
-centralWestMessages_en[OrganizationType.department] = {
+export const centralWestMessages_en = RegionMessages.create("Central-West Region", {
   federalDistrict: federalDistrictMessages_en
-}
+})
