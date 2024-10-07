@@ -1,26 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES2022",
+    "declaration": true,
+    "module": "ES2022",
+    "target": "ES2018",
     "allowJs": true,
     "moduleResolution": "node",
     "lib": [
-      "es2021",
+      "es2022",
       "dom"
     ],
     "outDir": "./dist/",
     "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "*",
-        "src/*"
-      ]
-    },
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "baseUrl": "./src",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src"
+  ]
 }
