@@ -1,5 +1,5 @@
 import { ConsoleLogger, SsgConfig, SsgContext } from "ssg-api"
-import { CLI } from "util/cli/CLI.js"
+import { CLI } from "../util/cli/CLI.js"
 import { Book } from "./Book.js"
 import { BookService } from "./BookService.js"
 import { PeopleService } from "../people/PeopleService.js"
