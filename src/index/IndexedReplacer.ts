@@ -1,4 +1,4 @@
-import { DomReplacement } from "time/DomReplacement.js"
+import { DomReplacement } from "../time/DomReplacement.js"
 import { HtmlRR0SsgContext } from "RR0SsgContext.js"
 
 /**

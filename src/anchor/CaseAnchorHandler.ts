@@ -1,9 +1,8 @@
 import { AnchorHandler } from "./AnchorHandler.js"
 import { HtmlRR0SsgContext } from "RR0SsgContext.js"
-import { TimeTextBuilder } from "time/TimeTextBuilder.js"
-import { CaseService } from "science/crypto/ufo/enquete/dossier/CaseService.js"
+import { TimeContext, TimeTextBuilder } from "../time/index.js"
+import { CaseService } from "../science/crypto/ufo/enquete/dossier/CaseService.js"
 import path from "path"
-import { TimeContext } from "time/TimeContext.js"
 
 export class CaseAnchorHandler implements AnchorHandler {
 
