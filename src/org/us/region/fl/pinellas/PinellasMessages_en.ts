@@ -1,5 +1,5 @@
-import { stPetersburgMessages } from "./stpetersburg/StPetersburgMessages"
-import { DepartmentMessages } from "../../../../country"
+import { stPetersburgMessages } from "./stpetersburg/StPetersburgMessages.js"
+import { DepartmentMessages } from "../../../../country/index.js"
 
 export let pinellasMessages_en = DepartmentMessages.create(
   "Pinellas County",

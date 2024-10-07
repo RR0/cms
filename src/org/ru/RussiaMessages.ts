@@ -1,4 +1,4 @@
-import { RegionMessages } from "../country"
-import { RussiaRegionCode } from "./region/RussiaRegionCode"
+import { RegionMessages } from "../country/index.js"
+import { RussiaRegionCode } from "./region/RussiaRegionCode.js"
 
 export type RussiaRegionMessagesList = { [key in RussiaRegionCode]: RegionMessages }

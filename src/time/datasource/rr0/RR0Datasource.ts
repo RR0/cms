@@ -1,6 +1,6 @@
-import { RR0CaseSummary } from "./RR0CaseSummary"
-import { AbstractDatasource } from "../AbstractDatasource"
-import { TimeContextFilter } from "../TimeContextFilter"
+import { RR0CaseSummary } from "./RR0CaseSummary.js"
+import { AbstractDatasource } from "../AbstractDatasource.js"
+import { TimeContextFilter } from "../TimeContextFilter.js"
 
 export class RR0ContextFilter extends TimeContextFilter<RR0CaseSummary> {
 }

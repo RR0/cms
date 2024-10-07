@@ -1,8 +1,8 @@
-import { RegionMessages } from "../../../country"
-import { arlington_en } from "./arlington/Arlington_en"
-import { OrganizationKind } from "../../../Organization"
-import { bristolCityCode } from "./bristol/Bristol"
-import { bristolMessages } from "./bristol/BristolMessages"
+import { RegionMessages } from "../../../country/index.js"
+import { arlington_en } from "./arlington/Arlington_en.js"
+import { OrganizationKind } from "../../../Organization.js"
+import { bristolCityCode } from "./bristol/Bristol.js"
+import { bristolMessages } from "./bristol/BristolMessages.js"
 
 export const virginia_en = RegionMessages.create("Virginia state", {
   arlington: arlington_en

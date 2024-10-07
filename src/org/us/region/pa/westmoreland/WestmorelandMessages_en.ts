@@ -1,5 +1,5 @@
-import { monessenMessages } from "./monessen/MonessenMessages"
-import { DepartmentMessages } from "../../../../country"
+import { monessenMessages } from "./monessen/MonessenMessages.js"
+import { DepartmentMessages } from "../../../../country/index.js"
 
 export let westmorelandMessages_en = DepartmentMessages.create(
   "Westmoreland County",

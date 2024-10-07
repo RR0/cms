@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
-import { RR0SsgContext } from "../../../RR0SsgContext"
-import { ileDeFrance } from "../../eu/fr/region/idf/Idf"
-import { rr0TestUtil } from "../../../test"
-import { france_fr } from "../../eu/fr/France_fr"
-import { idfMessages } from "../../eu/fr/region/idf/IdfMessages"
+import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { ileDeFrance } from "../../eu/fr/region/idf/Idf.js"
+import { rr0TestUtil } from "../../../test/index.js"
+import { france_fr } from "../../eu/fr/France_fr.js"
+import { idfMessages } from "../../eu/fr/region/idf/IdfMessages.js"
 
 describe("RegionMessages", () => {
 

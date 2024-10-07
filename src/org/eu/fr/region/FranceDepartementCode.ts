@@ -1,4 +1,4 @@
-import { DepartmentMessages } from "../../../country"
+import { DepartmentMessages } from "../../../country/index.js"
 
 export enum FranceDepartementCode {
   Ain = "01",

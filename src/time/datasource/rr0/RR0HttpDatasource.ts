@@ -1,12 +1,12 @@
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
-import { HttpSource } from "../HttpSource"
-import { UrlUtil } from "../../../util"
-import { RR0Datasource } from "./RR0Datasource"
-import { TimeContext } from "../../TimeContext"
-import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary"
-import { Place } from "../../../place"
-import { Publication, Source } from "../../../source"
-import { CityService, Organization } from "../../../org"
+import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HttpSource } from "../HttpSource.js"
+import { UrlUtil } from "../../../util/index.js"
+import { RR0Datasource } from "./RR0Datasource.js"
+import { TimeContext } from "../../TimeContext.js"
+import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary.js"
+import { Place } from "../../../place/index.js"
+import { Publication, Source } from "../../../source/index.js"
+import { CityService, Organization } from "../../../org/index.js"
 
 export class RR0HttpDatasource extends RR0Datasource {
 

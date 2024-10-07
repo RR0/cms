@@ -1,10 +1,10 @@
-import { TimeContext } from "../../TimeContext"
-import { rr0HttpDatasource } from "./RR0Mapping"
-import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary"
-import { UrlUtil } from "../../../util"
-import { Source } from "../../../source"
-import { Book } from "book/Book"
-import { Article } from "../../../source/Article"
+import { TimeContext } from "../../TimeContext.js"
+import { rr0HttpDatasource } from "./RR0Mapping.js"
+import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary.js"
+import { UrlUtil } from "../../../util/index.js"
+import { Source } from "../../../source/index.js"
+import { Book } from "book/Book.js"
+import { Article } from "../../../source/Article.js"
 
 function testCase(urlPath: string, time: TimeContext, description: string, sources: Source[],
                   place?: NamedPlace): RR0CaseSummary {

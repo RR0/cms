@@ -1,5 +1,5 @@
-export * from "./author"
-export * from "./witness"
+export * from "./author/index.js"
+export * from "./witness/index.js"
 export * from "./Occupation.js"
 export * from "./OccupationMessages.js"
 export * from "./People.js"

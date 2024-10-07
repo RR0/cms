@@ -1,5 +1,5 @@
-import { City } from "../../../country"
-import { beira } from "./beira/Beira"
+import { City } from "../../../country/index.js"
+import { beira } from "./beira/Beira.js"
 
 export const sofalaCities: City[] = [
   beira

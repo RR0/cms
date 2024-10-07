@@ -1,5 +1,5 @@
-import { NorthJutlandCityCode } from "./NorthJutlandCityCode"
-import { CityMessages } from "../../../../country"
+import { NorthJutlandCityCode } from "./NorthJutlandCityCode.js"
+import { CityMessages } from "../../../../country/index.js"
 
 
 export type NorthJutlandMessages = { [key in NorthJutlandCityCode]: CityMessages }

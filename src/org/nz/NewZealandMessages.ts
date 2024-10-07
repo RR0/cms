@@ -1,4 +1,4 @@
-import { NewZealandRegionCode } from "./region/NewZealandRegionCode"
-import { RegionMessages } from "../country"
+import { NewZealandRegionCode } from "./region/NewZealandRegionCode.js"
+import { RegionMessages } from "../country/index.js"
 
 export type NewZealandMessages = { [key in NewZealandRegionCode]: RegionMessages }

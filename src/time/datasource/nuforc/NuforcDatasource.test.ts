@@ -1,12 +1,12 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
-import { NuforcCaseSummary } from "./NuforcCaseSummary"
-import { nuforcRR0Mapping } from "./NuforcRR0Mapping"
-import { nuforcTestCases } from "./NuforcTestCases"
-import { DatasourceTestCase } from "../DatasourceTestCase"
-import { TimeContext } from "../../TimeContext"
-import { RR0CaseMapping } from "../rr0"
+import { rr0TestUtil } from "../../../test/index.js"
+import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
+import { nuforcRR0Mapping } from "./NuforcRR0Mapping.js"
+import { nuforcTestCases } from "./NuforcTestCases.js"
+import { DatasourceTestCase } from "../DatasourceTestCase.js"
+import { TimeContext } from "../../TimeContext.js"
+import { RR0CaseMapping } from "../rr0/index.js"
 
 describe("NuforcCaseSource", () => {
 

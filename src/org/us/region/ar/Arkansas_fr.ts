@@ -1,3 +1,3 @@
-import { RegionMessages } from "../../../country"
+import { RegionMessages } from "../../../country/index.js"
 
 export const arkansas_fr = RegionMessages.create("Arkansas", {})

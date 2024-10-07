@@ -1,6 +1,6 @@
-import { oceansideMessages } from "./oceanside/OceansideMessages"
-import { campPendletonMessages } from "./camppendleton/CampPendletonMessages"
-import { DepartmentMessages } from "../../../../country"
+import { oceansideMessages } from "./oceanside/OceansideMessages.js"
+import { campPendletonMessages } from "./camppendleton/CampPendletonMessages.js"
+import { DepartmentMessages } from "../../../../country/index.js"
 
 export const sanDiegoMessages_en = DepartmentMessages.create(
   "San Diego County",

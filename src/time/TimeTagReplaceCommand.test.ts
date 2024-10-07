@@ -1,10 +1,10 @@
-import { TimeReplacerFactory } from "./TimeReplacerFactory"
-import { rr0TestUtil } from "../test"
+import { TimeReplacerFactory } from "./TimeReplacerFactory.js"
+import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { TimeRenderer } from "./TimeRenderer"
-import { TimeTextBuilder } from "./TimeTextBuilder"
+import { TimeRenderer } from "./TimeRenderer.js"
+import { TimeTextBuilder } from "./TimeTextBuilder.js"
 import { DomReplaceCommand } from "ssg-api"
-import { TimeReplacer } from "./TimeReplacer"
+import { TimeReplacer } from "./TimeReplacer.js"
 
 describe("HtmlTagReplaceCommand", () => {
 

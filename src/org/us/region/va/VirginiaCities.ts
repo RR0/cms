@@ -1,6 +1,6 @@
-import { City } from "../../../country"
-import { bristol } from "./bristol/Bristol"
-import { arlingtonCities } from "./arlington/ArlingtonCities"
+import { City } from "../../../country/index.js"
+import { bristol } from "./bristol/Bristol.js"
+import { arlingtonCities } from "./arlington/ArlingtonCities.js"
 
 export const virginiaCities: City[] = [
   bristol,

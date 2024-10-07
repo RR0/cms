@@ -1,5 +1,5 @@
-import { sceauDatasource } from "./SceauRR0Mapping"
-import { SceauCaseSummary } from "./SceauCaseSummary"
+import { sceauDatasource } from "./SceauRR0Mapping.js"
+import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import path from "path"
 
 const baseUrl = path.join(sceauDatasource.baseUrl.href, sceauDatasource.searchPath)

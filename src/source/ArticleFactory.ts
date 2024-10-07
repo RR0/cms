@@ -1,6 +1,6 @@
-import { Article } from "./Article"
-import { RR0Data, TypedDataFactory } from "../data"
-import { RR0EventFactory } from "../event"
+import { Article } from "./Article.js"
+import { RR0Data, TypedDataFactory } from "../data/index.js"
+import { RR0EventFactory } from "../event/index.js"
 
 export class ArticleFactory extends TypedDataFactory<Article> {
 

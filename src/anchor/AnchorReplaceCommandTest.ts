@@ -1,9 +1,9 @@
-import { AnchorReplaceCommand } from "./AnchorReplaceCommand"
-import { rr0TestUtil } from "../test"
+import { AnchorReplaceCommand } from "./AnchorReplaceCommand.js"
+import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { CaseAnchorHandler } from "./CaseAnchorHandler"
-import { CaseService } from "../science"
-import { TimeElementFactory, TimeRenderer, TimeTextBuilder } from "../time"
+import { CaseAnchorHandler } from "./CaseAnchorHandler.js"
+import { CaseService } from "../science/index.js"
+import { TimeElementFactory, TimeRenderer, TimeTextBuilder } from "../time/index.js"
 
 describe("AnchorReplaceCommand", () => {
 

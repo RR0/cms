@@ -1,5 +1,5 @@
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
-import { HtmlRR0SsgContext } from "RR0SsgContext"
+import { HtmlRR0SsgContext } from "RR0SsgContext.js"
 
 /**
  * Determine page language and ddd links to page language variants,

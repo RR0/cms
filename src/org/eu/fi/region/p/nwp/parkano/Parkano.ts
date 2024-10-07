@@ -1,5 +1,5 @@
-import { createCity } from "../NwpCity"
-import { Place } from "../../../../../../../place"
-import { NwpCityCode } from "../NwpCityCode"
+import { createCity } from "../NwpCity.js"
+import { Place } from "../../../../../../../place/index.js"
+import { NwpCityCode } from "../NwpCityCode.js"
 
 export let parkano = createCity(NwpCityCode.Parkano, Place.fromDMS("62°00′30″N,23°01′30″E"))

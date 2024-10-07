@@ -1,6 +1,6 @@
-import { RegionMessages } from "../../country"
-import { FinlandRegionCode } from "./region/FinlandRegionCode"
-import { CountryMessages } from "../../country/CountryMessages"
+import { RegionMessages } from "../../country/index.js"
+import { FinlandRegionCode } from "./region/FinlandRegionCode.js"
+import { CountryMessages } from "../../country/CountryMessages.js"
 
 export type FinlandRegionsMessagesList = { [key in FinlandRegionCode]: RegionMessages<any> }
 

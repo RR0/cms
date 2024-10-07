@@ -1,5 +1,5 @@
-import { OrganizationMessages } from "../../../OrganizationMessages"
-import { CityMessagesList } from "./city"
+import { OrganizationMessages } from "../../../OrganizationMessages.js"
+import { CityMessagesList } from "./city/index.js"
 
 export class DepartmentMessages<M = CityMessagesList> extends OrganizationMessages {
   /**

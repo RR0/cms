@@ -1,5 +1,5 @@
-import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place"
-import { OiseCityCode } from "../OiseCityCode"
+import { franceCity } from "../../../FranceCity.js"
+import { Place } from "../../../../../../../place/index.js"
+import { OiseCityCode } from "../OiseCityCode.js"
 
 export const pontLEveque60 = franceCity(OiseCityCode.PontLEveque, Place.fromLocation(49.565278, 2.988611))

@@ -1,1 +1,1 @@
-export * from "./OutlineReplaceCommand"
+export * from "./OutlineReplaceCommand.js"

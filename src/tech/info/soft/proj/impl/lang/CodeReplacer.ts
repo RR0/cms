@@ -1,6 +1,6 @@
-import { DomReplacement } from "../../../../../../time/DomReplacement"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext"
-import { CodeParser } from "./CodeParser"
+import { DomReplacement } from "../../../../../../time/DomReplacement.js"
+import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { CodeParser } from "./CodeParser.js"
 
 export class CodeReplacer implements DomReplacement<HtmlRR0SsgContext> {
   constructor(protected parsers: CodeParser[]) {

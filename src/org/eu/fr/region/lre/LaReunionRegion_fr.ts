@@ -1,6 +1,6 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { LaReunionDepartementCode } from "./LaReunionDepartementCode"
-import { laReunion974Messages_fr } from "./974/LaReunion_fr"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { LaReunionDepartementCode } from "./LaReunionDepartementCode.js"
+import { laReunion974Messages_fr } from "./974/LaReunion_fr.js"
 
 export const laReunionDepartmentsMessages_fr: { [key in LaReunionDepartementCode]: DepartmentMessages<any> } = {
   [LaReunionDepartementCode.LaReunion]: laReunion974Messages_fr

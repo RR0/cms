@@ -1,1 +1,1 @@
-export * from "./soft"
+export * from "./soft/index.js"

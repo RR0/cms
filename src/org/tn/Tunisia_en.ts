@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country"
-import { TaiwanRegionMessagesList } from "./TunisiaMessages"
+import { CountryMessages } from "../country/index.js"
+import { TaiwanRegionMessagesList } from "./TunisiaMessages.js"
 
 export const tunisia_en = CountryMessages.create<TaiwanRegionMessagesList>("Tunisia", {})

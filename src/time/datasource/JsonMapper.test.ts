@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
-import { UfoSearchCaseRR0Mapper, ufoSearchCaseRR0Mapper, ufoSearchFileDatasource } from "./ufo-search"
-import { rr0TestUtil } from "../../test"
-import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases"
-import { RR0SsgContext } from "../../RR0SsgContext"
+import { UfoSearchCaseRR0Mapper, ufoSearchCaseRR0Mapper, ufoSearchFileDatasource } from "./ufo-search/index.js"
+import { rr0TestUtil } from "../../test/index.js"
+import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
+import { RR0SsgContext } from "../../RR0SsgContext.js"
 
 describe("JsonMapper", () => {
 

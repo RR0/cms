@@ -1,5 +1,11 @@
-import { CountryMessages } from "../country"
-import { AustraliaRegionCode, newSouthWales_fr, southAustralia_fr, victoria_fr, westernAustralia_fr } from "./region"
+import { CountryMessages } from "../country/index.js"
+import {
+  AustraliaRegionCode,
+  newSouthWales_fr,
+  southAustralia_fr,
+  victoria_fr,
+  westernAustralia_fr
+} from "./region/index.js"
 
 export const australia_fr = CountryMessages.create("Australie",
   {

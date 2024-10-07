@@ -1,6 +1,6 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { LesserPolandDepartementCode } from "./LesserPolandDepartementCode"
-import { suchaMessages_en } from "./sucha/SuchaMessages_en"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { LesserPolandDepartementCode } from "./LesserPolandDepartementCode.js"
+import { suchaMessages_en } from "./sucha/SuchaMessages_en.js"
 
 const cataloniaDepartementsMessageList: { [key in LesserPolandDepartementCode]: DepartmentMessages<any> } = {
   [LesserPolandDepartementCode.Sucha]: suchaMessages_en

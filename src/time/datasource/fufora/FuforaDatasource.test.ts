@@ -1,12 +1,12 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
-import { fuforaTestCases } from "./FuforaTestCases"
-import { DatasourceTestCase } from "../DatasourceTestCase"
-import { fuforaRR0Mapping } from "./FuforaRR0Mapping"
-import { TimeContext } from "../../TimeContext"
-import { FuforaCaseSummary } from "./FuforaCaseSummary"
-import { RR0CaseMapping } from "../rr0"
+import { rr0TestUtil } from "../../../test/index.js"
+import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { fuforaTestCases } from "./FuforaTestCases.js"
+import { DatasourceTestCase } from "../DatasourceTestCase.js"
+import { fuforaRR0Mapping } from "./FuforaRR0Mapping.js"
+import { TimeContext } from "../../TimeContext.js"
+import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
+import { RR0CaseMapping } from "../rr0/index.js"
 
 describe("FuforaCaseSource", () => {
 

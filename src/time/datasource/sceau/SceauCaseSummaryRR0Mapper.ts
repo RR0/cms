@@ -1,11 +1,11 @@
 import assert from "assert"
-import { CaseMapper } from "../CaseMapper"
-import { SceauCaseSummary } from "./SceauCaseSummary"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext"
-import { NamedPlace, RR0CaseSummary } from "../rr0"
-import { TimeContext } from "../../TimeContext"
-import { Source } from "../../../source"
-import { CityService } from "../../../org"
+import { CaseMapper } from "../CaseMapper.js"
+import { SceauCaseSummary } from "./SceauCaseSummary.js"
+import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { NamedPlace, RR0CaseSummary } from "../rr0/index.js"
+import { TimeContext } from "../../TimeContext.js"
+import { Source } from "../../../source/index.js"
+import { CityService } from "../../../org/index.js"
 
 /**
  * Maps SCEAU cases to RR0 cases.

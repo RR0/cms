@@ -1,8 +1,8 @@
-import { People } from "./People"
+import { People } from "./People.js"
 import path from "path"
-import { StringUtil } from "../util"
-import { RR0Data, TypedDataFactory } from "../data"
-import { RR0EventFactory } from "../event"
+import { StringUtil } from "../util/index.js"
+import { RR0Data, TypedDataFactory } from "../data/index.js"
+import { RR0EventFactory } from "../event/index.js"
 
 export class PeopleFactory extends TypedDataFactory<People> {
 

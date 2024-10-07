@@ -1,7 +1,7 @@
-import { Country, CountryCode } from "../country"
-import { Place } from "../../place/Place"
-import { Region } from "../country/region/Region"
-import { DominicanRepublicRegionCode } from "./region/DominicanRepublicRegionCode"
+import { Country, CountryCode } from "../country/index.js"
+import { Place } from "../../place/Place.js"
+import { Region } from "../country/region/Region.js"
+import { DominicanRepublicRegionCode } from "./region/DominicanRepublicRegionCode.js"
 
 export const dominicanRepublic = new Country(CountryCode.do)
 

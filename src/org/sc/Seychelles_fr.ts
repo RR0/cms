@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country"
-import { SeychellesRegionMessagesList } from "./SeychellesMessages"
+import { CountryMessages } from "../country/index.js"
+import { SeychellesRegionMessagesList } from "./SeychellesMessages.js"
 
 export const seychelles_fr = CountryMessages.create<SeychellesRegionMessagesList>("Seychelles", {})

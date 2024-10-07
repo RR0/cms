@@ -1,5 +1,5 @@
-import { City } from "../../country"
-import { algerCities } from "./al/AlgerCities"
+import { City } from "../../country/index.js"
+import { algerCities } from "./al/AlgerCities.js"
 
 export const panamaCities: City[] = [
   ...algerCities

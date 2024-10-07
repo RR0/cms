@@ -1,10 +1,10 @@
-import { NordCityCode } from "./NordCityCode"
-import { aniche59Messages } from "./Aniche/AnicheMessages"
-import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country"
-import { thiantMessages } from "./Thiant/ThiantMessages"
-import { jeumontMessages } from "./Jeumont/JeumontMessages"
-import { avesnesLesAubertMessages } from "./AvesnesLesAubert/AvesnesLesAubertMessages"
+import { NordCityCode } from "./NordCityCode.js"
+import { aniche59Messages } from "./Aniche/AnicheMessages.js"
+import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
+import { CityMessages } from "../../../../../country/index.js"
+import { thiantMessages } from "./Thiant/ThiantMessages.js"
+import { jeumontMessages } from "./Jeumont/JeumontMessages.js"
+import { avesnesLesAubertMessages } from "./AvesnesLesAubert/AvesnesLesAubertMessages.js"
 
 type NordCityMessagesList = { [key in NordCityCode]: CityMessages }
 export const nordMessages = DepartmentMessages.create<NordCityMessagesList>("Nord", {

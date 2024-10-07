@@ -1,7 +1,7 @@
-import { CodeReplacer } from "./CodeReplacer"
+import { CodeReplacer } from "./CodeReplacer.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext"
-import { HtmlCodeParser } from "./HtmlCodeParser"
+import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlCodeParser } from "./HtmlCodeParser.js"
 
 export class CodeReplacerFactory implements ReplacerFactory<DomReplacer> {
 

@@ -1,5 +1,5 @@
-import { RR0Data } from "../data"
-import { People } from "../people"
+import { RR0Data } from "../data/index.js"
+import { People } from "../people/People.js"
 
 export type RR0EventType =
   "birth"

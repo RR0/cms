@@ -17,11 +17,11 @@ import {
   TimeService,
   TimeTextBuilder
 } from "./time"
-import { CaseDirectoryStep, CaseFactory, CaseService } from "./science"
-import { GooglePlaceService, PlaceReplacerFactory } from "./place"
-import { OrganizationFactory, OrganizationService } from "./org"
-import { HtmlRR0SsgContext, RR0SsgContextImpl } from "./RR0SsgContext"
-import { CLI, HtmlTable } from "./util"
+import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/index.js"
+import { GooglePlaceService, PlaceReplacerFactory } from "./place/index.js"
+import { OrganizationFactory, OrganizationService } from "./org/index.js"
+import { HtmlRR0SsgContext, RR0SsgContextImpl } from "./RR0SsgContext.js"
+import { CLI, HtmlTable } from "./util/index.js"
 import {
   AngularExpressionReplaceCommand,
   ClassDomReplaceCommand,
@@ -47,7 +47,7 @@ import {
   SsiSetVarReplaceCommand,
   StringEchoVarReplaceCommand
 } from "ssg-api"
-import { LanguageReplaceCommand } from "./lang"
+import { LanguageReplaceCommand } from "./lang/index.js"
 import {
   AuthorReplaceCommand,
   PeopleDirectoryStepFactory,
@@ -64,27 +64,27 @@ import {
   SourceReplacer,
   SourceReplacerFactory
 } from "./source"
-import { NoteFileCounter, NoteRenderer, NoteReplacer, NoteReplacerFactory } from "./note"
-import { AnchorReplaceCommand, CaseAnchorHandler, DataAnchorHandler } from "./anchor"
-import { MetaLinkReplaceCommand } from "./MetaLinkReplaceCommand"
-import { OutlineReplaceCommand } from "./outline"
-import { ImageCommand } from "./ImageCommand"
-import { SearchIndexStep, SearchVisitor } from "./search"
-import { BaseReplaceCommand } from "./BaseReplaceCommand"
-import { OpenGraphCommand } from "./OpenGraphCommand"
-import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand"
-import { BookContentVisitor, BookDirectoryStep } from "./book"
+import { NoteFileCounter, NoteRenderer, NoteReplacer, NoteReplacerFactory } from "./note/index.js"
+import { AnchorReplaceCommand, CaseAnchorHandler, DataAnchorHandler } from "./anchor/index.js"
+import { MetaLinkReplaceCommand } from "./MetaLinkReplaceCommand.js"
+import { OutlineReplaceCommand } from "./outline/index.js"
+import { ImageCommand } from "./ImageCommand.js"
+import { SearchIndexStep, SearchVisitor } from "./search/index.js"
+import { BaseReplaceCommand } from "./BaseReplaceCommand.js"
+import { OpenGraphCommand } from "./OpenGraphCommand.js"
+import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
+import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
 import path from "path"
-import { IndexedReplacerFactory } from "index/IndexedReplacerFactory"
-import { APIFactory, CodeReplacerFactory } from "./tech"
-import { ContentVisitor, RR0ContentStep } from "./RR0ContentStep"
-import { AllDataService, TypedDataFactory } from "./data"
-import { UnitReplaceCommand } from "./value"
-import { DefaultContentVisitor } from "./DefaultContentVisitor"
-import { RR0EventFactory } from "./event"
+import { IndexedReplacerFactory } from "index/IndexedReplacerFactory.js"
+import { APIFactory, CodeReplacerFactory } from "./tech/index.js"
+import { ContentVisitor, RR0ContentStep } from "./RR0ContentStep.js"
+import { AllDataService, TypedDataFactory } from "./data/index.js"
+import { UnitReplaceCommand } from "./value/index.js"
+import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
+import { RR0EventFactory } from "./event/index.js"
 import fs from "fs"
 
-import { rr0DefaultCopyright } from "./RR0DefaultCopyright"
+import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 
 interface RR0BuildArgs {
   /**

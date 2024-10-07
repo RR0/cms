@@ -1,12 +1,12 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { BourgogneFrancheComteDepartementCode } from "./BourgogneFrancheComteDepartementCode"
-import { coteDOrMessages } from "./21/CoteDOrMessages"
-import { juraMessages } from "./39/JuraMessages"
-import { saoneEtLoireMessages } from "./71/SaoneEtLoireMessages"
-import { yonneMessages } from "./89/YonneMessages"
-import { nievreMessages } from "./58/NievreMessages"
-import { morbihanMessages } from "./56/MorbihanMessages"
-import { doubsMessages } from "./25/DoubsMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { BourgogneFrancheComteDepartementCode } from "./BourgogneFrancheComteDepartementCode.js"
+import { coteDOrMessages } from "./21/CoteDOrMessages.js"
+import { juraMessages } from "./39/JuraMessages.js"
+import { saoneEtLoireMessages } from "./71/SaoneEtLoireMessages.js"
+import { yonneMessages } from "./89/YonneMessages.js"
+import { nievreMessages } from "./58/NievreMessages.js"
+import { morbihanMessages } from "./56/MorbihanMessages.js"
+import { doubsMessages } from "./25/DoubsMessages.js"
 
 type BourgogneFrancheComteDepartmentMessagesList = { [key in BourgogneFrancheComteDepartementCode]: DepartmentMessages }
 export const bourgogneFrancheComteMessages = RegionMessages.create<BourgogneFrancheComteDepartmentMessagesList>(

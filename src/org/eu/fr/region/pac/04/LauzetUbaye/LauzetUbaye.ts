@@ -1,6 +1,6 @@
-import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place"
-import { AlpesDeHauteProvenceCityCode } from "../AlpesDeHauteProvenceCityCode"
+import { franceCity } from "../../../FranceCity.js"
+import { Place } from "../../../../../../../place/index.js"
+import { AlpesDeHauteProvenceCityCode } from "../AlpesDeHauteProvenceCityCode.js"
 
 export const lauzetUbaye = franceCity(AlpesDeHauteProvenceCityCode.LauzetUbaye,
   Place.fromDMS("44°25′51″N,6°25′58″E"))

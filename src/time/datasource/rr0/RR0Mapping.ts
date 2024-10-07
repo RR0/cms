@@ -1,6 +1,6 @@
 import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper.js"
 import { RR0HttpDatasource } from "./RR0HttpDatasource.js"
-import { cityService } from "../../../org"
+import { cityService } from "../../../org/index.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { RR0CaseMapping } from "./RR0CaseMapping.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"

@@ -1,9 +1,9 @@
-import { SceauHttpDatasource } from "./SceauHttpDatasource"
-import { cityService } from "../../../org"
-import { RR0CaseMapping } from "../rr0"
-import { SceauCaseSummary } from "./SceauCaseSummary"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
-import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper"
+import { SceauHttpDatasource } from "./SceauHttpDatasource.js"
+import { cityService } from "../../../org/index.js"
+import { RR0CaseMapping } from "../rr0/index.js"
+import { SceauCaseSummary } from "./SceauCaseSummary.js"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
+import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper.js"
 
 export const sceauDatasource = new SceauHttpDatasource(new URL("https://sceau-archives-ovni.org"))
 

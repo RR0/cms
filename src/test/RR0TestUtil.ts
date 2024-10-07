@@ -1,13 +1,13 @@
-import { HtmlRR0SsgContext, RR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext"
-import { TimeContext, TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder } from "../time"
+import { HtmlRR0SsgContext, RR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext.js"
+import { TimeContext, TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder } from "../time/index.js"
 import { FileContents, HtmlFileContents, SsgConfig, SsgContext } from "ssg-api"
 import path from "path"
-import { RR0EventFactory } from "../event"
-import { AllDataService, TypedDataFactory } from "../data"
-import { OrganizationFactory } from "../org"
-import { CaseFactory } from "../science"
-import { PeopleFactory } from "../people"
-import { APIFactory } from "../tech"
+import { RR0EventFactory } from "../event/index.js"
+import { AllDataService, TypedDataFactory } from "../data/index.js"
+import { OrganizationFactory } from "../org/index.js"
+import { CaseFactory } from "../science/index.js"
+import { PeopleFactory } from "../people/index.js"
+import { APIFactory } from "../tech/index.js"
 
 class RR0TestUtil {
 

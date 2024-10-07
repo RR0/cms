@@ -1,6 +1,6 @@
-import { franceCity } from "../../../FranceCity"
-import { Place } from "../../../../../../../place"
-import { NievreCityCode } from "../NievreCityCode"
+import { franceCity } from "../../../FranceCity.js"
+import { Place } from "../../../../../../../place/index.js"
+import { NievreCityCode } from "../NievreCityCode.js"
 
 export const chateauneufValDeBargis = franceCity(NievreCityCode.ChateauneufValDeBargis,
   Place.fromDMS(`47°17′03″N,3°13′38″E`))

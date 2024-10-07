@@ -1,5 +1,5 @@
-import { RegionMessages } from "../../../country"
-import { pinellasMessages_en } from "./pinellas/PinellasMessages_en"
+import { RegionMessages } from "../../../country/index.js"
+import { pinellasMessages_en } from "./pinellas/PinellasMessages_en.js"
 
 export const florida_en = RegionMessages.create(
   "Florida",

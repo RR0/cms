@@ -1,10 +1,10 @@
-import { GeipanHttpDatasource } from "./GeipanHttpDatasource"
-import { GeipanCaseSummaryRR0Mapper } from "./GeipanCaseSummaryRR0Mapper"
-import { GeipanFileDatasource } from "./GeipanFileDatasource"
+import { GeipanHttpDatasource } from "./GeipanHttpDatasource.js"
+import { GeipanCaseSummaryRR0Mapper } from "./GeipanCaseSummaryRR0Mapper.js"
+import { GeipanFileDatasource } from "./GeipanFileDatasource.js"
 
-import { GeipanCaseSummary } from "./GeipanCaseSummary"
-import { cityService } from "../../../../../Cities"
-import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time"
+import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
+import { cityService } from "../../../../../Cities.js"
+import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
 
 export const geipanHttpDatasource = new GeipanHttpDatasource(new URL("https://geipan.fr"), "fr/recherche/cas")
 export const geipanFileDatasource = new GeipanFileDatasource("org/eu/fr/cnes/geipan/export_cas_pub_20210219111412.csv",

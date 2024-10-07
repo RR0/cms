@@ -1,5 +1,5 @@
-import { Place } from "../../../../place/Place"
-import { Organization, OrganizationKind } from "../../../Organization"
+import { Place } from "../../../../place/Place.js"
+import { Organization, OrganizationKind } from "../../../Organization.js"
 
 export class Department extends Organization {
   /**

@@ -1,7 +1,7 @@
-import { NorthJutlandCityCode } from "./NorthJutlandCityCode"
-import { aalborgMessages } from "./aalborg/AalborgMessages"
-import { NorthJutlandMessages } from "./NorthJutlandMessages"
-import { DepartmentMessages } from "../../../../country"
+import { NorthJutlandCityCode } from "./NorthJutlandCityCode.js"
+import { aalborgMessages } from "./aalborg/AalborgMessages.js"
+import { NorthJutlandMessages } from "./NorthJutlandMessages.js"
+import { DepartmentMessages } from "../../../../country/index.js"
 
 const northJutlandCityMessages: NorthJutlandMessages = {
   [NorthJutlandCityCode.Aalborg]: aalborgMessages

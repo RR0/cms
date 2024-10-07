@@ -1,6 +1,6 @@
 import { ContentStep, ContentStepConfig, ContentStepResult, OutputFunc } from "ssg-api"
-import { HtmlRR0SsgContext } from "./RR0SsgContext"
-import { TimeContext } from "./time"
+import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { TimeContext } from "./time/index.js"
 
 export interface ContentVisitor {
   visit(context: HtmlRR0SsgContext): Promise<void>

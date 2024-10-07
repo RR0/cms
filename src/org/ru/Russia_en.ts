@@ -1,6 +1,6 @@
-import { CountryMessages } from "../country"
-import { northCaucasus_en } from "./region/nc/NorthCaucasus_en"
-import { RussiaRegionCode } from "./region/RussiaRegionCode"
+import { CountryMessages } from "../country/index.js"
+import { northCaucasus_en } from "./region/nc/NorthCaucasus_en.js"
+import { RussiaRegionCode } from "./region/RussiaRegionCode.js"
 
 export const russia_en = CountryMessages.create("Russia", {
   [RussiaRegionCode.nc]: northCaucasus_en

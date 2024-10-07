@@ -1,4 +1,4 @@
-import { CodeParser } from "./CodeParser"
+import { CodeParser } from "./CodeParser.js"
 
 export class HtmlCodeParser extends CodeParser {
   constructor(protected tagOpenStart = "&lt;", protected tagOpenEnd = "&gt;",

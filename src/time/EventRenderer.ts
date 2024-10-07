@@ -1,11 +1,11 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext"
-import { RR0Data } from "../data"
-import { Source, SourceFactory, SourceRenderer } from "../source"
-import { NoteRenderer } from "../note"
-import { NamedPlace } from "./datasource"
-import { TimeElementFactory } from "./TimeElementFactory"
+import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { RR0Data } from "../data/index.js"
+import { Source, SourceFactory, SourceRenderer } from "../source/index.js"
+import { NoteRenderer } from "../note/index.js"
+import { NamedPlace } from "./datasource/index.js"
+import { TimeElementFactory } from "./TimeElementFactory.js"
 import assert from "assert"
-import { RR0Event } from "../event"
+import { RR0Event } from "../event/index.js"
 
 /**
  * Render a case summary as HTML.

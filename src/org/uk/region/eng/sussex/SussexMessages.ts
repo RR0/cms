@@ -1,7 +1,7 @@
-import { SussexCityCode } from "./SussexCityCode"
-import { CityMessages, DepartmentMessages } from "../../../../country"
+import { SussexCityCode } from "./SussexCityCode.js"
+import { CityMessages, DepartmentMessages } from "../../../../country/index.js"
 
-import { frantMessages } from "./frant/FrantMessages"
+import { frantMessages } from "./frant/FrantMessages.js"
 
 type SussexCityMessagesList = { [key in SussexCityCode]: CityMessages }
 const sussexCityMessages: SussexCityMessagesList = {

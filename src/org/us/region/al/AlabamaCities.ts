@@ -1,5 +1,5 @@
-import { genevaCities } from "./geneva/GenevaCities"
-import { City } from "../../../country"
+import { genevaCities } from "./geneva/GenevaCities.js"
+import { City } from "../../../country/index.js"
 
 export const alabamaCities: City[] = [
   ...genevaCities

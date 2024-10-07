@@ -1,4 +1,4 @@
-import { CityMessages, DepartmentMessages } from "../../../../country"
+import { CityMessages, DepartmentMessages } from "../../../../country/index.js"
 
 export const chaves_en = DepartmentMessages.create("Chaves County", {
   88201: CityMessages.create("Roswell"),

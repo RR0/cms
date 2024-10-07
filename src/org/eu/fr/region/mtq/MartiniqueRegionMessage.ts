@@ -1,6 +1,6 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { MartiniqueDepartementCode } from "./MartiniqueDepartementCode"
-import { martinique972Messages } from "./972/MartiniqueMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { MartiniqueDepartementCode } from "./MartiniqueDepartementCode.js"
+import { martinique972Messages } from "./972/MartiniqueMessages.js"
 
 const laReunionDepartmentsMessages_en: { [key in MartiniqueDepartementCode]: DepartmentMessages<any> } = {
   [MartiniqueDepartementCode.Martinique]: martinique972Messages

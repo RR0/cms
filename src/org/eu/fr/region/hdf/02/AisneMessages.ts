@@ -1,7 +1,7 @@
-import { sainsRichaumontMessages } from "./SainsRichaumont/SainsRichaumontMessages"
-import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages"
-import { CityMessages } from "../../../../../country"
-import { AisneCityCode } from "./AisneCityCode"
+import { sainsRichaumontMessages } from "./SainsRichaumont/SainsRichaumontMessages.js"
+import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
+import { CityMessages } from "../../../../../country/index.js"
+import { AisneCityCode } from "./AisneCityCode.js"
 
 type AisneCityMessagesList = { [key in AisneCityCode]: CityMessages }
 const aisneCityMessages: AisneCityMessagesList = {

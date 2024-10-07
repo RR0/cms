@@ -1,11 +1,11 @@
-import { GeipanCaseSummary } from "./GeipanCaseSummary"
-import { GeipanCaseToSummaryMapper } from "./GeipanCaseToSummaryMapper"
-import { geipanHttpDatasource } from "./GeipanRR0Mapping"
-import { GeipanDatasource } from "./GeipanDatasource"
-import { GeipanSummaryToCaseMapper } from "./GeipanSummaryToCaseMapper"
-import { GeipanCase } from "./GeipanCase"
-import { CsvFileSource, Datasource, FileDatasource } from "../../../../../../time"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext"
+import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
+import { GeipanCaseToSummaryMapper } from "./GeipanCaseToSummaryMapper.js"
+import { geipanHttpDatasource } from "./GeipanRR0Mapping.js"
+import { GeipanDatasource } from "./GeipanDatasource.js"
+import { GeipanSummaryToCaseMapper } from "./GeipanSummaryToCaseMapper.js"
+import { GeipanCase } from "./GeipanCase.js"
+import { CsvFileSource, Datasource, FileDatasource } from "../../../../../../time/index.js"
+import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
 
 export class GeipanFileDatasource extends GeipanDatasource implements Datasource<GeipanCaseSummary>, FileDatasource<GeipanCaseSummary> {
 

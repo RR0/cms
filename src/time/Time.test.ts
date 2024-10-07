@@ -1,9 +1,9 @@
-import { Time } from "./Time"
-import { TimeContext } from "./TimeContext"
-import { RR0SsgContextImpl } from "../RR0SsgContext"
+import { Time } from "./Time.js"
+import { TimeContext } from "./TimeContext.js"
+import { RR0SsgContextImpl } from "../RR0SsgContext.js"
 import { FileContents, SsgConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../test"
+import { rr0TestUtil } from "../test/index.js"
 
 describe("Time", () => {
 

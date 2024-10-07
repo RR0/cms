@@ -1,11 +1,11 @@
 import { ConsoleLogger, HtmlFileContents, Logger, SsgConfig, SsgContext } from "ssg-api"
-import { CLI } from "./util"
+import { CLI } from "./util/index.js"
 import fs from "fs"
-import { TimeContext } from "./time"
-import { RR0SsgContextImpl } from "./RR0SsgContext"
+import { TimeContext } from "./time/index.js"
+import { RR0SsgContextImpl } from "./RR0SsgContext.js"
 import { glob } from "glob"
 import path from "path"
-import { CSVFileReader } from "./CSVFileReader"
+import { CSVFileReader } from "./CSVFileReader.js"
 
 interface WordFinderArgs {
   contents: string

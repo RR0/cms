@@ -1,6 +1,6 @@
-import { Place } from "../../../../../../../place"
-import { PkCityCode } from "../PkCityCode"
-import { City } from "../../../../../../country"
-import { pk } from "../Pk"
+import { Place } from "../../../../../../../place/index.js"
+import { PkCityCode } from "../PkCityCode.js"
+import { City } from "../../../../../../country/index.js"
+import { pk } from "../Pk.js"
 
 export let lieksa = new City(PkCityCode.Lieska, pk, [Place.fromDMS("63°19′05″N,030°01′30″E")])

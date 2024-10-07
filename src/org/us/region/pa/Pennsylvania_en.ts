@@ -1,5 +1,5 @@
-import { RegionMessages } from "../../../country"
-import { westmorelandMessages_en } from "./westmoreland/WestmorelandMessages_en"
+import { RegionMessages } from "../../../country/index.js"
+import { westmorelandMessages_en } from "./westmoreland/WestmorelandMessages_en.js"
 
 export const pennsylvania_en = RegionMessages.create(
   "Pennsylvania",

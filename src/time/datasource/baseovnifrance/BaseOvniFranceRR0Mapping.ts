@@ -1,9 +1,9 @@
-import { BaseOvniFranceCaseSummaryRR0Mapper } from "./BaseOvniFranceCaseSummaryRR0Mapper"
-import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary"
-import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource"
-import { cityService, departmentService } from "../../../org"
-import { RR0CaseMapping } from "../rr0"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
+import { BaseOvniFranceCaseSummaryRR0Mapper } from "./BaseOvniFranceCaseSummaryRR0Mapper.js"
+import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
+import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
+import { cityService, departmentService } from "../../../org/index.js"
+import { RR0CaseMapping } from "../rr0/index.js"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 
 export const baseOvniFranceDatasource = new BaseOvniFranceHttpDatasource()
 

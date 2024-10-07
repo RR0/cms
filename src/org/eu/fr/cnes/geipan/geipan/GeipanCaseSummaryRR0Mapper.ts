@@ -1,12 +1,12 @@
-import { GeipanCaseSummary } from "./GeipanCaseSummary"
+import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import assert from "assert"
-import { GeipanCaseClassification } from "./GeipanCaseClassification"
-import { CaseMapper, NamedPlace, RR0CaseSummary, TimeContext } from "../../../../../../time"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext"
-import { CityService } from "../../../../../country"
-import { Source } from "../../../../../../source"
-import { Organization } from "../../../../../Organization"
-import { france } from "../../../France"
+import { GeipanCaseClassification } from "./GeipanCaseClassification.js"
+import { CaseMapper, NamedPlace, RR0CaseSummary, TimeContext } from "../../../../../../time/index.js"
+import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { CityService } from "../../../../../country/index.js"
+import { Source } from "../../../../../../source/index.js"
+import { Organization } from "../../../../../Organization.js"
+import { france } from "../../../France.js"
 
 export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, GeipanCaseSummary, RR0CaseSummary> {
 

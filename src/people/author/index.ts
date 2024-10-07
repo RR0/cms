@@ -1,1 +1,1 @@
-export * from "./AuthorReplaceCommand"
+export * from "./AuthorReplaceCommand.js"

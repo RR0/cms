@@ -1,5 +1,5 @@
-import { UfoSearchCase, UfoSearchCaseType } from "./UfoSearchCase"
-import { TimeContext } from "../../TimeContext"
+import { UfoSearchCase, UfoSearchCaseType } from "./UfoSearchCase.js"
+import { TimeContext } from "../../TimeContext.js"
 
 export const ufoSearchTestCases: UfoSearchCase[] = [
   {

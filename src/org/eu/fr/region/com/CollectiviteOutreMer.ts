@@ -1,5 +1,5 @@
-import { FranceRegionCode } from "../FranceRegionCode"
-import { france } from "../../France"
-import { Organization, OrganizationKind } from "../../../../Organization"
+import { FranceRegionCode } from "../FranceRegionCode.js"
+import { france } from "../../France.js"
+import { Organization, OrganizationKind } from "../../../../Organization.js"
 
 export const collectiviteOutreMer = new Organization(FranceRegionCode.com, [], OrganizationKind.region, france)

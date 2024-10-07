@@ -1,6 +1,6 @@
-import { CataloniaDepartementCode } from "./CataloniaDepartementCode"
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { lleidaMessages_en } from "./lleida/LleidaMessages_en"
+import { CataloniaDepartementCode } from "./CataloniaDepartementCode.js"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { lleidaMessages_en } from "./lleida/LleidaMessages_en.js"
 
 const cataloniaDepartementsMessageList: { [key in CataloniaDepartementCode]: DepartmentMessages<any> } = {
   [CataloniaDepartementCode.Lleida]: lleidaMessages_en

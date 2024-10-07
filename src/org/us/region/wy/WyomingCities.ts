@@ -1,5 +1,5 @@
-import { carbonCities } from "./carbon/CarbonCities"
-import { City } from "../../../country"
+import { carbonCities } from "./carbon/CarbonCities.js"
+import { City } from "../../../country/index.js"
 
 export const wyomingCities: City[] = [
   ...carbonCities

@@ -1,11 +1,11 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { GeipanCaseSummary } from "./GeipanCaseSummary"
-import { geipanTestCaseSummaries } from "./GeipanTestCases"
-import { geipanRR0Mapping } from "./GeipanRR0Mapping"
-import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase"
-import { RR0CaseMapping, TimeContext } from "../../../../../../time"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext"
-import { rr0TestUtil } from "../../../../../../test"
+import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
+import { geipanTestCaseSummaries } from "./GeipanTestCases.js"
+import { geipanRR0Mapping } from "./GeipanRR0Mapping.js"
+import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase.js"
+import { RR0CaseMapping, TimeContext } from "../../../../../../time/index.js"
+import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { rr0TestUtil } from "../../../../../../test/index.js"
 
 describe("GeipanCaseSource", () => {
 

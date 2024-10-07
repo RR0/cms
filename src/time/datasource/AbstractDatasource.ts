@@ -1,7 +1,7 @@
 import { Datasource } from "./Datasource"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext"
-import { ContextFilter } from "./ContextFilter"
-import { TimeContextFilter } from "./TimeContextFilter"
+import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { ContextFilter } from "./ContextFilter.js"
+import { TimeContextFilter } from "./TimeContextFilter.js"
 
 /**
  * Cache cases which were already fetched, and filter out cases in memory according to (time) context.

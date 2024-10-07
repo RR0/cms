@@ -1,5 +1,5 @@
-import { LanguageReplaceCommand } from "./LanguageReplaceCommand"
-import { rr0TestUtil } from "../test"
+import { LanguageReplaceCommand } from "./LanguageReplaceCommand.js"
+import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 
 describe("LanguageReplaceCommand", () => {

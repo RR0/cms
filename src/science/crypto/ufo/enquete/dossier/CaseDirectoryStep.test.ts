@@ -1,11 +1,11 @@
-import { CaseDirectoryStep } from "./CaseDirectoryStep"
-import { rr0TestUtil } from "../../../../../test"
+import { CaseDirectoryStep } from "./CaseDirectoryStep.js"
+import { rr0TestUtil } from "../../../../../test/index.js"
 import { FileContents, SsgContext } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
-import { AllDataService, TypedDataFactory } from "../../../../../data"
-import { RR0Case } from "./RR0Case"
-import { CaseService } from "./CaseService"
-import { RR0EventFactory } from "../../../../../event"
+import { AllDataService, TypedDataFactory } from "../../../../../data/index.js"
+import { RR0Case } from "./RR0Case.js"
+import { CaseService } from "./CaseService.js"
+import { RR0EventFactory } from "../../../../../event/index.js"
 
 describe("DirectoryStep", () => {
 

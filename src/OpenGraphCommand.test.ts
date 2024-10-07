@@ -1,7 +1,7 @@
-import { OpenGraphCommand } from "./OpenGraphCommand"
-import { rr0TestUtil } from "./test"
+import { OpenGraphCommand } from "./OpenGraphCommand.js"
+import { rr0TestUtil } from "./test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { TimeTextBuilder } from "./time"
+import { TimeTextBuilder } from "./time/index.js"
 
 describe("OpenGraphCommand", () => {
 

@@ -1,4 +1,4 @@
-import { CityMessages } from "../../../country"
+import { CityMessages } from "../../../country/index.js"
 
 enum SofalaCityCode {
   beiraCityCode

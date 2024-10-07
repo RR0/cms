@@ -1,3 +1,3 @@
-import { City } from "../../../country"
+import { City } from "../../../country/index.js"
 
 export const telanganaCities: City[] = []

@@ -1,17 +1,17 @@
-import { GeipanCaseSummary, GeipanZoneCode } from "./GeipanCaseSummary"
+import { GeipanCaseSummary, GeipanZoneCode } from "./GeipanCaseSummary.js"
 import assert from "assert"
 import {
   GeipanCaseClassification,
   GeipanCaseClassification_calc,
   GeipanCaseClassification_minus
 } from "./GeipanCaseClassification"
-import { GeipanDatasource } from "./GeipanDatasource"
-import { HttpSource, TimeContext } from "../../../../../../time"
-import { RR0SsgContext } from "../../../../../../RR0SsgContext"
-import { ObjectUtil, UrlUtil } from "../../../../../../util"
-import { FranceDepartementCode } from "../../../region/FranceDepartementCode"
-import { FranceRegionCode } from "../../../region/FranceRegionCode"
-import { CountryCode } from "../../../../../country"
+import { GeipanDatasource } from "./GeipanDatasource.js"
+import { HttpSource, TimeContext } from "../../../../../../time/index.js"
+import { RR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { ObjectUtil, UrlUtil } from "../../../../../../util/index.js"
+import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
+import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
+import { CountryCode } from "../../../../../country/index.js"
 
 interface QueryParameters {
   /**

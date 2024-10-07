@@ -1,6 +1,6 @@
-import { RegionMessages } from "../../../country"
-import { ManitobaDepartmentCode } from "./ManitobaDepartmentCode"
-import { eastmanMessages } from "./eastman/EastmanMessages"
+import { RegionMessages } from "../../../country/index.js"
+import { ManitobaDepartmentCode } from "./ManitobaDepartmentCode.js"
+import { eastmanMessages } from "./eastman/EastmanMessages.js"
 
 export const manitobaMessages_fr = RegionMessages.create("Manitoba", {
     [ManitobaDepartmentCode.eastman]: eastmanMessages

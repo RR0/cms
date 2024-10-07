@@ -1,7 +1,7 @@
-import { FederalDistrictCityCode } from "../FederalDistrictCityCode"
-import { federalDistrict } from "../FederalDistrict"
-import { City } from "../../../../../country"
-import { Place } from "../../../../../../place"
+import { FederalDistrictCityCode } from "../FederalDistrictCityCode.js"
+import { federalDistrict } from "../FederalDistrict.js"
+import { City } from "../../../../../country/index.js"
+import { Place } from "../../../../../../place/index.js"
 
 export let brasilia = new City(FederalDistrictCityCode.Brasilia, federalDistrict,
   [Place.fromDMS("15°47′38″S,47°52′58″W")])

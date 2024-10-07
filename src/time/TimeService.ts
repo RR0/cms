@@ -1,7 +1,7 @@
-import { TimeRenderer } from "./TimeRenderer"
-import { TimeTextBuilder } from "./TimeTextBuilder"
-import { AbstractDataService, AllDataService } from "../data"
-import { RR0Event } from "../event"
+import { TimeRenderer } from "./TimeRenderer.js"
+import { TimeTextBuilder } from "./TimeTextBuilder.js"
+import { AbstractDataService, AllDataService } from "../data/index.js"
+import { RR0Event } from "../event/index.js"
 import { glob } from "glob"
 
 export class TimeService extends AbstractDataService<RR0Event> {

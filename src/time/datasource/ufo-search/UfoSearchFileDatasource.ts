@@ -1,10 +1,10 @@
-import { RR0SsgContext } from "../../../RR0SsgContext"
-import { Datasource } from "../Datasource"
+import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { Datasource } from "../Datasource.js"
 import { FileContents } from "ssg-api"
-import { UfoSearchDatasource } from "./UfoSearchDatasource"
-import { JsonMapper } from "../JsonMapper"
-import { UfoSearchCase } from "./UfoSearchCase"
-import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper"
+import { UfoSearchDatasource } from "./UfoSearchDatasource.js"
+import { JsonMapper } from "../JsonMapper.js"
+import { UfoSearchCase } from "./UfoSearchCase.js"
+import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper.js"
 
 class FileMapper extends JsonMapper<UfoSearchCase> {
 

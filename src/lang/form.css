@@ -1,4 +1,4 @@
-@import "/src/langlang/speech.css";
+@import "/src/langlang/speech.css.js";
 
 .indexed p[lang='ar-Latn'], .indexed p[lang='he-Latn'] {
   font-style: italic;

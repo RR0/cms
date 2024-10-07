@@ -1,12 +1,12 @@
-import { HtmlRR0SsgContext } from "RR0SsgContext"
+import { HtmlRR0SsgContext } from "RR0SsgContext.js"
 import { DirectoryStep, FileContents, HtmlLinks, HtmlMeta, OutputFunc, SsgConfig } from "ssg-api"
-import { RR0FileUtil } from "util/file/RR0FileUtil"
-import { Book } from "./Book"
-import { StringUtil } from "util/string/StringUtil"
-import { HtmlTag } from "util/html/HtmlTag"
+import { RR0FileUtil } from "util/file/RR0FileUtil.js"
+import { Book } from "./Book.js"
+import { StringUtil } from "util/string/StringUtil.js"
+import { HtmlTag } from "util/html/HtmlTag.js"
 import fs from "fs"
 import path from "path"
-import { Chapter } from "./Chapters"
+import { Chapter } from "./Chapters.js"
 
 /**
  * Scan directories for book information, then populates a template with collected data.

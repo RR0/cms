@@ -1,5 +1,5 @@
-import { westmorelandCities } from "./westmoreland/WestmorelandCities"
-import { City } from "../../../country"
+import { westmorelandCities } from "./westmoreland/WestmorelandCities.js"
+import { City } from "../../../country/index.js"
 
 export const pennsylvaniaCities: City[] = [
   ...westmorelandCities

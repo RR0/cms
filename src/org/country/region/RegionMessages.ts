@@ -1,5 +1,5 @@
-import { OrganizationMessages } from "../../OrganizationMessages"
-import { DepartmentMessagesList } from "./department"
+import { OrganizationMessages } from "../../OrganizationMessages.js"
+import { DepartmentMessagesList } from "./department/index.js"
 
 /**
  *

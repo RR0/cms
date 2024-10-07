@@ -1,9 +1,9 @@
 import path from "path"
-import { AbstractDataService, AllDataService } from "../../../../../data"
-import { RR0Case } from "./RR0Case"
-import { HtmlRR0SsgContext } from "../../../../../RR0SsgContext"
-import { TimeElementFactory } from "../../../../../time"
-import { CaseFactory } from "./CaseFactory"
+import { AbstractDataService, AllDataService } from "../../../../../data/index.js"
+import { RR0Case } from "./RR0Case.js"
+import { HtmlRR0SsgContext } from "../../../../../RR0SsgContext.js"
+import { TimeElementFactory } from "../../../../../time/index.js"
+import { CaseFactory } from "./CaseFactory.js"
 
 export class CaseService extends AbstractDataService<RR0Case> {
 

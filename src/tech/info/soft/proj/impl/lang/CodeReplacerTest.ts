@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@javarome/testscript"
-import { CodeReplacer } from "./CodeReplacer"
-import { rr0TestUtil } from "../../../../../../test"
-import { HtmlCodeParser } from "./HtmlCodeParser"
+import { CodeReplacer } from "./CodeReplacer.js"
+import { rr0TestUtil } from "../../../../../../test/index.js"
+import { HtmlCodeParser } from "./HtmlCodeParser.js"
 
 describe("CodeReplacer", () => {
   const replacer = new CodeReplacer([new HtmlCodeParser()])

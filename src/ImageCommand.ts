@@ -1,5 +1,5 @@
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
-import { HtmlRR0SsgContext } from "./RR0SsgContext"
+import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
 import * as path from "path"
 import * as fs from "fs"
 import sizeOf from "image-size"

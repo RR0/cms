@@ -1,12 +1,12 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { hautsDeSeineMessages } from "./92/HautsDeSeineMessages"
-import { IdfDepartmentCode } from "./IdfDepartmentCode"
-import { oiseMessages } from "./60/OiseCityMessages"
-import { parisMessages } from "./75/ParisMessages"
-import { yvelinesMessages } from "./78/YvelinesCityMessages"
-import { seineEtMarneMessages } from "./77/SeineEtMarneMessages"
-import { valDOiseMessages } from "./95/ValDOiseMessages"
-import { essonneMessages } from "./91/EssonneMessages"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { hautsDeSeineMessages } from "./92/HautsDeSeineMessages.js"
+import { IdfDepartmentCode } from "./IdfDepartmentCode.js"
+import { oiseMessages } from "./60/OiseCityMessages.js"
+import { parisMessages } from "./75/ParisMessages.js"
+import { yvelinesMessages } from "./78/YvelinesCityMessages.js"
+import { seineEtMarneMessages } from "./77/SeineEtMarneMessages.js"
+import { valDOiseMessages } from "./95/ValDOiseMessages.js"
+import { essonneMessages } from "./91/EssonneMessages.js"
 
 type IdfDepartmentMessagesList = & { [key in IdfDepartmentCode]: DepartmentMessages<any> }
 const idfDepartmentMessages: IdfDepartmentMessagesList = {

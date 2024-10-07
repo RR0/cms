@@ -1,3 +1,3 @@
-import { Country, CountryCode } from "../country"
+import { Country, CountryCode } from "../country/index.js"
 
 export const georgia = new Country(CountryCode.ge)

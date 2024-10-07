@@ -1,6 +1,6 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country"
-import { CollectiviteOutreMerDepartementCode } from "./CollectiviteOutreMerDepartementCode"
-import { nouvelleCaledonie_en } from "./988/NouvelleCaledonie_en"
+import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { CollectiviteOutreMerDepartementCode } from "./CollectiviteOutreMerDepartementCode.js"
+import { nouvelleCaledonie_en } from "./988/NouvelleCaledonie_en.js"
 
 const collectiviteOutreMerCityMessages: { [key in CollectiviteOutreMerDepartementCode]: DepartmentMessages<any> } = {
   [CollectiviteOutreMerDepartementCode.NouvelleCaledonie]: nouvelleCaledonie_en
