@@ -74,6 +74,10 @@ export class TimeContext {
     return this.date?.approximate || this.interval?.approximate || this.duration?.approximate
   }
 
+  set approximate(approx: boolean) {
+    this.date.approximate = approx
+  }
+
   get approximateTime(): boolean {
     return this.approximate || this.date?.hour?.approximate || this.date?.minute?.approximate || this.date?.second?.approximate
   }

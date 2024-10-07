@@ -76,7 +76,8 @@ export class UfoSearchHttpDatasource extends UfoSearchDatasource {
     time.setMonth(monthStr ? parseInt(monthStr, 10) : undefined)
     const dayOfMonthStr = dateFields[3]
     time.setDayOfMonth(dayOfMonthStr ? parseInt(dayOfMonthStr, 10) : undefined)
-    time.approximate = Boolean(dateFields[6])
+    const approximate = Boolean(dateFields[6])
+    time.approximate = approximate
   }
 
   protected async getFromRow(context: RR0SsgContext, row: Element): Promise<UfoSearchCase> {
@@ -135,7 +136,8 @@ export class UfoSearchHttpDatasource extends UfoSearchDatasource {
     const timeValue = timeLabel.nextSibling.textContent
     const timeFields = /(~)?(\d{1,2}):(\d{1,2})(\?)?/.exec(timeValue)
     assert.ok(timeFields, `Could not parse time "${timeValue}"`)
-    dateTime.approximateTime = Boolean(timeFields[0] || timeFields[4])
+    const approximateTime = Boolean(timeFields[0] || timeFields[4])
+    dateTime.date.hour.approximate = approximateTime
     const hourStr = timeFields[1]
     if (hourStr) {
       dateTime.setHour(parseInt(hourStr, 10))
