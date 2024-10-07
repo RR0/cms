@@ -1,8 +1,7 @@
 import { CountryMessages } from "../country"
 import { newSouthWales_en, southAustralia_en, victoria_en, westernAustralia_en } from "./region"
-import { AustraliaRegionsMessages } from "./AustraliaRegionsMessages"
 
-export const australia_en = CountryMessages.create<AustraliaRegionsMessages>("Australia",
+export const australia_en = CountryMessages.create("Australia",
   {
     nsw: newSouthWales_en,
     sa: southAustralia_en,

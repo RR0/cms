@@ -10,7 +10,7 @@ export class EssexPoliceFileDatasource extends EssexPoliceDatasource implements 
   readonly fileMapper = new class extends JsonMapper<EssexPoliceCaseSummary> {
     parse(context: RR0SsgContext, data: string): EssexPoliceCaseSummary[] {
       const allData = super.parse(context, data)
-      return allData["Majestic Timeline"] as EssexPoliceCaseSummary[]
+      return allData as EssexPoliceCaseSummary[]
     }
   }()
 

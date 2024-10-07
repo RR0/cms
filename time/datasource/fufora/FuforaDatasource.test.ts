@@ -6,7 +6,7 @@ import { DatasourceTestCase } from "../DatasourceTestCase"
 import { fuforaRR0Mapping } from "./FuforaRR0Mapping"
 import { TimeContext } from "../../TimeContext"
 import { FuforaCaseSummary } from "./FuforaCaseSummary"
-import { RR0CaseMapping } from "../rr0/RR0CaseMapping"
+import { RR0CaseMapping } from "../rr0"
 
 describe("FuforaCaseSource", () => {
 

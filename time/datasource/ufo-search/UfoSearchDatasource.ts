@@ -4,8 +4,8 @@ import { UfoSearchCase } from "./UfoSearchCase"
 
 export abstract class UfoSearchDatasource extends AbstractDatasource<UfoSearchCase> {
 
-  protected constructor(authors = ["Geldreich, Rich"], copyright = "UFO Search") {
-    super(authors, copyright)
+  protected constructor() {
+    super(["Geldreich, Rich"], "UFO Search")
   }
 
   protected abstract readCases(context: RR0SsgContext): Promise<UfoSearchCase[]>

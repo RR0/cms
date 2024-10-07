@@ -18,3 +18,6 @@ export const baseOvniFranceRR0Mapping: RR0CaseMapping<BaseOvniFranceCaseSummary>
   mapper: baseOvniFranceRR0Mapper,
   actions
 }
+
+export const baseOvniFranceSortComparator
+  = (c1: BaseOvniFranceCaseSummary, c2: BaseOvniFranceCaseSummary) => c1.id < c2.id ? -1 : c1.id > c2.id ? 1 : 0

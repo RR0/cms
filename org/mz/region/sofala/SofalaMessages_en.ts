@@ -1,11 +1,7 @@
-import { RegionMessages } from "../../../country"
-import { OrganizationType } from "../../../Organization"
-import { SofalaDepartmentCityList } from "./SofalaMessages"
+import { DepartmentMessages } from "../../../country"
 import { beiraCityCode } from "./beira/Beira"
 import { beiraMessages } from "./beira/BeiraMessages"
 
-export const sofalaMessages_en = new RegionMessages(["Sofala"])
-const cities: SofalaDepartmentCityList = {
+export const sofalaMessages_en = DepartmentMessages.create("Sofala", {
   [beiraCityCode]: beiraMessages
-}
-sofalaMessages_en[OrganizationType.city] = cities
+})

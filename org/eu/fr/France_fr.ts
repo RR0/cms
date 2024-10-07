@@ -10,7 +10,7 @@ import { hautsDeFranceMessages } from "./region/hdf/HautsDeFranceMessages"
 import { normandieMessages_fr } from "./region/nor/NormandieMessages_fr"
 import { grandEstMessages } from "./region/ges/GrandEstMessages"
 import { laReunionRegion_fr } from "./region/lre/LaReunionRegion_fr"
-import { OrganizationType } from "../../Organization"
+import { OrganizationKind } from "../../Organization"
 import { centreValDeLoireMessages } from "./region/cvl/CentreValDeLoireMessages"
 import { guadeloupeRegion_fr } from "./region/gua/GuadeloupeRegion_fr"
 import { bretagneMessages_fr } from "./region/bre/BretagneMessages_fr"
@@ -19,7 +19,7 @@ import { FranceRegionCode } from "./region/FranceRegionCode"
 import { collectiviteOutreMerMessage_fr } from "./region/com/CollectiviteOutreMerMessage_fr"
 
 export const france_fr = new FranceMessages(["France"])
-france_fr[OrganizationType.region] = {
+france_fr[OrganizationKind.region] = {
   ara: auvergneRhoneAlpesMessages,
   bre: bretagneMessages_fr,
   bfc: bourgogneFrancheComteMessages,

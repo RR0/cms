@@ -2,6 +2,7 @@ import { Browser, Builder, By, ITimeouts, WebDriver } from "selenium-webdriver"
 import { JSDOM } from "jsdom"
 import { FetchHttpFetcher } from "./FetchHttpFetcher"
 import { ArchiveHttpFetcher } from "./ArchiveHttpFetcher"
+import assert from "assert"
 
 export class MimeType {
   static readonly csv: string = "text/csv"
@@ -37,14 +38,17 @@ export class HttpSourceError extends Error {
  */
 export class HttpSource {
 
+  // TODO: Move selenium web driver in SeleniumHttpFetcher
   protected driver: WebDriver
 
   constructor(protected options: HttpSourceOptions = {fetchers: [new FetchHttpFetcher(), new ArchiveHttpFetcher()]}) {
   }
 
+  // TODO: Move selenium web driver in SeleniumHttpFetcher
   async getDriver(): Promise<WebDriver> {
     if (!this.driver) {
       const seleniumOptions = this.options.selenium
+      assert.ok(seleniumOptions, "selenium options expected in " + JSON.stringify(this.options))
       this.driver = await new Builder().forBrowser(Browser.CHROME).build()
       await this.driver.manage().setTimeouts(seleniumOptions.timeout)
     }
@@ -54,6 +58,7 @@ export class HttpSource {
   async get(queryUrl: URL, init: RequestInit = {}, resOut: Partial<Response> = {}): Promise<HTMLElement> {
     let pageSource: string
     const seleniumOptions = this.options.selenium
+    // TODO: Move selenium web driver in SeleniumHttpFetcher
     if (seleniumOptions) {
       const driver = await this.getDriver()
       await driver.get(queryUrl.href)

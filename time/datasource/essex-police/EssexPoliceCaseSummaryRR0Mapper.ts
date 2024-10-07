@@ -28,7 +28,7 @@ export class EssexPoliceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgCon
     }
     const place = this.getPlace(context, sourceCase)
     return {
-      type: "case",
+      type: "sighting",
       events: [],
       time: sourceCase.time,
       place,

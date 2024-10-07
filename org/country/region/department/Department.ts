@@ -1,5 +1,5 @@
 import { Place } from "../../../../place/Place"
-import { Organization, OrganizationType } from "../../../Organization"
+import { Organization, OrganizationKind } from "../../../Organization"
 
 export class Department extends Organization {
   /**
@@ -9,7 +9,7 @@ export class Department extends Organization {
    * @param places The geographical place of the department.
    */
   constructor(code: string, parent: Organization, places: Place[]) {
-    super(code, places, OrganizationType.department, parent)
+    super(code, places, OrganizationKind.department, parent)
   }
 
   static create(code: string, parent: Organization, place: Place) {

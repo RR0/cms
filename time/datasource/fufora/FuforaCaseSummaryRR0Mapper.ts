@@ -28,7 +28,7 @@ export class FuforaCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext,
     assert.ok(city, `Could not find city "${cityName}" for case ${id} at ${sourceCase.dateTime}`)
     const place: NamedPlace = {name: city.getTitle(context), place: city.places[0]}
     return {
-      type: "case",
+      type: "sighting",
       events: [],
       id,
       time: sourceCase.dateTime,

@@ -5,8 +5,8 @@ import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases"
 import { DatasourceTestCase } from "../DatasourceTestCase"
 import { TimeContext } from "../../TimeContext"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary"
-import { baseOvniFranceRR0Mapping } from "./BaseOvniFranceRR0Mapping"
-import { RR0CaseMapping } from "../rr0/RR0CaseMapping"
+import { baseOvniFranceRR0Mapping, baseOvniFranceSortComparator } from "./BaseOvniFranceRR0Mapping"
+import { RR0CaseMapping } from "../rr0"
 
 describe("BaseOvniFranceCaseSource", () => {
 
@@ -20,7 +20,7 @@ describe("BaseOvniFranceCaseSource", () => {
     }
 
     protected sortComparator(c1: BaseOvniFranceCaseSummary, c2: BaseOvniFranceCaseSummary): number {
-      return c1.id < c2.id ? -1 : c1.id > c2.id ? 1 : 0
+      return baseOvniFranceSortComparator(c1, c2)
     }
   }(baseOvniFranceRR0Mapping, baseOvniFranceTestCases)
 

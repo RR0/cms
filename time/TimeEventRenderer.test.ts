@@ -45,7 +45,7 @@ describe("TimeEventRenderer", () => {
     }
     const sources = [source1]
     const c: RR0CaseSummary = {
-      events: [], type: "case",
+      events: [], type: "sighting",
       time: context.time,
       place: namedPlace,
       description: "some sighting", sources

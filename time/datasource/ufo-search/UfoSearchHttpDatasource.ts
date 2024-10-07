@@ -1,6 +1,6 @@
 import { RR0SsgContext } from "../../../RR0SsgContext"
 import { UfoSearchDatasource } from "./UfoSearchDatasource"
-import { UrlUtil } from "../../../util/url/UrlUtil"
+import { UrlUtil } from "../../../util"
 import { JSDOM } from "jsdom"
 import { TimeContext } from "../../TimeContext"
 import { HttpSource } from "../HttpSource"

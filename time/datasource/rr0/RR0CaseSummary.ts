@@ -9,7 +9,7 @@ export type NamedPlace = {
   readonly name: string
 }
 
-export interface RR0CaseSummary extends RR0Data {
+export interface RR0CaseSummary extends RR0Event {
   /**
    * A unique identifier for this data.
    * // TODO: Make it mandatory
@@ -31,7 +31,7 @@ export interface RR0CaseSummary extends RR0Data {
   /**
    * The data type ("people", "place", "org", "book", "case", "sighting"...)
    */
-  readonly type: "case"
+  readonly type: "sighting"
   /**
    * Parent data.
    */

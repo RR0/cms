@@ -6,8 +6,8 @@ import { SsgContext } from "ssg-api"
 import { rr0TestUtil } from "../test"
 import { describe, expect, test } from "@javarome/testscript"
 import { PlaceLocation } from "./PlaceLocation"
-import { Organization } from "../org/Organization"
-import { RR0Messages_fr } from "../lang/RR0Messages_fr"
+import { Organization, OrganizationKind } from "../org/Organization"
+import { OrganizationMessages } from "../org"
 
 class MockPlaceService extends PlaceService {
 
@@ -35,14 +35,18 @@ class MockOrganizationService extends OrganizationService {
   }
 
   async read(_fileName: string): Promise<Organization> {
+    let title = "Los Alamos National Laboratories"
     return {
-      code: "laln",
+      type: "org",
+      kind: OrganizationKind.company,
+      id: "laln",
       dirName: this.dirName,
       getTitle(_context: SsgContext): string {
-        return "Los Alamos National Laboratories"
+        return title
       },
       places: [new Place([new PlaceLocation(35.87555555555556, -106.32416666666666)])],
-      getMessages: new RR0Messages_fr().org
+      getMessages: (_context) => new OrganizationMessages([title]),
+      events: []
     }
   }
 }

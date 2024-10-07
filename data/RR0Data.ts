@@ -1,7 +1,6 @@
-import { TimeContext } from "../time/TimeContext"
-import { Source } from "../source/Source"
-import { NamedPlace } from "../time/datasource/rr0/RR0CaseSummary"
-import { RR0Event } from "../event/RR0Event"
+import { NamedPlace, TimeContext } from "../time"
+import { Source } from "../source"
+import { RR0Event } from "../event"
 
 /**
  * Any kind of data on RR0 (see implementing classes).

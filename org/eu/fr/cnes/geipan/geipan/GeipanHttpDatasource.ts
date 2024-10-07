@@ -6,8 +6,8 @@ import {
   GeipanCaseClassification_minus
 } from "./GeipanCaseClassification"
 import { GeipanDatasource } from "./GeipanDatasource"
-import { HttpSource, RR0ContextFilter, TimeContext } from "../../../../../../time"
-import { HtmlRR0SsgContext, RR0SsgContext } from "../../../../../../RR0SsgContext"
+import { HttpSource, TimeContext } from "../../../../../../time"
+import { RR0SsgContext } from "../../../../../../RR0SsgContext"
 import { ObjectUtil, UrlUtil } from "../../../../../../util"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode"
 import { FranceRegionCode } from "../../../region/FranceRegionCode"
@@ -49,11 +49,6 @@ export class GeipanHttpDatasource extends GeipanDatasource {
 
   constructor(readonly baseUrl: URL, readonly searchPath: string) {
     super()
-  }
-
-  protected createFilter(context: HtmlRR0SsgContext) {
-    // TODO: Use GEIPAN-specific filter
-    return new RR0ContextFilter(context)
   }
 
   protected async readCases(context: RR0SsgContext): Promise<GeipanCaseSummary[]> {

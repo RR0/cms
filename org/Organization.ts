@@ -7,11 +7,12 @@ import { RR0Data } from "../data"
 import { RR0Event } from "../event"
 import { Place } from "../place"
 
-export enum OrganizationType {
+export enum OrganizationKind {
   country = "country",
   region = "region",
   department = "department",
   city = "city",
+  company = "company",
 }
 
 export class Organization<M extends TitleMessage = OrganizationMessages> implements RR0Data {
@@ -22,7 +23,7 @@ export class Organization<M extends TitleMessage = OrganizationMessages> impleme
 
   events: RR0Event[] = []
 
-  constructor(readonly id: string, readonly places: Place[], readonly kind: OrganizationType,
+  constructor(readonly id: string, readonly places: Place[], readonly kind: OrganizationKind,
               readonly parent?: Organization) {
     assert.ok(id, `id must be defined for organization of type ${kind}`)
     this.dirName = path.join(parent?.dirName ?? "org/", id)

@@ -34,6 +34,7 @@ import {
   HtAccessToNetlifyConfigReplaceCommand,
   HtmlLinks,
   HtmlMeta,
+  HtmlSsgContext,
   OutputFunc,
   Ssg,
   SsgConfig,
@@ -170,8 +171,9 @@ const config: SsgConfig = {
 }
 
 const outputFunc: OutputFunc
-  = async (context: SsgContext, outFile: FileContents): Promise<void> => {
+  = async (context: HtmlSsgContext, outFile: FileContents): Promise<void> => {
   try {
+    context.file.contents = context.file.serialize()
     context.log("Writing", outFile.name)
     await outFile.write()
     context.file.contents = outFile.contents

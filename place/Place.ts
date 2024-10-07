@@ -26,11 +26,11 @@ export class Place implements RR0Data {
    * @param {float} lat Latitude in decimal degrees. North is positive.
    * @param {float} lng Longitude in decimal degrees. East is positive.
    */
-  static fromLocation(lat: number, lng: number) {
+  static fromLocation(lat: number, lng: number): Place {
     return new Place([new PlaceLocation(lat, lng)])
   }
 
-  static fromDMS(latLng: string) {
+  static fromDMS(latLng: string): Place {
     return new Place([PlaceLocation.fromDMS(latLng)])
   }
 }

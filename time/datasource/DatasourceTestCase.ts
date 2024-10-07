@@ -3,13 +3,10 @@ import { CaseSummaryRenderer } from "../CaseSummaryRenderer"
 import { HtmlRR0SsgContext } from "../../RR0SsgContext"
 import { TimeContext } from "../TimeContext"
 import { TimeTextBuilder } from "../TimeTextBuilder"
-import { Source } from "../../source/Source"
-import { RR0CaseMapping } from "./rr0/RR0CaseMapping"
-import { SourceRenderer } from "../../source/SourceRenderer"
-import { NoteRenderer } from "../../note/NoteRenderer"
-import { SourceFactory } from "../../source/SourceFactory"
-import { NoteFileCounter } from "../../note/NoteFileCounter"
-import { AllDataService } from "../../data/AllDataService"
+import { Source, SourceFactory, SourceRenderer } from "../../source"
+import { RR0CaseMapping } from "./rr0"
+import { NoteFileCounter, NoteRenderer } from "../../note"
+import { AllDataService } from "../../data"
 import { HttpSource } from "./HttpSource"
 import { rr0TestUtil } from "../../test"
 import { TimeElementFactory } from "../TimeElementFactory"
@@ -79,8 +76,8 @@ export abstract class DatasourceTestCase<S> {
     const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext)}` : ""
     const indexStr = source.index ? `, ${source.index}` : ""
     const authorStr = datasource.authors.map(authorStr => `<span class="people">${authorStr}</span>`).join(" &amp; ")
-    const title = `cas n° ${nativeCase.id}`
-    return ` <span class="source">${authorStr}: <a href="${nativeCase.url.replaceAll(
+    const title = `cas n° ${nativeCase["id"]}`
+    return ` <span class="source">${authorStr}: <a href="${nativeCase["url"].replaceAll(
       "&",
       "&amp;")}">${title}</a>, <i>${datasource.copyright}</i>${publicationStr}${indexStr}</span>`
   }

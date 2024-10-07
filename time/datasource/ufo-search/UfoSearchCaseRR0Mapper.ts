@@ -27,7 +27,7 @@ export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0SsgContext, Ufo
     const place = this.getPlace(context, sourceCase)
     return {
       id: sourceCase.id,
-      type: "case",
+      type: "sighting",
       url: sourceCase.url,
       events: [],
       time: sourceCase.time,

@@ -17,4 +17,8 @@ export interface SceauCaseSummary {
   readonly texte: string
   readonly json: string
   readonly nomFichier?: string
+  /**
+   * The URL where this data can be found.
+   */
+  readonly url?: string
 }

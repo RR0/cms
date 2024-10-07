@@ -1,6 +1,6 @@
 import { tarrant_en } from "./tarrant/Tarrant_en"
 import { RegionMessages } from "../../../country"
-import { OrganizationType } from "../../../Organization"
+import { OrganizationKind } from "../../../Organization"
 import { houstonMessages } from "./houston/HoustonMessages"
 import { houstonCityCode } from "./houston/Houston"
 
@@ -11,4 +11,4 @@ export const texas_en = RegionMessages.create("Texas", {
     tarrant: tarrant_en
   }
 )
-texas_en[OrganizationType.city] = texasCityMessages
+texas_en[OrganizationKind.city] = texasCityMessages

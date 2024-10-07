@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext"
+import { HtmlRR0SsgContext, RR0SsgContext } from "../../../RR0SsgContext"
 import { HttpSource } from "../HttpSource"
 import { ObjectUtil, UrlUtil } from "../../../util"
 import { JSDOM } from "jsdom"
@@ -74,7 +74,8 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     })
   }
 
-  protected async readSummaries(context: RR0SsgContext): Promise<UrecatCase[]> {
+
+  protected async readCases(context: HtmlRR0SsgContext): Promise<UrecatCase[]> {
     const searchUrl = this.queryUrl(context)
     const page = await this.http.fetch<string>(searchUrl, {headers: {accept: "text/html;charset=iso-8859-1"}})
     const doc = new JSDOM(page).window.document.documentElement

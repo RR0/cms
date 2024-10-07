@@ -4,22 +4,27 @@ import { FileContents } from "ssg-api"
 import { UfoSearchDatasource } from "./UfoSearchDatasource"
 import { JsonMapper } from "../JsonMapper"
 import { UfoSearchCase } from "./UfoSearchCase"
-import { ufoSearchCaseRR0Mapper } from "./UfoSearchMapping"
+import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper"
 
 class FileMapper extends JsonMapper<UfoSearchCase> {
 
+  constructor(protected mapper: UfoSearchCaseRR0Mapper) {
+    super()
+  }
+
   parse(context: RR0SsgContext, data: string): UfoSearchCase[] {
     const allData = super.parse(context, data)
-    return allData["Majestic Timeline"].map(ufoSearchCaseRR0Mapper.map)
+    return allData["Majestic Timeline"].map(this.mapper.map)
   }
 }
 
 export class UfoSearchFileDatasource extends UfoSearchDatasource implements Datasource<UfoSearchCase> {
 
-  readonly fileMapper = new FileMapper()
+  readonly fileMapper: FileMapper
 
-  constructor(readonly fileName: string) {
+  constructor(readonly fileName: string, mapper: UfoSearchCaseRR0Mapper) {
     super()
+    this.fileMapper = new FileMapper(mapper)
   }
 
   protected async readCases(context: RR0SsgContext): Promise<UfoSearchCase[]> {

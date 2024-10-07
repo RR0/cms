@@ -61,7 +61,7 @@ export class RR0HttpDatasource extends RR0Datasource {
     const sources = this.getSources(row, itemContext)
     const description = this.getDescription(row)
     const id = this.id(itemTime, place)
-    return {type: "case", events: [], url: url.href, place, time: itemTime, description, sources, id}
+    return {type: "sighting", events: [], url: url.href, place, time: itemTime, description, sources, id}
   }
 
   protected async readCases(context: HtmlRR0SsgContext): Promise<RR0CaseSummary[]> {

@@ -10,6 +10,6 @@ export class CityMessages extends OrganizationMessages {
   }
 
   static create(title: string) {
-    return CityMessages.create(title)
+    return new CityMessages([title])
   }
 }

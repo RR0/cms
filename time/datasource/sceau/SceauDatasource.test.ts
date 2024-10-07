@@ -21,9 +21,9 @@ export class SceauTestDatasource extends SceauDatasource {
     super()
   }
 
-  /*protected async readCases(_context: HtmlRR0SsgContext): Promise<SceauCaseSummary[]> {
+  protected async readCases(_context: HtmlRR0SsgContext): Promise<SceauCaseSummary[]> {
     return sceauTestCases
-  }*/
+  }
 }
 
 export class SceauTestMapping implements SceauCaseMapping {

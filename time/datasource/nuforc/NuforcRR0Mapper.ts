@@ -105,7 +105,7 @@ export class NuforcRR0Mapper implements CaseMapper<HtmlRR0SsgContext, NuforcCase
       `Could not find city of name "${placeName}" in state "${sourceCase.state}" of country "${countryCode}"`)
     const place: NamedPlace = {name: city.getTitle(context), place: city.places[0]}
     return {
-      type: "case",
+      type: "sighting",
       events: [],
       time: sourceCase.time,
       place,

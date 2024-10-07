@@ -3,7 +3,7 @@ import { UsaStates } from "../../us/region/UsaStates"
 import { CanadaRegionCode } from "../../ca/region/CanadaRegionCode"
 import { AustraliaRegionCode } from "../../au"
 import { BrazilRegionCode } from "../../br/region/BrazilRegionCode"
-import { Organization, OrganizationType } from "../../Organization"
+import { Organization, OrganizationKind } from "../../Organization"
 import { EuropeRegionCode } from "../../eu/EuropeRegionCode"
 import { MexicoRegionCode } from "../../mx/region/MexicoRegionCode"
 import { PhilippinesRegionCode } from "../../ph/region/PhilippinesRegionCode"
@@ -38,6 +38,6 @@ export type RegionCode =
 export class Region<M extends TitleMessage = RegionMessages<any>, R = RegionCode> extends Organization<M> {
 
   constructor(code: R, country: Organization, places: Place[]) {
-    super(code, places, OrganizationType.region, country)
+    super(code.toString(), places, OrganizationKind.region, country)
   }
 }

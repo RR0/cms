@@ -1,7 +1,7 @@
 import { TimeContext } from "../../TimeContext"
 import { rr0HttpDatasource } from "./RR0Mapping"
 import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary"
-import { UrlUtil } from "../../../util/url/UrlUtil"
+import { UrlUtil } from "../../../util"
 import { Source } from "../../../source"
 import { Book } from "../../../book/Book"
 import { Article } from "../../../source/Article"
@@ -12,7 +12,7 @@ function testCase(urlPath: string, time: TimeContext, description: string, sourc
   const url = new URL(path, rr0HttpDatasource.baseUrl).href
   const id = rr0HttpDatasource.id(time, place)
   let dirName = undefined
-  return {url, time, description, sources, type: "case", id, events: [], dirName, place}
+  return {url, time, description, sources, type: "sighting", id, events: [], dirName, place}
 }
 
 const book: Book = {events: [], previousSourceRefs: [], type: "book", variants: [], id: "2848550546"}

@@ -1,9 +1,10 @@
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 import { HtmlRR0SsgContext } from "../RR0SsgContext"
-import { AllDataService, RR0Data } from "../data"
+import { AllDataService } from "../data"
 import { EventRenderer } from "./EventRenderer"
+import { RR0Event } from "../event"
 
-export class EventReplacer<D extends RR0Data> {
+export class EventReplacer<D extends RR0Event> {
 
   constructor(protected renderer: EventRenderer<D>, protected dataService: AllDataService) {
   }
@@ -28,7 +29,7 @@ export class EventReplacer<D extends RR0Data> {
 /**
  * Creates replacers for sources HTML in a given context.
  */
-export class EventReplacerFactory<D extends RR0Data> implements ReplacerFactory<DomReplacer> {
+export class EventReplacerFactory<D extends RR0Event> implements ReplacerFactory<DomReplacer> {
 
   constructor(protected replacer: EventReplacer<D>) {
   }

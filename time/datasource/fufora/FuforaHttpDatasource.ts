@@ -1,6 +1,6 @@
 import { RR0SsgContext } from "../../../RR0SsgContext"
 import { HttpSource } from "../HttpSource"
-import { UrlUtil } from "../../../util/url/UrlUtil"
+import { UrlUtil } from "../../../util"
 import { JSDOM } from "jsdom"
 import { FuforaCaseSummary } from "./FuforaCaseSummary"
 import { FuforaDatasource } from "./FuforaDatasource"

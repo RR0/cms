@@ -6,10 +6,23 @@ import assert from "assert"
 import { EssexPoliceDatasource } from "./EssexPoliceDatasource"
 import { EssexPoliceCaseSummary } from "./EssexPoliceCaseSummary"
 import { By } from "selenium-webdriver"
+import { ArchiveHttpFetcher } from "../ArchiveHttpFetcher"
+import { FetchHttpFetcher } from "../FetchHttpFetcher"
+
+const httpFetcher = new FetchHttpFetcher()
 
 export class EssexPoliceHttpDatasource extends EssexPoliceDatasource {
 
-  protected readonly http = new HttpSource()
+  protected readonly http = new HttpSource(
+    {
+      fetchers: [httpFetcher, new ArchiveHttpFetcher()],
+      selenium: {
+        browser: httpFetcher.randomUA(),
+        timeout: {script: 10000, pageLoad: 10000, implicit: 10000},
+        selector: ""
+      }
+    }
+  )
 
   constructor(readonly baseUrl: string, readonly searchPath: string) {
     super()

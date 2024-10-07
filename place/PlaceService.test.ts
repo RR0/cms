@@ -1,5 +1,6 @@
 import { GooglePlaceService } from "./GooglePlaceService"
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
+import { PlaceLocation } from "./PlaceLocation"
 
 describe("PlaceService", () => {
 
@@ -14,7 +15,7 @@ describe("PlaceService", () => {
     service = new GooglePlaceService("place", apiKey)
   })
 
-  const lanlPosition = {"lat": 35.8440582, "lng": -106.287162}
+  const lanlPosition = new PlaceLocation(35.8440582, -106.287162)
   const lanlElevation = 2161.025390625
 
   test("build place with one first name", async () => {

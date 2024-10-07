@@ -6,7 +6,7 @@ import { DatasourceTestCase } from "../DatasourceTestCase"
 import { essexPoliceTestCases } from "./EssexPoliceTestCases"
 import { TimeContext } from "../../TimeContext"
 import { essexPoliceRR0Mapping } from "./EssexPoliceMapping"
-import { RR0CaseMapping } from "../rr0/RR0CaseMapping"
+import { RR0CaseMapping } from "../rr0"
 
 describe("EssexPoliceCaseSource", () => {
 

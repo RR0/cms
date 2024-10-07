@@ -1,6 +1,6 @@
-import { ContentStep, ContentStepConfig, ContentStepResult, FileContents, OutputFunc } from "ssg-api"
+import { ContentStep, ContentStepConfig, ContentStepResult, OutputFunc } from "ssg-api"
 import { HtmlRR0SsgContext } from "./RR0SsgContext"
-import { TimeContext } from "./time/TimeContext"
+import { TimeContext } from "./time"
 
 export interface ContentVisitor {
   visit(context: HtmlRR0SsgContext): Promise<void>
@@ -34,13 +34,8 @@ export class RR0ContentStep extends ContentStep<HtmlRR0SsgContext> {
     return newTimeContext
   }
 
-  async write(context: HtmlRR0SsgContext, outputFile: FileContents): Promise<void> {
-    context.file.contents = context.file.serialize()
-    return super.write(context, outputFile)
-  }
-
   protected async processFile(context: HtmlRR0SsgContext, filePath: string,
-                              contentsConfig: ContentStepConfig): Promise<boolean> {
+                              contentsConfig: ContentStepConfig): Promise<string | undefined> {
     this.setContextFromFile(context, filePath)
     return super.processFile(context, filePath, contentsConfig)
   }

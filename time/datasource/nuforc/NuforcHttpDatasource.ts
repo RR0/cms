@@ -1,6 +1,6 @@
 import { RR0SsgContext } from "../../../RR0SsgContext"
 import { HttpSource } from "../HttpSource"
-import { UrlUtil } from "../../../util/url/UrlUtil"
+import { UrlUtil } from "../../../util"
 import { NuforcCaseSummary } from "./NuforcCaseSummary"
 import { ObjectUtil } from "../../../util/ObjectUtil"
 import { NuforcState } from "./NuforcState"

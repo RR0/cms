@@ -9,7 +9,7 @@ import { SourceFactory } from "./SourceFactory"
  */
 export class SourceRegistry extends SourceFactory {
 
-  readonly registry = {}
+  registry = {}
 
   constructor(dataService: AllDataService, http: HttpSource, baseUrl: string, options: Intl.DateTimeFormatOptions) {
     super(dataService, http, baseUrl, options)

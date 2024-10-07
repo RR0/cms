@@ -47,7 +47,7 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext,
     }
     const place = this.getPlace(context, sourceCase)
     return {
-      type: "case",
+      type: "sighting",
       events: [],
       id,
       time: sourceCase.time,
