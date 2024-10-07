@@ -1,7 +1,6 @@
 export * from "./datasource"
 export * from "./CaseSummaryRenderer.js"
 export * from "./DomReplacement.js"
-export * from "./DualRangeComponent.mjs"
 export * from "./EventRenderer.js"
 export * from "./EventReplacerFactory.js"
 export * from "./RelativeTimeTextBuilder.js"
