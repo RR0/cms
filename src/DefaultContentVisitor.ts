@@ -6,7 +6,7 @@ import path from "path"
 import { RR0Data } from "data/RR0Data.js"
 import { EventRenderer } from "./time/EventRenderer.js"
 import { People } from "./people/People.js"
-import { RR0Event } from "event/RR0Event.js"
+import { RR0Event } from "./event/RR0Event.js"
 import assert from "assert"
 
 export class DefaultContentVisitor implements ContentVisitor {
