@@ -3,7 +3,7 @@ import { rr0HttpDatasource } from "./RR0Mapping.js"
 import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary.js"
 import { UrlUtil } from "../../../util/index.js"
 import { Source } from "../../../source/index.js"
-import { Book } from "book/Book.js"
+import { Book } from "../../../book/Book.js"
 import { Article } from "../../../source/Article.js"
 
 function testCase(urlPath: string, time: TimeContext, description: string, sources: Source[],

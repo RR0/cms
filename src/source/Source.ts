@@ -1,5 +1,5 @@
 import { TimeContext } from "../time/TimeContext.js"
-import { RR0Data } from "data/RR0Data.js"
+import { RR0Data } from "../data/RR0Data.js"
 
 export type Publication = {
   /**

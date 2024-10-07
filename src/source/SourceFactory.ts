@@ -4,7 +4,7 @@ import path from "path"
 import { TimeContext } from "../time/TimeContext.js"
 import { FileContents } from "ssg-api"
 import { JSDOM } from "jsdom"
-import { AllDataService } from "data/AllDataService.js"
+import { AllDataService } from "../data/AllDataService.js"
 import { HttpSource } from "../time/datasource/HttpSource.js"
 
 /**
