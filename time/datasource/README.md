@@ -8,7 +8,7 @@ RR0 time data can be **imported** from external [Datasources](Datasource.ts), su
     * [ACUFO](acufo)
     * [URECAT](urecat)
 * [Base OVNI France](baseovnifrance)
-* [Essex Police](essex-police)
+* ~~[Essex Police](essex-police)~~
 * [FUFORA](fufora)
 * [GEIPAN](../../org/eu/fr/cnes/geipan)
 * [NUFORC](nuforc)
