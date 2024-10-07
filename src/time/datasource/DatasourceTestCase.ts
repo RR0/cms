@@ -8,13 +8,22 @@ import { RR0CaseMapping } from "./rr0/index.js"
 import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
 import { AllDataService } from "../../data/index.js"
 import { HttpSource } from "./HttpSource.js"
-import { rr0TestUtil } from "../../test/index.js"
 import { TimeElementFactory } from "../TimeElementFactory.js"
 import { TimeRenderer } from "../TimeRenderer.js"
 
 export abstract class DatasourceTestCase<S> {
 
-  timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
+  protected readonly intlOptions: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short"
+  }
+
+  timeTextBuilder = new TimeTextBuilder(this.intlOptions)
 
   protected constructor(readonly mapping: RR0CaseMapping<S>, readonly sourceCases: S[]) {
   }
@@ -39,7 +48,7 @@ export abstract class DatasourceTestCase<S> {
     const dataService = new AllDataService([])
     const baseUrl = "https://rr0.org"
     const http = new HttpSource()
-    const sourceFactory = new SourceFactory(dataService, http, baseUrl, rr0TestUtil.intlOptions)
+    const sourceFactory = new SourceFactory(dataService, http, baseUrl, this.intlOptions)
     const timeElementFactory = new TimeElementFactory(new TimeRenderer([], this.timeTextBuilder))
     const eventRenderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
       new SourceRenderer(this.timeTextBuilder), timeElementFactory)

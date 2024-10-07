@@ -1,12 +1,11 @@
+import { JSDOM } from "jsdom"
 import { HtmlRR0SsgContext, RR0SsgContext } from "../../../RR0SsgContext.js"
 import { HttpSource } from "../HttpSource.js"
 import { ObjectUtil, UrlUtil } from "../../../util/index.js"
-import { JSDOM } from "jsdom"
 import { UrecatCase, UrecatWitness } from "./UrecatCase.js"
 import { TimeTextBuilder } from "../../TimeTextBuilder.js"
 import { MessageUtils } from "../../../lang/index.js"
 import { UrecatDatasource } from "./UrecatDatasource.js"
-import { rr0TestUtil } from "../../../test/index.js"
 
 export class UrecatHttpDatasource extends UrecatDatasource {
 
@@ -22,6 +21,16 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     "sept": 7
   }
   protected readonly http = new HttpSource()
+
+  protected readonly intlOptions: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short"
+  }
 
   constructor(readonly baseUrl: URL, readonly searchPath = "ce3") {
     super(["Gross, Patrick"], "URECAT")
@@ -123,7 +132,7 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     const caseContext = this.getDate(context, url, row)
     const {placeName, departmentOrState, country} = this.getLocation(columns[1])
     const witnesses = this.getWitnesses(columns[2].textContent)
-    const timeStr = new TimeTextBuilder(rr0TestUtil.intlOptions).build(caseContext, true, {
+    const timeStr = new TimeTextBuilder(this.intlOptions).build(caseContext, true, {
         year: "numeric",
         month: "long",
         day: "numeric",
