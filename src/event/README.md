@@ -1,6 +1,13 @@
 # RR0 Event
 
-A RR0 event is a [RR0 Data](../data/README.md) with some people as a `subject`.
+A RR0 event is a [RR0 Data](../data/README.md) with some people as a `subject`
+and a `kind` (sub-type) which can be:
+
+- `birth`/creation
+- `death`/discontinuation
+- `image` snapshot
+- `book` publication
+- `sighting`
 
 ```mermaid
 classDiagram

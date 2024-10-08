@@ -1,4 +1,4 @@
-import { FilterForm } from "/index/FilterForm.mjs.js"
+import { FilterForm } from "/index/FilterForm.mjs"
 import { supportedLangs } from "./speech.js"
 
 /**
