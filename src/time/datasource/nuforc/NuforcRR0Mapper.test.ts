@@ -13,6 +13,7 @@ import { monessen } from "../../../org/us/region/pa/westmoreland/monessen/Moness
 import { bonneyLake } from "../../../org/us/region/wa/pierce/bonneylake/BonneyLake.js"
 import { Source } from "../../../source/index.js"
 import { slocomb } from "../../../org/us/region/al/geneva/slocomb/Slocomb.js"
+import { RR0CaseSummary } from "../rr0"
 
 function expectedSource(datasource: NuforcHttpDatasource, dataDate: Date, caseNumber: string): Source {
   const url = new URL("sighting/?id=" + caseNumber, datasource.baseUrl).href
@@ -56,8 +57,10 @@ describe("NuforcRR0Mapper", () => {
     const nativeCase6Time = nativeCase6.time
     const nativeCase7 = testCases[6]
     const nativeCase7Time = nativeCase7.time
-    const expected = [
+    const expected: RR0CaseSummary[] = [
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase1Time.getYear(), nativeCase1Time.getMonth(), nativeCase1Time.getDayOfMonth(),
           nativeCase1Time.getHour(), nativeCase1Time.getMinutes(), nativeCase1Time.getTimeZone()),
         place: {name: slocomb.getMessages(context).title, place: slocomb.places[0]},
@@ -65,6 +68,8 @@ describe("NuforcRR0Mapper", () => {
         sources: [expectedSource(nuforcDatasource, dataDate, nativeCase1.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase2Time.getYear(), nativeCase2Time.getMonth(), nativeCase2Time.getDayOfMonth(),
           nativeCase2Time.getHour(), nativeCase2Time.getMinutes(), nativeCase2Time.getTimeZone()),
         place: {name: castlegar.getMessages(context).title, place: castlegar.places[0]},
@@ -72,6 +77,8 @@ describe("NuforcRR0Mapper", () => {
         sources: [expectedSource(nuforcDatasource, dataDate, nativeCase2.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase3Time.getYear(), nativeCase3Time.getMonth(), nativeCase3Time.getDayOfMonth(),
           nativeCase3Time.getHour(), nativeCase3Time.getMinutes(), nativeCase3Time.getTimeZone()),
         place: {name: fortWorth.getMessages(context).title, place: fortWorth.places[0]},
@@ -79,6 +86,8 @@ describe("NuforcRR0Mapper", () => {
         sources: [expectedSource(nuforcDatasource, dataDate, nativeCase3.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase4Time.getYear(), nativeCase4Time.getMonth(), nativeCase4Time.getDayOfMonth(),
           nativeCase4Time.getHour(), nativeCase4Time.getMinutes(), nativeCase4Time.getTimeZone()),
         place: {name: campPendleton.getMessages(context).title, place: campPendleton.places[0]},
@@ -86,6 +95,8 @@ describe("NuforcRR0Mapper", () => {
         sources: [expectedSource(nuforcDatasource, dataDate, nativeCase4.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase5Time.getYear(), nativeCase5Time.getMonth(), nativeCase5Time.getDayOfMonth(),
           nativeCase5Time.getHour(), nativeCase5Time.getMinutes(), nativeCase5Time.getTimeZone()),
         place: {name: stPetersburg.getMessages(context).title, place: stPetersburg.places[0]},
@@ -93,6 +104,8 @@ describe("NuforcRR0Mapper", () => {
         sources: [expectedSource(nuforcDatasource, dataDate, nativeCase5.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase6Time.getYear(), nativeCase6Time.getMonth(), nativeCase6Time.getDayOfMonth(),
           nativeCase6Time.getHour(), nativeCase6Time.getMinutes(), nativeCase6Time.getTimeZone()),
         place: {name: monessen.getMessages(context).title, place: monessen.places[0]},
@@ -100,6 +113,8 @@ describe("NuforcRR0Mapper", () => {
         sources: [expectedSource(nuforcDatasource, dataDate, nativeCase6.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase7Time.getYear(), nativeCase7Time.getMonth(), nativeCase7Time.getDayOfMonth(),
           nativeCase7Time.getHour(), nativeCase7Time.getMinutes(), nativeCase7Time.getTimeZone()),
         place: {name: bonneyLake.getMessages(context).title, place: bonneyLake.places[0]},

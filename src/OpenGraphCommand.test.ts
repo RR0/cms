@@ -8,7 +8,7 @@ describe("OpenGraphCommand", () => {
   const outDir = "/out"
 
   test("time page", () => {
-    const timeFile = "time/0/0/6/5/index.html"
+    const timeFile = "src/time/0/0/6/5/index.html"
     const context = rr0TestUtil.newHtmlContext(timeFile, "")
     const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
     const command = new OpenGraphCommand(outDir, [timeFile], "https://rr0.org", timeTextBuilder)

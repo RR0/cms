@@ -1,6 +1,6 @@
 import path from "path"
 import { HtmlRR0SsgContext, RR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext.js"
-import { TimeContext, TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder } from "../time/index.js"
+import { TimeContext, TimeService, TimeServiceOptions } from "../time/index.js"
 import { FileContents, HtmlFileContents, SsgConfig, SsgContext } from "ssg-api"
 import { RR0EventFactory } from "../event/index.js"
 import { AllDataService, TypedDataFactory } from "../data/index.js"
@@ -8,8 +8,9 @@ import { OrganizationFactory } from "../org/index.js"
 import { CaseFactory } from "../science/index.js"
 import { PeopleFactory } from "../people/index.js"
 import { APIFactory } from "../tech/index.js"
+import { TimeTestUtil } from "../time/TimeTestUtil"
 
-class RR0TestUtil {
+export class RR0TestUtil {
 
   readonly outDir = "out"
 
@@ -29,12 +30,11 @@ class RR0TestUtil {
     timeZoneName: "short"
   }
 
-  readonly timeService: TimeService
-  readonly timeTextBuilder: TimeTextBuilder
-  readonly timeElementFactory: TimeElementFactory
   readonly dataService: AllDataService
   readonly caseFactory: CaseFactory
+
   readonly peopleFactory: PeopleFactory
+  readonly time: TimeTestUtil
 
   constructor() {
     const eventFactory = new RR0EventFactory()
@@ -48,16 +48,13 @@ class RR0TestUtil {
     this.dataService = new AllDataService(
       [orgFactory, this.caseFactory, this.peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
     this.dataService.getFromDir("", ["people", "case"]).then(data => {
-      console.debug(data)
+      //   console.debug(data)
     })
-
-    this.timeTextBuilder = new TimeTextBuilder(this.intlOptions)
-    this.timeService = new TimeService(this.dataService, this.timeTextBuilder)
-    this.timeElementFactory = new TimeElementFactory(this.timeService.renderer)
+    this.time = new TimeTestUtil(this)
   }
 
-  get timeRenderer(): TimeRenderer {
-    return this.timeService.renderer
+  async getTimeService(options: TimeServiceOptions = this.time.timeOptions): Promise<TimeService> {
+    return this.time.getTimeService(options)
   }
 
   newContext(inputFileName: string, contents?: string): RR0SsgContext {

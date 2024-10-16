@@ -9,8 +9,9 @@ describe("AnchorReplaceCommand", () => {
 
   test("replace anchor tag", async () => {
     const dataService = rr0TestUtil.dataService
+    const timeService = await rr0TestUtil.time.getTimeService()
     const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
-    const timeRenderer = new TimeRenderer([], timeTextBuilder)
+    const timeRenderer = new TimeRenderer(timeService, timeTextBuilder)
     const timeElementFactory = new TimeElementFactory(timeRenderer)
     const caseService = new CaseService(dataService, rr0TestUtil.caseFactory, timeElementFactory)
     const command = new AnchorReplaceCommand("https://rr0.org/", [new CaseAnchorHandler(caseService, timeTextBuilder)])

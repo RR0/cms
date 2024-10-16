@@ -17,14 +17,14 @@ describe("TitleReplaceCommand", () => {
 
   describe("Time page", () => {
 
-    const fileName = "time/1/9/5/4/index.html"
+    const fileName = "src/time/1/9/5/4/index.html"
 
     test("default title with no handler", async () => {
       const command = new SsiTitleReplaceCommand()
       const context = rr0TestUtil.newHtmlContext(fileName, `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe(fileName)
-      expect(context.file.contents).toBe("This is about time/1/9/5/4/index.html!")
+      expect(context.file.contents).toBe(`This is about ${fileName}!`)
     })
 
     test("default title with handler", async () => {
@@ -37,7 +37,7 @@ describe("TitleReplaceCommand", () => {
 
     test("default month title with handler", async () => {
       const command = new SsiTitleReplaceCommand([timeDefaultHandler])
-      const context = rr0TestUtil.newHtmlContext("time/1/9/5/4/10/index.html",
+      const context = rr0TestUtil.newHtmlContext("src/time/1/9/5/4/10/index.html",
         `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe("Octobre 1954")
@@ -46,7 +46,7 @@ describe("TitleReplaceCommand", () => {
 
     test("default day of month title with handler", async () => {
       const command = new SsiTitleReplaceCommand([timeDefaultHandler])
-      const context = rr0TestUtil.newHtmlContext("time/1/9/5/4/10/01/index.html",
+      const context = rr0TestUtil.newHtmlContext("src/time/1/9/5/4/10/01/index.html",
         `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe("Vendredi 1 octobre 1954")

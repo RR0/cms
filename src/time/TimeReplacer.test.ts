@@ -5,12 +5,14 @@ import { TimeRenderer } from "./TimeRenderer.js"
 import { TimeElementFactory } from "./TimeElementFactory.js"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 
-describe("TimeReplacer", () => {
+describe("TimeReplacer", async () => {
 
+  const timeService = await rr0TestUtil.time.getTimeService({
+    root: "src/time",
+    files: ["src/time/1/9/4/7/07/02/index.html", "src/time/2/0/0/3/index.html", "src/time/2/0/0/3/12/24/index.html", "src/time/2/0/0/4/index.html", "src/time/2/0/0/4/09/index.html", "src/time/2/0/0/5/08/23/index.html", "src/time/2/0/0/6/07/14/index.html", "src/time/2/0/0/7/06/15/index.html"]
+  })
   const textBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
-  const timeRenderer = new TimeRenderer(
-    ["time/1/9/4/7/07/02/index.html", "time/2/0/0/3/index.html", "time/2/0/0/3/12/24/index.html", "time/2/0/0/4/index.html", "/time/2/0/0/4/09/index.html", "time/2/0/0/5/08/23/index.html", "time/2/0/0/6/07/14/index.html", "/time/2/0/0/7/06/15/index.html"],
-    textBuilder)
+  const timeRenderer = new TimeRenderer(timeService, textBuilder)
   const timeElementFactory = new TimeElementFactory(timeRenderer)
   const replacer = new TimeReplacer(timeElementFactory)
 
@@ -171,7 +173,6 @@ describe("TimeReplacer", () => {
 
     test("with context", async () => {
       const context = rr0TestUtil.newHtmlContext("time/1/9/9/0/08/index.html", "")
-      const timeRenderer = new TimeRenderer(["time/1/9/4/7/07/02/index.html"], textBuilder)
       {
         const ctxElement = context.file.document.createElement("time")
         ctxElement.textContent = "1947-07-02"

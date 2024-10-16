@@ -15,6 +15,7 @@ import {
   TimeReplacer,
   TimeReplacerFactory,
   TimeService,
+  TimeServiceOptions,
   TimeTextBuilder
 } from "./time"
 import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/index.js"
@@ -209,8 +210,12 @@ dataService.getFromDir("", ["people", "case"]).then(data => {
   console.debug(data)
 })
 
+const timeOptions: TimeServiceOptions = {
+  root: "src/time",
+  files: []
+}
 const timeTextBuilder = new TimeTextBuilder(timeFormat)
-const timeService = new TimeService(dataService, timeTextBuilder)
+const timeService = new TimeService(dataService, timeTextBuilder, timeOptions)
 
 const peopleService = new PeopleService(dataService, peopleFactory)
 
@@ -304,7 +309,7 @@ timeService.getFiles().then(async (timeFiles) => {
     new ClassDomReplaceCommand(noteReplacerFactory, "note"),
     new ClassDomReplaceCommand(new IndexedReplacerFactory(), "indexed"),
     new UnitReplaceCommand(),
-    new MetaLinkReplaceCommand(new TimeLinkDefaultHandler(timeFiles, timeTextBuilder)),
+    new MetaLinkReplaceCommand(new TimeLinkDefaultHandler(timeService, timeTextBuilder)),
     databaseAggregationCommand
   ]
   const ssg = new Ssg(config)

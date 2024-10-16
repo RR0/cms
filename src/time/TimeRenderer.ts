@@ -4,6 +4,7 @@ import { TimeTextBuilder } from "./TimeTextBuilder.js"
 import { RelativeTimeTextBuilder } from "./RelativeTimeTextBuilder.js"
 import { UrlUtil } from "../util/url/UrlUtil.js"
 import { TimeReplacer } from "./TimeReplacer.js"
+import { TimeService } from "./TimeService"
 
 export interface TimeRenderOptions {
   url: boolean
@@ -11,7 +12,7 @@ export interface TimeRenderOptions {
 
 export class TimeRenderer {
 
-  constructor(readonly timeFiles: string[], protected textBuilder: TimeTextBuilder) {
+  constructor(readonly service: TimeService, protected textBuilder: TimeTextBuilder) {
   }
 
   render(context: HtmlRR0SsgContext, previousContext?: RR0SsgContext,
@@ -50,7 +51,7 @@ export class TimeRenderer {
     }
     timeEl.textContent = text
     const dirName = currentFileName.substring(0, currentFileName.indexOf("/index"))
-    const url = options.url && this.matchExistingTimeFile(absoluteTimeUrl)
+    const url = options.url && this.service.matchExistingTimeFile(absoluteTimeUrl)
     if (url && url !== dirName) {
       const a = replacement = doc.createElement("a") as HTMLAnchorElement
       a.href = UrlUtil.absolute(url)
@@ -61,16 +62,5 @@ export class TimeRenderer {
     let result = context.file.document.createElement("span")
     result.className = "time-resolved"
     return {result, replacement}
-  }
-
-  /**
-   * Creates <time> elements from time contexts.
-   */
-  protected matchExistingTimeFile(url: string): string | undefined {
-    while (url !== "time" && this.timeFiles.indexOf(`${url}/index.html`) < 0) {
-      const slash = url.lastIndexOf("/")
-      url = url.substring(0, slash)
-    }
-    return url === "time" ? undefined : url
   }
 }

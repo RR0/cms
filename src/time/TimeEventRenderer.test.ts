@@ -17,7 +17,7 @@ describe("TimeEventRenderer", () => {
   const http = new HttpSource()
   const sourceFactory = new SourceFactory(dataService, http, baseUrl, rr0TestUtil.intlOptions)
   const renderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
-    new SourceRenderer(rr0TestUtil.timeTextBuilder), rr0TestUtil.timeElementFactory)
+    new SourceRenderer(rr0TestUtil.time.timeTextBuilder), rr0TestUtil.time.timeElementFactory)
 
   test("render event", async () => {
     const context = rr0TestUtil.newHtmlContext("time/1/9/7/0/03/index.html")

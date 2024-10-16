@@ -17,7 +17,6 @@ export type TimeParseResult = {
  * Replaces a <time> tag.
  */
 export class TimeReplacer implements DomReplacement<HtmlRR0SsgContext, HTMLTimeElement> {
-
   /**
    * @param factory
    */

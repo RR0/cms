@@ -16,7 +16,7 @@ export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
     return {
       replace: (original: HTMLTimeElement): Promise<HTMLElement> => {
         return this.replacer.replacement(
-          this.replacer.factory.renderer.timeFiles.includes(context.file.name) ? context.clone() : context, original)
+          this.replacer.factory.renderer.service.isTimeFile(context.file.name) ? context.clone() : context, original)
       }
     }
   }

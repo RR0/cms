@@ -3,11 +3,11 @@ import { rr0TestUtil } from "../../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { RelativeTimeTextBuilder } from "../../time/index.js"
 
-describe("AuthorReplaceCommand", () => {
+describe("AuthorReplaceCommand", async () => {
 
-  const timeTextBuilder = rr0TestUtil.timeTextBuilder
+  const timeTextBuilder = rr0TestUtil.time.timeTextBuilder
   const relativeTimeTextBuilder = new RelativeTimeTextBuilder(timeTextBuilder)
-  const timeService = rr0TestUtil.timeService
+  const timeService = await rr0TestUtil.getTimeService()
 
   test("no author", async () => {
     const timeFile = "time/1/9/5/4/index.html"

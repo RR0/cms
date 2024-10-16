@@ -10,6 +10,7 @@ import { lyon69 } from "../../../org/eu/fr/region/ara/69/Lyon/Lyon.js"
 import { briancon05 } from "../../../org/eu/fr/region/pac/05/briancon/Briancon.js"
 import { chambonSurVoueize23 } from "../../../org/eu/fr/region/naq/23/Chambon/Chambon.js"
 import { Source } from "../../../source/index.js"
+import { RR0CaseSummary } from "../rr0"
 
 function expectedSource(datasource: BaseOvniFranceHttpDatasource, dataDate: Date, caseNumber: string): Source {
   const url = new URL(datasource.searchPath + "?typlist=20&page=0&numobs=" + caseNumber, datasource.baseUrl).href
@@ -41,8 +42,10 @@ describe("BaseOvniFranceCaseSource", () => {
     const nativeCase3Time = nativeCase3.time
     const nativeCase4 = baseOvniFranceTestCases[3]
     const nativeCase4Time = nativeCase4.time
-    const expected = [
+    const expected: RR0CaseSummary[] = [
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase1Time.getYear(), nativeCase1Time.getMonth(), nativeCase1Time.getDayOfMonth(),
           nativeCase1Time.getHour(), nativeCase1Time.getMinutes(), nativeCase1Time.getTimeZone()),
         place: {name: "Le Mans", place: leMans72.places[0]},
@@ -50,6 +53,8 @@ describe("BaseOvniFranceCaseSource", () => {
         sources: [expectedSource(baseOvniFranceDatasource, dataDate, nativeCase1.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase2Time.getYear(), nativeCase2Time.getMonth(), nativeCase2Time.getDayOfMonth(),
           nativeCase2Time.getHour(), nativeCase2Time.getMinutes(), nativeCase2Time.getTimeZone()),
         place: {name: "Lyon", place: lyon69.places[0]},
@@ -57,6 +62,8 @@ describe("BaseOvniFranceCaseSource", () => {
         sources: [expectedSource(baseOvniFranceDatasource, dataDate, nativeCase2.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase3Time.getYear(), nativeCase3Time.getMonth(), nativeCase3Time.getDayOfMonth(),
           nativeCase3Time.getHour(), nativeCase3Time.getMinutes(), nativeCase3Time.getTimeZone()),
         place: {name: "Briançon", place: briancon05.places[0]},
@@ -64,6 +71,8 @@ describe("BaseOvniFranceCaseSource", () => {
         sources: [expectedSource(baseOvniFranceDatasource, dataDate, nativeCase3.id)]
       },
       {
+        type: "sighting",
+        events: [],
         time: new TimeContext(nativeCase4Time.getYear(), nativeCase4Time.getMonth(), nativeCase4Time.getDayOfMonth(),
           nativeCase4Time.getHour(), nativeCase4Time.getMinutes(), nativeCase4Time.getTimeZone()),
         place: {name: "Chambon-sur-Voueize", place: chambonSurVoueize23.places[0]},

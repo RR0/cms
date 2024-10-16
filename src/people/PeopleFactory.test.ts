@@ -24,72 +24,67 @@ describe("PeopleFactory", () => {
   })
 
   test("build people with two first names", () => {
-    expect(factory.createFromFullName("Jérôme Pierre Beau")).toEqual({
-      title: "Beau, Jérôme Pierre",
-      countries: [],
-      lastName: "Beau",
-      firstNames: ["Jérôme", "Pierre"],
-      hoax: false,
-      discredited: false,
-      dirName: "people/b/BeauJeromePierre",
-      occupations: [],
-      pseudonyms: []
-    })
+    const people = factory.createFromFullName("Jérôme Pierre Beau")
+    expect(people.title).toBe("Beau, Jérôme Pierre")
+    expect(people.countries).toBe([])
+    expect(people.lastName).toBe("Beau")
+    expect(people.firstNames).toBe(["Jérôme", "Pierre"])
+    expect(people.hoax).toBe(false)
+    expect(people.discredited).toBe(false)
+    expect(people.dirName).toBe("people/b/BeauJeromePierre")
+    expect(people.occupations).toBe([])
+    expect(people.pseudonyms).toBe([])
   })
 
   test("build people with two last names", () => {
-    expect(factory.createFromFullName("Werner VonBraun")).toEqual({
-      title: "Von Braun, Werner",
-      countries: [],
-      lastName: "VonBraun",
-      firstNames: ["Werner"],
-      hoax: false,
-      discredited: false,
-      dirName: "people/v/VonBraunWerner",
-      occupations: [],
-      pseudonyms: []
-    })
+    const people = factory.createFromFullName("Werner VonBraun")
+    expect(people.title).toBe("Von Braun, Werner")
+    expect(people.countries).toBe([])
+    expect(people.lastName).toBe("VonBraun")
+    expect(people.firstNames).toBe(["Werner"])
+    expect(people.hoax).toBe(false)
+    expect(people.discredited).toBe(false)
+    expect(people.dirName).toBe("people/v/VonBraunWerner")
+    expect(people.occupations).toBe([])
+    expect(people.pseudonyms).toBe([])
   })
 
   test("build people with one initial first names", () => {
-    expect(factory.createFromFullName("Edward U. Condon")).toEqual({
-      title: "Condon, Edward U.",
-      countries: [],
-      lastName: "Condon",
-      firstNames: ["Edward", "U."],
-      hoax: false,
-      discredited: false,
-      dirName: "people/c/CondonEdwardU",
-      occupations: [],
-      pseudonyms: []
-    })
+    const people = factory.createFromFullName("Edward U. Condon")
+    expect(people.title).toBe("Condon, Edward U.")
+    expect(people.countries).toBe([])
+    expect(people.lastName).toBe("Condon")
+    expect(people.firstNames).toBe(["Edward", "U."])
+    expect(people.hoax).toBe(false)
+    expect(people.discredited).toBe(false)
+    expect(people.dirName).toBe("people/c/CondonEdwardU")
+    expect(people.occupations).toBe([])
+    expect(people.pseudonyms).toBe([])
   })
 
   test("build people with last name first", () => {
-    expect(factory.createFromFullName("Hynek, Josef Allen")).toEqual({
-      title: "Hynek, Josef Allen",
-      countries: [],
-      lastName: "Hynek",
-      firstNames: ["Josef", "Allen"],
-      hoax: false,
-      discredited: false,
-      dirName: "people/h/HynekJosefAllen",
-      occupations: [],
-      pseudonyms: []
-    })
+    const people = factory.createFromFullName("Hynek, Josef Allen")
+    expect(people.title).toBe("Hynek, Josef Allen")
+    expect(people.countries).toBe([])
+    expect(people.lastName).toBe("Hynek")
+    expect(people.firstNames).toBe(["Josef", "Allen"])
+    expect(people.hoax).toBe(false)
+    expect(people.discredited).toBe(false)
+    expect(people.dirName).toBe("people/h/HynekJosefAllen")
+    expect(people.occupations).toBe([])
+    expect(people.pseudonyms).toBe([])
   })
 
   test("Single name", () => {
-    expect(factory.createFromFullName("Aristote")).toEqual({
-      title: "Aristote",
-      countries: [],
-      lastName: "Aristote",
-      firstNames: [],
-      hoax: false,
-      discredited: false,
-      dirName: "people/a/Aristote",
-      occupations: [],
-      pseudonyms: []
-    })
+    const people = factory.createFromFullName("Aristote")
+    expect(people.title).toBe("Aristote")
+    expect(people.countries).toBe([])
+    expect(people.lastName).toBe("Aristote")
+    expect(people.firstNames).toBe([])
+    expect(people.hoax).toBe(false)
+    expect(people.discredited).toBe(false)
+    expect(people.dirName).toBe("people/a/Aristote")
+    expect(people.occupations).toBe([])
+    expect(people.pseudonyms).toBe([])
   })
 })

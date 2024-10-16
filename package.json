@@ -1,9 +1,9 @@
 {
   "name": "@rr0/cms",
   "type": "module",
-  "author": "rr0@rr0.org",
+  "author": "Jérôme Beau <rr0@rr0.org> (https://rr0.org)",
   "version": "0.1.14",
-  "description": "Content Management System",
+  "description": "RR0 Content Management System (CMS)",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "engines": {
@@ -27,7 +27,8 @@
     "@googlemaps/google-maps-services-js": "^3.4.0",
     "@rr0/common": "^1.0.1",
     "@rr0/lang": "^0.1.11",
-    "@rr0/time": "^0.5.0",
+    "@rr0/time": "^0.5.1",
+    "@rr0/place": "^0.2.0",
     "canvas": "^2.11.2",
     "csv-parser": "^3.0.0",
     "glob": "^11.0.0",
@@ -41,7 +42,7 @@
     "typescript": "^5.5.4",
     "@types/node": "^22.7.4",
     "tsx": "4.17.0",
-    "@javarome/testscript": "^0.10.7"
+    "@javarome/testscript": "^0.12.1"
   },
   "keywords": [
     "cms",

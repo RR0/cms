@@ -25,7 +25,7 @@ describe("DirectoryStep", () => {
     const context = rr0TestUtil.newContext("/science/crypto/ufo/enquete/dossier/index.html", template)
     const eventFactory = new RR0EventFactory()
     const dataService = new AllDataService([new TypedDataFactory<RR0Case>(eventFactory, "case")])
-    const caseService = new CaseService(dataService, rr0TestUtil.caseFactory, rr0TestUtil.timeElementFactory)
+    const caseService = new CaseService(dataService, rr0TestUtil.caseFactory, rr0TestUtil.time.timeElementFactory)
     const step = new CaseDirectoryStep(caseService, [], [], "/science/crypto/ufo/enquete/dossier/index.html",
       outputFunc, rr0TestUtil.config)
     const stepResult = await step.execute(context)

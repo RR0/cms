@@ -127,5 +127,4 @@ export class TimeElementFactory {
     }
     return replacement
   }
-
 }

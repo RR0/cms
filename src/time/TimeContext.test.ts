@@ -1,5 +1,6 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { TimeContext } from "./TimeContext.js"
+import { Level2Duration as EdtfDuration, Level2Year as EdtfYear } from "@rr0/time"
 
 describe("TimeContext", () => {
 
@@ -9,7 +10,9 @@ describe("TimeContext", () => {
 
   test("duration seconds", () => {
     timeContext.updateFromStr("P10S")
-    expect(timeContext.duration.value).toBe(10 * SECOND)
+    const duration: EdtfDuration = timeContext.duration
+    const value = duration.value as number
+    expect(value).toBe(10 * SECOND)
   })
 
   test("updateFromStr year", () => {
@@ -20,13 +23,19 @@ describe("TimeContext", () => {
 
   test("updateFromStr year interval", () => {
     timeContext.updateFromStr("1989/2001")
-    expect(timeContext.to.year.value).toBe(2001)
-    expect(timeContext.from.year.value).toBe(1989)
+    const toYearVal: EdtfYear = timeContext.to.year
+    const toYear = toYearVal.value as number
+    expect(toYear).toBe(2001)
+    const fromYearVal: EdtfYear = timeContext.from.year
+    const fromYear = fromYearVal.value as number
+    expect(fromYear).toBe(1989)
   })
 
   test("updateFromStr year from", () => {
     timeContext.updateFromStr("1989/")
-    expect(timeContext.from.year.value).toBe(1989)
+    const fromYearVal: EdtfYear = timeContext.from.year
+    const fromYear = fromYearVal.value as number
+    expect(fromYear).toBe(1989)
     expect(timeContext.to).toBeUndefined()
     expect(timeContext.getYear()).toBeUndefined()
   })
@@ -34,14 +43,16 @@ describe("TimeContext", () => {
   test("updateFromStr year to", () => {
     timeContext.updateFromStr("/2001")
     expect(timeContext.from).toBeUndefined()
-    expect(timeContext.to.year.value).toBe(2001)
+    const toYearVal: EdtfYear = timeContext.to.year
+    const toYear = toYearVal.value as number
+    expect(toYear).toBe(2001)
     expect(timeContext.getYear()).toBeUndefined()
   })
 
   test("updateFromStr year-month", () => {
     timeContext.updateFromStr("1989-10")
-    expect(timeContext.date.year.value).toBe(1989)
-    expect(timeContext.date.month.value).toBe(10)
+    expect(timeContext.getYear()).toBe(1989)
+    expect(timeContext.getMonth()).toBe(10)
   })
 
   test("updateFromStr year-month-day", () => {
