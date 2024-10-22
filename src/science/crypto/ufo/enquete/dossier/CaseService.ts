@@ -8,8 +8,8 @@ import { CaseFactory } from "./CaseFactory.js"
 export class CaseService extends AbstractDataService<RR0Case> {
 
   constructor(dataService: AllDataService, factory: CaseFactory,
-              protected readonly timeElementFactory: TimeElementFactory) {
-    super(dataService, factory)
+              protected readonly timeElementFactory: TimeElementFactory, files: string[]) {
+    super(dataService, factory, files)
   }
 
   getLink(context: HtmlRR0SsgContext, aCase: RR0Case): HTMLElement {

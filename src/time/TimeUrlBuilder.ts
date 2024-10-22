@@ -1,14 +1,20 @@
 import { TimeContext } from "./TimeContext.js"
+import path from "path"
+
+export type TimeUrlBuilderOptions = {
+  rootDir: string
+}
 
 export class TimeUrlBuilder {
 
-  static readonly root = "time/"
+  constructor(readonly options: TimeUrlBuilderOptions) {
+  }
 
-  static fromContext(time: TimeContext) {
-    let url = this.root
+  fromContext(time: TimeContext): string {
+    let url = this.options.rootDir
     const year = time.getYear()
     if (year) {
-      url += year.toString().split("").join("/")
+      url = path.join(url, year.toString().split("").join("/"))
     }
     let month = time.getMonth()
     if (month) {

@@ -3,22 +3,25 @@ import fs from "fs"
 import { UfoSearchCaseRR0Mapper, ufoSearchCaseRR0Mapper, ufoSearchFileDatasource } from "./ufo-search/index.js"
 import { rr0TestUtil } from "../../test/index.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
-import { RR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import path from "path"
+
+const root = "src"
 
 describe("JsonMapper", () => {
 
   const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
 
-  let context: RR0SsgContext
+  let context: HtmlRR0SsgContext
   let mapper: UfoSearchCaseRR0Mapper
 
   beforeEach(() => {
-    context = rr0TestUtil.newContext("time/1/9/7/0/03/index.html")
+    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     mapper = ufoSearchCaseRR0Mapper
   })
 
   test("read", () => {
-    const data = fs.readFileSync(ufoSearchFileDatasource.fileName, {encoding: "utf-8"})
+    const data = fs.readFileSync(path.join("src", ufoSearchFileDatasource.fileName), {encoding: "utf-8"})
     const cases = ufoSearchFileDatasource.fileMapper.parse(context, data)
     expect(cases.length).toEqual(54751)
     const expected1 = ufoSearchTestCases[0]

@@ -1,0 +1,73 @@
+<!--#include virtual="/header-start.html" -->
+<title>Dossiers ufologiques</title>
+<!--#include virtual="/header-end.html" -->
+<style>
+  #searchForm {
+    padding: 1em 0.5em;
+    border: 1px solid grey;
+    margin: 1em 0;
+  }
+
+  #searchForm + ul {
+    column-width: 14em;
+  }
+
+  #searchForm label, output {
+    padding: 0.5em 1em;
+    white-space: nowrap;
+  }
+
+  #searchForm input[name="text"] {
+    margin-left: 0.5em;
+  }
+
+  #searchForm output {
+    color: grey;
+  }
+</style>
+<form id="searchForm">
+  <input disabled name="text" oninput="findCase(event)" placeholder="Activez JavaScript"
+    size="24" style="margin-left: 1em" type="search"> <label>Canular <input checked disabled name="hoax"
+  onchange="findCase(event)" type="checkbox"/></label> <label>Méprise <input
+  checked disabled name="misinterpretation" onchange="findCase(event)" type="checkbox"/></label>
+  <output></output>
+</form>
+<!--#echo var="directories" -->
+<script>
+  const form = document.querySelector("#searchForm")
+  const textInput = form.querySelector("input[name='text']")
+  textInput.disabled = false
+  textInput.setAttribute("placeholder", "Nom (type, date)")
+
+  const hoaxInput = form.querySelector("input[name='hoax']")
+  hoaxInput.disabled = false
+
+  const misinterpretationInput = form.querySelector("input[name='misinterpretation']")
+  misinterpretationInput.disabled = false
+
+  function findCase (e) {
+    const value = textInput.value.toLowerCase()
+    const list = document.querySelector("#searchForm + ul")
+    let found = 0
+    for (const child of list.children) {
+      const childContentClasses = child.querySelector("a").classList
+      const isHoax = childContentClasses.contains("hoax")
+      const isMisinterpretation = childContentClasses.contains("misinterpretation")
+      const matchHoax = hoaxInput.checked || (!hoaxInput.checked && !isHoax)
+      const matchMisinterpretation = misinterpretationInput.checked || (!misinterpretationInput.checked && !isMisinterpretation)
+      const matchText = child.textContent.toLowerCase().indexOf(value) >= 0
+      if (matchText && matchHoax && matchMisinterpretation) {
+        child.style.display = "list-item"
+        found++
+      } else {
+        child.style.display = "none"
+      }
+    }
+    const output = form.querySelector("output")
+    output.textContent = `${found > 0 ? found : "Aucun"} cas / ${list.children.length}`
+  }
+
+  form.style.display = "block"
+  textInput.dispatchEvent(new Event("input"))
+</script>
+<!--#include virtual="/footer.html" -->

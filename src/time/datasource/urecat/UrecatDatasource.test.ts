@@ -28,7 +28,7 @@ describe("UrecatCaseSource", () => {
   let context: HtmlRR0SsgContext
 
   beforeEach(() => {
-    context = rr0TestUtil.newHtmlContext("time/1/9/7/7/03/index.html")
+    context = rr0TestUtil.time.newHtmlContext("1/9/7/7/03/index.html")
   })
 
   test("witnesses", () => {

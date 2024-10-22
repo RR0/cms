@@ -7,10 +7,10 @@ describe("AuthorReplaceCommand", async () => {
 
   const timeTextBuilder = rr0TestUtil.time.timeTextBuilder
   const relativeTimeTextBuilder = new RelativeTimeTextBuilder(timeTextBuilder)
-  const timeService = await rr0TestUtil.getTimeService()
+  const timeService = await rr0TestUtil.time.getService()
 
   test("no author", async () => {
-    const timeFile = "time/1/9/5/4/index.html"
+    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/index.html")
     const command = new AuthorReplaceCommand(timeService)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
@@ -20,7 +20,7 @@ describe("AuthorReplaceCommand", async () => {
   })
 
   test("author only", async () => {
-    const timeFile = "time/1/9/5/4/10/index.html"
+    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
     const command = new AuthorReplaceCommand(timeService)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
@@ -33,7 +33,7 @@ describe("AuthorReplaceCommand", async () => {
   })
 
   test("copyright only", async () => {
-    const timeFile = "time/1/9/5/4/10/index.html"
+    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
     const command = new AuthorReplaceCommand(timeService)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
@@ -47,7 +47,7 @@ describe("AuthorReplaceCommand", async () => {
   })
 
   test("author with copyright", async () => {
-    const timeFile = "time/1/9/5/4/10/index.html"
+    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
     const command = new AuthorReplaceCommand(timeService)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)

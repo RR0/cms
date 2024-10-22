@@ -19,7 +19,7 @@ describe("CsvMapper", () => {
   let mapper: CsvMapper<GeipanCaseSummary>
 
   beforeEach(() => {
-    context = rr0TestUtil.newContext("time/1/9/7/0/03/index.html")
+    context = rr0TestUtil.newContext(path.join(rr0TestUtil.rootDir, "time/1/9/7/0/03/index.html"))
     mapper = new CsvMapper()
   })
 

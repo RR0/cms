@@ -2,11 +2,21 @@ import { PeopleService } from "./PeopleService.js"
 import { People } from "./People.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"
+import path from "path"
 
 describe("PeopleFactory", () => {
 
   const dataService = rr0TestUtil.dataService
-  const factory = new PeopleService(dataService, rr0TestUtil.peopleFactory)
+  const peopleRoot = "src/people"
+  const peopleFiles = [
+    path.join(peopleRoot, "a/Aristote"),
+    path.join(peopleRoot, "b/BeauJerome"),
+    path.join(peopleRoot, "b/BeauJeromePierre"),
+    path.join(peopleRoot, "c/CondonEdwardU"),
+    path.join(peopleRoot, "h/HynekJosefAllen"),
+    path.join(peopleRoot, "v/VonBraunWerner")
+  ]
+  const factory = new PeopleService(dataService, rr0TestUtil.peopleFactory, peopleFiles)
 
   test("build people with one first name", () => {
     expect(factory.createFromFullName("Jérôme Beau")).toEqual(new People(

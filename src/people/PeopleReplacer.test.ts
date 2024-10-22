@@ -6,8 +6,15 @@ import { describe, expect, test } from "@javarome/testscript"
 import { AllDataService } from "../data/index.js"
 import { RR0EventFactory } from "../event/index.js"
 import { PeopleFactory } from "./PeopleFactory.js"
+import path from "path"
 
 describe("PeopleReplacer", () => {
+
+  const peopleRoot = "src/people"
+  const peopleFiles = [
+    path.join(peopleRoot, "b/BeauJerome"),
+    path.join(peopleRoot, "h/HynekJosefAllen")
+  ]
 
   const peopleFactory = new PeopleFactory(new RR0EventFactory())
 
@@ -22,8 +29,8 @@ describe("PeopleReplacer", () => {
 
   test("ignore brackets", async () => {
     const dataService = new AllDataService([peopleFactory])
-    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory))
-    const context = rr0TestUtil.newHtmlContext("time/1/9/9/0/08/index.html", "")
+    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory, peopleFiles))
+    const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
       const lastnameFirstElement = createPeopleElement(context,
         "Hynek, Josef Allen (Northwestern University, Evanston, Illinois)")
@@ -42,8 +49,8 @@ describe("PeopleReplacer", () => {
 
   test("replace people tags", async () => {
     const dataService = new AllDataService([peopleFactory])
-    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory))
-    const context = rr0TestUtil.newHtmlContext("time/1/9/9/0/08/index.html", "")
+    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory, peopleFiles))
+    const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
       const peopleWithTitle = createPeopleElement(context, "Ronald Reagan", "Ronald Wilson Reagan")
       let replacement = await replacer.replacement(context, peopleWithTitle)

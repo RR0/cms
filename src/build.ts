@@ -16,7 +16,8 @@ import {
   TimeReplacerFactory,
   TimeService,
   TimeServiceOptions,
-  TimeTextBuilder
+  TimeTextBuilder,
+  TimeUrlBuilder
 } from "./time"
 import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/index.js"
 import { GooglePlaceService, PlaceReplacerFactory } from "./place/index.js"
@@ -86,6 +87,7 @@ import { RR0EventFactory } from "./event/index.js"
 import fs from "fs"
 
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
+import { glob } from "glob"
 
 interface RR0BuildArgs {
   /**
@@ -215,9 +217,8 @@ const timeOptions: TimeServiceOptions = {
   files: []
 }
 const timeTextBuilder = new TimeTextBuilder(timeFormat)
-const timeService = new TimeService(dataService, timeTextBuilder, timeOptions)
-
-const peopleService = new PeopleService(dataService, peopleFactory)
+const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeOptions.root})
+const timeService = new TimeService(dataService, timeTextBuilder, timeUrlBuilder, timeOptions)
 
 const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY
 if (!googleMapsApiKey) {
@@ -228,11 +229,28 @@ const placeService = new GooglePlaceService("place", googleMapsApiKey)
 
 const orgService = new OrganizationService([], "org", undefined)
 
-timeService.getFiles().then(async (timeFiles) => {
+async function getTimeFiles(): Promise<string[]> {
+  const minusYearFiles = await glob("time/-?/?/?/?/index.html")
+  const year1Files = await glob("time/?/index.html")
+  const year2Files = await glob("time/?/?/index.html")
+  const year3Files = await glob("time/?/?/?/index.html")
+  const year4Files = await glob("time/?/?/?/?/index.html")
+  const monthFiles = await glob("time/?/?/?/?/??/index.html")
+  const dayFiles = await glob("time/?/?/?/?/??/??/index.html")
+  return year1Files.concat(year2Files).concat(year3Files).concat(year4Files).concat(
+    minusYearFiles).concat(monthFiles).concat(dayFiles).sort()
+}
+
+getTimeFiles().then(async (timeFiles) => {
   context.setVar("timeFilesCount", timeFiles.length)
   const timeElementFactory = new TimeElementFactory(timeService.renderer)
-  const caseService = new CaseService(dataService, caseFactory, timeElementFactory)
   const timeReplacer = new TimeReplacer(timeElementFactory)
+
+  const caseFiles = await caseFactory.getFiles()
+  const caseService = new CaseService(dataService, caseFactory, timeElementFactory, caseFiles)
+
+  const peopleFiles = await peopleFactory.getFiles()
+  const peopleService = new PeopleService(dataService, peopleFactory, peopleFiles)
   const peopleList = await peopleService.getAll()
   context.setVar("peopleFilesCount", peopleList.length)
   const bookMeta = new Map<string, HtmlMeta>()

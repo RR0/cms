@@ -3,10 +3,18 @@ import { PeopleService } from "./PeopleService.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { AllDataService } from "../data/index.js"
 import { rr0TestUtil } from "../test/index.js"
+import path from "path"
 
 describe("People", () => {
 
-  const service = new PeopleService(new AllDataService([]), rr0TestUtil.peopleFactory)
+  const peopleRoot = "src/people"
+  const peopleFiles = [
+    path.join(peopleRoot, "b/BeauJerome"),
+    path.join(peopleRoot, "b/BeauJeromePierre"),
+    path.join(peopleRoot, "h/HynekJosefAllen"),
+    path.join(peopleRoot, "v/VonBraunWerner")
+  ]
+  const service = new PeopleService(new AllDataService([]), rr0TestUtil.peopleFactory, peopleFiles)
 
   test("age", async () => {
     const [hynek] = await service.getFromDir("HynekJosefAllen")

@@ -1,7 +1,6 @@
 import { HtmlRR0SsgContext, RR0SsgContext } from "../RR0SsgContext.js"
 import { TimeRenderer, TimeRenderOptions } from "./TimeRenderer.js"
 import { TimeReplacer } from "./TimeReplacer.js"
-import { TimeContext } from "./TimeContext.js"
 
 /**
  * Creates <time> elements from time strings.
@@ -75,31 +74,26 @@ export class TimeElementFactory {
   }
 
   protected durationReplacement(context: HtmlRR0SsgContext): HTMLTimeElement | undefined {
+    const duration = context.time.duration
     const items = []
-    let duration = context.time.duration
     const messages = context.messages.context.time.duration
-    let datetime = "P"
-    const days = Math.floor(duration / TimeContext.DAY)
-    if (days > 0) {
-      items.push(messages.days(days))
-      datetime += days + "D"
+    const datetime = duration.toString()
+    const spec = duration.toSpec()
+    const days = spec.days
+    if (days) {
+      items.push(messages.days(days.value))
     }
-    duration %= TimeContext.DAY
-    const hours = Math.floor(duration / TimeContext.HOUR)
-    if (hours > 0) {
-      items.push(messages.hours(hours))
-      datetime += hours + "H"
+    const hours = spec.hours
+    if (hours) {
+      items.push(messages.hours(hours.value))
     }
-    duration %= TimeContext.HOUR
-    const minutes = Math.floor(duration / TimeContext.MINUTE)
-    if (minutes > 0) {
-      items.push(messages.minutes(minutes))
-      datetime += minutes + "M"
+    const minutes = spec.minutes
+    if (minutes) {
+      items.push(messages.minutes(minutes.value))
     }
-    duration %= TimeContext.MINUTE
-    if (duration > 0) {
-      items.push(messages.seconds(duration))
-      datetime += duration + "S"
+    const seconds = spec.seconds
+    if (seconds) {
+      items.push(messages.seconds(seconds.value))
     }
     let replacement: HTMLTimeElement | undefined
     if (items.length > 0) {

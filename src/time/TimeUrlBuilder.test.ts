@@ -3,17 +3,20 @@ import { TimeContext } from "./TimeContext.js"
 import { RR0SsgContextImpl } from "../RR0SsgContext.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"
+import path from "path"
 
 describe("TimeUrlBuilder", () => {
 
   const config = rr0TestUtil.config
+  const rootDir = rr0TestUtil.time.fullRoot
+  const timeUrlBuilder = new TimeUrlBuilder({rootDir})
 
   test("builds year", () => {
     {
       const context = new RR0SsgContextImpl("fr", new TimeContext(), config)
       context.time.setYear(2008)
-      const url = TimeUrlBuilder.fromContext(context.time)
-      expect(url).toEqual("time/2/0/0/8")
+      const url = timeUrlBuilder.fromContext(context.time)
+      expect(url).toEqual(path.join(rootDir, "2/0/0/8"))
     }
     {
       const context = new RR0SsgContextImpl("fr", new TimeContext(), config)
@@ -21,8 +24,8 @@ describe("TimeUrlBuilder", () => {
       context.time.setMonth(8)
       context.time.setDayOfMonth(12)
       context.time.setYear(2020)  // Resets month and day
-      const url = TimeUrlBuilder.fromContext(context.time)
-      expect(url).toEqual("time/2/0/2/0")
+      const url = timeUrlBuilder.fromContext(context.time)
+      expect(url).toEqual(path.join(rootDir, "2/0/2/0"))
     }
   })
 
@@ -31,8 +34,8 @@ describe("TimeUrlBuilder", () => {
       const context = new RR0SsgContextImpl("fr", new TimeContext(), config)
       context.time.setYear(2001)
       context.time.setMonth(9)
-      const url = TimeUrlBuilder.fromContext(context.time)
-      expect(url).toBe("time/2/0/0/1/09")
+      const url = timeUrlBuilder.fromContext(context.time)
+      expect(url).toBe(path.join(rootDir, "2/0/0/1/09"))
     }
     {
       const context = new RR0SsgContextImpl("fr", new TimeContext(), config)
@@ -40,8 +43,8 @@ describe("TimeUrlBuilder", () => {
       context.time.setMonth(8)
       context.time.setDayOfMonth(12)
       context.time.setMonth(2)
-      const url = TimeUrlBuilder.fromContext(context.time)
-      expect(url).toEqual("time/2/0/1/2/02")
+      const url = timeUrlBuilder.fromContext(context.time)
+      expect(url).toEqual(path.join(rootDir, "2/0/1/2/02"))
     }
   })
 })

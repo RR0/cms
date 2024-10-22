@@ -23,7 +23,7 @@ export class CaseDirectoryStep extends DirectoryStep {
   }
 
   static async create(outputFunc: OutputFunc, config: SsgConfig, caseService: CaseService): Promise<CaseDirectoryStep> {
-    const rootDirs = await caseService.getFiles()
+    const rootDirs = caseService.files
     return new CaseDirectoryStep(caseService, rootDirs, ["science/crypto/ufo/enquete/dossier/canular"],
       "science/crypto/ufo/enquete/dossier/index.html", outputFunc, config)
   }

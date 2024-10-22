@@ -1,6 +1,7 @@
-import { NamedPlace, TimeContext } from "../time/index.js"
-import { Source } from "../source/index.js"
-import { RR0Event } from "../event/index.js"
+import { NamedPlace } from "../time/datasource/rr0/RR0CaseSummary.js"
+import { TimeContext } from "../time/TimeContext.js"
+import { Source } from "../source/Source.js"
+import { RR0Event } from "../event/RR0Event.js"
 
 /**
  * Any kind of data on RR0 (see implementing classes).

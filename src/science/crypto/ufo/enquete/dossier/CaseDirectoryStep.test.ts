@@ -1,16 +1,21 @@
+import path from "path"
+import { describe, expect, test } from "@javarome/testscript"
+import { FileContents, SsgContext } from "ssg-api"
 import { CaseDirectoryStep } from "./CaseDirectoryStep.js"
 import { rr0TestUtil } from "../../../../../test/index.js"
-import { FileContents, SsgContext } from "ssg-api"
-import { describe, expect, test } from "@javarome/testscript"
-import { AllDataService, TypedDataFactory } from "../../../../../data/index.js"
 import { RR0Case } from "./RR0Case.js"
 import { CaseService } from "./CaseService.js"
-import { RR0EventFactory } from "../../../../../event/index.js"
+import { RR0EventFactory } from "../../../../../event/RR0EventFactory.js"
+import { TimeElementFactory } from "../../../../../time/TimeElementFactory.js"
+import { AllDataService } from "../../../../../data/AllDataService.js"
+import { TypedDataFactory } from "../../../../../data/TypedDataFactory.js"
 
 describe("DirectoryStep", () => {
 
-  async function outputFunc(context: SsgContext, info: FileContents, oudDir = rr0TestUtil.outDir + "/"): Promise<void> {
-    info.name = `${oudDir}${info.name}`
+  const root = "src"
+
+  async function outputFunc(context: SsgContext, info: FileContents, outDir = rr0TestUtil.outDir + "/"): Promise<void> {
+    info.name = `${outDir}${info.name}`
   }
 
   test("", async () => {
@@ -22,11 +27,15 @@ describe("DirectoryStep", () => {
 <!--#echo var="directories" -->
 <p>After</p>
 <!--#include virtual="/footer.html" -->`
-    const context = rr0TestUtil.newContext("/science/crypto/ufo/enquete/dossier/index.html", template)
+    const casesDirectoryPath = path.join(root, "science/crypto/ufo/enquete/dossier/index.html")
+    const context = rr0TestUtil.newContext(casesDirectoryPath, template)
     const eventFactory = new RR0EventFactory()
     const dataService = new AllDataService([new TypedDataFactory<RR0Case>(eventFactory, "case")])
-    const caseService = new CaseService(dataService, rr0TestUtil.caseFactory, rr0TestUtil.time.timeElementFactory)
-    const step = new CaseDirectoryStep(caseService, [], [], "/science/crypto/ufo/enquete/dossier/index.html",
+    const caseFiles = []
+    const timeService = rr0TestUtil.time.getService()
+    const timeElementFactory = new TimeElementFactory(timeService.renderer)
+    const caseService = new CaseService(dataService, rr0TestUtil.caseFactory, timeElementFactory, caseFiles)
+    const step = new CaseDirectoryStep(caseService, [], [], casesDirectoryPath,
       outputFunc, rr0TestUtil.config)
     const stepResult = await step.execute(context)
     expect(stepResult.directoryCount).toBe(239)

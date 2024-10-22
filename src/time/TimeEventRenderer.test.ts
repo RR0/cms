@@ -12,6 +12,7 @@ import { HautsDeSeineCityCode } from "../org/eu/fr/region/idf/92/HautsDeSeineCit
 
 describe("TimeEventRenderer", () => {
 
+  const root = "src/time"
   const dataService = new AllDataService([])
   const baseUrl = "https://rr0.org"
   const http = new HttpSource()
@@ -20,7 +21,7 @@ describe("TimeEventRenderer", () => {
     new SourceRenderer(rr0TestUtil.time.timeTextBuilder), rr0TestUtil.time.timeElementFactory)
 
   test("render event", async () => {
-    const context = rr0TestUtil.newHtmlContext("time/1/9/7/0/03/index.html")
+    const context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     const city = franceCity(HautsDeSeineCityCode.Nanterre, Place.fromLocation(48.891944, 2.207222))
     const dep = city.parent
     const region = dep.parent
@@ -54,6 +55,6 @@ describe("TimeEventRenderer", () => {
     const elem = outDoc.createElement("li")
     await renderer.render(context, c, elem)
     expect(elem.innerHTML).toBe(
-      `<time datetime="1970-03">mars 1970</time> À <span class="place">Nanterre (Hauts-de-Seine, France)</span>, some sighting <span class="source">Some Author: <span><a href="https://somesite.com/case1">Case 1</a>, <i>Some site</i>, 1970-03</span></span>`)
+      `<span class="time-resolved">en <time datetime="1970-03">mars 1970</time></span> À <span class="place">Nanterre (Hauts-de-Seine, France)</span>, some sighting <span class="source">Some Author: <span><a href="https://somesite.com/case1">Case 1</a>, <i>Some site</i>, 1970-03</span></span>`)
   })
 })

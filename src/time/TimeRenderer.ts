@@ -1,5 +1,4 @@
 import { HtmlRR0SsgContext, RR0SsgContext } from "../RR0SsgContext.js"
-import { TimeUrlBuilder } from "./TimeUrlBuilder.js"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 import { RelativeTimeTextBuilder } from "./RelativeTimeTextBuilder.js"
 import { UrlUtil } from "../util/url/UrlUtil.js"
@@ -34,7 +33,7 @@ export class TimeRenderer {
     replacement: HTMLElement
   } {
     const time = context.time
-    const absoluteTimeUrl = TimeUrlBuilder.fromContext(time)
+    const absoluteTimeUrl = this.service.urlBuilder.fromContext(time)
     const title = this.textBuilder.build(context, true, renderOptions)
     let text = previousContext ? new RelativeTimeTextBuilder(this.textBuilder).build(previousContext,
       context) : undefined
@@ -51,10 +50,10 @@ export class TimeRenderer {
     }
     timeEl.textContent = text
     const dirName = currentFileName.substring(0, currentFileName.indexOf("/index"))
-    const url = options.url && this.service.matchExistingTimeFile(absoluteTimeUrl)
-    if (url && url !== dirName) {
+    const existingUrl = options.url && this.service.matchExistingTimeFile(absoluteTimeUrl)
+    if (existingUrl && existingUrl !== dirName) {
       const a = replacement = doc.createElement("a") as HTMLAnchorElement
-      a.href = UrlUtil.absolute(url)
+      a.href = UrlUtil.absolute(existingUrl)
       a.append(timeEl)
     } else {
       replacement = timeEl

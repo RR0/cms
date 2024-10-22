@@ -22,7 +22,7 @@ export class ChronologyReplacerFactory implements ReplacerFactory<DomReplacer> {
   async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
     return {
       replace: async (ul: HTMLUListElement): Promise<HTMLUListElement> => {
-        const isTimeFile = await this.timeService.isTimeFile(context.file.name)
+        const isTimeFile = this.timeService.isTimeFile(context.file.name)
         if (isTimeFile) {
           ul = await this.replacer.replacement(context, ul)
         }

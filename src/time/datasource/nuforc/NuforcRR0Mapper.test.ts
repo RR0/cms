@@ -28,7 +28,7 @@ describe("NuforcRR0Mapper", () => {
 
   let context: HtmlRR0SsgContext
   beforeEach(() => {
-    context = rr0TestUtil.newHtmlContext("time/1/9/7/0/03/index.html")
+    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1970)
     context.time.setMonth(3)
   })

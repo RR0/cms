@@ -1,13 +1,13 @@
 import * as fs from "fs"
 import { FileUtil, Logger, SsgConfig } from "ssg-api"
 import { TimeContext } from "../time/TimeContext.js"
-import { TimeUrlBuilder } from "../time/TimeUrlBuilder.js"
 import * as path from "path"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Book } from "./Book.js"
 import { People } from "../people/People.js"
 import { PeopleService } from "../people/PeopleService.js"
 import { CSVFileReader } from "../CSVFileReader.js"
+import { TimeUrlBuilder } from "../time"
 
 export class BookService {
 
@@ -23,7 +23,7 @@ export class BookService {
   protected peopleList: People[] = []
 
   constructor(readonly logger: Logger, protected dry: boolean, protected peopleService: PeopleService,
-              protected config: SsgConfig) {
+              protected timeUrlBuilder: TimeUrlBuilder, protected config: SsgConfig) {
   }
 
   async import(fileName: string) {
@@ -73,7 +73,7 @@ export class BookService {
             authorsStr = authorsStr.substring(0, authorsStr.length - andAl.length - 1) + andAl
           }
         } while (dirName.length >= 255)
-        const parentDir = TimeUrlBuilder.fromContext(time)
+        const parentDir = this.timeUrlBuilder.fromContext(time)
         const bookDir = path.join(parentDir, dirName)
         const id = result[COLUMN_ISBN]
         const book: Book = {

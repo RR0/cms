@@ -11,6 +11,7 @@ import { HttpSource } from "./HttpSource.js"
 import { TimeElementFactory } from "../TimeElementFactory.js"
 import { TimeRenderer } from "../TimeRenderer.js"
 import { rr0TestUtil } from "../../test"
+import { TimeUrlBuilder } from "../TimeUrlBuilder"
 
 export abstract class DatasourceTestCase<S> {
 
@@ -50,7 +51,8 @@ export abstract class DatasourceTestCase<S> {
     const baseUrl = "https://rr0.org"
     const http = new HttpSource()
     const sourceFactory = new SourceFactory(dataService, http, baseUrl, this.intlOptions)
-    const timeService = await rr0TestUtil.getTimeService()
+    const timeService = await rr0TestUtil.time.getService()
+    const timeUrlBuilder = new TimeUrlBuilder({rootDir: "src/time"})
     const timeElementFactory = new TimeElementFactory(new TimeRenderer(timeService, this.timeTextBuilder))
     const eventRenderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
       new SourceRenderer(this.timeTextBuilder), timeElementFactory)
