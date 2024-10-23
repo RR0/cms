@@ -3,7 +3,7 @@ import { CaseMapper } from "../CaseMapper.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/index.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { Source } from "../../../source/index.js"
 import { CityService } from "../../../org/index.js"
 

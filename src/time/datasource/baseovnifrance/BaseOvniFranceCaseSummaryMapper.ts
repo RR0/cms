@@ -1,7 +1,7 @@
 import { CaseMapper } from "../CaseMapper.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { RR0Context } from "../../../RR0Context.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { BaseOvniFranceCase } from "./BaseOvniFranceCase.js"
 
 /**

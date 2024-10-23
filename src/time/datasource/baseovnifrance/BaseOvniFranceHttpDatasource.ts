@@ -3,7 +3,7 @@ import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import assert from "assert"
 import { BaseOvniFranceDatasource } from "./BaseOvniFranceDatasource.js"
 

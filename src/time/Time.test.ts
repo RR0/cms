@@ -1,5 +1,5 @@
 import { Time } from "./Time.js"
-import { TimeContext } from "./TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { RR0ContextImpl } from "../RR0Context.js"
 import { FileContents, SsgConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
@@ -28,21 +28,21 @@ describe("Time", () => {
     test("recognize year before 0 AD", () => {
       context.file = new FileContents("time/-0/0/1/1/index.html", "utf-8", "", new Date("2012-08-12"),
         {lang: "fr", variants: []})
-      const newTimeContext = TimeContext.fromFileName(context as any)
+      const newTimeContext = Time.contextFromFileName(context as any)
       expect(newTimeContext.getYear()).toBe(-11)
     })
 
     test("recognize year after 0 AD", () => {
       context.file = new FileContents("time/1/9/7/2/index.html", "utf-8", "", new Date("2012-08-12"),
         {lang: "fr", variants: []})
-      const newTimeContext = TimeContext.fromFileName(context as any)
+      const newTimeContext = Time.contextFromFileName(context as any)
       expect(newTimeContext.getYear()).toBe(1972)
     })
 
     test("recognize month", () => {
       context.file = new FileContents("time/1/9/7/2/08/index.html", "utf-8", "", new Date("2012-08-12"),
         {lang: "fr", variants: []})
-      const newTimeContext = TimeContext.fromFileName(context as any)
+      const newTimeContext = Time.contextFromFileName(context as any)
       expect(newTimeContext.getYear()).toBe(1972)
       expect(newTimeContext.getMonth()).toBe(8)
     })
@@ -50,7 +50,7 @@ describe("Time", () => {
     test("recognize day", () => {
       context.file = new FileContents("time/1/9/7/2/08/12/index.html", "utf-8", "", new Date("2012-08-12"),
         {lang: "fr", variants: []})
-      const newTimeContext = TimeContext.fromFileName(context as any)
+      const newTimeContext = Time.contextFromFileName(context as any)
       expect(newTimeContext.getYear()).toBe(1972)
       expect(newTimeContext.getMonth()).toBe(8)
       expect(newTimeContext.getDayOfMonth()).toBe(12)

@@ -1,5 +1,5 @@
-import { TimeContext } from "./TimeContext.js"
 import path from "path"
+import { TimeContext } from "@rr0/time"
 
 export type TimeUrlBuilderOptions = {
   rootDir: string

@@ -1,6 +1,6 @@
 import * as fs from "fs"
 import { FileUtil, Logger, SsgConfig } from "ssg-api"
-import { TimeContext } from "../time/TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import * as path from "path"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Book } from "./Book.js"

@@ -3,7 +3,7 @@ import { geipanHttpDatasource } from "./GeipanRR0Mapping.js"
 import { GeipanCaseClassification, GeipanCaseClassification_calc } from "./GeipanCaseClassification.js"
 import { GeipanZoneType } from "./GeipanCase.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
-import { TimeContext } from "../../../../../../time/index.js"
+import { TimeContext } from "@rr0/time"
 
 export const geipanTestCaseSummaries: GeipanCaseSummary[] = [
   {

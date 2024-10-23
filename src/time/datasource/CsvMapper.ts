@@ -1,6 +1,6 @@
 import { CaseMapper } from "./CaseMapper.js"
 import { RR0Context } from "../../RR0Context.js"
-import { TimeContext } from "../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 
 export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
 

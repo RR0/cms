@@ -5,7 +5,7 @@ import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
 import { nuforcRR0Mapping } from "./NuforcRR0Mapping.js"
 import { nuforcTestCases } from "./NuforcTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/index.js"
 
 describe("NuforcCaseSource", () => {

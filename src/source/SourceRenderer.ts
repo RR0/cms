@@ -1,6 +1,7 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import { Source } from "./Source.js"
-import { TimeContext, TimeTextBuilder } from "../time/index.js"
+import { TimeTextBuilder } from "../time/index.js"
+import { TimeContext } from "@rr0/time"
 
 /**
  * Render a case summary for a RR0 web page.

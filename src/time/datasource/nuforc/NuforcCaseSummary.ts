@@ -1,7 +1,7 @@
 import { NuforcState } from "./NuforcState.js"
 import { NuforcCountry } from "./NuforcCountry.js"
 import { NuforcShape } from "./NuforcShape.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 
 export interface NuforcCaseSummary {
   readonly id: string

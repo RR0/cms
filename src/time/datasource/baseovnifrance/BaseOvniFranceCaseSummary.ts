@@ -1,4 +1,4 @@
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 
 export enum BaseOvniFranceTypeObservation {
   visualClose = "Visuel : proche",

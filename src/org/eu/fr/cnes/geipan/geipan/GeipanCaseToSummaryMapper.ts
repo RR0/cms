@@ -1,7 +1,8 @@
 import { GeipanCaseSummary, GeipanZoneCode } from "./GeipanCaseSummary.js"
 import { GeipanCase } from "./GeipanCase.js"
-import { CaseMapper, TimeContext } from "../../../../../../time/index.js"
+import { CaseMapper } from "../../../../../../time/index.js"
 import { RR0Context } from "../../../../../../RR0Context.js"
+import { TimeContext } from "@rr0/time"
 
 /**
  * Maps a GEIPAN CSV case to a GEIPAN summary case.

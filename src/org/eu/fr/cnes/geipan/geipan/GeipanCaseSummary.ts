@@ -4,7 +4,7 @@ import { GeipanZoneType } from "./GeipanCase.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
 import { CountryCode } from "../../../../../country/index.js"
-import { TimeContext } from "../../../../../../time/index.js"
+import { TimeContext } from "@rr0/time"
 
 export type GeipanZoneCode = FranceDepartementCode | FranceRegionCode | CountryCode.fr
 

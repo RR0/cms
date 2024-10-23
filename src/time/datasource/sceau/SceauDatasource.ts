@@ -2,7 +2,7 @@ import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import { AbstractDatasource } from "../AbstractDatasource.js"
 import { HtmlRR0Context, RR0Context } from "../../../RR0Context.js"
 import { ContextFilter } from "../ContextFilter.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 
 type SceauCaseMapping = { [key in keyof SceauCaseSummary]: string }
 

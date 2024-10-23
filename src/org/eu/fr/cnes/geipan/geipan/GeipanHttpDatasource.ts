@@ -6,12 +6,13 @@ import {
   GeipanCaseClassification_minus
 } from "./GeipanCaseClassification"
 import { GeipanDatasource } from "./GeipanDatasource.js"
-import { HttpSource, TimeContext } from "../../../../../../time/index.js"
+import { HttpSource } from "../../../../../../time/index.js"
 import { RR0Context } from "../../../../../../RR0Context.js"
 import { ObjectUtil, UrlUtil } from "../../../../../../util/index.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
 import { CountryCode } from "../../../../../country/index.js"
+import { TimeContext } from "@rr0/time"
 
 interface QueryParameters {
   /**

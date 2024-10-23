@@ -1,5 +1,5 @@
 import { Gender } from "@rr0/common"
-import { TimeContext } from "../../../../../../time/index.js"
+import { TimeContext } from "@rr0/time"
 
 export enum GeipanWitnessSightingReaction {
   Emotion_Curiosity = "Emotion - Curiosité",

@@ -1,4 +1,4 @@
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { rr0HttpDatasource } from "./RR0Mapping.js"
 import { NamedPlace, RR0CaseSummary } from "./RR0CaseSummary.js"
 import { UrlUtil } from "../../../util/index.js"

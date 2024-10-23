@@ -5,9 +5,9 @@ import { OrganizationService } from "../org/OrganizationService.js"
 import { SsgContext } from "ssg-api"
 import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { PlaceLocation } from "./PlaceLocation.js"
 import { Organization, OrganizationKind } from "../org/Organization.js"
 import { OrganizationMessages } from "../org/index.js"
+import { PlaceLocation } from "@rr0/place"
 
 class MockPlaceService extends PlaceService {
 

@@ -1,7 +1,7 @@
 import { CaseConclusionMessages, MessageUtils, RR0Messages } from "./RR0Messages.js"
-import { placeMessages_fr } from "../place/index.js"
 import { peopleMessages_fr } from "../people/index.js"
 import { countryMessageList_fr, orgMessages_fr } from "../org/index.js"
+import { placeMessages_fr } from "@rr0/place/dist/lang/PlaceMessages_fr"
 
 const caseConclusion_fr: CaseConclusionMessages = {
   unknown: "inexpliqué",

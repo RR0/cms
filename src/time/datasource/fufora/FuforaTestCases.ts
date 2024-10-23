@@ -1,5 +1,5 @@
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { fuforaDatasource } from "./FuforaRR0Mapping.js"
 
 export const fuforaTestCases: FuforaCaseSummary[] = [

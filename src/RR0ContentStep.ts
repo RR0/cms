@@ -1,6 +1,7 @@
 import { ContentStep, ContentStepConfig, ContentStepResult, OutputFunc } from "ssg-api"
 import { HtmlRR0Context } from "./RR0Context.js"
-import { TimeContext } from "./time/index.js"
+import { Time } from "./time/index.js"
+import { TimeContext } from "@rr0/time"
 
 export interface ContentVisitor {
   visit(context: HtmlRR0Context): Promise<void>
@@ -24,7 +25,7 @@ export class RR0ContentStep extends ContentStep<HtmlRR0Context> {
   static setTimeFromPath(context: HtmlRR0Context, filePath: string): TimeContext | undefined {
     const time = context.time
     time.reset()
-    const newTimeContext = TimeContext.fromFileName(context, filePath)
+    const newTimeContext = Time.contextFromFileName(context, filePath)
     if (newTimeContext) {
       time.setYear(newTimeContext.getYear())
       time.setMonth(newTimeContext.getMonth())

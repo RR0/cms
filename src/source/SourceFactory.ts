@@ -1,11 +1,12 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import { Publication, Source } from "./Source.js"
 import path from "path"
-import { TimeContext } from "../time/TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { FileContents } from "ssg-api"
 import { JSDOM } from "jsdom"
 import { AllDataService } from "../data/AllDataService.js"
 import { HttpSource } from "../time/datasource/HttpSource.js"
+import { Time } from "../time"
 
 /**
  * Create Source objects.
@@ -70,7 +71,7 @@ export class SourceFactory {
     }
     const publication = source.publication
     if (publication && !publication.time) {
-      publication.time = TimeContext.fromFileName(context, href)
+      publication.time = Time.contextFromFileName(context, href)
     }
     if (hash) {
       source.index = hash

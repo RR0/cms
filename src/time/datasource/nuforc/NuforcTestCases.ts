@@ -1,6 +1,6 @@
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
 import { nuforcDatasource } from "./NuforcRR0Mapping.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { NuforcState } from "./NuforcState.js"
 import { NuforcCountry } from "./NuforcCountry.js"
 import { NuforcShape } from "./NuforcShape.js"

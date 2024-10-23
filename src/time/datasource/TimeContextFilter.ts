@@ -1,6 +1,6 @@
 import { ContextFilter } from "./ContextFilter.js"
 import { RR0Context } from "../../RR0Context.js"
-import { TimeContext } from "../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 
 export interface TimeContextCase {
   time?: TimeContext

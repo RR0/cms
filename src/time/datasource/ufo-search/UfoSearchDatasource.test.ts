@@ -4,7 +4,7 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { ufoSearchTestCases } from "./UfoSearchTestCases.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { ufoSearchRR0Mapping } from "./UfoSearchMapping.js"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
 

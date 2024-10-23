@@ -1,5 +1,5 @@
 import { TimeUrlBuilder } from "./TimeUrlBuilder.js"
-import { TimeContext } from "./TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { RR0ContextImpl } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"

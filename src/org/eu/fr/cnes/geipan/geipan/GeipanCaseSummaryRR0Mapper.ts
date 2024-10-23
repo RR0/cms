@@ -1,12 +1,13 @@
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import assert from "assert"
 import { GeipanCaseClassification } from "./GeipanCaseClassification.js"
-import { CaseMapper, NamedPlace, RR0CaseSummary, TimeContext } from "../../../../../../time/index.js"
+import { CaseMapper, NamedPlace, RR0CaseSummary } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { CityService } from "../../../../../country/index.js"
 import { Source } from "../../../../../../source/index.js"
 import { Organization } from "../../../../../Organization.js"
 import { france } from "../../../France.js"
+import { TimeContext } from "@rr0/time"
 
 export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, GeipanCaseSummary, RR0CaseSummary> {
 

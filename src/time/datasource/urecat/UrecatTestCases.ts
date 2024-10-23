@@ -1,5 +1,5 @@
 import { UrecatCase } from "./UrecatCase.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { rr0TestUtil } from "../../../test/index.js"
 
 const noWeekdayOptions = {...rr0TestUtil.intlOptions}

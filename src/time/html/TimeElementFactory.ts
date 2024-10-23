@@ -1,6 +1,7 @@
 import { HtmlRR0Context, RR0Context } from "../../RR0Context.js"
 import { TimeRenderer, TimeRenderOptions } from "./TimeRenderer.js"
 import { TimeReplacer } from "./TimeReplacer.js"
+import { Level2Interval } from "@rr0/time"
 
 /**
  * Creates <time> elements from time strings.
@@ -14,7 +15,7 @@ export class TimeElementFactory {
          options: TimeRenderOptions = {url: true}): HTMLElement | undefined {
     let replacement: HTMLElement | undefined
     const time = context.time
-    let interval = time.interval
+    const interval = time.interval as Level2Interval
     if (interval) {
       const fromContext = context.clone()
       fromContext.time.date = interval.start

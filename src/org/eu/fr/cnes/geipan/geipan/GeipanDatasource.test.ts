@@ -3,9 +3,10 @@ import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { geipanTestCaseSummaries } from "./GeipanTestCases.js"
 import { geipanRR0Mapping } from "./GeipanRR0Mapping.js"
 import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase.js"
-import { RR0CaseMapping, TimeContext } from "../../../../../../time/index.js"
+import { RR0CaseMapping } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { rr0TestUtil } from "../../../../../../test/index.js"
+import { TimeContext } from "@rr0/time"
 
 describe("GeipanCaseSource", () => {
 

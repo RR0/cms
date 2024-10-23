@@ -6,7 +6,7 @@ import { urecatRR0Mapping } from "./UrecatRR0Mapping.js"
 import { urecatTestCases } from "./UrecatTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { UrecatHttpDatasource } from "./UrecatHttpDatasource.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
 
 describe("UrecatCaseSource", () => {

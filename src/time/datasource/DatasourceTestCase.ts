@@ -1,7 +1,7 @@
 import { expect } from "@javarome/testscript"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
-import { TimeContext } from "../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { Source, SourceFactory, SourceRenderer } from "../../source/index.js"
 import { RR0CaseMapping } from "./rr0/index.js"

@@ -3,7 +3,7 @@ import { CaseMapper } from "../CaseMapper.js"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { CityService } from "../../../org/country/index.js"
 import { Source } from "../../../source/index.js"
 

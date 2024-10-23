@@ -1,6 +1,6 @@
 import path from "path"
 import { HtmlRR0Context, RR0Context, RR0ContextImpl } from "../RR0Context.js"
-import { TimeContext } from "../time/index.js"
+import { Time } from "../time/index.js"
 import { FileContents, HtmlFileContents, SsgConfig, SsgContext } from "ssg-api"
 import { RR0EventFactory } from "../event/index.js"
 import { AllDataService, TypedDataFactory } from "../data/index.js"
@@ -9,6 +9,7 @@ import { CaseFactory } from "../science/index.js"
 import { PeopleFactory } from "../people/index.js"
 import { APIFactory } from "../tech/index.js"
 import { TimeTestUtil } from "../time/TimeTestUtil"
+import { TimeContext } from "@rr0/time"
 
 export class RR0TestUtil {
 
@@ -75,7 +76,7 @@ export class RR0TestUtil {
     context.file = new HtmlFileContents(currentFile.name, currentFile.encoding, currentFile.contents,
       currentFile.lastModified, currentFile.lang, {author: []}, {}, title)
     const htmlContext = context as HtmlRR0Context
-    Object.assign(htmlContext.time, TimeContext.fromFileName(htmlContext, inputFileName))
+    Object.assign(htmlContext.time, Time.contextFromFileName(htmlContext, inputFileName))
     return htmlContext
   }
 }

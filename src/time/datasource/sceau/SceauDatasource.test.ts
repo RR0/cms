@@ -1,7 +1,7 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { Source } from "../../../source/index.js"
 import { HtmlTag } from "../../../util/index.js"
 import { SceauCaseMapping } from "./SceauCaseMapping.js"

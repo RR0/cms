@@ -4,7 +4,7 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { fuforaTestCases } from "./FuforaTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { fuforaRR0Mapping } from "./FuforaRR0Mapping.js"
-import { TimeContext } from "../../TimeContext.js"
+import { TimeContext } from "@rr0/time"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
 import { RR0CaseMapping } from "../rr0/index.js"
 

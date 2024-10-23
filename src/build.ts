@@ -9,7 +9,6 @@ import {
   RR0Mapping,
   SsiTitleReplaceCommand,
   Time,
-  TimeContext,
   TimeElementFactory,
   TimeLinkDefaultHandler,
   TimeReplacer,
@@ -88,6 +87,7 @@ import fs from "fs"
 
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { glob } from "glob"
+import { TimeContext } from "@rr0/time"
 
 interface RR0BuildArgs {
   /**
