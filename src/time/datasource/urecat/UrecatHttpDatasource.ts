@@ -1,9 +1,9 @@
 import { JSDOM } from "jsdom"
-import { HtmlRR0SsgContext, RR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context, RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { ObjectUtil, UrlUtil } from "../../../util/index.js"
 import { UrecatCase, UrecatWitness } from "./UrecatCase.js"
-import { TimeTextBuilder } from "../../TimeTextBuilder.js"
+import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
 import { MessageUtils } from "../../../lang/index.js"
 import { UrecatDatasource } from "./UrecatDatasource.js"
 
@@ -36,7 +36,7 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     super(["Gross, Patrick"], "URECAT")
   }
 
-  queryUrl(context: RR0SsgContext): URL {
+  queryUrl(context: RR0Context): URL {
     const time = context.time
     const day = time.getDayOfMonth()
     const month = time.getMonth()
@@ -84,7 +84,7 @@ export class UrecatHttpDatasource extends UrecatDatasource {
   }
 
 
-  protected async readCases(context: HtmlRR0SsgContext): Promise<UrecatCase[]> {
+  protected async readCases(context: HtmlRR0Context): Promise<UrecatCase[]> {
     const searchUrl = this.queryUrl(context)
     const page = await this.http.fetch<string>(searchUrl, {headers: {accept: "text/html;charset=iso-8859-1"}})
     const doc = new JSDOM(page).window.document.documentElement
@@ -104,7 +104,7 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     return {placeName, country, departmentOrState}
   }
 
-  protected getDate(context: RR0SsgContext, caseLink: URL, row: Element): RR0SsgContext {
+  protected getDate(context: RR0Context, caseLink: URL, row: Element): RR0Context {
     const timeStr = caseLink.pathname.substring(this.searchPath.length + 2)
     const dateFields = UrecatHttpDatasource.urlDateFormat.exec(timeStr)
     const itemContext = context.clone()
@@ -126,7 +126,7 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     return new URL(UrlUtil.join(this.searchPath, caseLink.href), this.baseUrl)
   }
 
-  protected getFromRow(context: RR0SsgContext, row: Element): UrecatCase {
+  protected getFromRow(context: RR0Context, row: Element): UrecatCase {
     const columns = row.querySelectorAll("td")
     const url = this.getLink(columns[1])
     const caseContext = this.getDate(context, url, row)

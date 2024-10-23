@@ -1,6 +1,6 @@
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import { AbstractDatasource } from "../AbstractDatasource.js"
-import { HtmlRR0SsgContext, RR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context, RR0Context } from "../../../RR0Context.js"
 import { ContextFilter } from "../ContextFilter.js"
 import { TimeContext } from "../../TimeContext.js"
 
@@ -13,7 +13,7 @@ export type FondMapping = {
 
 export class SceauContextFilter extends ContextFilter<SceauCaseSummary> {
 
-  constructor(context: RR0SsgContext) {
+  constructor(context: RR0Context) {
     super(context)
   }
 
@@ -158,9 +158,9 @@ export abstract class SceauDatasource extends AbstractDatasource<SceauCaseSummar
     super(authors, copyright)
   }
 
-  protected createFilter(context: HtmlRR0SsgContext) {
+  protected createFilter(context: HtmlRR0Context) {
     return new SceauContextFilter(context)
   }
 
-  protected abstract readCases(context: RR0SsgContext): Promise<SceauCaseSummary[]>
+  protected abstract readCases(context: RR0Context): Promise<SceauCaseSummary[]>
 }

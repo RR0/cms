@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { france_fr } from "../eu/fr/France_fr.js"
 import { rr0TestUtil } from "../../test/index.js"
-import { RR0SsgContext } from "../../RR0SsgContext.js"
+import { RR0Context } from "../../RR0Context.js"
 import { france_en } from "../eu/fr/France_en.js"
 import { usa_fr } from "../us/Usa_fr.js"
 import { usa_en } from "../us/Usa_en.js"
@@ -10,7 +10,7 @@ import { usa } from "../us/Usa.js"
 
 describe("CountryMessages", () => {
 
-  let context: RR0SsgContext
+  let context: RR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.newContext("time/1/9/7/0/03/index.html")

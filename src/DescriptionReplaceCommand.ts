@@ -1,14 +1,14 @@
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace/ReplaceCommand.js"
 
 /**
  * Adds an "abstract" HTML paragraph from a <meta name="description">, if any.
  */
-export class DescriptionReplaceCommand implements ReplaceCommand<HtmlRR0SsgContext> {
+export class DescriptionReplaceCommand implements ReplaceCommand<HtmlRR0Context> {
   constructor(protected readonly defaultDescription: string, protected readonly abstractClass = "abstract") {
   }
 
-  async execute(context: HtmlRR0SsgContext): Promise<void> {
+  async execute(context: HtmlRR0Context): Promise<void> {
     const file = context.file
     const inDescription = file.meta.description
     const outDoc = file.document

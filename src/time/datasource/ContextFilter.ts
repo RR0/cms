@@ -1,12 +1,12 @@
 import { UfoCaseFilter } from "./UfoCaseFilter.js"
-import { RR0SsgContext } from "../../RR0SsgContext.js"
+import { RR0Context } from "../../RR0Context.js"
 
 export abstract class ContextFilter<T> implements UfoCaseFilter<T> {
   /**
    * @param context The context to match
    * @protected
    */
-  protected constructor(protected context: RR0SsgContext) {
+  protected constructor(protected context: RR0Context) {
   }
 
   /**

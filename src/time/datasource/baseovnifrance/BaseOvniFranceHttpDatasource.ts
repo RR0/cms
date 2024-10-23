@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
@@ -37,7 +37,7 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
     super()
   }
 
-  queryUrl(context: RR0SsgContext): { formData: FormData; queryUrl: URL } {
+  queryUrl(context: RR0Context): { formData: FormData; queryUrl: URL } {
     const time = context.time
     const day = time.getDayOfMonth()
     const month = time.getMonth()
@@ -50,7 +50,7 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
     return {formData, queryUrl}
   }
 
-  protected async readCases(context: RR0SsgContext): Promise<BaseOvniFranceCaseSummary[]> {
+  protected async readCases(context: RR0Context): Promise<BaseOvniFranceCaseSummary[]> {
     const {formData, queryUrl} = this.queryUrl(context)
     const page = await this.http.submitForm<string>(queryUrl, formData, {accept: "text/html;charset=iso-8859-1"})
     const doc = new JSDOM(page).window.document.documentElement
@@ -68,7 +68,7 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
     return field.textContent === "Oui"
   }
 
-  protected getDate(context: RR0SsgContext, dateField: HTMLTableCellElement): TimeContext {
+  protected getDate(context: RR0Context, dateField: HTMLTableCellElement): TimeContext {
     const dateFormat = /(\d\d)-(\d\d)-(\d\d\d\d)/
     const dateFields = dateFormat.exec(dateField.textContent)
     const itemContext = context.clone()
@@ -90,7 +90,7 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
     dateTime.setTimeZone("GMT+1")
   }
 
-  protected getFromRow(context: RR0SsgContext, row: Element): BaseOvniFranceCaseSummary {
+  protected getFromRow(context: RR0Context, row: Element): BaseOvniFranceCaseSummary {
     const columns = row.querySelectorAll("td")
     const caseLink = columns[0].firstElementChild as HTMLAnchorElement
     const url = new URL(caseLink.href, this.baseUrl)

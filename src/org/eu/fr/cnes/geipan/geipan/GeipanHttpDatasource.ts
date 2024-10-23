@@ -7,7 +7,7 @@ import {
 } from "./GeipanCaseClassification"
 import { GeipanDatasource } from "./GeipanDatasource.js"
 import { HttpSource, TimeContext } from "../../../../../../time/index.js"
-import { RR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { RR0Context } from "../../../../../../RR0Context.js"
 import { ObjectUtil, UrlUtil } from "../../../../../../util/index.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
@@ -51,7 +51,7 @@ export class GeipanHttpDatasource extends GeipanDatasource {
     super()
   }
 
-  protected async readCases(context: RR0SsgContext): Promise<GeipanCaseSummary[]> {
+  protected async readCases(context: RR0Context): Promise<GeipanCaseSummary[]> {
     const time = context.time
     const day = time.getDayOfMonth()
     const dayStartStr = day ? String(day).padStart(2, "0") : "01"
@@ -86,7 +86,7 @@ export class GeipanHttpDatasource extends GeipanDatasource {
     return result
   }
 
-  protected getFromRow(context: RR0SsgContext, row: Element): GeipanCaseSummary {
+  protected getFromRow(context: RR0Context, row: Element): GeipanCaseSummary {
     const linkField = row.querySelector(".fiche-download-icon")
     const caseLink = linkField.firstElementChild as HTMLAnchorElement
     const url = new URL(caseLink.href, this.baseUrl)
@@ -133,7 +133,7 @@ export class GeipanHttpDatasource extends GeipanDatasource {
     }
   }
 
-  protected getTime(context: RR0SsgContext, fields: RegExpExecArray, index: number): TimeContext {
+  protected getTime(context: RR0Context, fields: RegExpExecArray, index: number): TimeContext {
     const itemContext = context.clone()
     const dateTime = itemContext.time
     dateTime.setYear(parseInt(fields[index], 10))

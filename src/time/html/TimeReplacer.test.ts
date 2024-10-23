@@ -1,9 +1,9 @@
 import { TimeReplacer } from "./TimeReplacer.js"
-import { rr0TestUtil } from "../test/index.js"
+import { rr0TestUtil } from "../../test"
 import { describe, expect, test } from "@javarome/testscript"
 import { TimeRenderer } from "./TimeRenderer.js"
 import { TimeElementFactory } from "./TimeElementFactory.js"
-import { TimeTextBuilder } from "./TimeTextBuilder.js"
+import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import path from "path"
 
 describe("TimeReplacer", async () => {
@@ -173,19 +173,21 @@ describe("TimeReplacer", async () => {
     expect(replacement.outerHTML).toBe(`<span class="time-resolved">en <a href="${rr0TestUtil.time.url(
       "2/0/0/5/")}"><time datetime="2005">2005</time></a></span>`)
     const original = context.file.document.createElement("time")
-    original.textContent = "2006"
+    const datetime = "2006"
+    original.textContent = datetime
     const replacement2 = await replacer.replacement(context, original)
     expect(replacement2.outerHTML).toBe(`<span class="time-resolved">en <a href="${rr0TestUtil.time.url(
-      "2/0/0/6/")}"><time datetime="2006" title="2006">l'année suivante</time></a></span>`)
+      "2/0/0/6/")}"><time datetime="${datetime}" title="2006">l'année suivante</time></a></span>`)
   })
 
   test("avoids linking to current file", async () => {
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     const timeEl = context.file.document.createElement("time")
-    timeEl.textContent = "1954-10-01"
+    const datetime = "1954-10-01"
+    timeEl.textContent = datetime
     const replacement = await replacer.replacement(context, timeEl)
     expect(replacement.outerHTML)
-      .toBe(`<span class="time-resolved">le <time datetime="1954-10-01">vendredi 1 octobre 1954</time></span>`)
+      .toBe(`<span class="time-resolved">le <time datetime="${datetime}">vendredi 1 octobre 1954</time></span>`)
   })
 
   describe("parse duration", () => {

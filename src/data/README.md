@@ -28,6 +28,9 @@ classDiagram
     class People {
     }
     RR0Data <|-- People
+    class Organization {
+    }
+    RR0Data <|-- Organization
     class Place {
     }
     RR0Data <|-- Place

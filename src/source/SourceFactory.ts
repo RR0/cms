@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { Publication, Source } from "./Source.js"
 import path from "path"
 import { TimeContext } from "../time/TimeContext.js"
@@ -22,7 +22,7 @@ export class SourceFactory {
    * @param context
    * @param href The anchor's URL string.
    */
-  async create(context: HtmlRR0SsgContext, href: string): Promise<Source> {
+  async create(context: HtmlRR0Context, href: string): Promise<Source> {
     return href.startsWith("http") ? await this.createExternal(context, href) : await this.createInternal(context, href)
   }
 
@@ -32,7 +32,7 @@ export class SourceFactory {
    * @param context
    * @param href
    */
-  async createInternal(context: HtmlRR0SsgContext, href: string): Promise<Source> {
+  async createInternal(context: HtmlRR0Context, href: string): Promise<Source> {
     if (path.dirname(href).startsWith("/")) {
       href = href.substring(1)
     }
@@ -84,7 +84,7 @@ export class SourceFactory {
    * @param context
    * @param href
    */
-  async createExternal(context: HtmlRR0SsgContext, href: string): Promise<Source> {
+  async createExternal(context: HtmlRR0Context, href: string): Promise<Source> {
     const resOut: Partial<Response> = {}
     let title: string
     let lastModif: string

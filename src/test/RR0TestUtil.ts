@@ -1,5 +1,5 @@
 import path from "path"
-import { HtmlRR0SsgContext, RR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext.js"
+import { HtmlRR0Context, RR0Context, RR0ContextImpl } from "../RR0Context.js"
 import { TimeContext } from "../time/index.js"
 import { FileContents, HtmlFileContents, SsgConfig, SsgContext } from "ssg-api"
 import { RR0EventFactory } from "../event/index.js"
@@ -51,8 +51,8 @@ export class RR0TestUtil {
     this.time = new TimeTestUtil(this)
   }
 
-  newContext(inputFileName: string, contents?: string): RR0SsgContext {
-    const context = new RR0SsgContextImpl("fr", new TimeContext(), this.config)
+  newContext(inputFileName: string, contents?: string): RR0Context {
+    const context = new RR0ContextImpl("fr", new TimeContext(), this.config)
     if (contents !== undefined && contents != null) {
       const langInfo = FileContents.getLang(inputFileName)
       context.file = new FileContents(inputFileName, "utf8", contents, new Date(), langInfo)
@@ -67,14 +67,14 @@ export class RR0TestUtil {
     return path.join(this.rootDir, inputFileName)
   }
 
-  newHtmlContext(inputFileName: string, contents?: string): HtmlRR0SsgContext {
+  newHtmlContext(inputFileName: string, contents?: string): HtmlRR0Context {
     const context = this.newContext(this.filePath(inputFileName), contents)
     const titleExec = /<title>(.*)<\/title>/.exec(contents)
     const title = titleExec && titleExec.length > 0 ? titleExec[1].trim() : undefined
     const currentFile = context.file
     context.file = new HtmlFileContents(currentFile.name, currentFile.encoding, currentFile.contents,
       currentFile.lastModified, currentFile.lang, {author: []}, {}, title)
-    const htmlContext = context as HtmlRR0SsgContext
+    const htmlContext = context as HtmlRR0Context
     Object.assign(htmlContext.time, TimeContext.fromFileName(htmlContext, inputFileName))
     return htmlContext
   }

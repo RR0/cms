@@ -1,5 +1,5 @@
 import { RegexReplacer, SsiEchoVarReplaceCommand } from "ssg-api"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { TimeService } from "../../time/TimeService.js"
 
 /**
@@ -12,7 +12,7 @@ export class AuthorReplaceCommand extends SsiEchoVarReplaceCommand {
     super("author")
   }
 
-  protected async createReplacer(context: HtmlRR0SsgContext): Promise<RegexReplacer> {
+  protected async createReplacer(context: HtmlRR0Context): Promise<RegexReplacer> {
     return {
       replace: (_match: string, ..._args: any[]): string => {
         const file = context.file

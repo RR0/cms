@@ -1,5 +1,5 @@
 import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace/ReplaceCommand.js"
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 import { Canvas, CanvasRenderingContext2D, createCanvas, loadImage } from "canvas"
 import fs from "fs"
 import path from "path"
@@ -10,7 +10,7 @@ import assert from "assert"
 /**
  * Create a preview image for each page sharing.
  */
-export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
+export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
 
   protected num = 0
 
@@ -21,7 +21,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
   ) {
   }
 
-  async execute(context: HtmlRR0SsgContext): Promise<void> {
+  async execute(context: HtmlRR0Context): Promise<void> {
     const title = context.file.title
     if (!title) { // Nothing to write in preview?
       return
@@ -52,7 +52,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
     context.file.contents = outDoc.documentElement.outerHTML
   }
 
-  getInfoStr(context: HtmlRR0SsgContext) {
+  getInfoStr(context: HtmlRR0Context) {
     const authors = context.file.meta.author
     const authorsStr = authors && authors.length > 0 ? authors.join(" & ") : ""
 
@@ -68,7 +68,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
         context.time.setDayOfMonth(timeContext.getDayOfMonth())
         context.time.setHour(undefined)
         context.time.setMinutes(undefined)
-        timeStr = this.timeTextBuilder.build(context)
+        timeStr = this.timeTextBuilder.build(context, true)
       }
     }
 
@@ -167,7 +167,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
    * @param dy
    * @protected
    */
-  protected async drawImage(context: HtmlRR0SsgContext, canvasCtx: CanvasRenderingContext2D, dy = 0) {
+  protected async drawImage(context: HtmlRR0Context, canvasCtx: CanvasRenderingContext2D, dy = 0) {
     const outDoc = context.file.document
     const docImages = outDoc.documentElement.getElementsByTagName("img")
     let widthRatio = 0.5
@@ -197,7 +197,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0SsgContext> {
     return widthRatio
   }
 
-  protected writeImageFile(context: HtmlRR0SsgContext, canvas: Canvas) {
+  protected writeImageFile(context: HtmlRR0Context, canvas: Canvas) {
     const buffer = canvas.toBuffer("image/png")
     const outputName = context.file.name
     const imageName = "og.png"

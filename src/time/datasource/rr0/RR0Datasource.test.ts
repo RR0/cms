@@ -1,6 +1,6 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { rr0TestCases } from "./RR0TestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { rr0FileDatasource, rr0Mapper } from "./RR0Mapping.js"
@@ -12,7 +12,7 @@ import { RR0CaseMapping } from "./RR0CaseMapping.js"
 import { RR0Datasource } from "./RR0Datasource.js"
 import { Datasource } from "../Datasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { TimeTextBuilder } from "../../TimeTextBuilder.js"
+import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 
@@ -22,7 +22,7 @@ export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0Ca
     super()
   }
 
-  protected async readCases(_context: HtmlRR0SsgContext): Promise<RR0CaseSummary[]> {
+  protected async readCases(_context: HtmlRR0Context): Promise<RR0CaseSummary[]> {
     return rr0TestCases
   }
 }
@@ -56,7 +56,7 @@ describe("RR0CaseSource", () => {
     /**
      * Specialization of sources for RR0 cases
      */
-    protected expectedSourceStr(context: HtmlRR0SsgContext, expectedSources: Source[], _nativeCase: RR0CaseSummary) {
+    protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], _nativeCase: RR0CaseSummary) {
       return expectedSources.map(source => {
         const sourceItems: string[] = []
         let authorStr = source.authors.map(author => `<span class="people">${author}</span>`).join(" &amp; ")
@@ -74,7 +74,7 @@ describe("RR0CaseSource", () => {
           if (publication.time) {
             const sourceContext = context.clone()
             sourceContext.time = source.publication.time
-            const timeStr = this.timeTextBuilder.build(sourceContext)
+            const timeStr = this.timeTextBuilder.build(sourceContext, true)
             sourceItems.push(timeStr)
           }
         }
@@ -87,7 +87,7 @@ describe("RR0CaseSource", () => {
     }
   }(new RR0TestMapping({read: ["fetch"], write: []}), rr0TestCases)
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")

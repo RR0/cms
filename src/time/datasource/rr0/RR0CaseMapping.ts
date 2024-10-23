@@ -1,5 +1,5 @@
 import { CaseMapping } from "../CaseMapping.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 
 /**
@@ -7,5 +7,5 @@ import { RR0CaseSummary } from "./RR0CaseSummary.js"
  *
  * @param S The source case type.
  */
-export interface RR0CaseMapping<S> extends CaseMapping<HtmlRR0SsgContext, S, RR0CaseSummary> {
+export interface RR0CaseMapping<S> extends CaseMapping<HtmlRR0Context, S, RR0CaseSummary> {
 }

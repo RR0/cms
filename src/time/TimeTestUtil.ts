@@ -1,7 +1,7 @@
 import path from "path"
 import { TimeElementFactory, TimeService, TimeServiceOptions, TimeTextBuilder, TimeUrlBuilder } from "../time/index.js"
 import { RR0TestUtil, rr0TestUtil } from "../test"
-import { HtmlRR0SsgContext } from "../RR0SsgContext"
+import { HtmlRR0Context } from "../RR0Context"
 
 export class TimeTestUtil {
 
@@ -17,7 +17,7 @@ export class TimeTestUtil {
     this.fullRoot = path.join(rr0TestUtil.rootDir, this.timeOptions.root)
   }
 
-  newHtmlContext(inputFileName: string, contents?: string): HtmlRR0SsgContext {
+  newHtmlContext(inputFileName: string, contents?: string): HtmlRR0Context {
     return rr0TestUtil.newHtmlContext(this.filePath(inputFileName), contents)
   }
 

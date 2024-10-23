@@ -1,15 +1,15 @@
 import { PeopleService } from "./PeopleService.js"
 import { DomReplacement } from "../time/DomReplacement.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { Occupation } from "./Occupation.js"
 import { CountryCode } from "../org/country/CountryCode.js"
 
-export class PeopleReplacer implements DomReplacement<HtmlRR0SsgContext> {
+export class PeopleReplacer implements DomReplacement<HtmlRR0Context> {
 
   constructor(protected service: PeopleService) {
   }
 
-  async replacement(context: HtmlRR0SsgContext, element: HTMLElement): Promise<HTMLElement> {
+  async replacement(context: HtmlRR0Context, element: HTMLElement): Promise<HTMLElement> {
     const title = element.title
     const peopleContent = element.textContent
     let peopleStr = peopleContent

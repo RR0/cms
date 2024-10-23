@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
-import { RR0SsgContext } from "../../RR0SsgContext.js"
+import { RR0Context } from "../../RR0Context.js"
 import { CsvMapper } from "./CsvMapper.js"
 import { rr0TestUtil } from "../../test/index.js"
 import path from "path"
@@ -15,7 +15,7 @@ describe("CsvMapper", () => {
 
   const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
 
-  let context: RR0SsgContext
+  let context: RR0Context
   let mapper: CsvMapper<GeipanCaseSummary>
 
   beforeEach(() => {

@@ -1,18 +1,18 @@
 import { CaseMapper } from "../CaseMapper.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { TimeContext } from "../../TimeContext.js"
 import { BaseOvniFranceCase } from "./BaseOvniFranceCase.js"
 
 /**
  * Maps a Base OVNI France CSV case to a Base OVNI France case.
  */
-export class BaseOvniFranceCaseSummaryMapper implements CaseMapper<RR0SsgContext, BaseOvniFranceCase, BaseOvniFranceCaseSummary> {
+export class BaseOvniFranceCaseSummaryMapper implements CaseMapper<RR0Context, BaseOvniFranceCase, BaseOvniFranceCaseSummary> {
 
   constructor(readonly baseUrl: URL, readonly copyright: string, readonly authors: string[]) {
   }
 
-  map(context: RR0SsgContext, csvCase: BaseOvniFranceCase, sourceTime: Date): BaseOvniFranceCaseSummary {
+  map(context: RR0Context, csvCase: BaseOvniFranceCase, sourceTime: Date): BaseOvniFranceCaseSummary {
     const caseNumber = csvCase["Num cas"]
     const dateFields = csvCase["Date"].split("-")
     const timeFields = csvCase["Heure"].split(":")

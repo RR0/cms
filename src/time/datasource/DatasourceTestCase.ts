@@ -1,41 +1,42 @@
 import { expect } from "@javarome/testscript"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { TimeContext } from "../TimeContext.js"
-import { TimeTextBuilder } from "../TimeTextBuilder.js"
+import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { Source, SourceFactory, SourceRenderer } from "../../source/index.js"
 import { RR0CaseMapping } from "./rr0/index.js"
 import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
 import { AllDataService } from "../../data/index.js"
 import { HttpSource } from "./HttpSource.js"
-import { TimeElementFactory } from "../TimeElementFactory.js"
-import { TimeRenderer } from "../TimeRenderer.js"
+import { TimeElementFactory } from "../html/TimeElementFactory.js"
+import { TimeRenderer } from "../html/TimeRenderer.js"
 import { rr0TestUtil } from "../../test"
-import { TimeUrlBuilder } from "../TimeUrlBuilder"
 
 export abstract class DatasourceTestCase<S> {
 
-  protected readonly intlOptions: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZoneName: "short"
-  }
-
   timeTextBuilder = new TimeTextBuilder(this.intlOptions)
 
-  protected constructor(readonly mapping: RR0CaseMapping<S>, readonly sourceCases: S[]) {
+  protected constructor(
+    readonly mapping: RR0CaseMapping<S>,
+    readonly sourceCases: S[],
+    protected readonly intlOptions: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short"
+    }
+  ) {
   }
 
-  checkCaseHTML(context: HtmlRR0SsgContext, nativeCase: S, item: HTMLLIElement, dataDate: Date) {
+  checkCaseHTML(context: HtmlRR0Context, nativeCase: S, item: HTMLLIElement, dataDate: Date) {
     const expected = this.mapping.mapper.map(context, nativeCase, dataDate)
     const time = this.getTime(nativeCase)
     const caseContext = context.clone()
     Object.assign(caseContext, {time})
-    const timeStr = this.timeTextBuilder.build(caseContext)
+    const timeStr = this.timeTextBuilder.build(caseContext, true)
     const placeStr = expected.place ? ` À <span class="place">${expected.place.name}</span>` : ""
     const expectedSources = expected.sources
     const sourceStr = expectedSources?.length > 0 ? this.expectedSourceStr(context, expectedSources, nativeCase) : ""
@@ -43,7 +44,7 @@ export abstract class DatasourceTestCase<S> {
       `<time datetime="${time.toString()}">${timeStr}</time>${placeStr}, ${expected.description}${sourceStr}.`)
   }
 
-  async testRender(context: HtmlRR0SsgContext) {
+  async testRender(context: HtmlRR0Context) {
     const sourceCases = await this.mapping.datasource.fetch(context)
     const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
     const cases = sourceCases.map(sourceCase => this.mapping.mapper.map(context, sourceCase, dataDate))
@@ -52,7 +53,6 @@ export abstract class DatasourceTestCase<S> {
     const http = new HttpSource()
     const sourceFactory = new SourceFactory(dataService, http, baseUrl, this.intlOptions)
     const timeService = await rr0TestUtil.time.getService()
-    const timeUrlBuilder = new TimeUrlBuilder({rootDir: "src/time"})
     const timeElementFactory = new TimeElementFactory(new TimeRenderer(timeService, this.timeTextBuilder))
     const eventRenderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
       new SourceRenderer(this.timeTextBuilder), timeElementFactory)
@@ -69,7 +69,7 @@ export abstract class DatasourceTestCase<S> {
     }
   }
 
-  async testFetch(context: HtmlRR0SsgContext) {
+  async testFetch(context: HtmlRR0Context) {
     const fetched = await this.mapping.datasource.fetch(context)
     const fetchSlice = fetched.slice(0, this.sourceCases.length)
     const sortedFetch = fetchSlice.sort(this.sortComparator)
@@ -81,12 +81,12 @@ export abstract class DatasourceTestCase<S> {
 
   protected abstract getTime(c: S): TimeContext
 
-  protected expectedSourceStr(context: HtmlRR0SsgContext, expectedSources: Source[], nativeCase: S) {
+  protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], nativeCase: S) {
     const datasource = this.mapping.datasource
     const source = expectedSources[0]
     const sourceContext = context.clone()
     sourceContext.time = source.publication.time
-    const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext)}` : ""
+    const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext, true)}` : ""
     const indexStr = source.index ? `, ${source.index}` : ""
     const authorStr = datasource.authors.map(authorStr => `<span class="people">${authorStr}</span>`).join(" &amp; ")
     const title = `cas n° ${nativeCase["id"]}`

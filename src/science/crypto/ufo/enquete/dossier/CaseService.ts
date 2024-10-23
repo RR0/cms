@@ -1,7 +1,7 @@
 import path from "path"
 import { AbstractDataService, AllDataService } from "../../../../../data/index.js"
 import { RR0Case } from "./RR0Case.js"
-import { HtmlRR0SsgContext } from "../../../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../../../RR0Context.js"
 import { TimeElementFactory } from "../../../../../time/index.js"
 import { CaseFactory } from "./CaseFactory.js"
 
@@ -12,7 +12,7 @@ export class CaseService extends AbstractDataService<RR0Case> {
     super(dataService, factory, files)
   }
 
-  getLink(context: HtmlRR0SsgContext, aCase: RR0Case): HTMLElement {
+  getLink(context: HtmlRR0Context, aCase: RR0Case): HTMLElement {
     const details: string[] = []
     const classList = ["data-resolved"]
     const classification = aCase.classification

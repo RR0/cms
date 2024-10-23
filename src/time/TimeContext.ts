@@ -1,6 +1,5 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { Time } from "./Time.js"
-import { TimeParseResult } from "./TimeReplacer.js"
 import {
   Level2Date as EdtfDate,
   Level2Duration as EdtfDuration,
@@ -82,23 +81,6 @@ export class TimeContext {
     return this.approximate || this.date?.hour?.approximate || this.date?.minute?.approximate || this.date?.second?.approximate
   }
 
-  static parseDateTime(timeStr: string): TimeParseResult {
-    try {
-      const date = EdtfDate.fromString(timeStr)
-      return {
-        approximate: date?.approximate,
-        yearStr: date.year?.toString(),
-        monthStr: date.month?.toString(),
-        dayOfMonthStr: date.day?.toString(),
-        hour: date.hour?.toString(),
-        minutes: date.minutes?.toString(),
-        timeZone: date.timeZone?.toString()
-      }
-    } catch (e) {
-      return undefined
-    }
-  }
-
   static fromString(timeStr: string): TimeContext {
     const timeContext = new TimeContext()
     timeContext.updateFromStr(timeStr)
@@ -110,7 +92,7 @@ export class TimeContext {
       "UTC" + (date.getTimezoneOffset() < 0 ? "-" : "+") + date.getTimezoneOffset())
   }
 
-  static fromFileName(context: HtmlRR0SsgContext, fileName = context.file.name): TimeContext | undefined {
+  static fromFileName(context: HtmlRR0Context, fileName = context.file.name): TimeContext | undefined {
     let timeContext: TimeContext | undefined
     let elems
     if (fileName.endsWith("index.html")) {
@@ -139,7 +121,7 @@ export class TimeContext {
   }
 
   /**
-   * @param {string} timeStr
+   * @param timeStr
    * @return If the string could be parsed
    */
   updateFromStr(timeStr: string) {

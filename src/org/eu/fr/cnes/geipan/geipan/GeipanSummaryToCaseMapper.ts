@@ -1,17 +1,17 @@
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { GeipanCase } from "./GeipanCase.js"
 import { CaseMapper } from "../../../../../../time/index.js"
-import { RR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { RR0Context } from "../../../../../../RR0Context.js"
 
 /**
  * Maps a GEIPAN CSV case to a GEIPAN summary case.
  */
-export class GeipanSummaryToCaseMapper implements CaseMapper<RR0SsgContext, GeipanCaseSummary, GeipanCase> {
+export class GeipanSummaryToCaseMapper implements CaseMapper<RR0Context, GeipanCaseSummary, GeipanCase> {
 
   constructor(readonly baseUrl: URL, readonly copyright: string, readonly authors: string[]) {
   }
 
-  map(context: RR0SsgContext, csvCase: GeipanCaseSummary, sourceTime: Date): GeipanCase {
+  map(context: RR0Context, csvCase: GeipanCaseSummary, sourceTime: Date): GeipanCase {
     const caseNumber = csvCase.id
     const sightingYear = csvCase.time.getYear().toString()
     const sightingMonth = csvCase.time.getMonth()?.toString() ?? "--"

@@ -2,13 +2,13 @@ import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import assert from "assert"
 import { GeipanCaseClassification } from "./GeipanCaseClassification.js"
 import { CaseMapper, NamedPlace, RR0CaseSummary, TimeContext } from "../../../../../../time/index.js"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { CityService } from "../../../../../country/index.js"
 import { Source } from "../../../../../../source/index.js"
 import { Organization } from "../../../../../Organization.js"
 import { france } from "../../../France.js"
 
-export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, GeipanCaseSummary, RR0CaseSummary> {
+export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, GeipanCaseSummary, RR0CaseSummary> {
 
   constructor(protected cityService: CityService, readonly baseUrl: URL, readonly copyright: string,
               readonly authors: string[]) {
@@ -38,7 +38,7 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext,
     return description.join(" ")
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: GeipanCaseSummary, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: GeipanCaseSummary, sourceTime: Date): RR0CaseSummary {
     const id = sourceCase.id
     const caseSource: Source = {
       previousSourceRefs: [],
@@ -57,7 +57,7 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext,
     }
   }
 
-  protected getPlace(context: HtmlRR0SsgContext, sourceCase: GeipanCaseSummary): NamedPlace {
+  protected getPlace(context: HtmlRR0Context, sourceCase: GeipanCaseSummary): NamedPlace {
     const depCode = sourceCase.zoneCode
     assert.ok(depCode, `Should at least have one of department,region or country code`)
     const placeItems = /(.+?)(:?\s+\(([A-Z]+)\))?(:?\s+\((\d+)\))?$/.exec(sourceCase.city)

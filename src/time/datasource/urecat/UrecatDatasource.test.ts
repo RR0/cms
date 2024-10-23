@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UrecatCase } from "./UrecatCase.js"
 import { urecatRR0Mapping } from "./UrecatRR0Mapping.js"
 import { urecatTestCases } from "./UrecatTestCases.js"
@@ -25,7 +25,7 @@ describe("UrecatCaseSource", () => {
     }
   }(urecatRR0Mapping, urecatTestCases)
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/7/03/index.html")

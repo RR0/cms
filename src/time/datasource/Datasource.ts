@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 
 /**
  * A source for cases.
@@ -22,5 +22,5 @@ export interface Datasource<S> {
    * @param context
    * @return Promise<S[]>
    */
-  fetch(context: HtmlRR0SsgContext): Promise<S[]>
+  fetch(context: HtmlRR0Context): Promise<S[]>
 }

@@ -1,5 +1,5 @@
 import { People } from "./People.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import path from "path"
 import { AbstractDataFactory, AbstractDataService, AllDataService } from "../data/index.js"
 import { CountryCode } from "../org/index.js"
@@ -74,7 +74,7 @@ export class PeopleService extends AbstractDataService<People> {
     return peopleList
   }
 
-  getLink(context: HtmlRR0SsgContext,
+  getLink(context: HtmlRR0Context,
           people: People, pseudoPeopleList: People[], allCountries: Set<CountryCode>,
           occupations: Set<Occupation>, filterOccupations: Occupation[] = [], content?: string): HTMLElement {
     const dirName = people.dirName

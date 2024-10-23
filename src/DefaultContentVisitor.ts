@@ -1,7 +1,7 @@
 import { AllDataService } from "./data/AllDataService.js"
-import { TimeElementFactory } from "./time/TimeElementFactory.js"
+import { TimeElementFactory } from "./time/html/TimeElementFactory.js"
 import { ContentVisitor } from "./RR0ContentStep.js"
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 import path from "path"
 import { RR0Data } from "./data/RR0Data.js"
 import { EventRenderer } from "./time/EventRenderer.js"
@@ -15,7 +15,7 @@ export class DefaultContentVisitor implements ContentVisitor {
               protected timeElementFactory: TimeElementFactory) {
   }
 
-  async visit(context: HtmlRR0SsgContext) {
+  async visit(context: HtmlRR0Context) {
     const dirName = path.dirname(context.file.name)
     const dataList = await this.service.getFromDir(dirName,
       ["people", "case", "sighting", "api", "product", "org"],
@@ -32,7 +32,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     }
   }
 
-  protected async process(context: HtmlRR0SsgContext, data: RR0Data) {
+  protected async process(context: HtmlRR0Context, data: RR0Data) {
     this.processTitle(context, data)
     this.processURL(context, data)
     const events = data.events.sort(
@@ -61,7 +61,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     context.file.contents = context.file.serialize()
   }
 
-  protected timeParagraph(context: HtmlRR0SsgContext, event: RR0Data) {
+  protected timeParagraph(context: HtmlRR0Context, event: RR0Data) {
     const container = context.file.document.createElement("p")
     const eventContext = context.clone()
     const eventTime = eventContext.time = event.time
@@ -71,7 +71,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     return {eventP: container, timeEl}
   }
 
-  protected async processImage(context: HtmlRR0SsgContext, imageData: RR0Data) {
+  protected async processImage(context: HtmlRR0Context, imageData: RR0Data) {
     const doc = context.file.document
     const contents = doc.querySelector(".contents")
     if (contents) {
@@ -98,7 +98,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     }
   }
 
-  protected async processBirth(context: HtmlRR0SsgContext, event: RR0Data, entity: RR0Data) {
+  protected async processBirth(context: HtmlRR0Context, event: RR0Data, entity: RR0Data) {
     const parentEl = context.file.document.querySelector(".contents")
     if (parentEl) {
       const {eventP, timeEl} = this.timeParagraph(context, event)
@@ -119,7 +119,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     }
   }
 
-  protected async processDeath(context: HtmlRR0SsgContext, event: RR0Event, entity: RR0Data) {
+  protected async processDeath(context: HtmlRR0Context, event: RR0Event, entity: RR0Data) {
     const {eventP, timeEl} = this.timeParagraph(context, event)
     const name = entity.name
     eventP.append(name)
@@ -138,7 +138,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     }
   }
 
-  protected async processBook(context: HtmlRR0SsgContext, bookData: RR0Data) {
+  protected async processBook(context: HtmlRR0Context, bookData: RR0Data) {
     const doc = context.file.document
     const parentEl = doc.querySelector(".contents")
     if (parentEl) {
@@ -156,14 +156,14 @@ export class DefaultContentVisitor implements ContentVisitor {
     }
   }
 
-  protected processTitle(context: HtmlRR0SsgContext, data: RR0Data) {
+  protected processTitle(context: HtmlRR0Context, data: RR0Data) {
     const doc = context.file.document
     if (!doc.title) {
       context.file.title = doc.title = data.title
     }
   }
 
-  protected processURL(context: HtmlRR0SsgContext, data: RR0Data) {
+  protected processURL(context: HtmlRR0Context, data: RR0Data) {
     const url = data.url
     if (url && !context.file.meta.url) {
       context.file.meta.url = url as unknown as string

@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { UfoSearchDatasource } from "./UfoSearchDatasource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
@@ -42,7 +42,7 @@ export class UfoSearchHttpDatasource extends UfoSearchDatasource {
     return searchUrl.href
   }
 
-  protected async readCases(context: RR0SsgContext): Promise<UfoSearchCase[]> {
+  protected async readCases(context: RR0Context): Promise<UfoSearchCase[]> {
     const day = context.time.getDayOfMonth()
     const month = context.time.getMonth()
     const year = context.time.getYear()
@@ -80,7 +80,7 @@ export class UfoSearchHttpDatasource extends UfoSearchDatasource {
     time.approximate = approximate
   }
 
-  protected async getFromRow(context: RR0SsgContext, row: Element): Promise<UfoSearchCase> {
+  protected async getFromRow(context: RR0Context, row: Element): Promise<UfoSearchCase> {
     const fieldsHeadings = Array.from(row.querySelectorAll("strong"))
     const dateLabel = fieldsHeadings.find(heading => heading.textContent.indexOf("Date") >= 0)
     const itemContext = context.clone()

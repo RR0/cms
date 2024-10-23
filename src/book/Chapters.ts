@@ -1,15 +1,15 @@
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 import { LinkType } from "ssg-api"
 import path from "path"
 import { glob } from "glob"
 
 export class Chapter {
 
-  readonly context: HtmlRR0SsgContext
+  readonly context: HtmlRR0Context
 
   subs: Chapter[] = []
 
-  constructor(parentContext: HtmlRR0SsgContext, protected startFileName: string) {
+  constructor(parentContext: HtmlRR0Context, protected startFileName: string) {
     this.context = parentContext.clone()
   }
 
@@ -80,7 +80,7 @@ ${this.subs.map(subFile => subFile.toString("  " + prefix)).join("")}`
 const args = new CLI().getArgs();
 const startFileName = args.start;
 
-const context = new RR0SsgContextImpl('fr', new TimeContext({
+const context = new RR0ContextImpl('fr', new TimeContext({
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -98,7 +98,7 @@ for (const variant of variants) {
   startFileNames.push(variantFileName);
 }
 for (const startFileName of startFileNames) {
-  const chapter = new Chapter(context as unknown as HtmlRR0SsgContext, startFileName);
+  const chapter = new Chapter(context as unknown as HtmlRR0Context, startFileName);
   chapter.scan().then(async () => {
     console.log('*** Before:\n', chapter.toString());
     await chapter.update();

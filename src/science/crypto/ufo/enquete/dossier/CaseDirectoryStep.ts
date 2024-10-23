@@ -1,5 +1,5 @@
 import { DirectoryStep, OutputFunc, SsgConfig } from "ssg-api"
-import { HtmlRR0SsgContext, RR0SsgContext } from "../../../../../RR0SsgContext.js"
+import { HtmlRR0Context, RR0Context } from "../../../../../RR0Context.js"
 import { StringUtil } from "../../../../../util/string/StringUtil.js"
 import { RR0Case } from "./RR0Case.js"
 import { CaseService } from "./CaseService.js"
@@ -34,7 +34,7 @@ export class CaseDirectoryStep extends DirectoryStep {
    * @param context
    * @param cases
    */
-  protected toList(context: HtmlRR0SsgContext, cases: RR0Case[]): HTMLUListElement {
+  protected toList(context: HtmlRR0Context, cases: RR0Case[]): HTMLUListElement {
     const listItems = cases.map(dirCase => {
       if (!dirCase.title) {
         const lastSlash = dirCase.dirName.lastIndexOf("/")
@@ -55,14 +55,14 @@ export class CaseDirectoryStep extends DirectoryStep {
    * @param context
    * @param dirCase
    */
-  protected toListItem(context: HtmlRR0SsgContext, dirCase: RR0Case): HTMLLIElement {
+  protected toListItem(context: HtmlRR0Context, dirCase: RR0Case): HTMLLIElement {
     const item = context.file.document.createElement("li")
     const ref = this.caseService.getLink(context, dirCase)
     item.appendChild(ref)
     return item
   }
 
-  protected async processDirs(context: HtmlRR0SsgContext, dirNames: string[]): Promise<void> {
+  protected async processDirs(context: HtmlRR0Context, dirNames: string[]): Promise<void> {
     const cases = await this.scan(context, dirNames)
     const ul = this.toList(context, cases)
     const outputPath = this.config.getOutputPath(context)
@@ -77,7 +77,7 @@ export class CaseDirectoryStep extends DirectoryStep {
    * @param context
    * @param dirNames The directories to look for case.json files.
    */
-  protected async scan(context: RR0SsgContext, dirNames: string[]): Promise<RR0Case[]> {
+  protected async scan(context: RR0Context, dirNames: string[]): Promise<RR0Case[]> {
     const cases: RR0Case[] = []
     for (const dirName of dirNames) {
       try {

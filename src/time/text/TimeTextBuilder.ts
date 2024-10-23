@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../RR0SsgContext.js"
+import { RR0Context } from "../../RR0Context.js"
 
 export class TimeTextBuilder {
 
@@ -12,7 +12,7 @@ export class TimeTextBuilder {
    * @param print
    * @param options
    */
-  build(context: RR0SsgContext, print = true, options = this.options): string {
+  build(context: RR0Context, print: boolean, options = this.options): string {
     const time = context.time
     const printOptions: Intl.DateTimeFormatOptions = {}
     const date = new Date(undefined, undefined, undefined)

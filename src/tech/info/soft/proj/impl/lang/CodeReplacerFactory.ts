@@ -1,6 +1,6 @@
 import { CodeReplacer } from "./CodeReplacer.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { HtmlCodeParser } from "./HtmlCodeParser.js"
 
 export class CodeReplacerFactory implements ReplacerFactory<DomReplacer> {
@@ -12,7 +12,7 @@ export class CodeReplacerFactory implements ReplacerFactory<DomReplacer> {
    *
    * @param context
    */
-  async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  async create(context: HtmlRR0Context): Promise<DomReplacer> {
     return {
       replace: (original: HTMLElement): Promise<HTMLElement> => {
         return this.replacer.replacement(context, original)

@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { RR0Datasource } from "./RR0Datasource.js"
@@ -20,7 +20,7 @@ export class RR0HttpDatasource extends RR0Datasource {
     return dateTime.toString() + (place?.org ? "$" + place.org?.dirName.replaceAll("/", "_") : "")
   }
 
-  getFromRows(context: HtmlRR0SsgContext, rows: Element[]): RR0CaseSummary[] {
+  getFromRows(context: HtmlRR0Context, rows: Element[]): RR0CaseSummary[] {
     const cases: RR0CaseSummary[] = []
     for (const row of rows) {
       if (row.hasChildNodes()) {
@@ -35,7 +35,7 @@ export class RR0HttpDatasource extends RR0Datasource {
     return Array.from(rowEls)
   }
 
-  getFromRow(context: HtmlRR0SsgContext, r: Element): RR0CaseSummary {
+  getFromRow(context: HtmlRR0Context, r: Element): RR0CaseSummary {
     const row = r.cloneNode(true) as Element
     const caseLink = context.file.name
     const url = new URL(caseLink, this.baseUrl)
@@ -64,14 +64,14 @@ export class RR0HttpDatasource extends RR0Datasource {
     return {type: "sighting", events: [], url: url.href, place, time: itemTime, description, sources, id}
   }
 
-  protected async readCases(context: HtmlRR0SsgContext): Promise<RR0CaseSummary[]> {
+  protected async readCases(context: HtmlRR0Context): Promise<RR0CaseSummary[]> {
     const queryUrl = this.queryUrl(context)
     const doc = await this.http.get(queryUrl)
     const rows = this.findRows(doc)
     return this.getFromRows(context, rows)
   }
 
-  protected getSources(row: Element, itemContext: HtmlRR0SsgContext): Source[] {
+  protected getSources(row: Element, itemContext: HtmlRR0Context): Source[] {
     const sources: Source[] = []
     const sourceEls = row.querySelectorAll(".source-id")
     for (const sourceEl of sourceEls) {
@@ -84,38 +84,9 @@ export class RR0HttpDatasource extends RR0Datasource {
       sourceEl.remove()
       const pubItems = title.split(",")
       const timeStr = pubItems[pubItems.length - 1].trim()
-      const parsedTime = TimeContext.parseDateTime(timeStr)
-      let time: TimeContext
       let publisher: string
-      if (parsedTime) {
-        time = new TimeContext()
-        if (parsedTime.yearStr) {
-          const year = parseInt(parsedTime.yearStr, 10)
-          if (!Number.isNaN(year)) {
-            time.setYear(year)
-          }
-        }
-        if (parsedTime.monthStr) {
-          const month = parseInt(parsedTime.monthStr, 10)
-          if (!Number.isNaN(month)) {
-            time.setMonth(month)
-          }
-        }
-        if (parsedTime.dayOfMonthStr) {
-          const dayOfMonth = parseInt(parsedTime.dayOfMonthStr, 10)
-          if (!Number.isNaN(dayOfMonth)) {
-            time.setDayOfMonth(dayOfMonth)
-          }
-        }
-        if (parsedTime.hour) {
-          time.setHour(parseInt(parsedTime.hour, 10))
-        }
-        if (parsedTime.minutes) {
-          time.setMinutes(parseInt(parsedTime.minutes, 10))
-        }
-        if (parsedTime.timeZone) {
-          time.setTimeZone(parsedTime.timeZone)
-        }
+      const time = TimeContext.fromString(timeStr)
+      if (time) {
         pubItems.pop()
       }
       publisher = pubItems.splice(1, pubItems.length - 1).map(item => item.trim()).join(", ").trim()
@@ -127,7 +98,7 @@ export class RR0HttpDatasource extends RR0Datasource {
     return sources
   }
 
-  protected getPlace(context: HtmlRR0SsgContext, placeEl: Element): NamedPlace {
+  protected getPlace(context: HtmlRR0Context, placeEl: Element): NamedPlace {
     const placeStr = placeEl.textContent
     const placeParsed = RR0HttpDatasource.placeRegex.exec(placeStr)
     let name: string
@@ -160,7 +131,7 @@ export class RR0HttpDatasource extends RR0Datasource {
     return el.textContent.trim().replaceAll("\n", "").replace(/\s{2,}/g, " ").replaceAll(" .", ".")
   }
 
-  protected queryUrl(context: HtmlRR0SsgContext): URL {
+  protected queryUrl(context: HtmlRR0Context): URL {
     const time = context.time
     const day = time.getDayOfMonth()
     const month = time.getMonth()

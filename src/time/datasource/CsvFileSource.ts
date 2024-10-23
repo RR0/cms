@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { Datasource } from "./Datasource.js"
 import { CsvMapper } from "./CsvMapper.js"
 import { FileSource } from "./FileSource.js"
@@ -26,7 +26,7 @@ export class CsvFileSource<S> extends FileSource {
     return super.fileName(context, datasource) + ".csv"
   }
 
-  write(context: HtmlRR0SsgContext, datasourceCases: S[], fetchTime: Date, datasource: Datasource<any>) {
+  write(context: HtmlRR0Context, datasourceCases: S[], fetchTime: Date, datasource: Datasource<any>) {
     const csvContents = this.mapper.mapAll(context, datasourceCases, fetchTime)
     return super.writeContents(context, csvContents, datasource)
   }

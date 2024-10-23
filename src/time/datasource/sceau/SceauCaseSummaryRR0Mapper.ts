@@ -1,7 +1,7 @@
 import assert from "assert"
 import { CaseMapper } from "../CaseMapper.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/index.js"
 import { TimeContext } from "../../TimeContext.js"
 import { Source } from "../../../source/index.js"
@@ -10,13 +10,13 @@ import { CityService } from "../../../org/index.js"
 /**
  * Maps SCEAU cases to RR0 cases.
  */
-export class SceauCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, SceauCaseSummary, RR0CaseSummary> {
+export class SceauCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, SceauCaseSummary, RR0CaseSummary> {
 
   constructor(protected cityService: CityService, readonly baseUrl: URL, readonly copyright: string,
               readonly authors: string[]) {
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: SceauCaseSummary, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: SceauCaseSummary, sourceTime: Date): RR0CaseSummary {
     const id = sourceCase.id
     const source: Source = {
       previousSourceRefs: [], events: [],

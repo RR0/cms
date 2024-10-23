@@ -1,5 +1,5 @@
 import { DomReplacer, ReplacerFactory } from "ssg-api"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { SourceReplacer } from "./SourceReplacer.js"
 
 /**
@@ -13,7 +13,7 @@ export class SourceReplacerFactory implements ReplacerFactory<DomReplacer> {
     this.replacer = replacer
   }
 
-  async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  async create(context: HtmlRR0Context): Promise<DomReplacer> {
     const replacer = this.replacer
     return {
       async replace(original: HTMLElement): Promise<HTMLElement> {

@@ -1,5 +1,5 @@
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 
 /**
  * Register images (`<img>` tags) required in an HTML file.
@@ -10,7 +10,7 @@ export class UnitReplaceCommand extends DomReplaceCommand {
     super("*[itemscope]", undefined)
   }
 
-  protected async createReplacer(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  protected async createReplacer(context: HtmlRR0Context): Promise<DomReplacer> {
     return {
       replace: async (itemEl: HTMLElement) => {
         if (itemEl.getAttribute("itemtype") === "https://schema.org/QuantitativeValue") {

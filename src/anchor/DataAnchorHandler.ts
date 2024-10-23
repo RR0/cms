@@ -1,5 +1,5 @@
 import { AnchorHandler } from "./AnchorHandler.js"
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 import { AllDataService } from "../data/AllDataService.js"
 import { RR0Data } from "../data/RR0Data.js"
 
@@ -13,7 +13,7 @@ export class DataAnchorHandler implements AnchorHandler {
   constructor(protected dataService: AllDataService) {
   }
 
-  async handle(context: HtmlRR0SsgContext, linkEl: HTMLAnchorElement, pathToSearch: string): Promise<void> {
+  async handle(context: HtmlRR0Context, linkEl: HTMLAnchorElement, pathToSearch: string): Promise<void> {
     const dataList = await this.dataService.getFromDir(pathToSearch, ["api", "product", "org"], ["index.json"])
     for (const data of dataList) {
       const type = data?.type
@@ -31,7 +31,7 @@ export class DataAnchorHandler implements AnchorHandler {
     }
   }
 
-  protected handleNote(context: HtmlRR0SsgContext, linkEl: HTMLAnchorElement, note: string) {
+  protected handleNote(context: HtmlRR0Context, linkEl: HTMLAnchorElement, note: string) {
     this.number++
     const noteStr = this.number.toString()
     const noteId = `deprecated-${noteStr}`
@@ -50,7 +50,7 @@ export class DataAnchorHandler implements AnchorHandler {
     linkEl.parentNode.insertBefore(replacement, linkEl.nextSibling)
   }
 
-  protected handleApi(context: HtmlRR0SsgContext, data: RR0Data, linkEl: HTMLAnchorElement) {
+  protected handleApi(context: HtmlRR0Context, data: RR0Data, linkEl: HTMLAnchorElement) {
     const next = data.next
     if (linkEl.classList.contains("deprecated")) {
       return
@@ -65,11 +65,11 @@ export class DataAnchorHandler implements AnchorHandler {
     }
   }
 
-  protected handleProduct(context: HtmlRR0SsgContext, data: RR0Data, linkEl: HTMLAnchorElement) {
+  protected handleProduct(context: HtmlRR0Context, data: RR0Data, linkEl: HTMLAnchorElement) {
     return this.handleApi(context, data, linkEl)
   }
 
-  protected handleOrg(context: HtmlRR0SsgContext, data: RR0Data, linkEl: HTMLAnchorElement) {
+  protected handleOrg(context: HtmlRR0Context, data: RR0Data, linkEl: HTMLAnchorElement) {
     return this.handleApi(context, data, linkEl)
   }
 }

@@ -1,5 +1,5 @@
 import { SourceRenderer } from "./SourceRenderer.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { SourceFactory } from "./SourceFactory.js"
 import { ReferenceGenerator } from "../ReferenceGenerator.js"
 
@@ -14,7 +14,7 @@ export class SourceReplacer {
               protected counter: ReferenceGenerator<any>) {
   }
 
-  async replacement(context: HtmlRR0SsgContext, original: HTMLElement): Promise<HTMLElement> {
+  async replacement(context: HtmlRR0Context, original: HTMLElement): Promise<HTMLElement> {
     const outputDoc = context.file.document
     const replacement = outputDoc.createElement("span")
     replacement.className = "source-id"
@@ -31,7 +31,7 @@ export class SourceReplacer {
     return replacement
   }
 
-  protected async content(context: HtmlRR0SsgContext, original: HTMLElement, container: HTMLElement) {
+  protected async content(context: HtmlRR0Context, original: HTMLElement, container: HTMLElement) {
     const href = (original as HTMLAnchorElement).href
     if (href) {
       const source = await this.factory.create(context, href)

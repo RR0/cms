@@ -1,5 +1,5 @@
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 
 export interface AnchorHandler {
-  handle(context: HtmlRR0SsgContext, a: HTMLAnchorElement, pathToSearch: string): Promise<void>
+  handle(context: HtmlRR0Context, a: HTMLAnchorElement, pathToSearch: string): Promise<void>
 }

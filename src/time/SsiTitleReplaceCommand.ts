@@ -1,5 +1,5 @@
 import { RegexReplacer, SsiEchoVarReplaceCommand, StringContextHandler } from "ssg-api"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 
 /**
  * Replaces the SSI expression "<!--#echo var="title" -->" by the page's <title> content,
@@ -11,7 +11,7 @@ export class SsiTitleReplaceCommand extends SsiEchoVarReplaceCommand {
     super("title")
   }
 
-  protected async createReplacer(context: HtmlRR0SsgContext): Promise<RegexReplacer> {
+  protected async createReplacer(context: HtmlRR0Context): Promise<RegexReplacer> {
     return {
       replace: (_match: string, ..._args: any[]): string => {
         const inputFile = context.file

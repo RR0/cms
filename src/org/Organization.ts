@@ -1,5 +1,5 @@
 import path from "path"
-import { RR0SsgContext } from "../RR0SsgContext.js"
+import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
@@ -30,17 +30,17 @@ export class Organization<M extends TitleMessage = OrganizationMessages> impleme
     assert.ok(id, `Code must be defined for organization of type ${kind}`)
   }
 
-  getMessages(context: RR0SsgContext): M {
+  getMessages(context: RR0Context): M {
     const parent = this.parent as Organization
-    const rootMessages = parent ? parent.getMessages(context) : context.messages
-    const messageKind = rootMessages[this.kind]
-    assert.ok(messageKind, `Could not find messages of kind "${this.kind}" in ${JSON.stringify(rootMessages)}`)
+    const parentMessages = parent ? parent.getMessages(context) : context.messages
+    const messageKind = parentMessages[this.kind]
+    assert.ok(messageKind, `Could not find messages of kind "${this.kind}" in ${JSON.stringify(parentMessages)}`)
     const messages = messageKind[this.id]
     assert.ok(messages, `Could not find messages for org "${this.id}" in messages "${JSON.stringify(messageKind)}"`)
     return messages
   }
 
-  getTitle(context: RR0SsgContext, options: OrganizationMessageOptions = {parent: false}): string {
+  getTitle(context: RR0Context, options: OrganizationMessageOptions = {parent: false}): string {
     const messages = this.getMessages(context)
     const parent = this.parent as Organization
     assert.ok(messages, `Could not find name of org "${this.id}" in parent org "${parent?.id}"`)

@@ -7,9 +7,9 @@ import { HtmlTag } from "../../../util/index.js"
 import { SceauCaseMapping } from "./SceauCaseMapping.js"
 import { SceauDatasource } from "./SceauDatasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { TimeTextBuilder } from "../../TimeTextBuilder.js"
+import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
 import { rr0TestUtil } from "../../../test/index.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { sceauDatasource, sceauRR0Mapper } from "./SceauRR0Mapping.js"
 import { sceauTestCases } from "./SceauTestCases.js"
 
@@ -21,7 +21,7 @@ export class SceauTestDatasource extends SceauDatasource {
     super()
   }
 
-  protected async readCases(_context: HtmlRR0SsgContext): Promise<SceauCaseSummary[]> {
+  protected async readCases(_context: HtmlRR0Context): Promise<SceauCaseSummary[]> {
     return sceauTestCases
   }
 }
@@ -55,7 +55,7 @@ describe("SCEAUCaseSource", () => {
     /**
      * Specialization of sources for SCEAU cases
      */
-    protected expectedSourceStr(context: HtmlRR0SsgContext, expectedSources: Source[], _nativeCase: SceauCaseSummary) {
+    protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], _nativeCase: SceauCaseSummary) {
       return expectedSources.map(source => {
         const sourceItems: string[] = []
         let authorStr = source.authors.map(author => `<span class="people">${author}</span>`).join(" &amp; ")
@@ -73,7 +73,7 @@ describe("SCEAUCaseSource", () => {
           if (publication.time) {
             const sourceContext = context.clone()
             sourceContext.time = source.publication.time
-            const timeStr = this.timeTextBuilder.build(sourceContext)
+            const timeStr = this.timeTextBuilder.build(sourceContext, true)
             sourceItems.push(timeStr)
           }
         }
@@ -86,7 +86,7 @@ describe("SCEAUCaseSource", () => {
     }
   }(new SceauTestMapping({read: ["fetch"], write: []}), sceauTestCases)
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")

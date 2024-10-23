@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { NuforcHttpDatasource } from "./NuforcHttpDatasource.js"
 import { rr0TestUtil } from "../../../test/index.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { TimeContext } from "../../TimeContext.js"
 import { nuforcDatasource, nuforcRR0Mapper } from "./NuforcRR0Mapping.js"
 import { nuforcTestCases } from "./NuforcTestCases.js"
@@ -26,7 +26,7 @@ function expectedSource(datasource: NuforcHttpDatasource, dataDate: Date, caseNu
 
 describe("NuforcRR0Mapper", () => {
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1970)

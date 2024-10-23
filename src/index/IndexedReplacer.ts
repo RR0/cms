@@ -1,12 +1,12 @@
 import { DomReplacement } from "../time/DomReplacement.js"
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 
 /**
  * Adds an index anchor element with the index id.
  */
-export class IndexedReplacer implements DomReplacement<HtmlRR0SsgContext> {
+export class IndexedReplacer implements DomReplacement<HtmlRR0Context> {
 
-  async replacement(context: HtmlRR0SsgContext, element: HTMLElement): Promise<HTMLElement> {
+  async replacement(context: HtmlRR0Context, element: HTMLElement): Promise<HTMLElement> {
     const items = element.querySelectorAll("li")
     let value = 1
     for (let i = 0; i < items.length; i++) {
@@ -16,7 +16,7 @@ export class IndexedReplacer implements DomReplacement<HtmlRR0SsgContext> {
     return element
   }
 
-  protected replaceItem(context: HtmlRR0SsgContext, item: HTMLLIElement, i: number): number {
+  protected replaceItem(context: HtmlRR0Context, item: HTMLLIElement, i: number): number {
     const anchor = item.querySelector(".index-anchor")
     let nextIndex: number
     if (!anchor) {

@@ -4,7 +4,7 @@ import { geipanTestCaseSummaries } from "./GeipanTestCases.js"
 import { geipanRR0Mapping } from "./GeipanRR0Mapping.js"
 import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase.js"
 import { RR0CaseMapping, TimeContext } from "../../../../../../time/index.js"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { rr0TestUtil } from "../../../../../../test/index.js"
 
 describe("GeipanCaseSource", () => {
@@ -23,7 +23,7 @@ describe("GeipanCaseSource", () => {
     }
   }(geipanRR0Mapping, geipanTestCaseSummaries)
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")

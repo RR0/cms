@@ -3,25 +3,25 @@ import { RR0Messages, ssgMessages } from "./lang/index.js"
 import { ConsoleLogger, FileContents, HtmlSsgContext, SsgConfig, SsgContext, SsgContextImpl } from "ssg-api"
 import { People } from "./people/People.js"
 
-export interface RR0SsgContext extends SsgContext {
+export interface RR0Context extends SsgContext {
 
   readonly messages: RR0Messages
   readonly time: TimeContext
 
-  clone(locale?: string): RR0SsgContext
+  clone(locale?: string): RR0Context
 }
 
-export interface HtmlRR0SsgContext extends HtmlSsgContext {
+export interface HtmlRR0Context extends HtmlSsgContext {
   readonly messages: RR0Messages
   time: TimeContext
   people: People
   readonly images: Set<string>
   readonly config: SsgConfig
 
-  clone(locale?: string): HtmlRR0SsgContext
+  clone(locale?: string): HtmlRR0Context
 }
 
-export class RR0SsgContextImpl extends SsgContextImpl {
+export class RR0ContextImpl extends SsgContextImpl {
 
   readonly messages: RR0Messages
   readonly images = new Set<string>()
@@ -45,7 +45,7 @@ export class RR0SsgContextImpl extends SsgContextImpl {
     return file
   }
 
-  clone(locale = this.locale): RR0SsgContextImpl {
-    return new RR0SsgContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file)
+  clone(locale = this.locale): RR0ContextImpl {
+    return new RR0ContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file)
   }
 }

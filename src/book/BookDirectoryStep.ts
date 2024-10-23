@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 import { DirectoryStep, FileContents, HtmlLinks, HtmlMeta, OutputFunc, SsgConfig } from "ssg-api"
 import { RR0FileUtil } from "../util/file/RR0FileUtil.js"
 import { Book } from "./Book.js"
@@ -26,7 +26,7 @@ export class BookDirectoryStep extends DirectoryStep {
       bookLinks)
   }
 
-  protected async processDirs(context: HtmlRR0SsgContext, dirNames: string[]): Promise<void> {
+  protected async processDirs(context: HtmlRR0Context, dirNames: string[]): Promise<void> {
     const books = this.scan(context, dirNames)
     await this.tocAll(context, books)
     const directoriesHtml = this.toList(books)
@@ -34,7 +34,7 @@ export class BookDirectoryStep extends DirectoryStep {
     await this.outputFunc(context, context.file)
   }
 
-  protected scan(context: HtmlRR0SsgContext, dirNames: string[]): Book[] {
+  protected scan(context: HtmlRR0Context, dirNames: string[]): Book[] {
     const books: Book[] = []
     for (const dirName of dirNames) {
       const dirBook: Book = {
@@ -103,13 +103,13 @@ export class BookDirectoryStep extends DirectoryStep {
     return HtmlTag.toString("li", a, attrs)
   }
 
-  protected async tocAll(context: HtmlRR0SsgContext, books: Book[]) {
+  protected async tocAll(context: HtmlRR0Context, books: Book[]) {
     for (const book of books) {
       await this.toc(context, book)
     }
   }
 
-  protected async toc(context: HtmlRR0SsgContext, book: Book) {
+  protected async toc(context: HtmlRR0Context, book: Book) {
     const startFileName = path.join(book.dirName, "index.html")
     try {
       context.read(startFileName)

@@ -1,6 +1,6 @@
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 import { ChronologyReplacer } from "./ChronologyReplacer.js"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { TimeService } from "../TimeService.js"
 import { RR0CaseMapping } from "./rr0/RR0CaseMapping.js"
@@ -19,7 +19,7 @@ export class ChronologyReplacerFactory implements ReplacerFactory<DomReplacer> {
    *
    * @param context
    */
-  async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  async create(context: HtmlRR0Context): Promise<DomReplacer> {
     return {
       replace: async (ul: HTMLUListElement): Promise<HTMLUListElement> => {
         const isTimeFile = this.timeService.isTimeFile(context.file.name)

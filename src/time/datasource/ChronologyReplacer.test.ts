@@ -2,17 +2,17 @@ import { beforeEach, describe, test } from "@javarome/testscript"
 import { ChronologyReplacer } from "./ChronologyReplacer.js"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { urecatRR0Mapping } from "./urecat/index.js"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { rr0TestUtil } from "../../test/index.js"
 import { SourceFactory, SourceRenderer } from "../../source/index.js"
 import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
-import { TimeTextBuilder } from "../TimeTextBuilder.js"
+import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { AllDataService } from "../../data/index.js"
 import { HttpSource } from "./HttpSource.js"
 
 describe("ChronologyReplacer", () => {
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
   let chronologyReplacer: ChronologyReplacer
 
   beforeEach(() => {

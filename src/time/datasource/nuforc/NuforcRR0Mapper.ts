@@ -1,7 +1,7 @@
 import assert from "assert"
 import { CaseMapper } from "../CaseMapper.js"
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NuforcCountry } from "./NuforcCountry.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { TimeContext } from "../../TimeContext.js"
@@ -27,7 +27,7 @@ import { Source } from "../../../source/index.js"
 import { algeria } from "../../../org/dz/Algeria.js"
 import { panama } from "../../../org/pa/Panama.js"
 
-export class NuforcRR0Mapper implements CaseMapper<HtmlRR0SsgContext, NuforcCaseSummary, RR0CaseSummary> {
+export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSummary, RR0CaseSummary> {
 
   static readonly countryMap: { [key in NuforcCountry]: string } = {
     Algeria: algeria.id,
@@ -84,7 +84,7 @@ export class NuforcRR0Mapper implements CaseMapper<HtmlRR0SsgContext, NuforcCase
     return description.join(", ")
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: NuforcCaseSummary, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: NuforcCaseSummary, sourceTime: Date): RR0CaseSummary {
     const caseSource: Source = {
       previousSourceRefs: [],
       events: [],

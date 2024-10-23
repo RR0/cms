@@ -1,5 +1,5 @@
 import { AnchorHandler } from "./AnchorHandler.js"
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 import { TimeContext, TimeTextBuilder } from "../time/index.js"
 import { CaseService } from "../science/crypto/ufo/enquete/dossier/CaseService.js"
 import path from "path"
@@ -9,7 +9,7 @@ export class CaseAnchorHandler implements AnchorHandler {
   constructor(protected caseService: CaseService, protected timeTextBuilder: TimeTextBuilder) {
   }
 
-  async handle(context: HtmlRR0SsgContext, link: HTMLAnchorElement, pathToSearch: string) {
+  async handle(context: HtmlRR0Context, link: HTMLAnchorElement, pathToSearch: string) {
     if (!link.title) {
       const foundCases = await this.caseService.get(pathToSearch)
       const aCase = foundCases[0]
@@ -34,7 +34,7 @@ export class CaseAnchorHandler implements AnchorHandler {
           } else if (!titles.includes(timeStr)) {
             caseContext.time.updateFromStr(timeStr)
           }
-          titles.push(this.timeTextBuilder.build(caseContext))
+          titles.push(this.timeTextBuilder.build(caseContext, true))
         }
         const place = aCase.place
         if (typeof place === "string" && !titles.includes(place)) {

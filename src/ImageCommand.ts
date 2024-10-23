@@ -1,5 +1,5 @@
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 import * as path from "path"
 import * as fs from "fs"
 import sizeOf from "image-size"
@@ -14,7 +14,7 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
     super("img", undefined)
   }
 
-  protected async createReplacer(context: HtmlRR0SsgContext): Promise<DomReplacer<HTMLImageElement>> {
+  protected async createReplacer(context: HtmlRR0Context): Promise<DomReplacer<HTMLImageElement>> {
     return {
       replace: async (imgEl: HTMLImageElement): Promise<HTMLImageElement> => {
         const src = imgEl.src
@@ -74,7 +74,7 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
     }
   }
 
-  protected async postExecute(context: HtmlRR0SsgContext) {
+  protected async postExecute(context: HtmlRR0Context) {
     const imagesUrls = context.images
     if (imagesUrls.size > 0) {
       for (const imageUrl of imagesUrls) {
@@ -84,7 +84,7 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
     }
   }
 
-  private handleImage(context: HtmlRR0SsgContext, imageUrl: string) {
+  private handleImage(context: HtmlRR0Context, imageUrl: string) {
     const inputFile = context.file.name
     if (imageUrl) {
       const isLocal = !imageUrl.startsWith("http")

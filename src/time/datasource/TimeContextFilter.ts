@@ -1,5 +1,5 @@
 import { ContextFilter } from "./ContextFilter.js"
-import { RR0SsgContext } from "../../RR0SsgContext.js"
+import { RR0Context } from "../../RR0Context.js"
 import { TimeContext } from "../TimeContext.js"
 
 export interface TimeContextCase {
@@ -8,7 +8,7 @@ export interface TimeContextCase {
 
 export class TimeContextFilter<S extends TimeContextCase> extends ContextFilter<S> {
 
-  constructor(context: RR0SsgContext) {
+  constructor(context: RR0Context) {
     super(context)
   }
 

@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { JSDOM } from "jsdom"
 import { SceauDatasource } from "./SceauDatasource.js"
@@ -13,7 +13,7 @@ export class SceauHttpDatasource extends SceauDatasource {
     super()
   }
 
-  getFromRows(context: RR0SsgContext, rows: Element[], fields: string[]): SceauCaseSummary[] {
+  getFromRows(context: RR0Context, rows: Element[], fields: string[]): SceauCaseSummary[] {
     const cases: SceauCaseSummary[] = []
     for (const row of rows) {
       if (row.hasChildNodes()) {
@@ -23,14 +23,14 @@ export class SceauHttpDatasource extends SceauDatasource {
     return cases
   }
 
-  protected queryUrl(context: RR0SsgContext, fondPath: string): URL {
+  protected queryUrl(context: RR0Context, fondPath: string): URL {
     const day = context.time.getDayOfMonth()
     const month = context.time.getMonth()
     const year = context.time.getYear()
     return new URL(path.join(this.searchPath, fondPath), this.baseUrl)
   }
 
-  protected async readCases(context: RR0SsgContext): Promise<SceauCaseSummary[]> {
+  protected async readCases(context: RR0Context): Promise<SceauCaseSummary[]> {
     let allCases = []
     for (const fetchedPage of this.pages) {
       const searchUrl = this.queryUrl(context, fetchedPage.path)
@@ -56,7 +56,7 @@ export class SceauHttpDatasource extends SceauDatasource {
     return allCases
   }
 
-  protected getFromRow(context: RR0SsgContext, row: Element, fields: string[]): SceauCaseSummary {
+  protected getFromRow(context: RR0Context, row: Element, fields: string[]): SceauCaseSummary {
     const values = row.querySelectorAll("td")
     const obj = {}
     for (let i = 0; i < values.length; i++) {

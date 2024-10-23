@@ -1,9 +1,9 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { RR0Data } from "../data/index.js"
 import { Source, SourceFactory, SourceRenderer } from "../source/index.js"
 import { NoteRenderer } from "../note/index.js"
 import { NamedPlace } from "./datasource/index.js"
-import { TimeElementFactory } from "./TimeElementFactory.js"
+import { TimeElementFactory } from "./html/TimeElementFactory.js"
 import assert from "assert"
 import { RR0Event } from "../event/index.js"
 
@@ -18,7 +18,7 @@ export class EventRenderer<E extends RR0Event> {
   ) {
   }
 
-  placeElement(context: HtmlRR0SsgContext, namedPlace: NamedPlace) {
+  placeElement(context: HtmlRR0Context, namedPlace: NamedPlace) {
     const doc = context.file.document
     const birthPlace = doc.createElement("span")
     birthPlace.className = "place"
@@ -26,7 +26,7 @@ export class EventRenderer<E extends RR0Event> {
     return birthPlace
   }
 
-  async renderEnd(context: HtmlRR0SsgContext, event: RR0Data, container: HTMLElement) {
+  async renderEnd(context: HtmlRR0Context, event: RR0Data, container: HTMLElement) {
     const sources = event.sources
     if (sources) {
       await this.renderSources(context, sources, container)
@@ -38,7 +38,7 @@ export class EventRenderer<E extends RR0Event> {
     container.append(".")
   }
 
-  async render(context: HtmlRR0SsgContext, event: E, container: HTMLElement) {
+  async render(context: HtmlRR0Context, event: E, container: HTMLElement) {
     const eventContext = context.clone()
     const eventTime = eventContext.time = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time`)
@@ -62,14 +62,14 @@ export class EventRenderer<E extends RR0Event> {
     container.append(".")
   }
 
-  async renderNotes(context: HtmlRR0SsgContext, notes: string[], container: HTMLElement) {
+  async renderNotes(context: HtmlRR0Context, notes: string[], container: HTMLElement) {
     for (const noteStr of notes) {
       const sourceEl = this.noteRenderer.render(context, noteStr)
       container.append(" ", sourceEl)
     }
   }
 
-  async renderSources(context: HtmlRR0SsgContext, sources: Source[], container: HTMLElement) {
+  async renderSources(context: HtmlRR0Context, sources: Source[], container: HTMLElement) {
     for (const source of sources) {
       const href = source.url
       const resolvedSource = href ? await this.sourceFactory.create(context, href.toString()) : source

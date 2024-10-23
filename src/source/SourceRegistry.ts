@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { Source } from "./Source.js"
 import { AllDataService } from "../data/index.js"
 import { HttpSource } from "../time/index.js"
@@ -21,7 +21,7 @@ export class SourceRegistry extends SourceFactory {
    * @param context
    * @param href The anchor's URL string.
    */
-  async createExternal(context: HtmlRR0SsgContext, href: string): Promise<Source> {
+  async createExternal(context: HtmlRR0Context, href: string): Promise<Source> {
     let source = await this.get(href)
     if (!source) {
       source = await super.createExternal(context, href)

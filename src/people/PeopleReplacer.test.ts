@@ -1,7 +1,7 @@
 import { PeopleReplacer } from "./PeopleReplacer.js"
 import { rr0TestUtil } from "../test/index.js"
 import { PeopleService } from "./PeopleService.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { AllDataService } from "../data/index.js"
 import { RR0EventFactory } from "../event/index.js"
@@ -18,7 +18,7 @@ describe("PeopleReplacer", () => {
 
   const peopleFactory = new PeopleFactory(new RR0EventFactory())
 
-  function createPeopleElement(context: HtmlRR0SsgContext, content: string, title?: string): HTMLSpanElement {
+  function createPeopleElement(context: HtmlRR0Context, content: string, title?: string): HTMLSpanElement {
     const peopleElement = context.file.document.createElement("span") as HTMLSpanElement
     peopleElement.textContent = content
     if (title) {

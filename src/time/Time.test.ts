@@ -1,6 +1,6 @@
 import { Time } from "./Time.js"
 import { TimeContext } from "./TimeContext.js"
-import { RR0SsgContextImpl } from "../RR0SsgContext.js"
+import { RR0ContextImpl } from "../RR0Context.js"
 import { FileContents, SsgConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"
@@ -23,7 +23,7 @@ describe("Time", () => {
   describe("contextFromFile", () => {
     const config: SsgConfig = rr0TestUtil.config
     const timeContext = new TimeContext()
-    const context = new RR0SsgContextImpl("fr", timeContext, config)
+    const context = new RR0ContextImpl("fr", timeContext, config)
 
     test("recognize year before 0 AD", () => {
       context.file = new FileContents("time/-0/0/1/1/index.html", "utf-8", "", new Date("2012-08-12"),

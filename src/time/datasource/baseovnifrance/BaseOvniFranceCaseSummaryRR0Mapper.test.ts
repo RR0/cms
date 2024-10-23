@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
 import { rr0TestUtil } from "../../../test/index.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { TimeContext } from "../../TimeContext.js"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"
 import { baseOvniFranceDatasource, baseOvniFranceRR0Mapper } from "./BaseOvniFranceRR0Mapping.js"
@@ -23,7 +23,7 @@ function expectedSource(datasource: BaseOvniFranceHttpDatasource, dataDate: Date
 
 describe("BaseOvniFranceCaseSource", () => {
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")

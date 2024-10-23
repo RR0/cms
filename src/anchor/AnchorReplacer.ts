@@ -1,5 +1,5 @@
 import { HtmlSsgContext } from "ssg-api"
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 import { AnchorHandler } from "./AnchorHandler.js"
 
 export class AnchorReplacer {
@@ -10,7 +10,7 @@ export class AnchorReplacer {
     this.baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/"
   }
 
-  async replacement(context: HtmlRR0SsgContext, a: HTMLAnchorElement): Promise<HTMLAnchorElement> {
+  async replacement(context: HtmlRR0Context, a: HTMLAnchorElement): Promise<HTMLAnchorElement> {
     const href = a.href
     const baseUrl = this.baseUrl + context.file.name
     try {
@@ -39,7 +39,7 @@ export class AnchorReplacer {
     context.debug("Adding target in", a.outerHTML)
   }
 
-  protected async updateLinkInternal(context: HtmlRR0SsgContext, a: HTMLAnchorElement, url: URL) {
+  protected async updateLinkInternal(context: HtmlRR0Context, a: HTMLAnchorElement, url: URL) {
     if (url.protocol.startsWith("http")) {
       const pathname = url.pathname
       const pathToSearch = pathname.substring(1)

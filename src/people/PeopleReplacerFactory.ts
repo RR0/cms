@@ -1,7 +1,7 @@
 import { PeopleReplacer } from "./PeopleReplacer.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 import { PeopleService } from "./PeopleService.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 
 /**
  * Creates replacers for people HTML in a given context.
@@ -13,7 +13,7 @@ export class PeopleReplacerFactory implements ReplacerFactory<DomReplacer> {
   constructor(protected service: PeopleService) {
   }
 
-  async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  async create(context: HtmlRR0Context): Promise<DomReplacer> {
     const instance = await this.getInstance()
     return {
       replace:

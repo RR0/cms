@@ -1,6 +1,6 @@
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
 import { AnchorReplacer } from "./AnchorReplacer.js"
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 import { AnchorHandler } from "./AnchorHandler.js"
 
 /**
@@ -15,7 +15,7 @@ export class AnchorReplaceCommand extends DomReplaceCommand<HTMLAnchorElement> {
     this.singleton = new AnchorReplacer(baseUrl, handlers)
   }
 
-  protected async createReplacer(context: HtmlRR0SsgContext): Promise<DomReplacer<HTMLAnchorElement>> {
+  protected async createReplacer(context: HtmlRR0Context): Promise<DomReplacer<HTMLAnchorElement>> {
     return {
       replace: async (original: HTMLAnchorElement): Promise<HTMLAnchorElement> => {
         return this.singleton.replacement(context, original)

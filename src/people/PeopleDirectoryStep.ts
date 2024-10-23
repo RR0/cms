@@ -1,6 +1,6 @@
 import { Occupation } from "./Occupation.js"
 import { People } from "./People.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { HtmlTag } from "../util/html/HtmlTag.js"
 import { DirectoryStep, OutputFunc, SsgConfig } from "ssg-api"
 import { StringUtil } from "../util/string/StringUtil.js"
@@ -25,7 +25,7 @@ export class PeopleDirectoryStep extends DirectoryStep {
     super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, name)
   }
 
-  protected async processDirs(context: HtmlRR0SsgContext, dirNames: string[]): Promise<void> {
+  protected async processDirs(context: HtmlRR0Context, dirNames: string[]): Promise<void> {
     const allPeopleList = await this.service.getAll()
     let peopleList = allPeopleList.filter(this.filter)
     const outputPath = this.config.getOutputPath(context)
@@ -78,7 +78,7 @@ export class PeopleDirectoryStep extends DirectoryStep {
     await this.outputFunc(context, output)
   }
 
-  protected toList(context: HtmlRR0SsgContext, peopleList: People[], pseudoPeopleList: People[],
+  protected toList(context: HtmlRR0Context, peopleList: People[], pseudoPeopleList: People[],
                    allCountries: Set<CountryCode>, occupations: Set<Occupation>): HTMLUListElement {
     const file = context.file
     const listItems = peopleList.map(
@@ -89,7 +89,7 @@ export class PeopleDirectoryStep extends DirectoryStep {
     return ul
   }
 
-  protected toListItem(context: HtmlRR0SsgContext, people: People, pseudoPeopleList: People[],
+  protected toListItem(context: HtmlRR0Context, people: People, pseudoPeopleList: People[],
                        allCountries: Set<CountryCode>, occupations: Set<Occupation>) {
     const ref = this.service.getLink(context, people, pseudoPeopleList, allCountries, occupations
       /*this.filter*/ // TODO: Restore removal of already-known (as from people occupation subset) occupation

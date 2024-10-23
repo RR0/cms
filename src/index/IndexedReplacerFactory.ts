@@ -1,12 +1,12 @@
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 import { IndexedReplacer } from "./IndexedReplacer.js"
-import { HtmlRR0SsgContext } from "RR0SsgContext.js"
+import { HtmlRR0Context } from "RR0Context.js"
 
 export class IndexedReplacerFactory implements ReplacerFactory<DomReplacer> {
 
   protected singleton = new IndexedReplacer()
 
-  async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  async create(context: HtmlRR0Context): Promise<DomReplacer> {
     const instance = await this.getInstance()
     return {
       replace:

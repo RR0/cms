@@ -3,7 +3,7 @@ import fs from "fs"
 import { UfoSearchCaseRR0Mapper, ufoSearchCaseRR0Mapper, ufoSearchFileDatasource } from "./ufo-search/index.js"
 import { rr0TestUtil } from "../../test/index.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import path from "path"
 
 const root = "src"
@@ -12,7 +12,7 @@ describe("JsonMapper", () => {
 
   const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
   let mapper: UfoSearchCaseRR0Mapper
 
   beforeEach(() => {

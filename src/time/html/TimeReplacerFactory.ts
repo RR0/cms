@@ -1,5 +1,5 @@
 import { TimeReplacer } from "./TimeReplacer.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 
 export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
@@ -12,7 +12,7 @@ export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
    *
    * @param context
    */
-  async create(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  async create(context: HtmlRR0Context): Promise<DomReplacer> {
     return {
       replace: (original: HTMLTimeElement): Promise<HTMLElement> => {
         return this.replacer.replacement(

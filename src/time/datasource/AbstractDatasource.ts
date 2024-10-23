@@ -1,5 +1,5 @@
 import { Datasource } from "./Datasource"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { ContextFilter } from "./ContextFilter.js"
 import { TimeContextFilter } from "./TimeContextFilter.js"
 
@@ -13,7 +13,7 @@ export abstract class AbstractDatasource<S> implements Datasource<S> {
   protected constructor(readonly authors: string[], readonly copyright: string) {
   }
 
-  async getCases(context: HtmlRR0SsgContext): Promise<S[]> {
+  async getCases(context: HtmlRR0Context): Promise<S[]> {
     const contextKey = this.contextKey(context)
     let found = this.cases.get(contextKey)
     if (!found) {
@@ -23,20 +23,20 @@ export abstract class AbstractDatasource<S> implements Datasource<S> {
     return found
   }
 
-  async fetch(context: HtmlRR0SsgContext): Promise<S[]> {
+  async fetch(context: HtmlRR0Context): Promise<S[]> {
     const summaries = await this.getCases(context)
     // TODO: This filter can only apply to RROUfoCases[], not S[]
     const contextFilter = this.createFilter(context)
     return summaries.filter(contextFilter.filter.bind(contextFilter))
   }
 
-  protected createFilter(context: HtmlRR0SsgContext): ContextFilter<S> {
+  protected createFilter(context: HtmlRR0Context): ContextFilter<S> {
     return new TimeContextFilter<S>(context)  // By default
   }
 
-  protected contextKey(context: HtmlRR0SsgContext) {
+  protected contextKey(context: HtmlRR0Context) {
     return context.time.toString()
   }
 
-  protected abstract readCases(context: HtmlRR0SsgContext): Promise<S[]>
+  protected abstract readCases(context: HtmlRR0Context): Promise<S[]>
 }

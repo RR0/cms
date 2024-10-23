@@ -1,5 +1,5 @@
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { AbstractDatasource } from "../AbstractDatasource.js"
 
 export abstract class NuforcDatasource extends AbstractDatasource<NuforcCaseSummary> {
@@ -8,5 +8,5 @@ export abstract class NuforcDatasource extends AbstractDatasource<NuforcCaseSumm
     super(authors, copyright)
   }
 
-  protected abstract readCases(context: RR0SsgContext): Promise<NuforcCaseSummary[]>
+  protected abstract readCases(context: RR0Context): Promise<NuforcCaseSummary[]>
 }

@@ -1,17 +1,17 @@
 import { GeipanCaseSummary, GeipanZoneCode } from "./GeipanCaseSummary.js"
 import { GeipanCase } from "./GeipanCase.js"
 import { CaseMapper, TimeContext } from "../../../../../../time/index.js"
-import { RR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { RR0Context } from "../../../../../../RR0Context.js"
 
 /**
  * Maps a GEIPAN CSV case to a GEIPAN summary case.
  */
-export class GeipanCaseToSummaryMapper implements CaseMapper<RR0SsgContext, GeipanCase, GeipanCaseSummary> {
+export class GeipanCaseToSummaryMapper implements CaseMapper<RR0Context, GeipanCase, GeipanCaseSummary> {
 
   constructor(readonly baseUrl: URL, readonly copyright: string, readonly authors: string[]) {
   }
 
-  map(context: RR0SsgContext, csvCase: GeipanCase, sourceTime: Date): GeipanCaseSummary {
+  map(context: RR0Context, csvCase: GeipanCase, sourceTime: Date): GeipanCaseSummary {
     const caseNumber = csvCase.cas_numEtude
     const dayField = csvCase.cas_JJ
     const sightingYear = parseInt(csvCase.cas_AAAA, 10)

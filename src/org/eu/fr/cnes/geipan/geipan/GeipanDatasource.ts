@@ -1,6 +1,6 @@
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { AbstractDatasource, TimeContextFilter } from "../../../../../../time/index.js"
-import { HtmlRR0SsgContext, RR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlRR0Context, RR0Context } from "../../../../../../RR0Context.js"
 
 export abstract class GeipanDatasource extends AbstractDatasource<GeipanCaseSummary> {
 
@@ -8,10 +8,10 @@ export abstract class GeipanDatasource extends AbstractDatasource<GeipanCaseSumm
     super(authors, copyright)
   }
 
-  protected createFilter(context: HtmlRR0SsgContext) {
+  protected createFilter(context: HtmlRR0Context) {
     // TODO: Use a GEIPAN-specific filter instead
     return new TimeContextFilter<GeipanCaseSummary>(context)
   }
 
-  protected abstract readCases(context: RR0SsgContext): Promise<GeipanCaseSummary[]>
+  protected abstract readCases(context: RR0Context): Promise<GeipanCaseSummary[]>
 }

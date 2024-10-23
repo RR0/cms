@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
@@ -149,7 +149,7 @@ export class FuforaHttpDatasource extends FuforaDatasource {
     super()
   }
 
-  async fetch(context: RR0SsgContext): Promise<FuforaCaseSummary[]> {
+  async fetch(context: RR0Context): Promise<FuforaCaseSummary[]> {
     const {formData, searchUrl} = this.queryUrl(context)
     const page = await this.http.submitForm<string>(searchUrl, formData)
     const doc = new JSDOM(page).window.document.documentElement
@@ -159,7 +159,7 @@ export class FuforaHttpDatasource extends FuforaDatasource {
     return this.getFromRows(context, rows)
   }
 
-  getFromRows(context: RR0SsgContext, rows: Element[]): FuforaCaseSummary[] {
+  getFromRows(context: RR0Context, rows: Element[]): FuforaCaseSummary[] {
     const cases: FuforaCaseSummary[] = []
     for (const row of rows) {
       if (row.hasChildNodes()) {
@@ -169,7 +169,7 @@ export class FuforaHttpDatasource extends FuforaDatasource {
     return cases
   }
 
-  queryUrl(context: RR0SsgContext) {
+  queryUrl(context: RR0Context) {
     const day = context.time.getDayOfMonth()
     const month = context.time.getMonth()
     const year = context.time.getYear()
@@ -192,7 +192,7 @@ export class FuforaHttpDatasource extends FuforaDatasource {
     return {formData, searchUrl}
   }
 
-  protected getFromRow(context: RR0SsgContext, row: Element): FuforaCaseSummary {
+  protected getFromRow(context: RR0Context, row: Element): FuforaCaseSummary {
     const fields = row.querySelectorAll("div")
     const caseLink = fields[0].firstElementChild as HTMLAnchorElement
     const dateFormat = /(?:(\d\d).(\d\d).(\d\d\d\d))?\n?(.+)?/

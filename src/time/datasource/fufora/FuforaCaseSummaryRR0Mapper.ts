@@ -1,7 +1,7 @@
 import assert from "assert"
 import { CaseMapper } from "../CaseMapper.js"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { TimeContext } from "../../TimeContext.js"
 import { CityService } from "../../../org/country/index.js"
@@ -10,13 +10,13 @@ import { Source } from "../../../source/index.js"
 /**
  * Maps FUFORA cases to RR0 cases.
  */
-export class FuforaCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, FuforaCaseSummary, RR0CaseSummary> {
+export class FuforaCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, FuforaCaseSummary, RR0CaseSummary> {
 
   constructor(protected cityService: CityService, readonly baseUrl: URL, readonly copyright: string,
               readonly authors: string[]) {
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: FuforaCaseSummary, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: FuforaCaseSummary, sourceTime: Date): RR0CaseSummary {
     const id = sourceCase.id
     const source: Source = {
       previousSourceRefs: [], events: [],

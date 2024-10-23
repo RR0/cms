@@ -1,8 +1,8 @@
-import { TimeReplacerFactory } from "./TimeReplacerFactory.js"
+import { TimeReplacerFactory } from "./html/TimeReplacerFactory.js"
 import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { DomReplaceCommand } from "ssg-api"
-import { TimeReplacer } from "./TimeReplacer.js"
+import { TimeReplacer } from "./html/TimeReplacer.js"
 import path from "path"
 
 describe("HtmlTagReplaceCommand", async () => {

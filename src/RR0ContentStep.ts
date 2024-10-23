@@ -1,18 +1,18 @@
 import { ContentStep, ContentStepConfig, ContentStepResult, OutputFunc } from "ssg-api"
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 import { TimeContext } from "./time/index.js"
 
 export interface ContentVisitor {
-  visit(context: HtmlRR0SsgContext): Promise<void>
+  visit(context: HtmlRR0Context): Promise<void>
 }
 
 export interface FileVisitor {
-  visit(context: HtmlRR0SsgContext, processFile: boolean): Promise<void>
+  visit(context: HtmlRR0Context, processFile: boolean): Promise<void>
 
   contentStepEnd(): Promise<void>
 }
 
-export class RR0ContentStep extends ContentStep<HtmlRR0SsgContext> {
+export class RR0ContentStep extends ContentStep<HtmlRR0Context> {
 
   constructor(
     contentConfigs: ContentStepConfig[], outputFunc: OutputFunc, protected fileVisitors: FileVisitor[] = [],
@@ -21,7 +21,7 @@ export class RR0ContentStep extends ContentStep<HtmlRR0SsgContext> {
     super(contentConfigs, outputFunc, name)
   }
 
-  static setTimeFromPath(context: HtmlRR0SsgContext, filePath: string): TimeContext | undefined {
+  static setTimeFromPath(context: HtmlRR0Context, filePath: string): TimeContext | undefined {
     const time = context.time
     time.reset()
     const newTimeContext = TimeContext.fromFileName(context, filePath)
@@ -34,22 +34,22 @@ export class RR0ContentStep extends ContentStep<HtmlRR0SsgContext> {
     return newTimeContext
   }
 
-  protected async processFile(context: HtmlRR0SsgContext, filePath: string,
+  protected async processFile(context: HtmlRR0Context, filePath: string,
                               contentsConfig: ContentStepConfig): Promise<string | undefined> {
     this.setContextFromFile(context, filePath)
     return super.processFile(context, filePath, contentsConfig)
   }
 
-  protected setContextFromFile(context: HtmlRR0SsgContext, filePath: string) {
+  protected setContextFromFile(context: HtmlRR0Context, filePath: string) {
     this.setTimeFromPath(context, filePath)
   }
 
-  protected setTimeFromPath(context: HtmlRR0SsgContext, filePath: string) {
+  protected setTimeFromPath(context: HtmlRR0Context, filePath: string) {
     context.time.reset()  // Don't use time context from previous page.
     RR0ContentStep.setTimeFromPath(context, filePath)
   }
 
-  protected async shouldProcessFile(context: HtmlRR0SsgContext, contentsConfig: ContentStepConfig): Promise<boolean> {
+  protected async shouldProcessFile(context: HtmlRR0Context, contentsConfig: ContentStepConfig): Promise<boolean> {
     const fileHasChanged = await super.shouldProcessFile(context, contentsConfig)
     const fileIsForced = this.toProcess.has(context.file.name)
     const processFile = this.force || fileIsForced || fileHasChanged
@@ -62,7 +62,7 @@ export class RR0ContentStep extends ContentStep<HtmlRR0SsgContext> {
     return processFile
   }
 
-  protected async shouldProcessContent(context: HtmlRR0SsgContext,
+  protected async shouldProcessContent(context: HtmlRR0Context,
                                        contentsConfig: ContentStepConfig): Promise<boolean> {
     const fileIsForced = this.toProcess.has(context.file.name)
     const showProcess = await super.shouldProcessContent(context, contentsConfig)

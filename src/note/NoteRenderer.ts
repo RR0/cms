@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { ReferenceGenerator } from "../ReferenceGenerator.js"
 
 export class NoteRenderer {
@@ -6,7 +6,7 @@ export class NoteRenderer {
   constructor(protected counter: ReferenceGenerator<any>) {
   }
 
-  render(context: HtmlRR0SsgContext, html: string): HTMLElement {
+  render(context: HtmlRR0Context, html: string): HTMLElement {
     const noteId = this.counter.next(context)
     const doc = context.file.document
     const replacement = doc.createElement("span")

@@ -5,7 +5,7 @@ import { GeipanDatasource } from "./GeipanDatasource.js"
 import { GeipanSummaryToCaseMapper } from "./GeipanSummaryToCaseMapper.js"
 import { GeipanCase } from "./GeipanCase.js"
 import { CsvFileSource, Datasource, FileDatasource } from "../../../../../../time/index.js"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 
 export class GeipanFileDatasource extends GeipanDatasource implements Datasource<GeipanCaseSummary>, FileDatasource<GeipanCaseSummary> {
 
@@ -19,12 +19,12 @@ export class GeipanFileDatasource extends GeipanDatasource implements Datasource
     super()
   }
 
-  save(context: HtmlRR0SsgContext, fetched: GeipanCaseSummary[], fetchTime: Date): void {
+  save(context: HtmlRR0Context, fetched: GeipanCaseSummary[], fetchTime: Date): void {
     const nativeCases = fetched.map(summary => this.writeMapper.map(context, summary, fetchTime))
     return this.file.write(context, nativeCases, fetchTime, this)
   }
 
-  protected async readCases(context: HtmlRR0SsgContext): Promise<GeipanCaseSummary[]> {
+  protected async readCases(context: HtmlRR0Context): Promise<GeipanCaseSummary[]> {
     const file = await this.file.read(context, this)
     const csvMapper = new GeipanCaseToSummaryMapper(geipanHttpDatasource.baseUrl, geipanHttpDatasource.searchPath,
       geipanHttpDatasource.authors)

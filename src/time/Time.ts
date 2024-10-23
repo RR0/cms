@@ -1,6 +1,6 @@
-import { TimeTextBuilder } from "./TimeTextBuilder.js"
+import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
 import { TimeContext } from "./TimeContext.js"
-import { HtmlRR0SsgContext, RR0SsgContextImpl } from "../RR0SsgContext.js"
+import { HtmlRR0Context, RR0ContextImpl } from "../RR0Context.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 
 export class Time {
@@ -26,14 +26,14 @@ export class Time {
     return Time.timePathRegex.exec(fileName)
   }
 
-  static titleFromFile(context: HtmlRR0SsgContext, fileName: string,
+  static titleFromFile(context: HtmlRR0Context, fileName: string,
                        timeTextBuilder: TimeTextBuilder): string | undefined {
     let title: string | undefined
     const timeContext = TimeContext.fromFileName(context, fileName)
     if (timeContext) {
-      const pageContext = new RR0SsgContextImpl(context.locale, timeContext, context.config, context.people,
+      const pageContext = new RR0ContextImpl(context.locale, timeContext, context.config, context.people,
         context.file)
-      title = timeTextBuilder.build(pageContext)
+      title = timeTextBuilder.build(pageContext, true)
       title = StringUtil.capitalizeFirstLetter(title)
     }
     return title

@@ -1,12 +1,12 @@
 import { DomReplacement } from "../../../../../../time/DomReplacement.js"
-import { HtmlRR0SsgContext } from "../../../../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { CodeParser } from "./CodeParser.js"
 
-export class CodeReplacer implements DomReplacement<HtmlRR0SsgContext> {
+export class CodeReplacer implements DomReplacement<HtmlRR0Context> {
   constructor(protected parsers: CodeParser[]) {
   }
 
-  async replacement(context: HtmlRR0SsgContext, codeElement: HTMLElement): Promise<HTMLElement> {
+  async replacement(context: HtmlRR0Context, codeElement: HTMLElement): Promise<HTMLElement> {
     if (codeElement) {
       const output = context.file.document.createElement("code")
       const innerHTML = codeElement.innerHTML

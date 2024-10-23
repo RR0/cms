@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { Source } from "./Source.js"
 import { TimeContext, TimeTextBuilder } from "../time/index.js"
 
@@ -10,14 +10,14 @@ export class SourceRenderer {
   constructor(readonly timeTextBuilder: TimeTextBuilder) {
   }
 
-  render(context: HtmlRR0SsgContext, source: Source): HTMLElement {
+  render(context: HtmlRR0Context, source: Source): HTMLElement {
     const sourceEl = context.file.document.createElement("span")
     sourceEl.className = "source"
     this.renderContent(context, source, sourceEl)
     return sourceEl
   }
 
-  renderContent(context: HtmlRR0SsgContext, source: Source, container: HTMLElement): void {
+  renderContent(context: HtmlRR0Context, source: Source, container: HTMLElement): void {
     const doc = context.file.document
     const sourceContext = context.clone()
     const authors = source.authors
@@ -62,7 +62,7 @@ export class SourceRenderer {
         } else {
           sourceContext.time.updateFromStr(timeValue as unknown as string)
         }
-        pubItems.push(this.timeTextBuilder.build(sourceContext))
+        pubItems.push(this.timeTextBuilder.build(sourceContext, true))
       }
       if (source.index) {
         pubItems.push(source.index.toString())

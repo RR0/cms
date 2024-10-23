@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { AbstractDatasource } from "../AbstractDatasource.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 
@@ -8,5 +8,5 @@ export abstract class UfoSearchDatasource extends AbstractDatasource<UfoSearchCa
     super(["Geldreich, Rich"], "UFO Search")
   }
 
-  protected abstract readCases(context: RR0SsgContext): Promise<UfoSearchCase[]>
+  protected abstract readCases(context: RR0Context): Promise<UfoSearchCase[]>
 }

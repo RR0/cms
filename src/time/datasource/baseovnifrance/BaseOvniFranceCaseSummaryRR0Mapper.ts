@@ -1,7 +1,7 @@
 import assert from "assert"
 import { CaseMapper } from "../CaseMapper.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { TimeContext } from "../../TimeContext.js"
 import { DepartmentService } from "../../../org/country/region/department/DepartmentService.js"
@@ -11,14 +11,14 @@ import { Source } from "../../../source/index.js"
 /**
  * Maps a Base OVNI France case to a RR0 case.
  */
-export class BaseOvniFranceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0SsgContext, BaseOvniFranceCaseSummary, RR0CaseSummary> {
+export class BaseOvniFranceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, BaseOvniFranceCaseSummary, RR0CaseSummary> {
 
   constructor(
     protected depService: DepartmentService, protected cityService: CityService,
     readonly baseUrl: URL, readonly copyright: string, readonly authors: string[]) {
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: BaseOvniFranceCaseSummary, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: BaseOvniFranceCaseSummary, sourceTime: Date): RR0CaseSummary {
     const caseSource: Source = {
       previousSourceRefs: [], events: [],
       url: sourceCase.url, title: "cas n° " + sourceCase.id, authors: this.authors,

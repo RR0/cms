@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { JSDOM } from "jsdom"
 import { ObjectUtil } from "../../../util/index.js"
@@ -15,7 +15,7 @@ export class AcufoDatasource extends AbstractDatasource<AcufoCase> {
     super(["Gross, Patrick"], "ACUFO/ALSACAT (Les ovnis vus de près)")
   }
 
-  protected async readCases(context: RR0SsgContext): Promise<AcufoCase[]> {
+  protected async readCases(context: RR0Context): Promise<AcufoCase[]> {
     const day = context.time.getDayOfMonth()
     const month = context.time.getMonth()
     const year = context.time.getYear()
@@ -28,7 +28,7 @@ export class AcufoDatasource extends AbstractDatasource<AcufoCase> {
     return Array.from(rowEls).map(row => this.getNativeCase(context, row))
   }
 
-  protected getNativeCase(context: RR0SsgContext, row: Element): AcufoCase {
+  protected getNativeCase(context: RR0Context, row: Element): AcufoCase {
     const fields = row.querySelectorAll("td")
     const caseLink = fields[0].firstElementChild as HTMLAnchorElement
     const dateFormat = /(\d\d)\/(\d\d)\/(\d\d\d\d) (\d\d):(\d\d)/

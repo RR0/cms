@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext, RR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context, RR0Context } from "../../RR0Context.js"
 import { TimeRenderer, TimeRenderOptions } from "./TimeRenderer.js"
 import { TimeReplacer } from "./TimeReplacer.js"
 
@@ -10,7 +10,7 @@ export class TimeElementFactory {
   constructor(readonly renderer: TimeRenderer) {
   }
 
-  create(context: HtmlRR0SsgContext, previousContext: HtmlRR0SsgContext | undefined,
+  create(context: HtmlRR0Context, previousContext: HtmlRR0Context | undefined,
          options: TimeRenderOptions = {url: true}): HTMLElement | undefined {
     let replacement: HTMLElement | undefined
     const time = context.time
@@ -34,7 +34,7 @@ export class TimeElementFactory {
     return replacement
   }
 
-  createInterval(fromContext: HtmlRR0SsgContext, toContext: HtmlRR0SsgContext, previousContext: HtmlRR0SsgContext,
+  protected createInterval(fromContext: HtmlRR0Context, toContext: HtmlRR0Context, previousContext: HtmlRR0Context,
                  options: TimeRenderOptions): HTMLElement | undefined {
     let replacement: HTMLElement
     const startReplacement = this.valueReplacement(fromContext, previousContext, options)
@@ -50,7 +50,7 @@ export class TimeElementFactory {
     return replacement
   }
 
-  createStarting(fromContext: HtmlRR0SsgContext, previousContext: HtmlRR0SsgContext,
+  protected createStarting(fromContext: HtmlRR0Context, previousContext: HtmlRR0Context,
                  options: TimeRenderOptions): HTMLElement | undefined {
     const {result, replacement} = this.renderer.renderContent(fromContext, previousContext, options)
     let startingReplacement: HTMLElement
@@ -62,7 +62,7 @@ export class TimeElementFactory {
     return result
   }
 
-  valueReplacement(context: HtmlRR0SsgContext, previousContext: RR0SsgContext | undefined,
+  protected valueReplacement(context: HtmlRR0Context, previousContext: RR0Context | undefined,
                    options: TimeRenderOptions = {url: true}): HTMLElement | undefined {
     let replacement
     if (context.time.duration) {
@@ -73,7 +73,7 @@ export class TimeElementFactory {
     return replacement
   }
 
-  protected durationReplacement(context: HtmlRR0SsgContext): HTMLTimeElement | undefined {
+  protected durationReplacement(context: HtmlRR0Context): HTMLTimeElement | undefined {
     const duration = context.time.duration
     const items = []
     const messages = context.messages.context.time.duration
@@ -113,7 +113,7 @@ export class TimeElementFactory {
   }
 
   protected dateTimeReplacement(
-    context: HtmlRR0SsgContext, previousContext: RR0SsgContext | null, options: TimeRenderOptions = {url: true}
+    context: HtmlRR0Context, previousContext: RR0Context | null, options: TimeRenderOptions = {url: true}
   ): HTMLElement | undefined {
     let replacement: HTMLElement | undefined = undefined
     if (context.time.isDefined()) {

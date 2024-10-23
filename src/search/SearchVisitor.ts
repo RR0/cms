@@ -1,7 +1,7 @@
 import { HtmlFileContents } from "ssg-api"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import fs from "fs"
-import { TimeTextBuilder } from "../time/TimeTextBuilder.js"
+import { TimeTextBuilder } from "../time/text/TimeTextBuilder.js"
 import { FileVisitor } from "../RR0ContentStep.js"
 
 export type PageInfo = {
@@ -56,7 +56,7 @@ export class SearchVisitor implements FileVisitor {
     }
   }
 
-  async visit(context: HtmlRR0SsgContext): Promise<void> {
+  async visit(context: HtmlRR0Context): Promise<void> {
     const file = context.file
     const title = file.title
     const outDir = "out/"
@@ -93,7 +93,7 @@ export class SearchVisitor implements FileVisitor {
     return div.textContent
   }
 
-  protected indexContent(context: HtmlRR0SsgContext, outputFile: HtmlFileContents) {
+  protected indexContent(context: HtmlRR0Context, outputFile: HtmlFileContents) {
     const contents = this.getContents(outputFile.document)
     const contentsRecord: PageInfo = {
       title: outputFile.title,
@@ -106,7 +106,7 @@ export class SearchVisitor implements FileVisitor {
     this.contentStream.write(str)
   }
 
-  protected indexWords(context: HtmlRR0SsgContext, outputFile: HtmlFileContents) {
+  protected indexWords(context: HtmlRR0Context, outputFile: HtmlFileContents) {
     const pageIndex = this.index.pages.length
     const nonSignificant = context.messages.nonSignificantWords
     const contents = this.getContents(outputFile.document)

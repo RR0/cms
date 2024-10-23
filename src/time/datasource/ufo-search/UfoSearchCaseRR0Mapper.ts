@@ -1,13 +1,13 @@
 import assert from "assert"
 import { CaseMapper } from "../CaseMapper.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/index.js"
 import { TimeContext } from "../../TimeContext.js"
 import { CityService } from "../../../org/index.js"
 import { Source } from "../../../source/index.js"
 
-export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0SsgContext, UfoSearchCase, RR0CaseSummary> {
+export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0Context, UfoSearchCase, RR0CaseSummary> {
 
   constructor(protected cityService: CityService, readonly baseUrl: string, readonly copyright: string,
               readonly authors: string[]) {
@@ -18,7 +18,7 @@ export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0SsgContext, Ufo
     return description.join(" ")
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: UfoSearchCase, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: UfoSearchCase, sourceTime: Date): RR0CaseSummary {
     const authors = this.authors
     const url = sourceCase.url
     const title = "cas n° " + sourceCase.id
@@ -38,7 +38,7 @@ export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0SsgContext, Ufo
     }
   }
 
-  protected getPlace(context: HtmlRR0SsgContext, placeName: string): NamedPlace {
+  protected getPlace(context: HtmlRR0Context, placeName: string): NamedPlace {
     const org = this.cityService.find(context, placeName, undefined)
     assert.ok(org, `Could not find place "${placeName}"}"`)
     return {name: org.getMessages(context).toTitle(context, org, {parent: true}), org, place: org.places[0]}

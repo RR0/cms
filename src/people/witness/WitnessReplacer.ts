@@ -1,4 +1,4 @@
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 
 export class WitnessReplacer {
 
@@ -12,7 +12,7 @@ export class WitnessReplacer {
    * @param witnessName The actual name of the witness (even if to be anonymized)
    * @param witnessId The unique id (a number typically) to identify the witness in this case.
    */
-  replacement(context: HtmlRR0SsgContext, witnessName: string, witnessId?: string): HTMLElement {
+  replacement(context: HtmlRR0Context, witnessName: string, witnessId?: string): HTMLElement {
     const doc = context.file.document
     const span = doc.createElement("span")
     if (this.now.getFullYear() - context.time.getYear() <= this.max) {

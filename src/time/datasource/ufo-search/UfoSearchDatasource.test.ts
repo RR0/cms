@@ -1,6 +1,6 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { ufoSearchTestCases } from "./UfoSearchTestCases.js"
@@ -24,7 +24,7 @@ describe("UfoSearchCaseSource", () => {
     }
   }(ufoSearchRR0Mapping, ufoSearchTestCases)
 
-  let context: HtmlRR0SsgContext
+  let context: HtmlRR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")

@@ -1,5 +1,5 @@
 import { DomReplacement } from "../DomReplacement.js"
-import { HtmlRR0SsgContext } from "../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../RR0Context.js"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { RR0CaseSummary } from "./rr0/RR0CaseSummary.js"
 import { RR0CaseMapping } from "./rr0/RR0CaseMapping.js"
@@ -9,7 +9,7 @@ import { HttpSource } from "./HttpSource.js"
 /**
  * Replaces a (ul) tag from (chronology) files with case summaries from external datasources.
  */
-export class ChronologyReplacer implements DomReplacement<HtmlRR0SsgContext, HTMLUListElement> {
+export class ChronologyReplacer implements DomReplacement<HtmlRR0Context, HTMLUListElement> {
   /**
    * Remember already processed datasources.
    *
@@ -20,13 +20,13 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0SsgContext, HTM
   constructor(protected mappings: RR0CaseMapping<any>[], protected renderer: CaseSummaryRenderer) {
   }
 
-  async replacement(context: HtmlRR0SsgContext, element: HTMLUListElement): Promise<HTMLUListElement> {
+  async replacement(context: HtmlRR0Context, element: HTMLUListElement): Promise<HTMLUListElement> {
     element.classList.add("indexed")  // Make sure the user can share an anchor to a list item.
     await this.aggregate(context, element)
     return element
   }
 
-  protected async aggregate(context: HtmlRR0SsgContext, element: HTMLUListElement) {
+  protected async aggregate(context: HtmlRR0Context, element: HTMLUListElement) {
     const existingCases: RR0CaseSummary[] = []
     const casesToAdd: RR0CaseSummary[] = []
     for (const mapping of this.mappings) {
@@ -60,7 +60,7 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0SsgContext, HTM
     }
   }
 
-  protected async aggregateDatasource(mapping: RR0CaseMapping<any>, context: HtmlRR0SsgContext,
+  protected async aggregateDatasource(mapping: RR0CaseMapping<any>, context: HtmlRR0Context,
                                       existingCases: RR0CaseSummary[], casesToAdd: RR0CaseSummary[]) {
     let fetched: any[]
     const datasource = mapping.datasource
@@ -102,7 +102,7 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0SsgContext, HTM
     }
   }
 
-  protected merge(context: HtmlRR0SsgContext, sourceCases: any[], fetchTime: Date, mapping: RR0CaseMapping<any>,
+  protected merge(context: HtmlRR0Context, sourceCases: any[], fetchTime: Date, mapping: RR0CaseMapping<any>,
                   existingCases: RR0CaseSummary[]
   ): RR0CaseSummary[] {
     const casesToMerge = sourceCases.map(sourceCase => mapping.mapper.map(context, sourceCase, fetchTime))

@@ -1,8 +1,8 @@
 import { CaseMapper } from "./CaseMapper.js"
-import { RR0SsgContext } from "../../RR0SsgContext.js"
+import { RR0Context } from "../../RR0Context.js"
 import { TimeContext } from "../TimeContext.js"
 
-export class CsvMapper<S> implements CaseMapper<RR0SsgContext, S, string> {
+export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
 
   readonly fields = new Set<string>()
 
@@ -10,7 +10,7 @@ export class CsvMapper<S> implements CaseMapper<RR0SsgContext, S, string> {
     readonly sep = ",", readonly escapeStr = "\"", readonly prefix = "") {
   }
 
-  readonly fieldMapper = (context: RR0SsgContext, key: string, value: any, sourceTime: Date): string => {
+  readonly fieldMapper = (context: RR0Context, key: string, value: any, sourceTime: Date): string => {
     let addField = true
     let val: any
     if (value instanceof Date) {
@@ -47,7 +47,7 @@ export class CsvMapper<S> implements CaseMapper<RR0SsgContext, S, string> {
    * @param sourceCase
    * @param sourceTime
    */
-  map(context: RR0SsgContext, sourceCase: S, sourceTime: Date): string {
+  map(context: RR0Context, sourceCase: S, sourceTime: Date): string {
     const entries = Array.from(Object.entries(sourceCase)).sort((entry1, entry2) => entry1[0].localeCompare(entry2[0]))
     return entries.map(entry => this.fieldMapper(context, entry[0], entry[1], sourceTime)).join(
       this.sep)
@@ -60,7 +60,7 @@ export class CsvMapper<S> implements CaseMapper<RR0SsgContext, S, string> {
    * @param sourceCases
    * @param sourceTime
    */
-  mapAll(context: RR0SsgContext, sourceCases: S[], sourceTime: Date): string {
+  mapAll(context: RR0Context, sourceCases: S[], sourceTime: Date): string {
     const values = sourceCases.map(c => this.map(context, c, sourceTime))
     return Array.from(this.fields).join(this.sep) + "\n" + values.join("\n")
   }

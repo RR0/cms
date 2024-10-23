@@ -1,5 +1,5 @@
 import { HtmlSsgContext, Link, ReplaceCommand } from "ssg-api"
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 
 export interface LinkHandler<C extends HtmlSsgContext> {
 
@@ -15,7 +15,7 @@ export interface LinkHandler<C extends HtmlSsgContext> {
 /**
  * Convert meta <link> to HTML <nav> links.
  */
-export class MetaLinkReplaceCommand<C extends HtmlRR0SsgContext = HtmlRR0SsgContext> implements ReplaceCommand<C> {
+export class MetaLinkReplaceCommand<C extends HtmlRR0Context = HtmlRR0Context> implements ReplaceCommand<C> {
 
   constructor(protected defaultHandler?: LinkHandler<C>) {
   }
@@ -52,7 +52,7 @@ export class MetaLinkReplaceCommand<C extends HtmlRR0SsgContext = HtmlRR0SsgCont
     // NOP
   }
 
-  protected linkItem(context: HtmlRR0SsgContext, link: Link): HTMLLIElement {
+  protected linkItem(context: HtmlRR0Context, link: Link): HTMLLIElement {
     const doc = context.file.document
     const a = doc.createElement("a")
     a.className = link.type

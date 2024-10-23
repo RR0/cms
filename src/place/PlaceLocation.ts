@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../RR0SsgContext.js"
+import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 
 export type DMS = {
@@ -53,7 +53,7 @@ export class PlaceLocation {
     return sign * direction * (degrees + minutes / 60 + seconds / 3600)
   }
 
-  toDMS(context: RR0SsgContext): string {
+  toDMS(context: RR0Context): string {
     const placeMsg = context.messages.place
     return placeMsg.dmsLat(PlaceLocation.fromDouble(this.lat)) + ","
       + placeMsg.dmsLng(PlaceLocation.fromDouble(this.lng))

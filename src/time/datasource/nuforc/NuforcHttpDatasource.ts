@@ -1,4 +1,4 @@
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
@@ -22,7 +22,7 @@ export class NuforcHttpDatasource extends NuforcDatasource {
     super()
   }
 
-  protected queryUrl(context: RR0SsgContext): URL {
+  protected queryUrl(context: RR0Context): URL {
     const day = context.time.getDayOfMonth()
     const month = context.time.getMonth()
     const year = context.time.getYear()
@@ -35,7 +35,7 @@ export class NuforcHttpDatasource extends NuforcDatasource {
     return searchUrl
   }
 
-  protected async readCases(context: RR0SsgContext): Promise<NuforcCaseSummary[]> {
+  protected async readCases(context: RR0Context): Promise<NuforcCaseSummary[]> {
     const searchUrl = this.queryUrl(context)
     const doc = await this.http.get(searchUrl, {headers: {accept: "text/html;charset=utf-8"}})
     const rowEls = doc.querySelectorAll("#table_1 tbody tr")
@@ -58,7 +58,7 @@ export class NuforcHttpDatasource extends NuforcDatasource {
     return ObjectUtil.enumFromValue<NuforcState>(NuforcState, stateStr)
   }
 
-  protected getTime(dateField: HTMLTableCellElement, context: RR0SsgContext): TimeContext {
+  protected getTime(dateField: HTMLTableCellElement, context: RR0Context): TimeContext {
     const dateFields = NuforcHttpDatasource.dateFormat.exec(dateField.textContent)
     const itemContext = context.clone()
     const dateTime = itemContext.time
@@ -86,7 +86,7 @@ export class NuforcHttpDatasource extends NuforcDatasource {
     return imageField.textContent === "Y"
   }
 
-  protected getNativeCase(context: RR0SsgContext, row: Element): NuforcCaseSummary {
+  protected getNativeCase(context: RR0Context, row: Element): NuforcCaseSummary {
     const columns = row.querySelectorAll("td")
     const url = this.getLink(columns[0])
     const caseNumber = new URLSearchParams(url.search).get("id")

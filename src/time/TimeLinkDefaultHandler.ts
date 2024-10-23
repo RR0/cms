@@ -1,16 +1,16 @@
 import { LinkHandler } from "../MetaLinkReplaceCommand.js"
 import { Time } from "./Time.js"
-import { HtmlRR0SsgContext } from "../RR0SsgContext.js"
+import { HtmlRR0Context } from "../RR0Context.js"
 import { Link, LinkType } from "ssg-api"
-import { TimeTextBuilder } from "./TimeTextBuilder.js"
+import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
 import { TimeService } from "./TimeService"
 
-export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0SsgContext> {
+export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0Context> {
 
   constructor(protected service: TimeService, protected timeTextBuilder: TimeTextBuilder) {
   }
 
-  contents(context: HtmlRR0SsgContext): Link | undefined {
+  contents(context: HtmlRR0Context): Link | undefined {
     const prevLink = this.prev(context)
     if (prevLink) {
       let contentUrl = this.service.matchExistingTimeFile(prevLink.url.substring(1))
@@ -23,7 +23,7 @@ export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0SsgContext> {
     }
   }
 
-  next(context: HtmlRR0SsgContext): Link | undefined {
+  next(context: HtmlRR0Context): Link | undefined {
     let fileName = context.file.name
     if (this.isTimeFile(fileName)) {
       const pos = this.service.files.indexOf(fileName)
@@ -37,7 +37,7 @@ export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0SsgContext> {
     }
   }
 
-  prev(context: HtmlRR0SsgContext): Link | undefined {
+  prev(context: HtmlRR0Context): Link | undefined {
     let fileName = context.file.name
     if (this.isTimeFile(fileName)) {
       const pos = this.service.files.indexOf(fileName)
@@ -53,7 +53,7 @@ export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0SsgContext> {
     }
   }
 
-  start(context: HtmlRR0SsgContext): Link | undefined {
+  start(context: HtmlRR0Context): Link | undefined {
     if (this.isTimeFile(context.file.name)) {
       return {
         type: LinkType.contents,

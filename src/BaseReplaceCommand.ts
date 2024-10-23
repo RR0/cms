@@ -1,5 +1,5 @@
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
-import { HtmlRR0SsgContext } from "./RR0SsgContext.js"
+import { HtmlRR0Context } from "./RR0Context.js"
 
 import path from "path"
 
@@ -12,7 +12,7 @@ export class BaseReplaceCommand extends DomReplaceCommand {
     super("base", undefined)
   }
 
-  protected async createReplacer(context: HtmlRR0SsgContext): Promise<DomReplacer> {
+  protected async createReplacer(context: HtmlRR0Context): Promise<DomReplacer> {
     const self = this
     return new class implements DomReplacer<HTMLBaseElement> {
       async replace(original: HTMLBaseElement): Promise<HTMLBaseElement> {

@@ -1,14 +1,14 @@
 import assert from "assert"
 import { CaseMapper } from "../CaseMapper.js"
 import { UrecatCase } from "./UrecatCase.js"
-import { HtmlRR0SsgContext } from "../../../RR0SsgContext.js"
+import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { TimeContext } from "../../TimeContext.js"
 import { CityService } from "../../../org/country/index.js"
 import { CountryService } from "../../../org/country/CountryService.js"
 import { Source } from "../../../source/index.js"
 
-export class UrecatRR0Mapper implements CaseMapper<HtmlRR0SsgContext, UrecatCase, RR0CaseSummary> {
+export class UrecatRR0Mapper implements CaseMapper<HtmlRR0Context, UrecatCase, RR0CaseSummary> {
 
   constructor(
     protected cityService: CityService, protected countryService: CountryService,
@@ -20,7 +20,7 @@ export class UrecatRR0Mapper implements CaseMapper<HtmlRR0SsgContext, UrecatCase
     return description.join(", ")
   }
 
-  map(context: HtmlRR0SsgContext, sourceCase: UrecatCase, sourceTime: Date): RR0CaseSummary {
+  map(context: HtmlRR0Context, sourceCase: UrecatCase, sourceTime: Date): RR0CaseSummary {
     const caseSource: Source = {
       events: [], previousSourceRefs: [],
       url: sourceCase.url, title: "cas n° " + sourceCase.id, authors: this.authors,

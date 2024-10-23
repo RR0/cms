@@ -22,7 +22,7 @@ import {
 import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/index.js"
 import { GooglePlaceService, PlaceReplacerFactory } from "./place/index.js"
 import { OrganizationFactory, OrganizationService } from "./org/index.js"
-import { HtmlRR0SsgContext, RR0SsgContextImpl } from "./RR0SsgContext.js"
+import { HtmlRR0Context, RR0ContextImpl } from "./RR0Context.js"
 import { CLI, HtmlTable } from "./util/index.js"
 import {
   AngularExpressionReplaceCommand,
@@ -194,7 +194,7 @@ const timeFormat: Intl.DateTimeFormatOptions = {
   minute: "2-digit"
 }
 const timeContext = new TimeContext()
-const context = new RR0SsgContextImpl("fr", timeContext, config)
+const context = new RR0ContextImpl("fr", timeContext, config)
 context.setVar("mail", "rr0@rr0.org")
 
 const siteBaseUrl = "https://rr0.org/"
@@ -289,7 +289,7 @@ getTimeFiles().then(async (timeFiles) => {
         /*, baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping*/
       ], caseRenderer)
   )
-  const timeDefaultHandler = (context: HtmlRR0SsgContext): string | undefined => {
+  const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {
     let title: string | undefined
     title = Time.titleFromFile(context, context.file.name, timeTextBuilder)
     return title

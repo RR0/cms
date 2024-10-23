@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
-import { RR0SsgContext } from "../../../../../RR0SsgContext.js"
+import { RR0Context } from "../../../../../RR0Context.js"
 import { rr0TestUtil } from "../../../../../test/index.js"
 import { france_fr } from "../../../../eu/fr/France_fr.js"
 import { nanterreMessages } from "../../../../eu/fr/region/idf/92/Nanterre/NanterreMessages.js"
@@ -14,7 +14,7 @@ import { canada_fr } from "../../../../ca/Canada_fr.js"
 
 describe("CityMessages", () => {
 
-  let context: RR0SsgContext
+  let context: RR0Context
 
   beforeEach(() => {
     context = rr0TestUtil.newContext("time/1/9/7/0/03/index.html")

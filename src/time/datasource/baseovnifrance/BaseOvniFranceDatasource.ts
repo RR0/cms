@@ -1,5 +1,5 @@
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { RR0SsgContext } from "../../../RR0SsgContext.js"
+import { RR0Context } from "../../../RR0Context.js"
 import { AbstractDatasource } from "../AbstractDatasource.js"
 
 export abstract class BaseOvniFranceDatasource extends AbstractDatasource<BaseOvniFranceCaseSummary> {
@@ -8,5 +8,5 @@ export abstract class BaseOvniFranceDatasource extends AbstractDatasource<BaseOv
     super(authors, copyright)
   }
 
-  protected abstract readCases(context: RR0SsgContext): Promise<BaseOvniFranceCaseSummary[]>
+  protected abstract readCases(context: RR0Context): Promise<BaseOvniFranceCaseSummary[]>
 }
