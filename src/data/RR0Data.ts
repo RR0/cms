@@ -1,7 +1,7 @@
-import { NamedPlace } from "../time/datasource/rr0/RR0CaseSummary.js"
 import { TimeContext } from "@rr0/time"
 import { Source } from "../source/Source.js"
 import { RR0Event } from "../event/RR0Event.js"
+import { NamedPlace } from "../time/datasource/rr0/NamedPlace"
 
 /**
  * Any kind of data on RR0 (see implementing classes).

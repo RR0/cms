@@ -3,7 +3,7 @@ import { CaseMapper } from "../CaseMapper.js"
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NuforcCountry } from "./NuforcCountry.js"
-import { NamedPlace, RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
+import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { TimeContext } from "@rr0/time"
 import { NuforcShape } from "./NuforcShape.js"
 import { CityService } from "../../../org/country/index.js"
@@ -26,6 +26,7 @@ import { usa } from "../../../org/us/Usa.js"
 import { Source } from "../../../source/index.js"
 import { algeria } from "../../../org/dz/Algeria.js"
 import { panama } from "../../../org/pa/Panama.js"
+import { NamedPlace } from "../rr0/NamedPlace"
 
 export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSummary, RR0CaseSummary> {
 

@@ -1,13 +1,5 @@
-import { Place } from "../../../place/index.js"
-import { Organization } from "../../../org/index.js"
 import { RR0Data } from "../../../data/index.js"
 import { RR0Event } from "../../../event/index.js"
-
-export type NamedPlace = {
-  readonly place?: Place
-  readonly org?: Organization
-  readonly name: string
-}
 
 export interface RR0CaseSummary extends RR0Event {
   /**
