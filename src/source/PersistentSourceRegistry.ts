@@ -12,8 +12,12 @@ export class PersistentSourceRegistry extends SourceRegistry {
   constructor(dataService: AllDataService, http: HttpSource, baseUrl: string, protected fileName: string,
               options: Intl.DateTimeFormatOptions) {
     super(dataService, http, baseUrl, options)
-    const registryFileContents = FileContents.read(fileName, "utf-8").contents
-    this.registry = JSON.parse(registryFileContents)
+    try {
+      const registryFileContents = FileContents.read(fileName, "utf-8").contents
+      this.registry = JSON.parse(registryFileContents)
+    } catch (e) {
+      console.warn("Could not read persistent source registry", fileName, e)
+    }
   }
 
   protected async get(href: string): Promise<Source> {

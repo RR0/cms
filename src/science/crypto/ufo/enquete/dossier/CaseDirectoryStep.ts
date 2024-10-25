@@ -22,12 +22,6 @@ export class CaseDirectoryStep extends DirectoryStep {
     super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, "case directory")
   }
 
-  static async create(outputFunc: OutputFunc, config: SsgConfig, caseService: CaseService): Promise<CaseDirectoryStep> {
-    const rootDirs = caseService.files
-    return new CaseDirectoryStep(caseService, rootDirs, ["science/crypto/ufo/enquete/dossier/canular"],
-      "science/crypto/ufo/enquete/dossier/index.html", outputFunc, config)
-  }
-
   /**
    * Convert an array of Case[] to an <ul> HTML unordered list.
    *
