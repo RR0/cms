@@ -6,8 +6,6 @@ import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import path from "path"
 
-const root = "src"
-
 describe("JsonMapper", () => {
 
   const dataDate = new Date("2024-08-12 00:00:00 GMT+1")

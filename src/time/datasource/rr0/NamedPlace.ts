@@ -1,5 +1,5 @@
-import { Place } from "../../../place"
-import { Organization } from "../../../org"
+import { Place } from "../../../place/index.js"
+import { Organization } from "../../../org/index.js"
 
 export type NamedPlace = {
   readonly place?: Place
