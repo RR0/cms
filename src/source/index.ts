@@ -1,7 +1,4 @@
-export * from "./Article.js"
-export * from "./ArticleFactory.js"
 export * from "./PersistentSourceRegistry.js"
-export * from "./Source.js"
 export * from "./SourceFactory.js"
 export * from "./SourceFileCounter.js"
 export * from "./SourceIndexStep.js"

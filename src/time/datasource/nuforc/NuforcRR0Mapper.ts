@@ -23,10 +23,10 @@ import { seychelles } from "../../../org/sc/Seychelles.js"
 import { southKorea } from "../../../org/kr/SouthKorea.js"
 import { uk } from "../../../org/uk/Uk.js"
 import { usa } from "../../../org/us/Usa.js"
-import { Source } from "../../../source/index.js"
 import { algeria } from "../../../org/dz/Algeria.js"
 import { panama } from "../../../org/pa/Panama.js"
 import { NamedPlace } from "../rr0/NamedPlace"
+import { Source } from "@rr0/data/dist/source"
 
 export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSummary, RR0CaseSummary> {
 

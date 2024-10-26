@@ -1,8 +1,7 @@
 import { TimeRenderer } from "./html/TimeRenderer.js"
 import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
-import { AbstractDataService, AllDataService } from "../data/index.js"
-import { RR0Event } from "../event/index.js"
 import { TimeUrlBuilder } from "./TimeUrlBuilder"
+import { AbstractDataService, AllDataService, RR0Event } from "@rr0/data"
 
 export type TimeServiceOptions = {
   readonly root: string,

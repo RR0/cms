@@ -1,3 +1,5 @@
+import path from "path"
+import fs from "fs"
 import {
   CaseSummaryRenderer,
   ChronologyReplacerActions,
@@ -74,19 +76,16 @@ import { BaseReplaceCommand } from "./BaseReplaceCommand.js"
 import { OpenGraphCommand } from "./OpenGraphCommand.js"
 import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
 import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
-import path from "path"
 import { IndexedReplacerFactory } from "./index/IndexedReplacerFactory.js"
 import { APIFactory, CodeReplacerFactory } from "./tech/index.js"
 import { ContentVisitor, RR0ContentStep } from "./RR0ContentStep.js"
-import { AllDataService, TypedDataFactory } from "./data/index.js"
 import { UnitReplaceCommand } from "./value/index.js"
 import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
-import { RR0EventFactory } from "./event/index.js"
-import fs from "fs"
 
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
+import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 
 export interface RR0BuildArgs {
   /**

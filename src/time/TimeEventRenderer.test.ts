@@ -5,14 +5,14 @@ import { Place } from "../place/index.js"
 import { franceCity } from "../org/eu/fr/region/FranceCity.js"
 import { HttpSource, NamedPlace, RR0CaseSummary } from "./datasource/index.js"
 import { TimeContext } from "@rr0/time"
-import { Source, SourceFactory, SourceRenderer } from "../source/index.js"
+import { SourceFactory, SourceRenderer } from "../source/index.js"
 import { NoteFileCounter, NoteRenderer } from "../note/index.js"
-import { AllDataService } from "../data/index.js"
 import { HautsDeSeineCityCode } from "../org/eu/fr/region/idf/92/HautsDeSeineCityCode.js"
+import { AllDataService } from "@rr0/data"
+import { Source } from "@rr0/data/dist/source"
 
 describe("TimeEventRenderer", () => {
 
-  const root = "src/time"
   const dataService = new AllDataService([])
   const baseUrl = "https://rr0.org"
   const http = new HttpSource()

@@ -1,7 +1,6 @@
 import { AnchorHandler } from "./AnchorHandler.js"
 import { HtmlRR0Context } from "RR0Context.js"
-import { AllDataService } from "../data/AllDataService.js"
-import { RR0Data } from "../data/RR0Data.js"
+import { AllDataService, RR0Data } from "@rr0/data"
 
 export class DataAnchorHandler implements AnchorHandler {
 

@@ -2,7 +2,6 @@ import { beforeEach, describe, test } from "@javarome/testscript"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import { TimeContext } from "@rr0/time"
-import { Source } from "../../../source/index.js"
 import { HtmlTag } from "../../../util/index.js"
 import { SceauCaseMapping } from "./SceauCaseMapping.js"
 import { SceauDatasource } from "./SceauDatasource.js"
@@ -12,6 +11,7 @@ import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { sceauDatasource, sceauRR0Mapper } from "./SceauRR0Mapping.js"
 import { sceauTestCases } from "./SceauTestCases.js"
+import { Source } from "@rr0/data/dist/source"
 
 export class SceauTestDatasource extends SceauDatasource {
 

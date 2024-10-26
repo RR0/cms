@@ -5,7 +5,7 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NamedPlace, RR0CaseSummary } from "../rr0/index.js"
 import { TimeContext } from "@rr0/time"
 import { CityService } from "../../../org/index.js"
-import { Source } from "../../../source/index.js"
+import { Source } from "@rr0/data/dist/source"
 
 export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0Context, UfoSearchCase, RR0CaseSummary> {
 

@@ -6,8 +6,8 @@ import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { TimeContext } from "@rr0/time"
 import { CityService } from "../../../org/country/index.js"
 import { CountryService } from "../../../org/country/CountryService.js"
-import { Source } from "../../../source/index.js"
 import { NamedPlace } from "../rr0/NamedPlace"
+import { Source } from "@rr0/data/dist/source"
 
 export class UrecatRR0Mapper implements CaseMapper<HtmlRR0Context, UrecatCase, RR0CaseSummary> {
 

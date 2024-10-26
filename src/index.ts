@@ -1,7 +1,5 @@
 export * from "./anchor/index.js"
 export * from "./book/index.js"
-export * from "./data/index.js"
-export * from "./event/index.js"
 export * from "./index/index.js"
 export * from "./lang/index.js"
 export * from "./note/index.js"

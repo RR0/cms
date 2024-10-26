@@ -1,12 +1,12 @@
 import { HtmlRR0Context } from "../RR0Context.js"
-import { Publication, Source } from "./Source.js"
 import path from "path"
 import { TimeContext } from "@rr0/time"
 import { JSDOM } from "jsdom"
-import { AllDataService } from "../data/AllDataService.js"
 import { HttpSource } from "../time/datasource/HttpSource.js"
 import { Time } from "../time"
 import { FileContents } from "@javarome/fileutil"
+import { AllDataService } from "@rr0/data"
+import { Publication, Source } from "@rr0/data/dist/source"
 
 /**
  * Create Source objects.

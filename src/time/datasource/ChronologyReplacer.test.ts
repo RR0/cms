@@ -7,8 +7,8 @@ import { rr0TestUtil } from "../../test/index.js"
 import { SourceFactory, SourceRenderer } from "../../source/index.js"
 import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
-import { AllDataService } from "../../data/index.js"
 import { HttpSource } from "./HttpSource.js"
+import { AllDataService } from "@rr0/data"
 
 describe("ChronologyReplacer", () => {
 

@@ -1,5 +1,5 @@
 import { Chapter } from "./Chapters.js"
-import { Source } from "../source/Source.js"
+import { Source } from "@rr0/data/dist/source"
 
 export interface Book extends Source {
 

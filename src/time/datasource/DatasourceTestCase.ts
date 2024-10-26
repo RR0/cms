@@ -3,14 +3,15 @@ import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import { TimeContext } from "@rr0/time"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
-import { Source, SourceFactory, SourceRenderer } from "../../source/index.js"
+import { SourceFactory, SourceRenderer } from "../../source/index.js"
 import { RR0CaseMapping } from "./rr0/index.js"
 import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
-import { AllDataService } from "../../data/index.js"
 import { HttpSource } from "./HttpSource.js"
 import { TimeElementFactory } from "../html/TimeElementFactory.js"
 import { TimeRenderer } from "../html/TimeRenderer.js"
 import { rr0TestUtil } from "../../test"
+import { AllDataService } from "@rr0/data"
+import { Source } from "@rr0/data/dist/source"
 
 export abstract class DatasourceTestCase<S> {
 

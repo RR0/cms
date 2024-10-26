@@ -3,10 +3,9 @@ import { rr0TestUtil } from "../test/index.js"
 import { PeopleService } from "./PeopleService.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { AllDataService } from "../data/index.js"
-import { RR0EventFactory } from "../event/index.js"
 import { PeopleFactory } from "./PeopleFactory.js"
 import path from "path"
+import { AllDataService, RR0EventFactory } from "@rr0/data"
 
 describe("PeopleReplacer", () => {
 

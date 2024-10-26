@@ -9,8 +9,8 @@ import { leMans72 } from "../../../org/eu/fr/region/pdl/72/LeMans/LeMans.js"
 import { lyon69 } from "../../../org/eu/fr/region/ara/69/Lyon/Lyon.js"
 import { briancon05 } from "../../../org/eu/fr/region/pac/05/briancon/Briancon.js"
 import { chambonSurVoueize23 } from "../../../org/eu/fr/region/naq/23/Chambon/Chambon.js"
-import { Source } from "../../../source/index.js"
 import { RR0CaseSummary } from "../rr0"
+import { Source } from "@rr0/data/dist/source"
 
 function expectedSource(datasource: BaseOvniFranceHttpDatasource, dataDate: Date, caseNumber: string): Source {
   const url = new URL(datasource.searchPath + "?typlist=20&page=0&numobs=" + caseNumber, datasource.baseUrl).href

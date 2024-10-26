@@ -2,10 +2,9 @@ import { TimeContext } from "@rr0/time"
 import { rr0HttpDatasource } from "./RR0Mapping.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { UrlUtil } from "../../../util/index.js"
-import { Source } from "../../../source/index.js"
 import { Book } from "../../../book/Book.js"
-import { Article } from "../../../source/Article.js"
 import { NamedPlace } from "./NamedPlace"
+import { Article, Source } from "@rr0/data/dist/source"
 
 function testCase(urlPath: string, time: TimeContext, description: string, sources: Source[],
                   place?: NamedPlace): RR0CaseSummary {

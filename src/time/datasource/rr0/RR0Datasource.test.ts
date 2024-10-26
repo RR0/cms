@@ -6,13 +6,13 @@ import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { rr0FileDatasource, rr0Mapper } from "./RR0Mapping.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { TimeContext } from "@rr0/time"
-import { Source } from "../../../source/index.js"
 import { HtmlTag } from "../../../util/html/HtmlTag.js"
 import { RR0CaseMapping } from "./RR0CaseMapping.js"
 import { RR0Datasource } from "./RR0Datasource.js"
 import { Datasource } from "../Datasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
+import { Source } from "@rr0/data/dist/source"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 

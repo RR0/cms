@@ -5,11 +5,9 @@ import { CaseDirectoryStep } from "./CaseDirectoryStep.js"
 import { rr0TestUtil } from "../../../../../test/index.js"
 import { RR0Case } from "./RR0Case.js"
 import { CaseService } from "./CaseService.js"
-import { RR0EventFactory } from "../../../../../event/RR0EventFactory.js"
 import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
-import { AllDataService } from "../../../../../data/AllDataService.js"
-import { TypedDataFactory } from "../../../../../data/TypedDataFactory.js"
 import { FileContents } from "@javarome/fileutil"
+import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 
 describe("DirectoryStep", () => {
 

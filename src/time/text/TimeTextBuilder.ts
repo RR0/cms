@@ -1,7 +1,9 @@
 import { RR0Context } from "../../RR0Context.js"
 
 export class TimeTextBuilder {
-
+  /**
+   * @param options The default date format.to use.
+   */
   constructor(readonly options: Intl.DateTimeFormatOptions) {
   }
 

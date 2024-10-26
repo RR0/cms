@@ -2,8 +2,7 @@ import { Occupation } from "./Occupation.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Gender } from "@rr0/common"
 import { CountryCode } from "../org/country/CountryCode.js"
-import { RR0Data } from "../data/RR0Data.js"
-import { RR0Event } from "../event/RR0Event.js"
+import { RR0Data, RR0Event } from "@rr0/data"
 
 export class People implements RR0Data {
   readonly type = "people"

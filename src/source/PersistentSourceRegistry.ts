@@ -1,8 +1,8 @@
-import { Source } from "./Source.js"
-import { AllDataService } from "../data/AllDataService.js"
 import { HttpSource } from "../time/datasource/HttpSource.js"
 import { SourceRegistry } from "./SourceRegistry.js"
 import { FileContents } from "@javarome/fileutil"
+import { AllDataService } from "@rr0/data"
+import { Source } from "@rr0/data/dist/source"
 
 /**
  * Create Source objects and register them.

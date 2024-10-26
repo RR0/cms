@@ -1,6 +1,5 @@
 import { Organization } from "./Organization.js"
-import { TypedDataFactory } from "../data/TypedDataFactory.js"
-import { RR0EventFactory } from "../event/RR0EventFactory.js"
+import { RR0EventFactory, TypedDataFactory } from "@rr0/data"
 
 export class OrganizationFactory extends TypedDataFactory<Organization> {
 

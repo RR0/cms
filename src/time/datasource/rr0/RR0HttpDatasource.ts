@@ -5,9 +5,9 @@ import { RR0Datasource } from "./RR0Datasource.js"
 import { TimeContext } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { Place } from "../../../place/index.js"
-import { Publication, Source } from "../../../source/index.js"
 import { CityService, Organization } from "../../../org/index.js"
 import { NamedPlace } from "./NamedPlace"
+import { Publication, Source } from "@rr0/data/dist/source"
 
 export class RR0HttpDatasource extends RR0Datasource {
 

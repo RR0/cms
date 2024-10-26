@@ -4,10 +4,10 @@ import { GeipanCaseClassification } from "./GeipanCaseClassification.js"
 import { CaseMapper, NamedPlace, RR0CaseSummary } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { CityService } from "../../../../../country/index.js"
-import { Source } from "../../../../../../source/index.js"
 import { Organization } from "../../../../../Organization.js"
 import { france } from "../../../France.js"
 import { TimeContext } from "@rr0/time"
+import { Source } from "@rr0/data/dist/source"
 
 export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, GeipanCaseSummary, RR0CaseSummary> {
 

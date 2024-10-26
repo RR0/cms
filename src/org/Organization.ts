@@ -3,9 +3,8 @@ import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
-import { RR0Data } from "../data/index.js"
-import { RR0Event } from "../event/index.js"
 import { Place } from "../place/index.js"
+import { RR0Data, RR0Event } from "@rr0/data"
 
 export enum OrganizationKind {
   country = "country",

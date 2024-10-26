@@ -1,8 +1,7 @@
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 import { HtmlRR0Context } from "../RR0Context.js"
-import { AllDataService } from "../data/index.js"
 import { EventRenderer } from "./EventRenderer.js"
-import { RR0Event } from "../event/index.js"
+import { AllDataService, RR0Event } from "@rr0/data"
 
 export class EventReplacer<D extends RR0Event> {
 

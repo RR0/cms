@@ -29,6 +29,7 @@
     "@rr0/lang": "^0.1.12",
     "@rr0/time": "^0.7.7",
     "@rr0/place": "^0.3.2",
+    "@rr0/data": "^0.1.0",
     "@javarome/fileutil": "^0.3.4",
     "ssg-api": "^1.16.5",
     "canvas": "^2.11.2",

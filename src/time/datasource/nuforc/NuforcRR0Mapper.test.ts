@@ -11,9 +11,9 @@ import { campPendleton } from "../../../org/us/region/ca/sandiego/camppendleton/
 import { stPetersburg } from "../../../org/us/region/fl/pinellas/stpetersburg/StPetersburg.js"
 import { monessen } from "../../../org/us/region/pa/westmoreland/monessen/Monessen.js"
 import { bonneyLake } from "../../../org/us/region/wa/pierce/bonneylake/BonneyLake.js"
-import { Source } from "../../../source/index.js"
 import { slocomb } from "../../../org/us/region/al/geneva/slocomb/Slocomb.js"
 import { RR0CaseSummary } from "../rr0"
+import { Source } from "@rr0/data/dist/source"
 
 function expectedSource(datasource: NuforcHttpDatasource, dataDate: Date, caseNumber: string): Source {
   const url = new URL("sighting/?id=" + caseNumber, datasource.baseUrl).href

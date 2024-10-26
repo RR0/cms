@@ -1,13 +1,11 @@
-import { AllDataService } from "./data/AllDataService.js"
+import path from "path"
+import assert from "assert"
 import { TimeElementFactory } from "./time/html/TimeElementFactory.js"
 import { ContentVisitor } from "./RR0ContentStep.js"
 import { HtmlRR0Context } from "./RR0Context.js"
-import path from "path"
-import { RR0Data } from "./data/RR0Data.js"
 import { EventRenderer } from "./time/EventRenderer.js"
 import { People } from "./people/People.js"
-import { RR0Event } from "./event/RR0Event.js"
-import assert from "assert"
+import { AllDataService, RR0Data, RR0Event } from "@rr0/data"
 
 export class DefaultContentVisitor implements ContentVisitor {
 

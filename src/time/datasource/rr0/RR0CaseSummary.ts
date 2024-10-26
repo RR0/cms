@@ -1,5 +1,4 @@
-import { RR0Data } from "../../../data/index.js"
-import { RR0Event } from "../../../event/index.js"
+import { RR0Data, RR0Event } from "@rr0/data"
 
 export interface RR0CaseSummary extends RR0Event {
   /**

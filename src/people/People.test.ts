@@ -1,9 +1,9 @@
 import { People } from "./People.js"
 import { PeopleService } from "./PeopleService.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { AllDataService } from "../data/index.js"
 import { rr0TestUtil } from "../test/index.js"
 import path from "path"
+import { AllDataService } from "@rr0/data"
 
 describe("People", () => {
 

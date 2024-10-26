@@ -1,12 +1,12 @@
 import { People } from "./People.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import path from "path"
-import { AbstractDataFactory, AbstractDataService, AllDataService } from "../data/index.js"
 import { CountryCode } from "../org/index.js"
 import { Occupation } from "./Occupation.js"
 import { Time } from "../time/Time.js"
 import { Gender } from "@rr0/common"
 import { PeopleFactory } from "./PeopleFactory.js"
+import { AbstractDataFactory, AbstractDataService, AllDataService } from "@rr0/data"
 
 export class PeopleService extends AbstractDataService<People> {
 

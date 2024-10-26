@@ -9,29 +9,21 @@ export class RelativeTimeTextBuilder {
   build(oldContext: RR0Context, newContext: RR0Context): string {
     let text: string | undefined
     let print = true
+    const time = newContext.time
     const previousTime = oldContext?.time
     if (previousTime?.isDefined()) {
       const deltaContext = oldContext.clone()
       const deltaTime = deltaContext.time
       let dayOfMonthDelta: number | undefined
-      let yearDelta: number | undefined
-      let monthDelta: number | undefined
       let hourDelta: number | undefined
       let minutesDelta: number | undefined
 
-      function shouldSetDay() {
-        return !previousTime.getMonth() || monthDelta === 0
-      }
-
-      function shouldSetHour() {
-        return !previousTime.getDayOfMonth() || dayOfMonthDelta === 0
-      }
-
-      function shouldSetMinutes() {
-        return !previousTime.getMinutes() || hourDelta === 0
-      }
-
-      function setYear(year: number) {
+      let yearDelta: number | undefined
+      const year = time.getYear()
+      const sameYear = yearDelta === 0
+      const noYear = !previousTime.getYear()
+      const shouldSetYear = noYear || !sameYear
+      if (year) {
         const previousYear = previousTime.getYear()
         if (previousYear) {
           yearDelta = year - previousYear
@@ -41,7 +33,11 @@ export class RelativeTimeTextBuilder {
         }
       }
 
-      function setMonth(month: number) {
+      let monthDelta: number | undefined
+      const sameMonth = monthDelta === 0
+      const noMonth = !previousTime.getMonth()
+      const month = time.getMonth()
+      if (month) {
         const previousMonth = previousTime.getMonth()
         if (yearDelta === 0) {
           monthDelta = month - (previousMonth || 0)
@@ -53,8 +49,18 @@ export class RelativeTimeTextBuilder {
         }
       }
 
+      const shouldSetDay = noMonth || (sameYear && sameMonth)
+      const noDay = !previousTime.getDayOfMonth()
+      const sameDay = dayOfMonthDelta === 0
+
+      const shouldSetHour = noDay || (sameYear && sameMonth && sameDay)
+
+      const noMinutes = !previousTime.getMinutes()
+      const sameHour = hourDelta === 0
+      const shouldSetMinutes = noMinutes || (sameYear && sameMonth && sameDay && sameHour)
+
       function setDayOfMonth(dayOfMonth: number) {
-        const sameMonth = yearDelta === 0 && shouldSetDay()
+        const sameMonth = yearDelta === 0 && shouldSetDay
         if (sameMonth) {
           dayOfMonthDelta = dayOfMonth - (previousTime.getDayOfMonth() || 0)
           if (dayOfMonthDelta != 0) {
@@ -66,7 +72,7 @@ export class RelativeTimeTextBuilder {
       }
 
       function setHour(hour: number) {
-        const sameDay = yearDelta === 0 && shouldSetDay() && shouldSetHour()
+        const sameDay = yearDelta === 0 && shouldSetDay && shouldSetHour
         if (sameDay) {
           hourDelta = hour - (previousTime.getHour() || 0)
           if (hourDelta != 0) {
@@ -78,7 +84,7 @@ export class RelativeTimeTextBuilder {
       }
 
       function setMinutes(minutes: number) {
-        const sameHour = yearDelta === 0 && shouldSetDay() && shouldSetHour() && shouldSetMinutes()
+        const sameHour = yearDelta === 0 && shouldSetDay && shouldSetHour && shouldSetMinutes
         if (sameHour) {
           minutesDelta = minutes - (previousTime.getMinutes() || 0)
           if (minutesDelta != 0) {
@@ -88,15 +94,6 @@ export class RelativeTimeTextBuilder {
         deltaTime.setMinutes(minutes)
       }
 
-      const time = newContext.time
-      const year = time.getYear()
-      if (year) {
-        setYear(year)
-      }
-      const month = time.getMonth()
-      if (month) {
-        setMonth(month)
-      }
       const dayOfMonth = time.getDayOfMonth()
       if (dayOfMonth) {
         setDayOfMonth(dayOfMonth)
@@ -156,7 +153,7 @@ export class RelativeTimeTextBuilder {
         if (deltaContext.time.isDefined()) {
           defaultContext = deltaContext
           const dayOfMonth = defaultContext.time.getDayOfMonth()
-          if (dayOfMonth && shouldSetDay()) {
+          if (dayOfMonth && shouldSetDay) {
             defaultContext.time.setMonth(newContext.time.getMonth() || previousTime.getMonth(), false)  // give month
             defaultContext.time.setYear(newContext.time.getYear() || previousTime.getYear(), false)  // give year
             // context for the day but won't

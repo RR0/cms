@@ -2,8 +2,6 @@ import path from "path"
 import { HtmlRR0Context, RR0Context, RR0ContextImpl } from "../RR0Context.js"
 import { Time } from "../time/index.js"
 import { FileWriteConfig, HtmlFileContents, SsgContext } from "ssg-api"
-import { RR0EventFactory } from "../event/index.js"
-import { AllDataService, TypedDataFactory } from "../data/index.js"
 import { OrganizationFactory } from "../org/index.js"
 import { CaseFactory } from "../science/index.js"
 import { PeopleFactory } from "../people/index.js"
@@ -11,6 +9,7 @@ import { APIFactory } from "../tech/index.js"
 import { TimeTestUtil } from "../time/TimeTestUtil"
 import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
+import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 
 export class RR0TestUtil {
 
