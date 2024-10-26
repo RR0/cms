@@ -1,7 +1,7 @@
 import { Elevation, Place } from "./Place.js"
 import fs from "fs"
-import { FileUtil } from "ssg-api"
 import { PlaceLocation } from "@rr0/place"
+import { writeFile } from "@javarome/fileutil"
 
 export abstract class PlaceService {
 
@@ -81,7 +81,7 @@ export abstract class PlaceService {
     for (const location of place.locations) {
       const fileName = this.getFileName(location)
       const contents = JSON.stringify(place, null, 2)
-      await FileUtil.writeFile(fileName, contents, "utf-8")
+      await writeFile(fileName, contents, "utf-8")
     }
   }
 }

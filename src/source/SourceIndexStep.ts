@@ -1,5 +1,6 @@
-import { FileUtil, SsgContext, SsgStep } from "ssg-api"
+import { SsgContext, SsgStep } from "ssg-api"
 import { SourceRegistry } from "./SourceRegistry.js"
+import { writeFile } from "@javarome/fileutil"
 
 /**
  * Saves the index file collected by the SourceCommand.
@@ -13,6 +14,6 @@ export class SourceIndexStep implements SsgStep {
     context.log("Saving sources index at", this.fileName)
     const index = this.sourceCommand.registry
     const indexJson = JSON.stringify(index)
-    return FileUtil.writeFile(this.fileName, indexJson, "utf-8")
+    return writeFile(this.fileName, indexJson, "utf-8")
   }
 }

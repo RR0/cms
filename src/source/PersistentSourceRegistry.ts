@@ -2,7 +2,7 @@ import { Source } from "./Source.js"
 import { AllDataService } from "../data/AllDataService.js"
 import { HttpSource } from "../time/datasource/HttpSource.js"
 import { SourceRegistry } from "./SourceRegistry.js"
-import { FileContents } from "ssg-api"
+import { FileContents } from "@javarome/fileutil"
 
 /**
  * Create Source objects and register them.

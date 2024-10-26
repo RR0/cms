@@ -1,7 +1,8 @@
 import { RR0Messages, ssgMessages } from "./lang/index.js"
-import { ConsoleLogger, FileContents, HtmlSsgContext, SsgConfig, SsgContext, SsgContextImpl } from "ssg-api"
+import { ConsoleLogger, FileWriteConfig, HtmlSsgContext, SsgContext, SsgContextImpl } from "ssg-api"
 import { People } from "./people/People.js"
 import { TimeContext } from "@rr0/time"
+import { FileContents } from "@javarome/fileutil"
 
 export interface RR0Context extends SsgContext {
 
@@ -16,7 +17,7 @@ export interface HtmlRR0Context extends HtmlSsgContext {
   time: TimeContext
   people: People
   readonly images: Set<string>
-  readonly config: SsgConfig
+  readonly config: FileWriteConfig
 
   clone(locale?: string): HtmlRR0Context
 }
@@ -27,7 +28,7 @@ export class RR0ContextImpl extends SsgContextImpl {
   readonly images = new Set<string>()
   protected readonly fileMap = new Map<string, FileContents>()
 
-  constructor(locale: string, readonly time: TimeContext, readonly config: SsgConfig,
+  constructor(locale: string, readonly time: TimeContext, readonly config: FileWriteConfig,
               readonly people = undefined, currentFile: FileContents | undefined = undefined,
               readonly messages: RR0Messages = ssgMessages[locale]) {
     super(locale, new Map(), "RR0", new ConsoleLogger("RR0"), currentFile)

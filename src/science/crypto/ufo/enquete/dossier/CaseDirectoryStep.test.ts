@@ -1,6 +1,6 @@
 import path from "path"
 import { describe, expect, test } from "@javarome/testscript"
-import { FileContents, SsgContext } from "ssg-api"
+import { SsgContext } from "ssg-api"
 import { CaseDirectoryStep } from "./CaseDirectoryStep.js"
 import { rr0TestUtil } from "../../../../../test/index.js"
 import { RR0Case } from "./RR0Case.js"
@@ -9,6 +9,7 @@ import { RR0EventFactory } from "../../../../../event/RR0EventFactory.js"
 import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
 import { AllDataService } from "../../../../../data/AllDataService.js"
 import { TypedDataFactory } from "../../../../../data/TypedDataFactory.js"
+import { FileContents } from "@javarome/fileutil"
 
 describe("DirectoryStep", () => {
 

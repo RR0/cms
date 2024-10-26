@@ -1,5 +1,5 @@
 import * as fs from "fs"
-import { FileUtil, Logger, SsgConfig } from "ssg-api"
+import { FileWriteConfig, Logger } from "ssg-api"
 import { TimeContext } from "@rr0/time"
 import * as path from "path"
 import { StringUtil } from "../util/string/StringUtil.js"
@@ -8,6 +8,7 @@ import { People } from "../people/People.js"
 import { PeopleService } from "../people/PeopleService.js"
 import { CSVFileReader } from "../CSVFileReader.js"
 import { TimeUrlBuilder } from "../time"
+import { writeFile } from "@javarome/fileutil"
 
 export class BookService {
 
@@ -23,7 +24,7 @@ export class BookService {
   protected peopleList: People[] = []
 
   constructor(readonly logger: Logger, protected dry: boolean, protected peopleService: PeopleService,
-              protected timeUrlBuilder: TimeUrlBuilder, protected config: SsgConfig) {
+              protected timeUrlBuilder: TimeUrlBuilder, protected config: FileWriteConfig) {
   }
 
   async import(fileName: string) {
@@ -102,7 +103,7 @@ export class BookService {
         const filePath = path.join(bookDir, `book.json`)
         const bookJson = JSON.stringify(book, null, 2)
         if (!this.dry) {
-          await FileUtil.writeFile(filePath, bookJson, "utf-8")
+          await writeFile(filePath, bookJson, "utf-8")
         }
         books.push(book)
       } else {

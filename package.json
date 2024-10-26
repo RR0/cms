@@ -29,13 +29,14 @@
     "@rr0/lang": "^0.1.12",
     "@rr0/time": "^0.7.7",
     "@rr0/place": "^0.3.2",
+    "@javarome/fileutil": "^0.3.4",
+    "ssg-api": "^1.16.5",
     "canvas": "^2.11.2",
     "csv-parser": "^3.0.0",
     "glob": "^11.0.0",
     "image-size": "^1.1.1",
     "jsdom": "^24.1.0",
-    "selenium-webdriver": "^4.22.0",
-    "ssg-api": "^1.16.3"
+    "selenium-webdriver": "^4.22.0"
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.7",

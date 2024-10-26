@@ -1,4 +1,4 @@
-import { FileContents } from "ssg-api"
+import { FileContents } from "@javarome/fileutil"
 import { RR0Data } from "./RR0Data.js"
 import { TypedDataFactory } from "./TypedDataFactory.js"
 import { glob } from "glob"

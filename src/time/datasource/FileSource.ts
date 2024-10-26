@@ -2,7 +2,8 @@ import { Datasource } from "./Datasource.js"
 import { StringUtil } from "../../util/string/StringUtil.js"
 import path from "path"
 import fs from "fs"
-import { FileContents, HtmlSsgContext } from "ssg-api"
+import { HtmlSsgContext } from "ssg-api"
+import { FileContents } from "@javarome/fileutil"
 
 export class FileSource {
 

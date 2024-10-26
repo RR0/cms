@@ -1,5 +1,5 @@
 import { Occupation } from "./Occupation.js"
-import { OutputFunc, SsgConfig } from "ssg-api"
+import { FileWriteConfig, OutputFunc } from "ssg-api"
 import { RR0FileUtil } from "../util/file/RR0FileUtil.js"
 import { PeopleService } from "./PeopleService.js"
 import { PeopleDirectoryStep, peopleOccupationFilter } from "./PeopleDirectoryStep.js"
@@ -27,7 +27,7 @@ export type PeopleDirectoryStepOptions = {
 export class PeopleDirectoryStepFactory {
 
   constructor(
-    protected outputFunc: OutputFunc, protected config: SsgConfig, protected service: PeopleService,
+    protected outputFunc: OutputFunc, protected config: FileWriteConfig, protected service: PeopleService,
     protected excludedDirs: string[]
   ) {
   }

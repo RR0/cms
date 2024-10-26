@@ -2,7 +2,7 @@ import { Occupation } from "./Occupation.js"
 import { People } from "./People.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { HtmlTag } from "../util/html/HtmlTag.js"
-import { DirectoryStep, OutputFunc, SsgConfig } from "ssg-api"
+import { DirectoryStep, FileWriteConfig, OutputFunc } from "ssg-api"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { PeopleService } from "./PeopleService.js"
 import { CountryCode } from "../org/country/CountryCode.js"
@@ -20,7 +20,7 @@ export function peopleOccupationFilter(filterOccupations: Occupation[]): PeopleF
 export class PeopleDirectoryStep extends DirectoryStep {
 
   constructor(name: string, rootDirs: string[], excludedDirs: string[], templateFileName: string,
-              protected outputFunc: OutputFunc, config: SsgConfig, protected service: PeopleService,
+              protected outputFunc: OutputFunc, config: FileWriteConfig, protected service: PeopleService,
               protected filter: PeopleFilter = (_people: People) => true) {
     super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, name)
   }

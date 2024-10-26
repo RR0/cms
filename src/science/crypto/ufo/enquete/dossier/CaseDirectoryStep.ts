@@ -1,4 +1,4 @@
-import { DirectoryStep, OutputFunc, SsgConfig } from "ssg-api"
+import { DirectoryStep, FileWriteConfig, OutputFunc } from "ssg-api"
 import { HtmlRR0Context, RR0Context } from "../../../../../RR0Context.js"
 import { StringUtil } from "../../../../../util/string/StringUtil.js"
 import { RR0Case } from "./RR0Case.js"
@@ -18,7 +18,7 @@ export class CaseDirectoryStep extends DirectoryStep {
    * @param config
    */
   constructor(protected caseService: CaseService, rootDirs: string[], excludedDirs: string[], templateFileName: string,
-              protected outputFunc: OutputFunc, config: SsgConfig) {
+              protected outputFunc: OutputFunc, config: FileWriteConfig) {
     super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, "case directory")
   }
 

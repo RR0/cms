@@ -1,5 +1,6 @@
 import path from "path"
-import { FileContents, RegexReplaceCommand, RegexReplacer, SsgContext } from "ssg-api"
+import { RegexReplaceCommand, RegexReplacer, SsgContext } from "ssg-api"
+import { FileContents } from "@javarome/fileutil"
 
 /**
  * Replaces SSI's `<!-- #include virtual="myFileName" -->` by fileName's contents.

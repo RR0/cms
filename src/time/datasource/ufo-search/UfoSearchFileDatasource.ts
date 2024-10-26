@@ -1,10 +1,10 @@
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { Datasource } from "../Datasource.js"
-import { FileContents } from "ssg-api"
 import { UfoSearchDatasource } from "./UfoSearchDatasource.js"
 import { JsonMapper } from "../JsonMapper.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper.js"
+import { FileContents } from "@javarome/fileutil"
 
 class FileMapper extends JsonMapper<UfoSearchCase> {
 

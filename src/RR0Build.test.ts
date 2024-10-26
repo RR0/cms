@@ -1,16 +1,15 @@
-import { describe } from "@javarome/testscript"
-import { RR0Build, RR0BuildArgs } from "./RR0Build"
-import { CLI } from "./util"
-import { FileContents } from "ssg-api"
-import { TimeServiceOptions } from "./time"
-import { glob } from "glob"
 import path from "path"
-import { PeopleDirectoryStepOptions } from "./people"
-
-const testRoot = "test"
+import { glob } from "glob"
+import { describe } from "@javarome/testscript"
+import { FileContents } from "@javarome/fileutil"
+import { CLI } from "./util/index.js"
+import { RR0Build, RR0BuildArgs } from "./RR0Build.js"
+import { TimeServiceOptions } from "./time/index.js"
+import { PeopleDirectoryStepOptions } from "./people/index.js"
+import { rr0TestUtil } from "./test"
 
 function testFilePath(filePath: string) {
-  return path.join(testRoot, filePath)
+  return path.join(rr0TestUtil.rootDir, filePath)
 }
 
 describe("Build", () => {

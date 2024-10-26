@@ -28,17 +28,15 @@ import {
   ClassDomReplaceCommand,
   ContentStepConfig,
   CopyStep,
-  CopyStepConfig,
   DomReplaceCommand,
-  FileContents,
-  FileUtil,
+  FileCopyConfig,
+  FileWriteConfig,
   HtAccessToNetlifyConfigReplaceCommand,
   HtmlLinks,
   HtmlMeta,
   HtmlSsgContext,
   OutputFunc,
   Ssg,
-  SsgConfig,
   SsgContext,
   SsiEchoVarReplaceCommand,
   SsiIfReplaceCommand,
@@ -88,6 +86,7 @@ import fs from "fs"
 
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { TimeContext } from "@rr0/time"
+import { FileContents, writeFile } from "@javarome/fileutil"
 
 export interface RR0BuildArgs {
   /**
@@ -136,7 +135,7 @@ const outputFunc: OutputFunc
 
 export class RR0Build {
 
-  config: SsgConfig
+  config: FileWriteConfig
   private context: RR0ContextImpl
   private placeService: GooglePlaceService
   private orgService: OrganizationService<any, undefined>
@@ -212,12 +211,12 @@ export class RR0Build {
     const copies = this.copies
     copies.push(...(ufoCasesStep.config.rootDirs).map(dir => path.join(dir, "case.json")))
     const outDir = this.outDir
-    await FileUtil.writeFile(path.join(outDir, "casesDirs.json"), JSON.stringify(ufoCasesStep.config.rootDirs), "utf-8")
+    await writeFile(path.join(outDir, "casesDirs.json"), JSON.stringify(ufoCasesStep.config.rootDirs), "utf-8")
     copies.push(...(peopleSteps.reduce((rootDirs, peopleStep) => {
       rootDirs.push(...peopleStep.config.rootDirs)
       return rootDirs
     }, [])).map(dir => path.join(dir, "people.json")))
-    await FileUtil.writeFile(path.join(outDir, "peopleDirs.json"),
+    await writeFile(path.join(outDir, "peopleDirs.json"),
       JSON.stringify(peopleList.map(people => people.dirName)), "utf-8")
 
     const timeTextBuilder = this.timeTextBuilder
@@ -349,7 +348,7 @@ export class RR0Build {
       ssg.add(new SourceIndexStep(this.sourceRegistryFileName, sourceFactory))
     }
     if (copies) {
-      const copyConfig: CopyStepConfig = {
+      const copyConfig: FileCopyConfig = {
         getOutputPath,
         sourcePatterns: copies,
         options: {ignore: ["node_modules/**", "out/**"]}

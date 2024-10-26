@@ -1,9 +1,10 @@
 import { Time } from "./Time.js"
 import { TimeContext } from "@rr0/time"
 import { RR0ContextImpl } from "../RR0Context.js"
-import { FileContents, SsgConfig } from "ssg-api"
+import { FileWriteConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"
+import { FileContents } from "@javarome/fileutil"
 
 describe("Time", () => {
 
@@ -21,7 +22,7 @@ describe("Time", () => {
   })
 
   describe("contextFromFile", () => {
-    const config: SsgConfig = rr0TestUtil.config
+    const config: FileWriteConfig = rr0TestUtil.config
     const timeContext = new TimeContext()
     const context = new RR0ContextImpl("fr", timeContext, config)
 

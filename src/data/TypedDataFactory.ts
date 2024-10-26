@@ -1,9 +1,9 @@
 import path from "path"
-import { FileContents } from "ssg-api"
 import { RR0Data } from "./RR0Data.js"
 import { AbstractDataFactory } from "./AbstractDataFactory.js"
 import { RR0EventFactory } from "../event/RR0EventFactory.js"
 import { RR0FileUtil } from "../util/file/RR0FileUtil.js"
+import { FileContents } from "@javarome/fileutil"
 
 /**
  * A RR0Data factory which can read either <someType>.json files of index.json with a "type": "<someType>" property.

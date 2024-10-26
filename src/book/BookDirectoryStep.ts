@@ -1,5 +1,5 @@
 import { HtmlRR0Context } from "RR0Context.js"
-import { DirectoryStep, FileContents, HtmlLinks, HtmlMeta, OutputFunc, SsgConfig } from "ssg-api"
+import { DirectoryStep, FileWriteConfig, HtmlLinks, HtmlMeta, OutputFunc } from "ssg-api"
 import { RR0FileUtil } from "../util/file/RR0FileUtil.js"
 import { Book } from "./Book.js"
 import { StringUtil } from "../util/string/StringUtil.js"
@@ -7,6 +7,7 @@ import { HtmlTag } from "../util/html/HtmlTag.js"
 import fs from "fs"
 import path from "path"
 import { Chapter } from "./Chapters.js"
+import { FileContents } from "@javarome/fileutil"
 
 /**
  * Scan directories for book information, then populates a template with collected data.
@@ -14,12 +15,12 @@ import { Chapter } from "./Chapters.js"
 export class BookDirectoryStep extends DirectoryStep {
 
   constructor(rootDirs: string[], templateFileName: string, protected outputFunc: OutputFunc,
-              config: SsgConfig, name: string,
+              config: FileWriteConfig, name: string,
               protected bookMeta: Map<string, HtmlMeta>, protected bookLinks: Map<string, HtmlLinks>) {
     super({rootDirs, excludedDirs: [], templateFileName, getOutputPath: config.getOutputPath}, name)
   }
 
-  static async create(outputFunc: OutputFunc, config: SsgConfig, bookMeta: Map<string, HtmlMeta>,
+  static async create(outputFunc: OutputFunc, config: FileWriteConfig, bookMeta: Map<string, HtmlMeta>,
                       bookLinks: Map<string, HtmlLinks>): Promise<BookDirectoryStep> {
     const dirs = RR0FileUtil.findDirectoriesContaining("book*.json")
     return new BookDirectoryStep(dirs, "book/index.html", outputFunc, config, "all books", bookMeta,

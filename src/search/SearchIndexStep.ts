@@ -1,6 +1,7 @@
-import { FileUtil, SsgContext, SsgStep } from "ssg-api"
+import { SsgContext, SsgStep } from "ssg-api"
 import { SearchIndex, SearchVisitor } from "./SearchVisitor.js"
 import fs from "fs"
+import { writeFile } from "@javarome/fileutil"
 
 /**
  * Saves the index file collected by the SearchCommand.
@@ -47,6 +48,6 @@ export class SearchIndexStep implements SsgStep {
     }
     context.log("Saving search index of", existingIndex.pages.length, "pages at", this.fileName)
     const indexJson = JSON.stringify(existingIndex)
-    return FileUtil.writeFile(this.fileName, indexJson, "utf-8")
+    return writeFile(this.fileName, indexJson, "utf-8")
   }
 }
