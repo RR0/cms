@@ -73,8 +73,9 @@ export class RR0TestUtil {
     const titleExec = /<title>(.*)<\/title>/.exec(contents)
     const title = titleExec && titleExec.length > 0 ? titleExec[1].trim() : undefined
     const currentFile = context.file
+    const lang = currentFile.lang
     context.file = new HtmlFileContents(currentFile.name, currentFile.encoding, currentFile.contents,
-      currentFile.lastModified, currentFile.lang, {author: []}, {}, title)
+      currentFile.lastModified, lang, {author: []}, {}, title)
     const htmlContext = context as HtmlRR0Context
     Object.assign(htmlContext.time, Time.contextFromFileName(htmlContext, inputFileName))
     return htmlContext

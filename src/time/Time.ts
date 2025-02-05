@@ -33,7 +33,7 @@ export class Time {
     if (timeContext) {
       const pageContext = new RR0ContextImpl(context.locale, timeContext, context.config, context.people,
         context.file)
-      title = timeTextBuilder.build(pageContext, true)
+      title = timeTextBuilder.build(pageContext)
       title = StringUtil.capitalizeFirstLetter(title)
     }
     return title

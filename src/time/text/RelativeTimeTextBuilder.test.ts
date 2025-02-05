@@ -14,9 +14,11 @@ describe("RelativeTimeTextBuilder", () => {
       previousContext.time.setYear(2003)
       const context = previousContext.clone()
       context.time.setYear(2004)
-      expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("l'année suivante")
+      const s1 = relativeTimeTextBuilder.build(previousContext, context)
+      expect(s1).toBe("l'année suivante")
       context.time.setMonth(6)
-      expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("juin 2004")
+      const s2 = relativeTimeTextBuilder.build(previousContext, context)
+      expect(s2).toBe("juin 2004")
     }
   })
 
@@ -27,7 +29,8 @@ describe("RelativeTimeTextBuilder", () => {
     context.time.setYear(1990)
     context.time.setMonth(8)
     context.time.setDayOfMonth(4)
-    expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("samedi 4 août 1990")
+    const s = relativeTimeTextBuilder.build(previousContext, context)
+    expect(s).toBe("samedi 4 août 1990")
   })
 
   test("next month", () => {
@@ -37,17 +40,21 @@ describe("RelativeTimeTextBuilder", () => {
       sept9_2003.time.setMonth(9)
       const oct_2003 = sept9_2003.clone()
       oct_2003.time.setMonth(oct_2003.time.getMonth()! + 1)
-      expect(relativeTimeTextBuilder.build(sept9_2003, oct_2003)).toBe("le mois suivant")
+      const s1 = relativeTimeTextBuilder.build(sept9_2003, oct_2003)
+      expect(s1).toBe("le mois suivant")
       const oct23_2003 = oct_2003.clone()
       oct23_2003.time.setDayOfMonth(23) // Resets day of month in context
-      expect(relativeTimeTextBuilder.build(oct_2003, oct23_2003)).toBe("jeudi 23")
+      const s2 = relativeTimeTextBuilder.build(oct_2003, oct23_2003)
+      expect(s2).toBe("jeudi 23")
       const context4 = oct23_2003.clone()
       context4.time.setMonth(12)
-      expect(relativeTimeTextBuilder.build(oct23_2003, context4)).toBe("décembre")
+      const s3 = relativeTimeTextBuilder.build(oct23_2003, context4)
+      expect(s3).toBe("décembre")
       const context5 = context4.clone()
       context5.time.setMonth(1)
       context5.time.setDayOfMonth(24)
-      expect(relativeTimeTextBuilder.build(context4, context5)).toBe("lundi 24 janvier")
+      const s4 = relativeTimeTextBuilder.build(context4, context5)
+      expect(s4).toBe("vendredi 24 janvier")
     }
     {
       const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
@@ -55,7 +62,8 @@ describe("RelativeTimeTextBuilder", () => {
       context.time.setMonth(9)
       const previousContext = context.clone()
       context.time.setMonth(context.time.getMonth()! + 1)
-      expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("the month after")
+      const s = relativeTimeTextBuilder.build(previousContext, context)
+      expect(s).toBe("the month after")
     }
   })
 
@@ -106,12 +114,12 @@ describe("RelativeTimeTextBuilder", () => {
         context.time.setMonth(9)
         context.time.setDayOfMonth(23)
         context.time.setHour(16)
-        expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("Tuesday, September 23, 2003 at 04 PM")
+        expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("Tuesday, September 23, 2003 at 04 PM")
         previousContext = context.clone()
         context.time.setHour(17)
         expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("one hour later")
         context.time.setMinutes(43)
-        expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("05:43 PM")
+        expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("05:43 PM")
       }
     })
   })

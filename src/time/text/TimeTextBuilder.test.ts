@@ -13,7 +13,7 @@ describe("timeTextBuilder", () => {
     {
       const context = new RR0ContextImpl("fr", new TimeContext(), config)
       context.time.setYear(2003)
-      expect(timeTextBuilder.build(context, true)).toBe("2003")
+      expect(timeTextBuilder.build(context)).toBe("2003")
     }
   })
 
@@ -22,13 +22,13 @@ describe("timeTextBuilder", () => {
       const context = new RR0ContextImpl("fr", new TimeContext(), config)
       context.time.setYear(2003)
       context.time.setMonth(9)
-      expect(timeTextBuilder.build(context, true)).toBe("septembre 2003")
+      expect(timeTextBuilder.build(context)).toBe("septembre 2003")
     }
     {
       const context = new RR0ContextImpl("en", new TimeContext(), config)
       context.time.setYear(2003)
       context.time.setMonth(9)
-      expect(timeTextBuilder.build(context, true)).toBe("September 2003")
+      expect(timeTextBuilder.build(context)).toBe("September 2003")
     }
   })
 
@@ -38,14 +38,14 @@ describe("timeTextBuilder", () => {
       context.time.setYear(2003)
       context.time.setMonth(9)
       context.time.setDayOfMonth(23)
-      expect(timeTextBuilder.build(context, true)).toBe("mardi 23 septembre 2003")
+      expect(timeTextBuilder.build(context)).toBe("mardi 23 septembre 2003")
     }
     {
       const context = new RR0ContextImpl("en", new TimeContext(), config)
       context.time.setYear(2003)
       context.time.setMonth(9)
       context.time.setDayOfMonth(23)
-      expect(timeTextBuilder.build(context, true)).toBe("Tuesday, September 23, 2003")
+      expect(timeTextBuilder.build(context)).toBe("Tuesday, September 23, 2003")
     }
   })
 
@@ -56,14 +56,14 @@ describe("timeTextBuilder", () => {
       context.time.setMonth(9)
       context.time.setDayOfMonth(23)
       context.time.setHour(16)
-      expect(timeTextBuilder.build(context, true)).toBe("mardi 23 septembre 2003 à 16 h")
+      expect(timeTextBuilder.build(context)).toBe("mardi 23 septembre 2003 à 16 h")
     }
     {
       const context = new RR0ContextImpl("en", new TimeContext(), config)
       context.time.setYear(2003)
       context.time.setMonth(9)
       context.time.setDayOfMonth(23)
-      expect(timeTextBuilder.build(context, true)).toBe("Tuesday, September 23, 2003")
+      expect(timeTextBuilder.build(context)).toBe("Tuesday, September 23, 2003")
     }
   })
 })

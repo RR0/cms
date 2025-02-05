@@ -68,7 +68,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
         context.time.setDayOfMonth(timeContext.getDayOfMonth())
         context.time.setHour(undefined)
         context.time.setMinutes(undefined)
-        timeStr = this.timeTextBuilder.build(context, true)
+        timeStr = this.timeTextBuilder.build(context)
       }
     }
 

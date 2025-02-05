@@ -74,7 +74,7 @@ describe("RR0CaseSource", () => {
           if (publication.time) {
             const sourceContext = context.clone()
             sourceContext.time = source.publication.time
-            const timeStr = this.timeTextBuilder.build(sourceContext, true)
+            const timeStr = this.timeTextBuilder.build(sourceContext)
             sourceItems.push(timeStr)
           }
         }

@@ -63,7 +63,7 @@ export class SourceRenderer {
         } else {
           sourceContext.time.updateFromStr(timeValue as unknown as string)
         }
-        pubItems.push(this.timeTextBuilder.build(sourceContext, true))
+        pubItems.push(this.timeTextBuilder.build(sourceContext))
       }
       if (source.index) {
         pubItems.push(source.index.toString())

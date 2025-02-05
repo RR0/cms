@@ -37,7 +37,7 @@ export abstract class DatasourceTestCase<S> {
     const time = this.getTime(nativeCase)
     const caseContext = context.clone()
     Object.assign(caseContext, {time})
-    const timeStr = this.timeTextBuilder.build(caseContext, true)
+    const timeStr = this.timeTextBuilder.build(caseContext)
     const placeStr = expected.place ? ` À <span class="place">${expected.place.name}</span>` : ""
     const expectedSources = expected.sources
     const sourceStr = expectedSources?.length > 0 ? this.expectedSourceStr(context, expectedSources, nativeCase) : ""
@@ -87,7 +87,7 @@ export abstract class DatasourceTestCase<S> {
     const source = expectedSources[0]
     const sourceContext = context.clone()
     sourceContext.time = source.publication.time
-    const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext, true)}` : ""
+    const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext)}` : ""
     const indexStr = source.index ? `, ${source.index}` : ""
     const authorStr = datasource.authors.map(authorStr => `<span class="people">${authorStr}</span>`).join(" &amp; ")
     const title = `cas n° ${nativeCase["id"]}`

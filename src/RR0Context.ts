@@ -24,7 +24,6 @@ export interface HtmlRR0Context extends HtmlSsgContext {
 
 export class RR0ContextImpl extends SsgContextImpl {
 
-
   readonly images = new Set<string>()
   protected readonly fileMap = new Map<string, FileContents>()
 
@@ -48,5 +47,9 @@ export class RR0ContextImpl extends SsgContextImpl {
 
   clone(locale = this.locale): RR0ContextImpl {
     return new RR0ContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file)
+  }
+
+  toString() {
+    return this.time?.toString() || ""
   }
 }

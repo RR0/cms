@@ -132,14 +132,13 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     const caseContext = this.getDate(context, url, row)
     const {placeName, departmentOrState, country} = this.getLocation(columns[1])
     const witnesses = this.getWitnesses(columns[2].textContent)
-    const timeStr = new TimeTextBuilder(this.intlOptions).build(caseContext, true, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      }
-    )
+    const timeStr = new TimeTextBuilder(this.intlOptions).build(caseContext, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    })
     const sightingDate = caseContext.time
     const countStr = ObjectUtil.keyFromValue(UrecatHttpDatasource.wordToCount, witnesses.length)
     const title = `${timeStr}, ${placeName}, ${departmentOrState}, ${country}, ${countStr} ${MessageUtils.pluralWord(

@@ -8,8 +8,6 @@ import path from "path"
 
 describe("JsonMapper", () => {
 
-  const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
-
   let context: HtmlRR0Context
   let mapper: UfoSearchCaseRR0Mapper
 

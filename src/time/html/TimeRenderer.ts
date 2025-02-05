@@ -34,9 +34,8 @@ export class TimeRenderer {
   } {
     const time = context.time
     const absoluteTimeUrl = this.service.urlBuilder.fromContext(time)
-    const title = this.textBuilder.build(context, true, renderOptions)
-    const text = (previousContext ? this.relativeTextBuilder.build(previousContext,
-      context) : undefined) || title
+    const title = this.textBuilder.build(context, renderOptions)
+    const text = (previousContext ? this.relativeTextBuilder.build(previousContext, context) : undefined) || title
     const file = context.file
     const currentFileName = file.name
     const doc = file.document

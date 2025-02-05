@@ -24,7 +24,8 @@ describe("TitleReplaceCommand", () => {
       await command.execute(context)
       const fullPath = rr0TestUtil.filePath(fileName)
       expect(context.file.title).toBe(fullPath)
-      expect(context.file.contents).toBe(`This is about ${fullPath}!`)
+      expect(context.file.contents).toBe(`<html><head><title>${rr0TestUtil.filePath(
+        fileName)}</title></head><body>This is about ${fullPath}!</body></html>`)
     })
 
     test("default title with handler", async () => {
@@ -32,7 +33,8 @@ describe("TitleReplaceCommand", () => {
       const context = rr0TestUtil.newHtmlContext(fileName, `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe("1954")
-      expect(context.file.contents).toBe("This is about 1954!")
+      expect(context.file.contents).toBe(
+        `<html><head><title>1954</title></head><body>This is about 1954!</body></html>`)
     })
 
     test("default month title with handler", async () => {
@@ -41,7 +43,8 @@ describe("TitleReplaceCommand", () => {
         `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe("Octobre 1954")
-      expect(context.file.contents).toBe("This is about Octobre 1954!")
+      expect(context.file.contents).toBe(
+        `<html><head><title>Octobre 1954</title></head><body>This is about Octobre 1954!</body></html>`)
     })
 
     test("default day of month title with handler", async () => {
@@ -50,7 +53,8 @@ describe("TitleReplaceCommand", () => {
         `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
       expect(context.file.title).toBe("Vendredi 1 octobre 1954")
-      expect(context.file.contents).toBe("This is about Vendredi 1 octobre 1954!")
+      expect(context.file.contents).toBe(
+        `<html><head><title>Vendredi 1 octobre 1954</title></head><body>This is about Vendredi 1 octobre 1954!</body></html>`)
     })
 
   })

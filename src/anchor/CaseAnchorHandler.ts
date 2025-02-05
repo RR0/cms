@@ -35,7 +35,7 @@ export class CaseAnchorHandler implements AnchorHandler {
           } else if (!titles.includes(timeStr)) {
             caseContext.time.updateFromStr(timeStr)
           }
-          titles.push(this.timeTextBuilder.build(caseContext, true))
+          titles.push(this.timeTextBuilder.build(caseContext))
         }
         const place = aCase.place
         if (typeof place === "string" && !titles.includes(place)) {
