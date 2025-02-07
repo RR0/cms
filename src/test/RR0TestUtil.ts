@@ -52,8 +52,8 @@ export class RR0TestUtil {
     this.time = new TimeTestUtil(this)
   }
 
-  newContext(inputFileName: string, contents?: string): RR0Context {
-    const context = new RR0ContextImpl("fr", new TimeContext(), this.config)
+  newContext(inputFileName: string, contents?: string, locale = "fr"): RR0Context {
+    const context = new RR0ContextImpl(locale, new TimeContext(), this.config)
     if (contents !== undefined && contents != null) {
       const langInfo = FileContents.getLang(inputFileName)
       context.file = new FileContents(inputFileName, "utf8", contents, new Date(), langInfo)
@@ -68,8 +68,8 @@ export class RR0TestUtil {
     return path.join(this.rootDir, inputFileName)
   }
 
-  newHtmlContext(inputFileName: string, contents?: string): HtmlRR0Context {
-    const context = this.newContext(this.filePath(inputFileName), contents)
+  newHtmlContext(inputFileName: string, contents?: string, locale = "fr"): HtmlRR0Context {
+    const context = this.newContext(this.filePath(inputFileName), contents, locale)
     const titleExec = /<title>(.*)<\/title>/.exec(contents)
     const title = titleExec && titleExec.length > 0 ? titleExec[1].trim() : undefined
     const currentFile = context.file

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
-import { UfoSearchCaseRR0Mapper, ufoSearchCaseRR0Mapper, ufoSearchFileDatasource } from "./ufo-search/index.js"
+import { ufoSearchFileDatasource } from "./ufo-search/index.js"
 import { rr0TestUtil } from "../../test/index.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
@@ -9,11 +9,9 @@ import path from "path"
 describe("JsonMapper", () => {
 
   let context: HtmlRR0Context
-  let mapper: UfoSearchCaseRR0Mapper
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
-    mapper = ufoSearchCaseRR0Mapper
+    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html", undefined, "en")
   })
 
   test("read", () => {

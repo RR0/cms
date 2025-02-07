@@ -17,8 +17,8 @@ export class TimeTestUtil {
     this.fullRoot = path.join(rr0TestUtil.rootDir, this.timeOptions.root)
   }
 
-  newHtmlContext(inputFileName: string, contents?: string): HtmlRR0Context {
-    return rr0TestUtil.newHtmlContext(this.filePath(inputFileName), contents)
+  newHtmlContext(inputFileName: string, contents?: string, locale = "fr"): HtmlRR0Context {
+    return rr0TestUtil.newHtmlContext(this.filePath(inputFileName), contents, locale)
   }
 
   filePath(inputFileName: string): string {
