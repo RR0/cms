@@ -27,6 +27,7 @@ import { tunisia_en } from "./tn/Tunisia_en.js"
 import { ecuador_en } from "./ec/Ecuador_en.js"
 import { egypt_en } from "./eg/Egypt_en.js"
 import { georgia_en } from "./ge/Georgia_en.js"
+import { china_en } from "./cn/ChinaMessages_en"
 
 export const countryMessageList_en: CountryMessagesList = {
   at: CountryMessages.create("Austria"),
@@ -37,7 +38,7 @@ export const countryMessageList_en: CountryMessagesList = {
   ca: canada_en,
   ch: CountryMessages.create("Switzerland"),
   cl: CountryMessages.create("Chile"),
-  cn: CountryMessages.create("China"),
+  cn: china_en,
   co: colombia_en,
   cy: CountryMessages.create("Cyprus"),
   de: CountryMessages.create("Germany"),

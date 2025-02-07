@@ -35,21 +35,28 @@ describe("RelativeTimeTextBuilder", () => {
 
   test("next month", () => {
     {
-      const sept9_2003 = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
-      sept9_2003.time.setYear(2003)
-      sept9_2003.time.setMonth(9)
-      const oct_2003 = sept9_2003.clone()
-      oct_2003.time.setMonth(oct_2003.time.getMonth()! + 1)
-      const s1 = relativeTimeTextBuilder.build(sept9_2003, oct_2003)
+      const context1 = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
+      context1.time.setYear(2003)
+      {
+        context1.time.setMonth(2)
+        const next2months = context1.clone()
+        next2months.time.setMonth(context1.time.getMonth()! + 2)
+        const s11 = relativeTimeTextBuilder.build(context1, next2months)
+        expect(s11).toBe("avril")
+      }
+      context1.time.setMonth(9)
+      const context2 = context1.clone()
+      context2.time.setMonth(context2.time.getMonth()! + 1)
+      const s1 = relativeTimeTextBuilder.build(context1, context2)
       expect(s1).toBe("le mois suivant")
-      const oct23_2003 = oct_2003.clone()
-      oct23_2003.time.setDayOfMonth(23) // Resets day of month in context
-      const s2 = relativeTimeTextBuilder.build(oct_2003, oct23_2003)
+      const context3 = context2.clone()
+      context3.time.setDayOfMonth(23) // Resets day of month in context
+      const s2 = relativeTimeTextBuilder.build(context2, context3)
       expect(s2).toBe("jeudi 23")
-      const context4 = oct23_2003.clone()
+      const context4 = context3.clone()
       context4.time.setMonth(12)
-      const s3 = relativeTimeTextBuilder.build(oct23_2003, context4)
-      expect(s3).toBe("décembre")
+      const s3 = relativeTimeTextBuilder.build(context3, context4)
+      expect(s3).toBe("un mois plus tard")
       const context5 = context4.clone()
       context5.time.setMonth(1)
       context5.time.setDayOfMonth(24)

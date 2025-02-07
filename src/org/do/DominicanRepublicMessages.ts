@@ -1,1 +1,1 @@
-export type SouthKoreaRegionMessagesList = {}
+export type DominicanRepublicMessagesList = {}

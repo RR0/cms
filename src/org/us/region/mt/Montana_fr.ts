@@ -1,6 +1,6 @@
-import { kalamazooMessages_fr } from "./kalamazoo/KalamazooMessages_fr.js"
+import { cascadeMessages_fr } from "./cascade/CascadeMessages_fr.js"
 import { RegionMessages } from "../../../country/index.js"
 
 export const montana_fr = RegionMessages.create("Montana", {
-  kalamazoo: kalamazooMessages_fr
+  cascade: cascadeMessages_fr
 })

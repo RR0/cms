@@ -27,6 +27,7 @@ import { tunisia_fr } from "./tn/Tunisia_fr.js"
 import { ecuador_fr } from "./ec/Ecuador_fr.js"
 import { egypt_fr } from "./eg/Egypt_fr.js"
 import { georgia_fr } from "./ge/Georgia_fr.js"
+import { china_fr } from "./cn/ChinaMessages_fr"
 
 /**
  * Country messages in French language.
@@ -40,7 +41,7 @@ export const countryMessageList_fr: CountryMessagesList = {
   ca: canada_fr,
   ch: CountryMessages.create("Suisse"),
   cl: CountryMessages.create("Chili"),
-  cn: CountryMessages.create("Chine"),
+  cn: china_fr,
   co: colombia_fr,
   cy: CountryMessages.create("Chypre"),
   de: CountryMessages.create("Allemagne"),

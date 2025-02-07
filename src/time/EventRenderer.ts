@@ -72,7 +72,7 @@ export class EventRenderer<E extends RR0Event> {
   async renderSources(context: HtmlRR0Context, sources: Source[], container: HTMLElement) {
     for (const source of sources) {
       const href = source.url
-      const resolvedSource = href ? await this.sourceFactory.create(context, href.toString()) : source
+      const resolvedSource = source.title || !href ? source : await this.sourceFactory.create(context, href.toString())
       const sourceEl = this.sourceRenderer.render(context, resolvedSource)
       container.append(" ", sourceEl)
     }

@@ -20,6 +20,7 @@ classDiagram
     cms --> place
     cms --> org
     cms --> ssg-api
+    cms --> data
 ```
 
-- [Data types](src/data/README.md)
+- [Data types](https://github.com/RR0/data?tab=readme-ov-file#rr0data)

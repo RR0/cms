@@ -1,7 +1,7 @@
 import { melbourneVicMessages } from "./melbourne/index.js"
 import { VictoriaCityCode } from "./VictoriaCityCode.js"
-import { RegionMessages } from "../../../country/index.js"
+import { DepartmentMessages } from "../../../country/index.js"
 
-export const victoria_en = RegionMessages.create("Victoria", {
+export const victoria_en = DepartmentMessages.create("Victoria", {
   [VictoriaCityCode.Melbourne]: melbourneVicMessages
 })

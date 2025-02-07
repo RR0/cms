@@ -34,27 +34,29 @@ describe("TimeEventRenderer", () => {
       place: city.places[0],
       name: cityMessages.toTitle(context, city)
     }
-    const source1: Source = {
+    const sourceMonth = 12
+    const unreacheableSource: Source = {
       events: [], previousSourceRefs: [],
       url: "https://somesite.com/case1",
       title: "Case 1",
       authors: ["Some Author"],
       publication: {
         publisher: "Some site",
-        time: TimeContext.fromDate(new Date(2001, 12, 13))
+        time: TimeContext.fromDate(new Date(2001, sourceMonth - 1, 13))
       }
     }
-    const sources = [source1]
+    const sources = [unreacheableSource]
     const c: RR0CaseSummary = {
       events: [], type: "sighting",
       time: context.time,
       place: namedPlace,
-      description: "some sighting", sources
+      description: "some sighting",
+      sources
     }
     const outDoc = context.file.document
     const elem = outDoc.createElement("li")
     await renderer.render(context, c, elem)
     expect(elem.innerHTML).toBe(
-      `<span class="time-resolved">en <time datetime="1970-03">mars 1970</time></span> À <span class="place">Nanterre (Hauts-de-Seine, France)</span>, some sighting <span class="source">Some Author: <span><a href="https://somesite.com/case1">Case 1</a>, <i>Some site</i>, 1970-03</span></span>`)
+      `<span class="time-resolved">en <time datetime="1970-03">mars 1970</time></span> À <span class="place">Nanterre (Hauts-de-Seine (Île-de-France (France)))</span>, some sighting <span class="source"><span class="people">Some Author</span>&nbsp;: <a href="https://somesite.com/case1">Case 1</a>, <i>Some site</i>, jeudi 13 décembre 2001</span>.`)
   })
 })

@@ -36,7 +36,8 @@ export class RR0Messages_fr implements RR0Messages {
         },
         month: {
           before: "le mois précédent",
-          after: "le mois suivant"
+          after: "le mois suivant",
+          later: "un mois plus tard"
         },
         day: {
           before: "la veille",

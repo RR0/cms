@@ -1,6 +1,6 @@
-import { kalamazoo } from "./kalamazoo/Kalamazoo.js"
+import { pike } from "./pike/Pike.js"
 import { Organization } from "../../../Organization.js"
 
 export const missouriCounties: Organization[] = [
-  kalamazoo
+  pike
 ]

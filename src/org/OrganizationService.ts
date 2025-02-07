@@ -22,7 +22,11 @@ export class OrganizationService<O extends Organization = Organization, P extend
     })
   }
 
-  /** @param parent should be context.placeContext */
+  /**
+   * @param context
+   * @param nameToFind
+   * @param parent should be context.placeContext
+   */
   find(context: RR0Context, nameToFind: string, parent: P): Organization | undefined {
     let foundOrg = this.orgs.find(someOrg => {
       const someOrgMessages = someOrg.getMessages(context)

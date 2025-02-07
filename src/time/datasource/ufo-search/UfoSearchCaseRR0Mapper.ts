@@ -40,7 +40,7 @@ export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0Context, UfoSea
 
   protected getPlace(context: HtmlRR0Context, placeName: string): NamedPlace {
     const org = this.cityService.find(context, placeName, undefined)
-    assert.ok(org, `Could not find place "${placeName}"}"`)
+    assert.ok(org, `Could not find place "${placeName}"`)
     return {name: org.getMessages(context).toTitle(context, org, {parent: true}), org, place: org.places[0]}
   }
 }

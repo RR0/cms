@@ -1,5 +1,5 @@
 import { CountryMessages } from "../country/index.js"
-import { SouthKoreaRegionMessagesList } from "./DominicanRepublicMessages.js"
+import { DominicanRepublicMessagesList } from "./DominicanRepublicMessages.js"
 
-export const dominicanRepublic_fr = new CountryMessages<SouthKoreaRegionMessagesList>(["République Dominicaine"],
+export const dominicanRepublic_fr = new CountryMessages<DominicanRepublicMessagesList>(["République Dominicaine"],
   {})

@@ -1,6 +1,6 @@
-import { kalamazooCities } from "./kalamazoo/KalamazooCities.js"
+import { hindsCities } from "./hinds/HindsCities.js"
 import { City } from "../../../country/index.js"
 
 export const mississippiCities: City[] = [
-  ...kalamazooCities
+  ...hindsCities
 ]

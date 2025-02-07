@@ -1,6 +1,6 @@
-import { kalamazooMessages_fr } from "./kalamazoo/KalamazooMessages_fr.js"
+import { hindsMessages_fr } from "./hinds/HindsMessages_fr.js"
 import { RegionMessages } from "../../../country/index.js"
 
 export const mississippi_fr = RegionMessages.create("Mississippi", {
-  kalamazoo: kalamazooMessages_fr
+  hinds: hindsMessages_fr
 })
