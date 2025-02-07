@@ -14,7 +14,8 @@ class FileMapper extends JsonMapper<UfoSearchCase> {
 
   parse(context: HtmlRR0Context, data: string): UfoSearchCase[] {
     const allData = super.parse(context, data)
-    return allData["Majestic Timeline"].map(line => this.mapper.map(context, line, context.file.lastModified))
+    return allData["Majestic Timeline"].map(
+      (line: UfoSearchCase) => this.mapper.map(context, line, context.file.lastModified))
   }
 }
 

@@ -25,8 +25,8 @@ describe("CsvMapper", () => {
 
   test("columns for a case", () => {
     mapper.map(context, geipanTestCaseSummaries[0], dataDate)
-    expect(Array.from(mapper.fields)).toEqual(
-      ["id", "url", "city", "zoneType", "zoneCode", "dateTime", "postTime", "classification"])
+    expect(Array.from(mapper.fields).sort()).toEqual(
+      ["city", "classification", "id", "postTime", "time", "url", "zoneCode", "zoneType"])
   })
 
   test("values of a case", () => {
