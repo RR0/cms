@@ -302,7 +302,7 @@ export class RR0Build {
       replacements: [new HtAccessToNetlifyConfigReplaceCommand(baseUrl)],
       roots: [".htaccess"],
       getOutputPath(_context: SsgContext): string {
-        return path.join(this.outDir, "netlify.toml")
+        return path.join(outDir, "netlify.toml")
       }
     }
     const contentRoots = this.contentRoots
