@@ -261,7 +261,6 @@ export class RR0Build {
       new DescriptionReplaceCommand("UFO data for french-reading people", "abstract"),
       new AuthorReplaceCommand(timeService)
     ]
-//  const sourceCounter = new SourceFileCounter()
     const sourceCounter = new SourceFileCounter()
     const sourceReplacer = new SourceReplacer(sourceRenderer, sourceFactory, sourceCounter)
     const sourceReplacerFactory = new SourceReplacerFactory(sourceReplacer)

@@ -105,10 +105,13 @@ describe("Build", () => {
       politicians: testFilePath("people/politicians.html"),
       rulers: testFilePath("people/dirigeants.html")
     }
-    const build = new RR0Build(contentRoots, copies, outDir, "fr", googleMapsApiKey, "rr0@rr0.org", timeOptions,
-      "https://rr0.org/", timeFormat, timeFiles, directoryPages,
+    const sourceRegistryFileName = testFilePath("source/index.json")
+    const siteBaseUrl = "https://rr0.org/"
+    const mail = "rr0@rr0.org"
+    const build = new RR0Build(contentRoots, copies, outDir, "fr", googleMapsApiKey, mail, timeOptions,
+      siteBaseUrl, timeFormat, timeFiles, directoryPages,
       testFilePath("science/crypto/ufo/enquete/dossier/index.html"),
-      [testFilePath("science/crypto/ufo/enquete/dossier/canular")], testFilePath("source/index.json"),
+      [testFilePath("science/crypto/ufo/enquete/dossier/canular")], sourceRegistryFileName,
       ["people/Astronomers_fichiers", "people/witness", "people/author"], directoryOptions)
     await build.run(args)
   })
