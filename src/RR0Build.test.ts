@@ -1,4 +1,3 @@
-import path from "path"
 import { glob } from "glob"
 import { describe } from "@javarome/testscript"
 import { FileContents } from "@javarome/fileutil"
@@ -6,11 +5,8 @@ import { CLI } from "./util/index.js"
 import { RR0Build, RR0BuildArgs } from "./RR0Build.js"
 import { TimeServiceOptions } from "./time/index.js"
 import { PeopleDirectoryStepOptions } from "./people/index.js"
-import { rr0TestUtil } from "./test"
-
-function testFilePath(filePath: string) {
-  return path.join(rr0TestUtil.rootDir, filePath)
-}
+import { testFilePath } from "./test"
+import * as process from "node:process"
 
 describe("Build", () => {
   console.time("ssg")
@@ -55,14 +51,14 @@ describe("Build", () => {
     "time/DualRangeComponent.mjs",
     "index/index.js", "lang/form.js", "lang/form.css", "lang/speech.js", "lang/speech.css",
     "croyance/divin/theisme/mono/livre/islam/coran/index.js"
-  ].map(testFilePath)
+  ]
   const outDir = "out"
   const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY
   if (!googleMapsApiKey) {
     throw Error("GOOGLE_MAPS_API_KEY is required")
   }
   const timeOptions: TimeServiceOptions = {
-    root: testFilePath("time"),
+    root: "time",
     files: []
   }
   const timeFormat: Intl.DateTimeFormatOptions = {
@@ -93,26 +89,31 @@ describe("Build", () => {
   ].map(testFilePath)
   getTimeFiles().then(async (timeFiles) => {
     const directoryOptions: PeopleDirectoryStepOptions = {
-      root: testFilePath("people/index.html"),
-      scientists: testFilePath("people/scientifiques.html"),
-      ufologists: testFilePath("people/ufologues.html"),
-      ufoWitnesses: testFilePath("people/witness/index.html"),
-      astronomers: testFilePath("people/astronomes.html"),
-      contactees: testFilePath("people/contactes.html"),
-      pilots: testFilePath("people/pilotes.html"),
-      military: testFilePath("people/militaires.html"),
-      softwareEngineers: testFilePath("tech/info/Personnes.html"),
-      politicians: testFilePath("people/politicians.html"),
-      rulers: testFilePath("people/dirigeants.html")
+      root: "people/index.html",
+      scientists: "people/scientifiques.html",
+      ufologists: "people/ufologues.html",
+      ufoWitnesses: "people/witness/index.html",
+      astronomers: "people/astronomes.html",
+      contactees: "people/contactes.html",
+      pilots: "people/pilotes.html",
+      military: "people/militaires.html",
+      softwareEngineers: "tech/info/Personnes.html",
+      politicians: "people/politicians.html",
+      rulers: "people/dirigeants.html"
     }
-    const sourceRegistryFileName = testFilePath("source/index.json")
+    const sourceRegistryFileName = "source/index.json"
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
-    const build = new RR0Build(contentRoots, copies, outDir, "fr", googleMapsApiKey, mail, timeOptions,
+    const build = new RR0Build({
+      contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
       siteBaseUrl, timeFormat, timeFiles, directoryPages,
-      testFilePath("science/crypto/ufo/enquete/dossier/index.html"),
-      [testFilePath("science/crypto/ufo/enquete/dossier/canular")], sourceRegistryFileName,
-      ["people/Astronomers_fichiers", "people/witness", "people/author"], directoryOptions)
+      ufoCaseDirectoryFile: "science/crypto/ufo/enquete/dossier/index.html",
+      ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"],
+      sourceRegistryFileName,
+      directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"],
+      directoryOptions,
+      inDir: testFilePath
+    })
     await build.run(args)
   })
 })

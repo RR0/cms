@@ -87,9 +87,29 @@ import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
 import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 
+export interface RR0BuildOptions {
+  contentRoots: string[]
+  copies: string[]
+  outDir: string
+  locale: string,
+  googleMapsApiKey: string
+  mail: string
+  timeOptions: TimeServiceOptions
+  siteBaseUrl: string
+  timeFormat: Intl.DateTimeFormatOptions
+  timeFiles: string[],
+  directoryPages: string[]
+  ufoCaseDirectoryFile: string
+  ufoCasesExclusions: string[],
+  sourceRegistryFileName: string
+  directoryExcluded: string[],
+  directoryOptions: PeopleDirectoryStepOptions
+  inDir?: (path: string) => string
+}
+
 export interface RR0BuildArgs {
   /**
-   * Configuration file
+   * Configuration file name.
    */
   config?: string
 
@@ -137,34 +157,29 @@ export class RR0Build {
   config: FileWriteConfig
   private context: RR0ContextImpl
   private placeService: GooglePlaceService
-  private orgService: OrganizationService<any, undefined>
+  private orgService: OrganizationService<any>
   private timeService: TimeService
   private caseFactory: CaseFactory
   private dataService: AllDataService
   private peopleFactory: PeopleFactory
   private timeTextBuilder: TimeTextBuilder
 
-  constructor(
-    protected contentRoots: string[], protected copies: string[], protected outDir: string, locale: string,
-    googleMapsApiKey: string, mail: string, protected timeOptions: TimeServiceOptions, protected siteBaseUrl: string,
-    protected timeFormat: Intl.DateTimeFormatOptions, protected timeFiles: string[],
-    protected directoryPages: string[], protected ufoCaseDirectoryFile: string, protected ufoCasesExclusions: string[],
-    protected sourceRegistryFileName: string, protected directoryExcluded: string[],
-    protected directoryOptions: PeopleDirectoryStepOptions
-  ) {
+  constructor(protected options: RR0BuildOptions) {
     this.config = {
       getOutputPath(context: SsgContext): string {
-        return path.join(outDir, context.file.name)
+        return path.join(options.outDir, context.file.name)
       }
     }
     const timeContext = new TimeContext()
-    const context = this.context = new RR0ContextImpl(locale, timeContext, this.config)
-    context.setVar("mapsApiKey", googleMapsApiKey)
-    context.setVar("mail", mail)
-    this.placeService = new GooglePlaceService("place", googleMapsApiKey)
+    const context = this.context = new RR0ContextImpl(options.locale, timeContext, this.config)
+    context.setVar("mapsApiKey", options.googleMapsApiKey)
+    context.setVar("mail", options.mail)
+    this.placeService = new GooglePlaceService("place", options.googleMapsApiKey)
     this.orgService = new OrganizationService([], "org", undefined)
-    const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(timeFormat)
-    const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeOptions.root})
+    const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(options.timeFormat)
+    const timeOptions = options.timeOptions
+    const timeRoot = this.options.inDir(timeOptions.root)
+    const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeRoot})
     const eventFactory = new RR0EventFactory()
     const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
     const orgFactory = new OrganizationFactory(eventFactory)
@@ -183,7 +198,7 @@ export class RR0Build {
 
   async run(args: RR0BuildArgs) {
     const context = this.context
-    const timeFiles = this.timeFiles
+    const timeFiles = this.options.timeFiles
     context.setVar("timeFilesCount", timeFiles.length)
     const timeService = this.timeService
     const timeElementFactory = new TimeElementFactory(timeService.renderer)
@@ -200,16 +215,22 @@ export class RR0Build {
     const bookMeta = new Map<string, HtmlMeta>()
     const bookLinks = new Map<string, HtmlLinks>()
     const config = this.config
-    const ufoCasesStep = new CaseDirectoryStep(caseService, caseService.files, this.ufoCasesExclusions,
-      this.ufoCaseDirectoryFile,
+    const ufoCaseDirectoryFile = this.options.inDir(this.options.ufoCaseDirectoryFile)
+    const ufoCasesExclusions = this.options.ufoCasesExclusions.map(this.options.inDir)
+    const ufoCasesStep = new CaseDirectoryStep(caseService, caseService.files, ufoCasesExclusions,
+      ufoCaseDirectoryFile,
       outputFunc, config)
     const peopleDirectoryFactory = new PeopleDirectoryStepFactory(outputFunc, config, peopleService,
-      this.directoryExcluded)
-    const peopleSteps = await peopleDirectoryFactory.create(this.directoryOptions)
+      this.options.directoryExcluded)
+    const directoryOptions = this.options.directoryOptions
+    for (const directoryOption in directoryOptions) {
+      directoryOptions[directoryOption] = this.options.inDir(directoryOptions[directoryOption])
+    }
+    const peopleSteps = await peopleDirectoryFactory.create(directoryOptions)
     // Publish case.json files so that vraiufo.com will find them
-    const copies = this.copies
+    const copies = this.options.copies
     copies.push(...(ufoCasesStep.config.rootDirs).map(dir => path.join(dir, "case.json")))
-    const outDir = this.outDir
+    const outDir = this.options.outDir
     await writeFile(path.join(outDir, "casesDirs.json"), JSON.stringify(ufoCasesStep.config.rootDirs), "utf-8")
     copies.push(...(peopleSteps.reduce((rootDirs, peopleStep) => {
       rootDirs.push(...peopleStep.config.rootDirs)
@@ -224,9 +245,10 @@ export class RR0Build {
     )
     const sourceRenderer = new SourceRenderer(timeTextBuilder)
     const http = new HttpSource()
-    const baseUrl = this.siteBaseUrl
-    const timeFormat = this.timeFormat
-    const sourceFactory = new PersistentSourceRegistry(dataService, http, baseUrl, this.sourceRegistryFileName,
+    const baseUrl = this.options.siteBaseUrl
+    const timeFormat = this.options.timeFormat
+    const sourceRegistryFileName = this.options.inDir(this.options.sourceRegistryFileName)
+    const sourceFactory = new PersistentSourceRegistry(dataService, http, baseUrl, sourceRegistryFileName,
       timeFormat)
     const noteCounter = new NoteFileCounter()
     const noteRenderer = new NoteRenderer(noteCounter)
@@ -284,7 +306,7 @@ export class RR0Build {
     const ssg = new Ssg(config)
     const getOutputPath = (context: SsgContext): string => path.join(outDir, context.file.name)
     const force = args.force === "true"
-    const toProcess = new Set<string>(this.directoryPages)
+    const toProcess = new Set<string>(this.options.directoryPages)
     const csvTransformer = new class implements SsiIncludeReplaceCommandTransformer {
       transform(context: SsgContext, file: FileContents): string | undefined {
         const fileName = file.name
@@ -305,11 +327,18 @@ export class RR0Build {
         return path.join(outDir, "netlify.toml")
       }
     }
-    const contentRoots = this.contentRoots
+    const options = this.options
+    const contentRoots = options.contentRoots.map(options.inDir)
     const includeStep = new RR0ContentStep(
       [htAccessToNetlifyConfig, {
         roots: contentRoots,
-        replacements: [new SsiIncludeReplaceCommand([csvTransformer])],
+        replacements: [new class extends SsiIncludeReplaceCommand {
+          protected filePath(context: SsgContext, fileNameArg: string): string {
+            const dirName = path.dirname(context.file.name)
+            const filePath = fileNameArg.startsWith("/") ? options.inDir(fileNameArg) : path.join(dirName, fileNameArg)
+            return filePath
+          }
+        }([csvTransformer])],
         getOutputPath
       }],
       outputFunc, [], [], force, "content includes", toProcess
@@ -343,13 +372,13 @@ export class RR0Build {
       ssg.add(new SearchIndexStep("search/index.json", searchVisitor))
     }
     if (reindex?.includes("sources")) {
-      ssg.add(new SourceIndexStep(this.sourceRegistryFileName, sourceFactory))
+      ssg.add(new SourceIndexStep(sourceRegistryFileName, sourceFactory))
     }
     if (copies) {
       const copyConfig: FileCopyConfig = {
         getOutputPath,
-        sourcePatterns: copies,
-        options: {ignore: ["node_modules/**", "out/**"]}
+        sourcePatterns: copies.map(this.options.inDir),
+        options: {ignore: ["node_modules/**", "out/**"].map(this.options.inDir)}
       }
       ssg.add(new CopyStep(copyConfig))
     }
