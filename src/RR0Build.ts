@@ -335,8 +335,8 @@ export class RR0Build {
         replacements: [new class extends SsiIncludeReplaceCommand {
           protected filePath(context: SsgContext, fileNameArg: string): string {
             const dirName = path.dirname(context.file.name)
-            const filePath = fileNameArg.startsWith("/") ? options.inDir(fileNameArg) : path.join(dirName, fileNameArg)
-            return filePath
+            return fileNameArg.startsWith("/") ?
+              path.join(process.cwd(), options.inDir(fileNameArg)) : path.join(dirName, fileNameArg)
           }
         }([csvTransformer])],
         getOutputPath
