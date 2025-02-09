@@ -96,7 +96,6 @@ export interface RR0BuildOptions {
   timeOptions: TimeServiceOptions
   siteBaseUrl: string
   timeFormat: Intl.DateTimeFormatOptions
-  timeFiles: string[],
   directoryPages: string[]
   ufoCaseDirectoryFile: string
   ufoCasesExclusions: string[],
@@ -196,7 +195,7 @@ export class RR0Build {
 
   async run(args: RR0BuildArgs) {
     const context = this.context
-    const timeFiles = this.options.timeFiles
+    const timeFiles = this.options.timeOptions.files
     context.setVar("timeFilesCount", timeFiles.length)
     const timeService = this.timeService
     const timeElementFactory = new TimeElementFactory(timeService.renderer)
