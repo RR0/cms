@@ -3,16 +3,17 @@ import { HtmlRR0Context } from "../RR0Context.js"
 import path from "path"
 import { CountryCode } from "../org/index.js"
 import { Occupation } from "./Occupation.js"
-import { Time } from "../time/Time.js"
 import { Gender } from "@rr0/common"
 import { PeopleFactory } from "./PeopleFactory.js"
 import { AbstractDataFactory, AbstractDataService, AllDataService } from "@rr0/data"
+import { TimeService } from "../time"
 
 export class PeopleService extends AbstractDataService<People> {
 
   readonly cache = new Map<string, People>()
 
-  constructor(dataService: AllDataService, protected peopleFactory: PeopleFactory, files: string[]) {
+  constructor(dataService: AllDataService, protected peopleFactory: PeopleFactory, files: string[],
+              protected timeService: TimeService) {
     super(dataService, peopleFactory, files)
   }
 
@@ -89,12 +90,12 @@ export class PeopleService extends AbstractDataService<People> {
     }
     let birthTimeStr = people.birthTime as unknown as string
     if (birthTimeStr) {
-      const birthTime = people.birthTime = Time.dateFromIso(birthTimeStr)
+      const birthTime = people.birthTime = this.timeService.dateFromIso(birthTimeStr)
       birthTimeStr = birthTime.getFullYear().toString()
     }
     let deathTimeStr = people.deathTime as unknown as string
     if (deathTimeStr) {
-      const deathTime = people.deathTime = Time.dateFromIso(deathTimeStr)
+      const deathTime = people.deathTime = this.timeService.dateFromIso(deathTimeStr)
       deathTimeStr = deathTime.getFullYear().toString()
     }
     if (people.isDeceased()) {

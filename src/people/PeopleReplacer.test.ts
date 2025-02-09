@@ -28,7 +28,8 @@ describe("PeopleReplacer", () => {
 
   test("ignore brackets", async () => {
     const dataService = new AllDataService([peopleFactory])
-    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory, peopleFiles))
+    const replacer = new PeopleReplacer(
+      new PeopleService(dataService, peopleFactory, peopleFiles, rr0TestUtil.time.getService()))
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
       const lastnameFirstElement = createPeopleElement(context,
@@ -48,7 +49,8 @@ describe("PeopleReplacer", () => {
 
   test("replace people tags", async () => {
     const dataService = new AllDataService([peopleFactory])
-    const replacer = new PeopleReplacer(new PeopleService(dataService, peopleFactory, peopleFiles))
+    const replacer = new PeopleReplacer(
+      new PeopleService(dataService, peopleFactory, peopleFiles, rr0TestUtil.time.getService()))
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
       const peopleWithTitle = createPeopleElement(context, "Ronald Reagan", "Ronald Wilson Reagan")

@@ -34,7 +34,7 @@
     "@rr0/place": "^0.3.2",
     "@rr0/data": "^0.1.2",
     "@javarome/fileutil": "^0.3.6",
-    "ssg-api": "^1.16.11",
+    "ssg-api": "^1.16.12",
     "canvas": "^2.11.2",
     "csv-parser": "^3.0.0",
     "glob": "^11.0.0",

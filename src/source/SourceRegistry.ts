@@ -1,5 +1,5 @@
 import { HtmlRR0Context } from "../RR0Context.js"
-import { HttpSource } from "../time/index.js"
+import { HttpSource, TimeService } from "../time/index.js"
 import { SourceFactory } from "./SourceFactory.js"
 import { AllDataService } from "@rr0/data"
 import { Source } from "@rr0/data/dist/source"
@@ -11,8 +11,9 @@ export class SourceRegistry extends SourceFactory {
 
   registry = {}
 
-  constructor(dataService: AllDataService, http: HttpSource, baseUrl: string, options: Intl.DateTimeFormatOptions) {
-    super(dataService, http, baseUrl, options)
+  constructor(dataService: AllDataService, http: HttpSource, baseUrl: string, options: Intl.DateTimeFormatOptions,
+              time: TimeService) {
+    super(dataService, http, baseUrl, options, time)
   }
 
   /**

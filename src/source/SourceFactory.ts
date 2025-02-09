@@ -3,7 +3,7 @@ import path from "path"
 import { TimeContext } from "@rr0/time"
 import { JSDOM } from "jsdom"
 import { HttpSource } from "../time/datasource/HttpSource.js"
-import { Time } from "../time"
+import { TimeService } from "../time"
 import { FileContents } from "@javarome/fileutil"
 import { AllDataService } from "@rr0/data"
 import { Publication, Source } from "@rr0/data/dist/source"
@@ -14,7 +14,7 @@ import { Publication, Source } from "@rr0/data/dist/source"
 export class SourceFactory {
 
   constructor(protected dataService: AllDataService, protected http: HttpSource, protected baseUrl: string,
-              protected options: Intl.DateTimeFormatOptions) {
+              protected options: Intl.DateTimeFormatOptions, protected time: TimeService) {
   }
 
   /**
@@ -71,7 +71,7 @@ export class SourceFactory {
     }
     const publication = source.publication
     if (publication && !publication.time) {
-      publication.time = Time.contextFromFileName(context, href)
+      publication.time = this.time.contextFromFileName(context, href)
     }
     if (hash) {
       source.index = hash

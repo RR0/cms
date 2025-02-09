@@ -16,7 +16,7 @@ describe("PeopleFactory", () => {
     path.join(peopleRoot, "h/HynekJosefAllen"),
     path.join(peopleRoot, "v/VonBraunWerner")
   ]
-  const factory = new PeopleService(dataService, rr0TestUtil.peopleFactory, peopleFiles)
+  const factory = new PeopleService(dataService, rr0TestUtil.peopleFactory, peopleFiles, rr0TestUtil.time.getService())
 
   test("build people with one first name", () => {
     expect(factory.createFromFullName("Jérôme Beau")).toEqual(new People(

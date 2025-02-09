@@ -10,7 +10,8 @@ describe("ClassDomReplaceCommand", () => {
   test("replaces", async () => {
     const peopleRoot = "src/people"
     const peopleFiles = [path.join(peopleRoot, "b/BeauJerome")]
-    const peopleService = new PeopleService(rr0TestUtil.dataService, rr0TestUtil.peopleFactory, peopleFiles)
+    const peopleService = new PeopleService(rr0TestUtil.dataService, rr0TestUtil.peopleFactory, peopleFiles,
+      rr0TestUtil.time.getService())
     const command = new ClassDomReplaceCommand(
       new PeopleReplacerFactory(peopleService), "people")
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", `<span class="people">Jérôme Beau</span>`)

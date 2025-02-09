@@ -1,0 +1,19 @@
+{
+  "occupations": [
+    "ufologist",
+    "teacher"
+  ],
+  "countries": [
+    "fr"
+  ],
+  "events": [
+    {
+      "type": "birth",
+      "time": "1940"
+    },
+    {
+      "type": "death",
+      "time": "2025-01-04"
+    }
+  ]
+}

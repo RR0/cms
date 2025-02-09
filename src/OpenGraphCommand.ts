@@ -3,8 +3,7 @@ import { HtmlRR0Context } from "./RR0Context.js"
 import { Canvas, CanvasRenderingContext2D, createCanvas, loadImage } from "canvas"
 import fs from "fs"
 import path from "path"
-import { TimeTextBuilder } from "./time/index.js"
-import { RR0ContentStep } from "./RR0ContentStep.js"
+import { TimeService } from "./time/index.js"
 import assert from "assert"
 
 /**
@@ -16,7 +15,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
 
   constructor(
     protected outDir: string, protected timeFiles: string[], protected baseUrl: string,
-    protected timeTextBuilder: TimeTextBuilder,
+    protected timeService: TimeService,
     protected width: number = 1200, protected height: number = 600
   ) {
   }
@@ -61,14 +60,14 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
     if (this.timeFiles.includes(fileName)) {
       timeStr = "Chronologie"
     } else {
-      const timeContext = RR0ContentStep.setTimeFromPath(context, fileName)
+      const timeContext = this.timeService.gSetTimeFromPath(context, fileName)
       if (timeContext) {
         context.time.setYear(timeContext.getYear())
         context.time.setMonth(timeContext.getMonth())
         context.time.setDayOfMonth(timeContext.getDayOfMonth())
         context.time.setHour(undefined)
         context.time.setMinutes(undefined)
-        timeStr = this.timeTextBuilder.build(context)
+        timeStr = this.timeService.textBuilder.build(context)
       }
     }
 

@@ -1,7 +1,6 @@
 import { ContentStep, ContentStepConfig, ContentStepResult, OutputFunc } from "ssg-api"
 import { HtmlRR0Context } from "./RR0Context.js"
-import { Time } from "./time/index.js"
-import { TimeContext } from "@rr0/time"
+import { TimeService } from "./time/index.js"
 
 export interface ContentVisitor {
   visit(context: HtmlRR0Context): Promise<void>
@@ -13,51 +12,41 @@ export interface FileVisitor {
   contentStepEnd(): Promise<void>
 }
 
+export interface RR0ContentStepOptions {
+  contentConfigs: ContentStepConfig[]
+  outputFunc: OutputFunc
+  fileVisitors?: FileVisitor[]
+  contentVisitors?: ContentVisitor[]
+  force: boolean
+  name: string
+  toProcess: Set<string>
+}
+
 export class RR0ContentStep extends ContentStep<HtmlRR0Context> {
 
-  constructor(
-    contentConfigs: ContentStepConfig[], outputFunc: OutputFunc, protected fileVisitors: FileVisitor[] = [],
-    protected contentVisitors: ContentVisitor[] = [], protected force: boolean, name: string,
-    protected toProcess: Set<string>) {
-    super(contentConfigs, outputFunc, name)
-  }
+  protected timeService: TimeService
 
-  static setTimeFromPath(context: HtmlRR0Context, filePath: string): TimeContext | undefined {
-    const time = context.time
-    time.reset()
-    const newTimeContext = Time.contextFromFileName(context, filePath)
-    if (newTimeContext) {
-      time.setYear(newTimeContext.getYear())
-      time.setMonth(newTimeContext.getMonth())
-      time.setDayOfMonth(newTimeContext.getDayOfMonth())
-      // context.time.from = context.time
-    }
-    return newTimeContext
+  constructor(protected options: RR0ContentStepOptions, timeService: TimeService) {
+    super(options.contentConfigs, options.outputFunc, options.name)
+    this.timeService = timeService
+    this.options.fileVisitors = options.fileVisitors || []
+    this.options.contentVisitors = options.contentVisitors || []
   }
 
   protected async processFile(context: HtmlRR0Context, filePath: string,
                               contentsConfig: ContentStepConfig): Promise<string | undefined> {
-    this.setContextFromFile(context, filePath)
+    this.timeService.setContextFromFile(context, filePath)
     return super.processFile(context, filePath, contentsConfig)
-  }
-
-  protected setContextFromFile(context: HtmlRR0Context, filePath: string) {
-    this.setTimeFromPath(context, filePath)
-  }
-
-  protected setTimeFromPath(context: HtmlRR0Context, filePath: string) {
-    context.time.reset()  // Don't use time context from previous page.
-    RR0ContentStep.setTimeFromPath(context, filePath)
   }
 
   protected async shouldProcessFile(context: HtmlRR0Context, contentsConfig: ContentStepConfig): Promise<boolean> {
     const fileHasChanged = await super.shouldProcessFile(context, contentsConfig)
-    const fileIsForced = this.toProcess.has(context.file.name)
-    const processFile = this.force || fileIsForced || fileHasChanged
+    const fileIsForced = this.options.toProcess.has(context.file.name)
+    const processFile = this.options.force || fileIsForced || fileHasChanged
     if (processFile) {
-      this.toProcess.add(context.file.name)
+      this.options.toProcess.add(context.file.name)
     }
-    for (const fileVisitor of this.fileVisitors) {
+    for (const fileVisitor of this.options.fileVisitors) {
       await fileVisitor.visit(context, processFile)
     }
     return processFile
@@ -65,11 +54,11 @@ export class RR0ContentStep extends ContentStep<HtmlRR0Context> {
 
   protected async shouldProcessContent(context: HtmlRR0Context,
                                        contentsConfig: ContentStepConfig): Promise<boolean> {
-    const fileIsForced = this.toProcess.has(context.file.name)
+    const fileIsForced = this.options.toProcess.has(context.file.name)
     const showProcess = await super.shouldProcessContent(context, contentsConfig)
-    const should = this.force || fileIsForced || showProcess
+    const should = this.options.force || fileIsForced || showProcess
     if (should) {
-      for (const contentVisitor of this.contentVisitors) {
+      for (const contentVisitor of this.options.contentVisitors) {
         await contentVisitor.visit(context)
       }
     }
@@ -78,7 +67,7 @@ export class RR0ContentStep extends ContentStep<HtmlRR0Context> {
 
   protected async postExecute(result: ContentStepResult): Promise<ContentStepResult> {
     await super.postExecute(result)
-    for (const fileVisitor of this.fileVisitors) {
+    for (const fileVisitor of this.options.fileVisitors) {
       await fileVisitor.contentStepEnd()
     }
     return result

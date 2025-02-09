@@ -16,7 +16,8 @@ describe("TimeEventRenderer", () => {
   const dataService = new AllDataService([])
   const baseUrl = "https://rr0.org"
   const http = new HttpSource()
-  const sourceFactory = new SourceFactory(dataService, http, baseUrl, rr0TestUtil.intlOptions)
+  const sourceFactory = new SourceFactory(dataService, http, baseUrl, rr0TestUtil.intlOptions,
+    rr0TestUtil.time.getService())
   const renderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
     new SourceRenderer(rr0TestUtil.time.timeTextBuilder), rr0TestUtil.time.timeElementFactory)
 

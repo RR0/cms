@@ -10,7 +10,6 @@ import {
   HttpSource,
   RR0Mapping,
   SsiTitleReplaceCommand,
-  Time,
   TimeElementFactory,
   TimeLinkDefaultHandler,
   TimeReplacer,
@@ -78,7 +77,7 @@ import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
 import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
 import { IndexedReplacerFactory } from "./index/IndexedReplacerFactory.js"
 import { APIFactory, CodeReplacerFactory } from "./tech/index.js"
-import { ContentVisitor, RR0ContentStep } from "./RR0ContentStep.js"
+import { ContentVisitor, RR0ContentStep, RR0ContentStepOptions } from "./RR0ContentStep.js"
 import { UnitReplaceCommand } from "./value/index.js"
 import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
 
@@ -104,7 +103,6 @@ export interface RR0BuildOptions {
   sourceRegistryFileName: string
   directoryExcluded: string[],
   directoryOptions: PeopleDirectoryStepOptions
-  inDir?: (path: string) => string
 }
 
 export interface RR0BuildArgs {
@@ -178,7 +176,7 @@ export class RR0Build {
     this.orgService = new OrganizationService([], "org", undefined)
     const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(options.timeFormat)
     const timeOptions = options.timeOptions
-    const timeRoot = this.options.inDir(timeOptions.root)
+    const timeRoot = timeOptions.root
     const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeRoot})
     const eventFactory = new RR0EventFactory()
     const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
@@ -209,22 +207,21 @@ export class RR0Build {
     const caseService = new CaseService(dataService, this.caseFactory, timeElementFactory, caseFiles)
 
     const peopleFiles = await this.peopleFactory.getFiles()
-    const peopleService = new PeopleService(dataService, this.peopleFactory, peopleFiles)
+    const peopleService = new PeopleService(dataService, this.peopleFactory, peopleFiles, timeService)
     const peopleList = await peopleService.getAll()
     context.setVar("peopleFilesCount", peopleList.length)
     const bookMeta = new Map<string, HtmlMeta>()
     const bookLinks = new Map<string, HtmlLinks>()
     const config = this.config
-    const ufoCaseDirectoryFile = this.options.inDir(this.options.ufoCaseDirectoryFile)
-    const ufoCasesExclusions = this.options.ufoCasesExclusions.map(this.options.inDir)
+    const ufoCaseDirectoryFile = this.options.ufoCaseDirectoryFile
+    const ufoCasesExclusions = this.options.ufoCasesExclusions
     const ufoCasesStep = new CaseDirectoryStep(caseService, caseService.files, ufoCasesExclusions,
-      ufoCaseDirectoryFile,
-      outputFunc, config)
+      ufoCaseDirectoryFile, outputFunc, config)
     const peopleDirectoryFactory = new PeopleDirectoryStepFactory(outputFunc, config, peopleService,
       this.options.directoryExcluded)
     const directoryOptions = this.options.directoryOptions
     for (const directoryOption in directoryOptions) {
-      directoryOptions[directoryOption] = this.options.inDir(directoryOptions[directoryOption])
+      directoryOptions[directoryOption] = directoryOptions[directoryOption]
     }
     const peopleSteps = await peopleDirectoryFactory.create(directoryOptions)
     // Publish case.json files so that vraiufo.com will find them
@@ -232,10 +229,11 @@ export class RR0Build {
     copies.push(...(ufoCasesStep.config.rootDirs).map(dir => path.join(dir, "case.json")))
     const outDir = this.options.outDir
     await writeFile(path.join(outDir, "casesDirs.json"), JSON.stringify(ufoCasesStep.config.rootDirs), "utf-8")
-    copies.push(...(peopleSteps.reduce((rootDirs, peopleStep) => {
+    const dirsContainingPeopleJson = peopleSteps.reduce((rootDirs, peopleStep) => {
       rootDirs.push(...peopleStep.config.rootDirs)
       return rootDirs
-    }, [])).map(dir => path.join(dir, "people.json")))
+    }, [])
+    copies.push(...dirsContainingPeopleJson.map(dir => path.join(dir, "people.json")))
     await writeFile(path.join(outDir, "peopleDirs.json"),
       JSON.stringify(peopleList.map(people => people.dirName)), "utf-8")
 
@@ -247,9 +245,9 @@ export class RR0Build {
     const http = new HttpSource()
     const baseUrl = this.options.siteBaseUrl
     const timeFormat = this.options.timeFormat
-    const sourceRegistryFileName = this.options.inDir(this.options.sourceRegistryFileName)
+    const sourceRegistryFileName = this.options.sourceRegistryFileName
     const sourceFactory = new PersistentSourceRegistry(dataService, http, baseUrl, sourceRegistryFileName,
-      timeFormat)
+      timeFormat, timeService)
     const noteCounter = new NoteFileCounter()
     const noteRenderer = new NoteRenderer(noteCounter)
     const caseRenderer = new CaseSummaryRenderer(noteRenderer, sourceFactory, sourceRenderer, timeElementFactory)
@@ -265,7 +263,7 @@ export class RR0Build {
     )
     const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {
       let title: string | undefined
-      title = Time.titleFromFile(context, context.file.name, timeTextBuilder)
+      title = timeService.titleFromFile(context, context.file.name, timeTextBuilder)
       return title
     }
     const pageReplaceCommands = [
@@ -327,22 +325,22 @@ export class RR0Build {
         return path.join(outDir, "netlify.toml")
       }
     }
-    const options = this.options
-    const contentRoots = options.contentRoots.map(options.inDir)
-    const includeStep = new RR0ContentStep(
-      [htAccessToNetlifyConfig, {
+    const contentRoots = this.options.contentRoots
+    const contentStepOptions: RR0ContentStepOptions = {
+      contentConfigs: [htAccessToNetlifyConfig, {
         roots: contentRoots,
         replacements: [new class extends SsiIncludeReplaceCommand {
           protected filePath(context: SsgContext, fileNameArg: string): string {
             const dirName = path.dirname(context.file.name)
             return fileNameArg.startsWith("/") ?
-              path.join(process.cwd(), options.inDir(fileNameArg)) : path.join(dirName, fileNameArg)
+              path.join(process.cwd(), fileNameArg) : path.join(dirName, fileNameArg)
           }
         }([csvTransformer])],
         getOutputPath
       }],
-      outputFunc, [], [], force, "content includes", toProcess
-    )
+      outputFunc, fileVisitors: [], contentVisitors: [], force, name: "content includes", toProcess
+    }
+    const includeStep = new RR0ContentStep(contentStepOptions, timeService)
     ssg.add(includeStep)
     ssg.add(ufoCasesStep)
     ssg.add(...peopleSteps)
@@ -359,10 +357,12 @@ export class RR0Build {
         new AnchorReplaceCommand(baseUrl,
           [new CaseAnchorHandler(caseService, timeTextBuilder), new DataAnchorHandler(dataService)]),
         new ImageCommand(outDir, 275, 500),
-        new OpenGraphCommand(outDir, timeFiles, baseUrl, timeTextBuilder)
+        new OpenGraphCommand(outDir, timeFiles, baseUrl, timeService)
       ]
-      ssg.add(new RR0ContentStep([{roots: contentRoots, replacements: contentReplacements, getOutputPath}],
-        outputFunc, [], contentVisitors, force, "contents replacements", toProcess))
+      ssg.add(new RR0ContentStep({
+        contentConfigs: [{roots: contentRoots, replacements: contentReplacements, getOutputPath}],
+        outputFunc, fileVisitors: [], contentVisitors, force, name: "contents replacements", toProcess
+      }, timeService))
     }
     if (args.books) {
       ssg.add(await BookDirectoryStep.create(outputFunc, config, bookMeta, bookLinks))
@@ -377,8 +377,8 @@ export class RR0Build {
     if (copies) {
       const copyConfig: FileCopyConfig = {
         getOutputPath,
-        sourcePatterns: copies.map(this.options.inDir),
-        options: {ignore: ["node_modules/**", "out/**"].map(this.options.inDir)}
+        sourcePatterns: Array.from(new Set(copies)),
+        options: {ignore: ["node_modules/**", "out/**"]}
       }
       ssg.add(new CopyStep(copyConfig))
     }

@@ -35,7 +35,7 @@ describe("Build", () => {
       "tech/**/*.html",
       "udb/*.html",
       "js/**/*.html"
-    ]
+    ].map(testFilePath)
   const copiesArg = args.copies
   const copies = copiesArg ? copiesArg : [
     "favicon.ico", "manifest.json", "opensearch.xml", "apple-touch-icon.png", "apple-touch-icon_400x400.png", "screenshot1.jpg",
@@ -51,14 +51,14 @@ describe("Build", () => {
     "time/DualRangeComponent.mjs",
     "index/index.js", "lang/form.js", "lang/form.css", "lang/speech.js", "lang/speech.css",
     "croyance/divin/theisme/mono/livre/islam/coran/index.js"
-  ]
+  ].map(testFilePath)
   const outDir = "out"
   const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY
   if (!googleMapsApiKey) {
     throw Error("GOOGLE_MAPS_API_KEY is required")
   }
   const timeOptions: TimeServiceOptions = {
-    root: "time",
+    root: testFilePath("time"),
     files: []
   }
   const timeFormat: Intl.DateTimeFormatOptions = {
@@ -71,13 +71,13 @@ describe("Build", () => {
   }
 
   async function getTimeFiles(): Promise<string[]> {
-    const minusYearFiles = await glob("time/-?/?/?/?/index.html")
-    const year1Files = await glob("time/?/index.html")
-    const year2Files = await glob("time/?/?/index.html")
-    const year3Files = await glob("time/?/?/?/index.html")
-    const year4Files = await glob("time/?/?/?/?/index.html")
-    const monthFiles = await glob("time/?/?/?/?/??/index.html")
-    const dayFiles = await glob("time/?/?/?/?/??/??/index.html")
+    const minusYearFiles = await glob(testFilePath("time/-?/?/?/?/index.html"))
+    const year1Files = await glob(testFilePath("time/?/index.html"))
+    const year2Files = await glob(testFilePath("time/?/?/index.html"))
+    const year3Files = await glob(testFilePath("time/?/?/?/index.html"))
+    const year4Files = await glob(testFilePath("time/?/?/?/?/index.html"))
+    const monthFiles = await glob(testFilePath("time/?/?/?/?/??/index.html"))
+    const dayFiles = await glob(testFilePath("time/?/?/?/?/??/??/index.html"))
     return year1Files.concat(year2Files).concat(year3Files).concat(year4Files).concat(
       minusYearFiles).concat(monthFiles).concat(dayFiles).sort()
   }
@@ -89,30 +89,29 @@ describe("Build", () => {
   ].map(testFilePath)
   getTimeFiles().then(async (timeFiles) => {
     const directoryOptions: PeopleDirectoryStepOptions = {
-      root: "people/index.html",
-      scientists: "people/scientifiques.html",
-      ufologists: "people/ufologues.html",
-      ufoWitnesses: "people/witness/index.html",
-      astronomers: "people/astronomes.html",
-      contactees: "people/contactes.html",
-      pilots: "people/pilotes.html",
-      military: "people/militaires.html",
-      softwareEngineers: "tech/info/Personnes.html",
-      politicians: "people/politicians.html",
-      rulers: "people/dirigeants.html"
+      root: testFilePath("people/index.html"),
+      scientists: testFilePath("people/scientifiques.html"),
+      ufologists: testFilePath("people/ufologues.html"),
+      ufoWitnesses: testFilePath("people/witness/index.html"),
+      astronomers: testFilePath("people/astronomes.html"),
+      contactees: testFilePath("people/contactes.html"),
+      pilots: testFilePath("people/pilotes.html"),
+      military: testFilePath("people/militaires.html"),
+      softwareEngineers: testFilePath("tech/info/Personnes.html"),
+      politicians: testFilePath("people/politicians.html"),
+      rulers: testFilePath("people/dirigeants.html")
     }
-    const sourceRegistryFileName = "source/index.json"
+    const sourceRegistryFileName = testFilePath("source/index.json")
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
     const build = new RR0Build({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
       siteBaseUrl, timeFormat, timeFiles, directoryPages,
-      ufoCaseDirectoryFile: "science/crypto/ufo/enquete/dossier/index.html",
-      ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"],
+      ufoCaseDirectoryFile: testFilePath("science/crypto/ufo/enquete/dossier/index.html"),
+      ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"].map(testFilePath),
       sourceRegistryFileName,
-      directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"],
-      directoryOptions,
-      inDir: testFilePath
+      directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"].map(testFilePath),
+      directoryOptions
     })
     await build.run(args)
   })

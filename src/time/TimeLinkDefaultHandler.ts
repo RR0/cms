@@ -1,5 +1,4 @@
 import { LinkHandler } from "../MetaLinkReplaceCommand.js"
-import { Time } from "./Time.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { Link, LinkType } from "ssg-api"
 import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
@@ -13,9 +12,10 @@ export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0Context> {
   contents(context: HtmlRR0Context): Link | undefined {
     const prevLink = this.prev(context)
     if (prevLink) {
-      let contentUrl = this.service.matchExistingTimeFile(prevLink.url.substring(1))
-      if (contentUrl != this.service.root) {
-        const text = Time.titleFromFile(context, contentUrl, this.timeTextBuilder)
+      const service = this.service
+      let contentUrl = service.matchExistingTimeFile(prevLink.url.substring(1))
+      if (contentUrl != service.root) {
+        const text = service.titleFromFile(context, contentUrl, this.timeTextBuilder)
         if (text) {
           return {type: LinkType.prev, text, url: "/" + contentUrl}
         }
@@ -26,11 +26,12 @@ export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0Context> {
   next(context: HtmlRR0Context): Link | undefined {
     let fileName = context.file.name
     if (this.isTimeFile(fileName)) {
-      const pos = this.service.files.indexOf(fileName)
+      const service = this.service
+      const pos = service.files.indexOf(fileName)
       if (pos >= 0) {
-        const nextFile = this.service.files[pos + 1]
+        const nextFile = service.files[pos + 1]
         if (nextFile) {
-          const text = Time.titleFromFile(context, nextFile, this.timeTextBuilder)!
+          const text = service.titleFromFile(context, nextFile, this.timeTextBuilder)!
           return {type: LinkType.next, text, url: "/" + nextFile}
         }
       }
@@ -40,11 +41,12 @@ export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0Context> {
   prev(context: HtmlRR0Context): Link | undefined {
     let fileName = context.file.name
     if (this.isTimeFile(fileName)) {
-      const pos = this.service.files.indexOf(fileName)
+      const service = this.service
+      const pos = service.files.indexOf(fileName)
       if (pos >= 0) {
-        const prevFile = this.service.files[pos - 1]
+        const prevFile = service.files[pos - 1]
         if (prevFile) {
-          const text = Time.titleFromFile(context, prevFile, this.timeTextBuilder)
+          const text = service.titleFromFile(context, prevFile, this.timeTextBuilder)
           if (text) {
             return {type: LinkType.prev, text, url: "/" + prevFile}
           }

@@ -1,6 +1,5 @@
 import path from "path"
 import { HtmlRR0Context, RR0Context, RR0ContextImpl } from "../RR0Context.js"
-import { Time } from "../time/index.js"
 import { FileWriteConfig, HtmlFileContents, SsgContext } from "ssg-api"
 import { OrganizationFactory } from "../org/index.js"
 import { CaseFactory } from "../science/index.js"
@@ -77,7 +76,7 @@ export class RR0TestUtil {
     context.file = new HtmlFileContents(currentFile.name, currentFile.encoding, currentFile.contents,
       currentFile.lastModified, lang, {author: []}, {}, title)
     const htmlContext = context as HtmlRR0Context
-    const timeContext = Time.contextFromFileName(htmlContext, inputFileName)
+    const timeContext = this.time.getService().contextFromFileName(htmlContext, inputFileName)
     Object.assign(htmlContext.time, timeContext)
     return htmlContext
   }

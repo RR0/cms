@@ -2,7 +2,6 @@ import { SsiTitleReplaceCommand } from "./SsiTitleReplaceCommand.js"
 import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { HtmlRR0Context } from "../RR0Context.js"
-import { Time } from "./Time.js"
 
 describe("TitleReplaceCommand", () => {
 
@@ -10,7 +9,7 @@ describe("TitleReplaceCommand", () => {
 
   const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {
     let title: string | undefined
-    title = Time.titleFromFile(context, context.file.name, timeTextBuilder)
+    title = rr0TestUtil.time.getService().titleFromFile(context, context.file.name, timeTextBuilder)
     return title
   }
 

@@ -14,7 +14,8 @@ describe("People", () => {
     path.join(peopleRoot, "h/HynekJosefAllen"),
     path.join(peopleRoot, "v/VonBraunWerner")
   ]
-  const service = new PeopleService(new AllDataService([]), rr0TestUtil.peopleFactory, peopleFiles)
+  const service = new PeopleService(new AllDataService([]), rr0TestUtil.peopleFactory, peopleFiles,
+    rr0TestUtil.time.getService())
 
   test("age", async () => {
     const [hynek] = await service.getFromDir("HynekJosefAllen")
