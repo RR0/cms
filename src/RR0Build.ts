@@ -33,6 +33,7 @@ import {
   FileCopyConfig,
   FileWriteConfig,
   HtAccessToNetlifyConfigReplaceCommand,
+  HtmlFileContents,
   HtmlLinks,
   HtmlMeta,
   HtmlSsgContext,
@@ -140,7 +141,9 @@ export interface RR0BuildArgs {
 const outputFunc: OutputFunc
   = async (context: HtmlSsgContext, outFile: FileContents): Promise<void> => {
   try {
-    context.file.contents = context.file.serialize()
+    if (context.file instanceof HtmlFileContents) {
+      context.file.contents = context.file.serialize()
+    }
     context.log("Writing", outFile.name)
     await outFile.write()
     context.file.contents = outFile.contents

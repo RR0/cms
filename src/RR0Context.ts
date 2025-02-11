@@ -31,6 +31,14 @@ export class RR0ContextImpl extends SsgContextImpl {
               readonly people = undefined, currentFile: FileContents | undefined = undefined,
               readonly messages: RR0Messages = ssgMessages[locale]) {
     super(locale, new Map(), "RR0", new ConsoleLogger("RR0"), currentFile)
+    while (!this.messages) {
+      if (locale.length > 2) {
+        locale = locale.substring(0, 2)   // Fallback to language without country specifics
+      } else {
+        locale = "fr" // Default language
+      }
+      this.messages = ssgMessages[locale]
+    }
   }
 
   read(filePath: string): FileContents {

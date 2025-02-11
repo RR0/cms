@@ -1,7 +1,5 @@
 import { glob } from "glob"
 import { describe } from "@javarome/testscript"
-import { FileContents } from "@javarome/fileutil"
-import { CLI } from "./util/index.js"
 import { RR0Build, RR0BuildArgs } from "./RR0Build.js"
 import { TimeServiceOptions } from "./time/index.js"
 import { PeopleDirectoryStepOptions } from "./people/index.js"
@@ -10,10 +8,8 @@ import * as process from "node:process"
 
 describe("Build", () => {
   console.time("ssg")
-  let args = new CLI().getArgs<RR0BuildArgs>()
-  const configFile = args.config
-  if (configFile) {
-    args = JSON.parse(FileContents.read(configFile).contents)
+  const args: RR0BuildArgs = {
+    force: "true"
   }
   const cliContents = args.contents
   console.debug("contents", cliContents)
