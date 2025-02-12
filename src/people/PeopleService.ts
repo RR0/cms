@@ -65,20 +65,15 @@ export class PeopleService extends AbstractDataService<People> {
   }
 
   async getFromDir(dirName: string): Promise<People[]> {
-    let peopleList: People[] = []
     const fileSpec = ["people*.json"]
-    const peopleDataList = await this.dataService.getFromDir<People>(dirName, ["people", undefined], fileSpec)
-    for (const peopleData of peopleDataList) {
-      const people = this.factory.createFromData(peopleData)
-      peopleList.push(people)
-    }
-    return peopleList
+    return this.dataService.getFromDir<People>(dirName, ["people", undefined], fileSpec)
   }
 
   getLink(context: HtmlRR0Context,
           people: People, pseudoPeopleList: People[], allCountries: Set<CountryCode>,
           occupations: Set<Occupation>, filterOccupations: Occupation[] = [], content?: string): HTMLElement {
     const dirName = people.dirName
+    const events = people.events
     const titles = []
     const classList = ["data-resolved", "people-resolved"]
     if (pseudoPeopleList.indexOf(people) >= 0 || people.pseudonyms.includes(content)) {
@@ -88,21 +83,13 @@ export class PeopleService extends AbstractDataService<People> {
     if (people.hoax) {
       classList.push("canular")
     }
-    let birthTimeStr = people.birthTime as unknown as string
-    if (birthTimeStr) {
-      const birthTime = people.birthTime = this.timeService.dateFromIso(birthTimeStr)
-      birthTimeStr = birthTime.getFullYear().toString()
-    }
-    let deathTimeStr = people.deathTime as unknown as string
-    if (deathTimeStr) {
-      const deathTime = people.deathTime = this.timeService.dateFromIso(deathTimeStr)
-      deathTimeStr = deathTime.getFullYear().toString()
-    }
+    const birthTimeStr = people.birthTime?.date.year.toString()
+    const deathTimeStr = people.deathTime?.date.year.toString()
     if (people.isDeceased()) {
       classList.push("deceased")
     }
     if (birthTimeStr || deathTimeStr) {
-      const timeStr = birthTimeStr ? deathTimeStr ? birthTimeStr + "-" + deathTimeStr : birthTimeStr + "-" : "-" + deathTimeStr
+      const timeStr = birthTimeStr ? deathTimeStr ? `${birthTimeStr}-${deathTimeStr}` : `${birthTimeStr}-` : `-${deathTimeStr}`
       titles.push(timeStr)
     }
     const age = people.getAge()
@@ -151,9 +138,9 @@ export class PeopleService extends AbstractDataService<People> {
       elem.classList.add(...classList)
     }
     let portraitUrl = people.image
+    const imageEvents = events.filter(event => event.type === "image")
     if (!portraitUrl) {
-      const portraitEvent = people.events.find(
-        event => event.type === "image" && AbstractDataFactory.defaultImageFileNames.includes(event.url))
+      const portraitEvent = imageEvents.find(event => AbstractDataFactory.defaultImageFileNames.includes(event.url))
       if (portraitEvent) {
         portraitUrl = path.join("/", people.dirName, portraitEvent.url)
       }

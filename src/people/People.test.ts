@@ -4,6 +4,7 @@ import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"
 import path from "path"
 import { AllDataService } from "@rr0/data"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 describe("People", () => {
 
@@ -24,13 +25,13 @@ describe("People", () => {
 
     hynek.birthTime = new Date("1910-05-01")
     expect(hynek.isDeceased()).toBe(false)
-    expect(hynek.isDeceased(new Date("2040"))).toBe(true)
-    expect(hynek.getAge(new Date("1972-08-12"))).toBe(62)
+    expect(hynek.isDeceased(EdtfDate.fromString("2040"))).toBe(true)
+    expect(hynek.getAge(EdtfDate.fromString("1972-08-12"))).toBe(62)
 
     hynek.deathTime = new Date("1986-04-27")
     expect(hynek.isDeceased()).toBe(true)
-    expect(hynek.getAge(new Date("1986-04-27"))).toBe(76)
-    expect(hynek.getAge(new Date("2020-04-27"))).toBe(76)
+    expect(hynek.getAge(EdtfDate.fromString("1986-04-27"))).toBe(76)
+    expect(hynek.getAge(EdtfDate.fromString("2020-04-27"))).toBe(76)
   })
 
   test("build url", () => {

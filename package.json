@@ -2,7 +2,7 @@
   "name": "@rr0/cms",
   "type": "module",
   "author": "Jérôme Beau <rr0@rr0.org> (https://rr0.org)",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "description": "RR0 Content Management System (CMS)",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,10 +20,11 @@
   ],
   "scripts": {
     "prebuild": "npm install",
+    "preview": "vite preview --host",
     "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
     "prepublishOnly": "npm run build",
     "test": "testscript",
-    "test-one": "rm -Rf out && tsx src/RR0Context.test.ts",
+    "test-one": "rm -Rf out && tsx src/RR0Build.test.ts",
     "test-ci": "rm -Rf out && testscript"
   },
   "dependencies": {
@@ -47,7 +48,8 @@
     "typescript": "^5.6.3",
     "@types/node": "^22.7.4",
     "tsx": "4.17.0",
-    "@javarome/testscript": "^0.13.1"
+    "@javarome/testscript": "^0.13.1",
+    "vite": "^6.1.0"
   },
   "keywords": [
     "cms",
