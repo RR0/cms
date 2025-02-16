@@ -1,9 +1,9 @@
 import { ContextFilter } from "./ContextFilter.js"
 import { RR0Context } from "../../RR0Context.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export interface TimeContextCase {
-  time?: TimeContext
+  time?: EdtfDate
 }
 
 export class TimeContextFilter<S extends TimeContextCase> extends ContextFilter<S> {
@@ -19,7 +19,7 @@ export class TimeContextFilter<S extends TimeContextCase> extends ContextFilter<
       const day = time.getDayOfMonth()
       const month = time.getMonth()
       const year = time.getYear()
-      return (!year || year === sightingTime.getYear()) && (!month || month === sightingTime.getMonth()) && (!day || day === sightingTime.getDayOfMonth())
+      return (!year || year === sightingTime.year?.value) && (!month || month === sightingTime.month?.value) && (!day || day === sightingTime.day?.value)
     } else {
       return true
     }

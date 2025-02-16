@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { AllierCityCode } from "../AllierCityCode.js"
+import { allier } from "../Allier"
+import { City } from "../../../../../../country"
 
-export const vallonEnSully = franceCity(AllierCityCode.VallonEnSully, Place.fromDMS("46°32′13″N,2°36′32″E"))
+export const vallonEnSully = City.create(String(AllierCityCode.VallonEnSully), allier,
+  Place.fromDMS("46°32′13″N,2°36′32″E"))

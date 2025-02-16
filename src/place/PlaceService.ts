@@ -1,6 +1,5 @@
-import { Elevation, Place } from "./Place.js"
 import fs from "fs"
-import { PlaceLocation } from "@rr0/place"
+import { Elevation, Place, PlaceLocation } from "@rr0/place"
 import { writeFile } from "@javarome/fileutil"
 
 export abstract class PlaceService {

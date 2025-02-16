@@ -1,4 +1,4 @@
-import { Place } from "../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { NorthChinaDepartementCode } from "../NorthChinaDepartmentCode"
 import { Department } from "../../../../country"
 import { northChina } from "../NorthChina"

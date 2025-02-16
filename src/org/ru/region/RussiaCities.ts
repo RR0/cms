@@ -1,6 +1,6 @@
 import { City } from "../../country/region/department/city/City.js"
 import { Department } from "../../country/region/department/Department.js"
-import { Place } from "../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { northCaucasusCities } from "./nc/NorthCaucasusCities.js"
 
 export const russiaCities: City[] = [

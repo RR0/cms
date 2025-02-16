@@ -1,6 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { IsereCityCode } from "../IsereCityCode.js"
+import { isere } from "../Isere"
+import { City } from "../../../../../../country"
 
-export const saintGeoireEnValdaine = franceCity(IsereCityCode.SaintGeoireEnValdaine,
+export const saintGeoireEnValdaine = City.create(String(IsereCityCode.SaintGeoireEnValdaine), isere,
   Place.fromDMS(`45°27′27″N,5°38′08″E`))

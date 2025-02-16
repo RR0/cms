@@ -1,9 +1,8 @@
-import { Place } from "../../../place/index.js"
 import { UsaStates } from "../../us/region/UsaStates.js"
 import { CanadaRegionCode } from "../../ca/region/CanadaRegionCode.js"
 import { AustraliaRegionCode } from "../../au/index.js"
 import { BrazilRegionCode } from "../../br/region/BrazilRegionCode.js"
-import { Organization, OrganizationKind } from "../../Organization.js"
+import { Organization } from "../../Organization.js"
 import { EuropeRegionCode } from "../../eu/EuropeRegionCode.js"
 import { MexicoRegionCode } from "../../mx/region/MexicoRegionCode.js"
 import { PhilippinesRegionCode } from "../../ph/region/PhilippinesRegionCode.js"
@@ -17,6 +16,8 @@ import { UkRegionCode } from "../../uk/region/UkRegionCode.js"
 import { RegionMessages } from "./RegionMessages.js"
 import { TitleMessage } from "../../TitleMessage.js"
 import { IndiaRegionCode } from "../../in/region/IndiaRegionCode.js"
+import { OrganizationKind } from "../../OrganizationKind"
+import { Place } from "@rr0/place"
 
 export type RegionCode =
   AustraliaRegionCode

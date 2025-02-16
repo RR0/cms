@@ -1,6 +1,6 @@
 import { hautsDeSeine } from "./92/HautsDeSeine.js"
 import { oise } from "./60/Oise.js"
-import { paris } from "./75/Paris.js"
+import { parisDep } from "./75/ParisDep.js"
 import { yvelines } from "./78/Yvelines.js"
 import { Organization } from "../../../../Organization.js"
 import { seineEtMarne } from "./77/SeineEtMarne.js"
@@ -11,7 +11,7 @@ export const idfDepartments: Organization[] = [
   essonne,
   hautsDeSeine,
   oise,
-  paris,
+  parisDep,
   seineEtMarne,
   valDOise,
   yvelines

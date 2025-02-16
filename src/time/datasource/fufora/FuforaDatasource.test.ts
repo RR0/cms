@@ -3,19 +3,21 @@ import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { fuforaTestCases } from "./FuforaTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
-import { fuforaRR0Mapping } from "./FuforaRR0Mapping.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
 import { RR0CaseMapping } from "../rr0/index.js"
+import { FuforaRR0Mapping } from "./FuforaRR0Mapping"
 
 describe("FuforaCaseSource", () => {
+
+  const fuforaRR0Mapping = new FuforaRR0Mapping(rr0TestUtil.cityService, {read: ["fetch"], write: ["backup"]})
 
   const testCase = new class extends DatasourceTestCase<FuforaCaseSummary> {
     constructor(mapping: RR0CaseMapping<FuforaCaseSummary>, sourceCases: FuforaCaseSummary[]) {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: FuforaCaseSummary): TimeContext {
+    protected getTime(c: FuforaCaseSummary): EdtfDate {
       return c.dateTime
     }
 

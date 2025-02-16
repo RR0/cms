@@ -1,5 +1,5 @@
 import { IndiaRegionCode } from "./IndiaRegionCode.js"
-import { Place } from "../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { Region } from "../../country/region/Region.js"
 import { india } from "../India.js"
 

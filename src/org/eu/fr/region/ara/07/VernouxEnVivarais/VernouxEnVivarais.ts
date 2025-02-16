@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { ArdecheCityCode } from "../ArdecheCityCode.js"
+import { ardeche } from "../Ardeche"
+import { City } from "../../../../../../country"
 
-export const vernouxEnVivarais = franceCity(ArdecheCityCode.VernouxEnVivarais, Place.fromDMS("44°53′47″N,4°38′46″E"))
+export const vernouxEnVivarais = City.create(String(ArdecheCityCode.VernouxEnVivarais), ardeche,
+  Place.fromDMS("44°53′47″N,4°38′46″E"))

@@ -4,6 +4,7 @@ import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
 import { FuforaDatasource } from "./FuforaDatasource.js"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 interface FormData {
   /**
@@ -197,12 +198,12 @@ export class FuforaHttpDatasource extends FuforaDatasource {
     const caseLink = fields[0].firstElementChild as HTMLAnchorElement
     const dateFormat = /(?:(\d\d).(\d\d).(\d\d\d\d))?\n?(.+)?/
     const dateFields = dateFormat.exec(fields[1].textContent)
-    const itemContext = context.clone()
-    const dateTime = itemContext.time
-    dateTime.setYear(parseInt(dateFields[3], 10))
-    dateTime.setMonth(parseInt(dateFields[2], 10))
     const dayOfMonth = dateFields[1]
-    dateTime.setDayOfMonth(dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined)
+    const dateTime = new EdtfDate({
+      year: parseInt(dateFields[3], 10),
+      month: parseInt(dateFields[2], 10),
+      day: dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined
+    })
     const dateTimeRefinement = dateFields[4] ? dateFields[4].trim() : undefined
     const placeStr = fields[2].innerHTML
     const placeRows = placeStr.split("<br>")

@@ -37,7 +37,7 @@ export class DefaultContentVisitor implements ContentVisitor {
       (event1, event2) => event1.time ? event2.time ? event1.time.isBefore(event2.time) ? -1 : 1 : -1 : 1)
     const doc = context.file.document
     for (const event of events) {
-      switch (event.type) {
+      switch (event.eventType) {
         case "birth":
           await this.processBirth(context, event, data)
           break
@@ -59,10 +59,10 @@ export class DefaultContentVisitor implements ContentVisitor {
     context.file.contents = context.file.serialize()
   }
 
-  protected timeParagraph(context: HtmlRR0Context, event: RR0Data) {
+  protected timeParagraph(context: HtmlRR0Context, event: RR0Event) {
     const container = context.file.document.createElement("p")
     const eventContext = context.clone()
-    const eventTime = eventContext.time = event.time
+    const eventTime = eventContext.time.date = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time`)
     container.dataset.time = eventTime.toString()
     const timeEl = this.timeElementFactory.create(eventContext, context)
@@ -96,7 +96,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     }
   }
 
-  protected async processBirth(context: HtmlRR0Context, event: RR0Data, entity: RR0Data) {
+  protected async processBirth(context: HtmlRR0Context, event: RR0Event, entity: RR0Data) {
     const parentEl = context.file.document.querySelector(".contents")
     if (parentEl) {
       const {eventP, timeEl} = this.timeParagraph(context, event)
@@ -104,9 +104,10 @@ export class DefaultContentVisitor implements ContentVisitor {
       eventP.append(name)
       eventP.append(context.messages[entity.type].birth)
       eventP.append(timeEl)
-      if (event.place) {
+      const eventPlace = event.place
+      if (eventPlace) {
         eventP.append(" à ")
-        eventP.append(this.eventRenderer.placeElement(context, event.place))
+        eventP.append(this.eventRenderer.placeElement(context, eventPlace))
       }
       await this.eventRenderer.renderEnd(context, event, eventP)
 

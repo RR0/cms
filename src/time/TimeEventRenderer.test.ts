@@ -1,15 +1,16 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { CaseSummaryRenderer } from "./CaseSummaryRenderer.js"
 import { rr0TestUtil } from "../test/index.js"
-import { Place } from "../place/index.js"
-import { franceCity } from "../org/eu/fr/region/FranceCity.js"
-import { HttpSource, NamedPlace, RR0CaseSummary } from "./datasource/index.js"
-import { TimeContext } from "@rr0/time"
+import { HttpSource, RR0CaseSummary } from "./datasource/index.js"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { SourceFactory, SourceRenderer } from "../source/index.js"
 import { NoteFileCounter, NoteRenderer } from "../note/index.js"
 import { HautsDeSeineCityCode } from "../org/eu/fr/region/idf/92/HautsDeSeineCityCode.js"
-import { AllDataService } from "@rr0/data"
-import { Source } from "@rr0/data/dist/source"
+import { AllDataService, Source } from "@rr0/data"
+import { Place } from "@rr0/place"
+import { OrganizationPlace } from "../place/OrganizationPlace"
+import { hautsDeSeine } from "../org/eu/fr/region/idf/92/HautsDeSeine"
+import { City } from "../org"
 
 describe("TimeEventRenderer", () => {
 
@@ -23,18 +24,9 @@ describe("TimeEventRenderer", () => {
 
   test("render event", async () => {
     const context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
-    const city = franceCity(HautsDeSeineCityCode.Nanterre, Place.fromLocation(48.891944, 2.207222))
-    const dep = city.parent
-    const region = dep.parent
-    const countryMessages = context.messages.country
-    const franceMessages = countryMessages.fr
-    const idfMessages = franceMessages.region[region.id]
-    const hautsDeSeineMessages = idfMessages.department[dep.id]
-    const cityMessages = hautsDeSeineMessages.city[city.id]
-    const namedPlace: NamedPlace = {
-      place: city.places[0],
-      name: cityMessages.toTitle(context, city)
-    }
+    const city = City.create(String(HautsDeSeineCityCode.Nanterre), hautsDeSeine,
+      Place.fromLocation(48.891944, 2.207222))
+    const namedPlace = new OrganizationPlace(city)
     const sourceMonth = 12
     const unreacheableSource: Source = {
       events: [], previousSourceRefs: [],
@@ -43,13 +35,15 @@ describe("TimeEventRenderer", () => {
       authors: ["Some Author"],
       publication: {
         publisher: "Some site",
-        time: TimeContext.fromDate(new Date(2001, sourceMonth - 1, 13))
+        time: EdtfDate.fromDate(new Date(2001, sourceMonth - 1, 13))
       }
     }
     const sources = [unreacheableSource]
     const c: RR0CaseSummary = {
-      events: [], type: "sighting",
-      time: context.time,
+      events: [],
+      type: "event",
+      eventType: "sighting",
+      time: context.time.date,
       place: namedPlace,
       description: "some sighting",
       sources

@@ -3,7 +3,7 @@ import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate, Level2Timeshift } from "@rr0/time"
 import assert from "assert"
 import { BaseOvniFranceDatasource } from "./BaseOvniFranceDatasource.js"
 
@@ -68,26 +68,25 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
     return field.textContent === "Oui"
   }
 
-  protected getDate(context: RR0Context, dateField: HTMLTableCellElement): TimeContext {
+  protected getDate(context: RR0Context, dateField: HTMLTableCellElement): EdtfDate {
     const dateFormat = /(\d\d)-(\d\d)-(\d\d\d\d)/
     const dateFields = dateFormat.exec(dateField.textContent)
-    const itemContext = context.clone()
-    const dateTime = itemContext.time
-    dateTime.setYear(parseInt(dateFields[3], 10))
-    dateTime.setMonth(parseInt(dateFields[2], 10))
     const dayOfMonth = dateFields[1]
-    dateTime.setDayOfMonth(dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined)
-    return dateTime
+    return new EdtfDate({
+      year: parseInt(dateFields[3], 10),
+      month: parseInt(dateFields[2], 10),
+      day: dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined
+    })
   }
 
-  protected setTime(dateTime: TimeContext, timeField: HTMLTableCellElement) {
+  protected setTime(dateTime: EdtfDate, timeField: HTMLTableCellElement) {
     const timeFormat = /(\d\d):(\d\d)/
     const timeFields = timeFormat.exec(timeField.textContent)
     const hour = timeFields ? parseInt(timeFields[1], 10) : undefined
     const minutes = timeFields ? parseInt(timeFields[2], 10) : undefined
-    dateTime.setHour(hour)
-    dateTime.setMinutes(minutes)
-    dateTime.setTimeZone("GMT+1")
+    dateTime.hour = hour
+    dateTime.minute = minutes
+    dateTime.timeshift = Level2Timeshift.fromString("GMT+1")
   }
 
   protected getFromRow(context: RR0Context, row: Element): BaseOvniFranceCaseSummary {

@@ -1,5 +1,5 @@
 import { City } from "../../../../../country/index.js"
-import { Place } from "../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { HebeiCityCode } from "../HebeiCityCode"
 import { hebei } from "../Hebei"
 

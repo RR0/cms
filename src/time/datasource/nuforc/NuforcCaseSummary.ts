@@ -1,11 +1,11 @@
 import { NuforcState } from "./NuforcState.js"
 import { NuforcCountry } from "./NuforcCountry.js"
 import { NuforcShape } from "./NuforcShape.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export interface NuforcCaseSummary {
   readonly id: string
-  readonly time: TimeContext
+  readonly time: EdtfDate
   readonly url: string
   readonly city: string
   readonly state: NuforcState

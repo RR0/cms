@@ -7,8 +7,9 @@ import { Gender } from "@rr0/common"
 import { PeopleFactory } from "./PeopleFactory.js"
 import { AbstractDataFactory, AbstractDataService, AllDataService } from "@rr0/data"
 import { TimeService } from "../time"
+import { PeopleJson } from "./PeopleJson"
 
-export class PeopleService extends AbstractDataService<People> {
+export class PeopleService extends AbstractDataService<People, PeopleJson> {
 
   readonly cache = new Map<string, People>()
 
@@ -83,8 +84,8 @@ export class PeopleService extends AbstractDataService<People> {
     if (people.hoax) {
       classList.push("canular")
     }
-    const birthTimeStr = people.birthTime?.date.year.toString()
-    const deathTimeStr = people.deathTime?.date.year.toString()
+    const birthTimeStr = people.birthTime?.year.toString()
+    const deathTimeStr = people.deathTime?.year.toString()
     if (people.isDeceased()) {
       classList.push("deceased")
     }
@@ -138,7 +139,7 @@ export class PeopleService extends AbstractDataService<People> {
       elem.classList.add(...classList)
     }
     let portraitUrl = people.image
-    const imageEvents = events.filter(event => event.type === "image")
+    const imageEvents = events.filter(event => event.eventType === "image")
     if (!portraitUrl) {
       const portraitEvent = imageEvents.find(event => AbstractDataFactory.defaultImageFileNames.includes(event.url))
       if (portraitEvent) {

@@ -3,6 +3,7 @@ import { ConsoleLogger, FileWriteConfig, HtmlSsgContext, SsgContext, SsgContextI
 import { People } from "./people/People.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
+import { PlaceContext } from "@rr0/place"
 
 export interface RR0Context extends SsgContext {
 
@@ -15,6 +16,7 @@ export interface RR0Context extends SsgContext {
 export interface HtmlRR0Context extends HtmlSsgContext {
   readonly messages: RR0Messages
   time: TimeContext
+  place: PlaceContext
   people: People
   readonly images: Set<string>
   readonly config: FileWriteConfig
@@ -26,6 +28,7 @@ export class RR0ContextImpl extends SsgContextImpl {
 
   readonly images = new Set<string>()
   protected readonly fileMap = new Map<string, FileContents>()
+  place: PlaceContext
 
   constructor(locale: string, readonly time: TimeContext, readonly config: FileWriteConfig,
               readonly people = undefined, currentFile: FileContents | undefined = undefined,
@@ -39,6 +42,7 @@ export class RR0ContextImpl extends SsgContextImpl {
       }
       this.messages = ssgMessages[locale]
     }
+    this.place = new PlaceContext(locale, this.messages.context.place)
   }
 
   read(filePath: string): FileContents {

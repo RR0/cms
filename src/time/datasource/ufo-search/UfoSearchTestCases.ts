@@ -1,10 +1,10 @@
 import { UfoSearchCase, UfoSearchCaseType } from "./UfoSearchCase.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export const ufoSearchTestCases: UfoSearchCase[] = [
   {
     id: "979AEFAA",
-    time: new TimeContext(0),
+    time: new EdtfDate({year: 0}),
     desc: "Greek and Roman records of UFO's",
     key_vals: {
       url: `<a href="timeline.html#979AEFAA">0's #0</a>`
@@ -17,7 +17,7 @@ export const ufoSearchTestCases: UfoSearchCase[] = [
   },
   {
     id: "F91D10A9",
-    time: new TimeContext(34, 4),
+    time: new EdtfDate({year: 34, month: 4}),
     desc: "A white, round object, accompanied by 10 small stars, flew overhead. The pattern suggests the stars might have been in formation with the main object, making it an unusual possible meteor event.",
     key_vals: {
       url: `<a href="timeline.html#F91D10A9">4/34 #1</a>`

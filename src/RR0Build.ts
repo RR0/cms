@@ -1,14 +1,18 @@
 import path from "path"
 import fs from "fs"
 import {
+  BaseOvniFranceRR0Mapping,
   CaseSummaryRenderer,
   ChronologyReplacerActions,
   ChronologyReplacerFactory,
   CsvMapper,
   EventReplacer,
   EventReplacerFactory,
+  FuforaRR0Mapping,
   HttpSource,
+  NuforcRR0Mapping,
   RR0Mapping,
+  SceauRR0Mapping,
   SsiTitleReplaceCommand,
   TimeElementFactory,
   TimeLinkDefaultHandler,
@@ -17,11 +21,23 @@ import {
   TimeService,
   TimeServiceOptions,
   TimeTextBuilder,
-  TimeUrlBuilder
+  TimeUrlBuilder,
+  UrecatRR0Mapping
 } from "./time"
 import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/index.js"
-import { GooglePlaceService, PlaceReplacerFactory } from "./place/index.js"
-import { OrganizationFactory, OrganizationService } from "./org/index.js"
+import { PlaceReplacerFactory } from "./place/index.js"
+import {
+  cities,
+  CityService,
+  countries,
+  CountryService,
+  departments,
+  DepartmentService,
+  OrganizationFactory,
+  OrganizationService,
+  regions,
+  RegionService
+} from "./org/index.js"
 import { HtmlRR0Context, RR0ContextImpl } from "./RR0Context.js"
 import { HtmlTable } from "./util/index.js"
 import {
@@ -85,7 +101,9 @@ import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
-import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { AllDataService, EventDataFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { GooglePlaceService } from "@rr0/place"
+import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
 
 export interface RR0BuildOptions {
   contentRoots: string[]
@@ -163,6 +181,9 @@ export class RR0Build {
   private dataService: AllDataService
   private peopleFactory: PeopleFactory
   private timeTextBuilder: TimeTextBuilder
+  private cityService: CityService
+  private departmentService: DepartmentService
+  private countryService: CountryService
 
   constructor(protected options: RR0BuildOptions) {
     this.config = {
@@ -174,15 +195,20 @@ export class RR0Build {
     const context = this.context = new RR0ContextImpl(options.locale, timeContext, this.config)
     context.setVar("mapsApiKey", options.googleMapsApiKey)
     context.setVar("mail", options.mail)
+    const eventFactory = new RR0EventFactory()
     this.placeService = new GooglePlaceService("place", options.googleMapsApiKey)
-    this.orgService = new OrganizationService([], "org", undefined)
+    const orgFactory = new OrganizationFactory(eventFactory)
+    this.orgService = new OrganizationService([], "org", orgFactory, undefined)
+    const countryService = this.countryService = new CountryService(countries, "org", orgFactory, undefined)
+    const regionService = new RegionService(regions, "org", orgFactory, countryService)
+    const departmentService = this.departmentService = new DepartmentService(departments, "org", orgFactory,
+      regionService)
+    this.cityService = new CityService(cities, "org", orgFactory, departmentService)
     const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(options.timeFormat)
     const timeOptions = options.timeOptions
     const timeRoot = timeOptions.root
     const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeRoot})
-    const eventFactory = new RR0EventFactory()
-    const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
-    const orgFactory = new OrganizationFactory(eventFactory)
+    const sightingFactory = new EventDataFactory(eventFactory, "sighting", ["index"])
     const caseFactory = this.caseFactory = new CaseFactory(eventFactory)
     const peopleFactory = this.peopleFactory = new PeopleFactory(eventFactory)
     const apiFactory = new APIFactory(eventFactory)
@@ -256,11 +282,19 @@ export class RR0Build {
     // const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
     // const actions: ChronologyReplacerActions = {read: [], write: ["backup"]}
     const actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}
-    const rr0Mapping = new RR0Mapping(actions)
+    const rr0Mapping = new RR0Mapping(this.cityService, actions)
+    const geipanRR0Mapping = new GeipanRR0Mapping(this.cityService, actions)
+    const baseOvniFranceRR0Mapping = new BaseOvniFranceRR0Mapping(this.cityService, this.departmentService, actions)
+    const fuforaRR0Mapping = new FuforaRR0Mapping(this.cityService, actions)
+    const nuforcRR0Mapping = new NuforcRR0Mapping(this.cityService, this.countryService, actions)
+    const urecatRR0Mapping = new UrecatRR0Mapping(this.cityService, this.countryService, actions)
+    const sceauRR0Mapping = new SceauRR0Mapping(this.cityService, actions)
     const databaseAggregationCommand = new DomReplaceCommand(".contents ul",
       new ChronologyReplacerFactory(timeService,
-        [rr0Mapping /*new GeipanRR0Mapping(actions)
-      /*, baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping*/
+        [rr0Mapping,
+          geipanRR0Mapping,
+          baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping,
+          sceauRR0Mapping
         ], caseRenderer)
     )
     const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {

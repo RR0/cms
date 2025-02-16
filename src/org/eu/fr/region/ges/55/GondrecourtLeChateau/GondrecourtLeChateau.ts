@@ -1,6 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { MeuseCityCode } from "../MeuseCityCode.js"
+import { meuse } from "../Meuse"
+import { City } from "../../../../../../country"
 
-export const gondrecourtLeChateau = franceCity(MeuseCityCode.GondrecourtLeChateau,
+export const gondrecourtLeChateau = City.create(String(MeuseCityCode.GondrecourtLeChateau), meuse,
   Place.fromDMS("48°30′51″N,5°30′28″E"))

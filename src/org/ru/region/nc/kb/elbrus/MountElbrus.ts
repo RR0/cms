@@ -1,5 +1,5 @@
 import { ukCity } from "../../../RussiaCities.js"
-import { Place } from "../../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { KabardinoBalkariaCityCode } from "../KabardinoBalkariaCityCode.js"
 import { kabardinoBalkaria } from "../KabardinoBalkaria.js"
 

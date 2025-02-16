@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { JuraCityCode } from "../JuraCityCode.js"
+import { jura } from "../Jura"
+import { City } from "../../../../../../country"
 
-export const saintClaude = franceCity(JuraCityCode.SaintClaude, Place.fromDMS("47°23′55″N,4°32′33″E"))
+export const saintClaude = City.create(String(JuraCityCode.SaintClaude), jura, Place.fromDMS("47°23′55″N,4°32′33″E"))

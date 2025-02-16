@@ -1,14 +1,25 @@
 import path from "path"
 import { HtmlRR0Context, RR0Context, RR0ContextImpl } from "../RR0Context.js"
 import { FileWriteConfig, HtmlFileContents, SsgContext } from "ssg-api"
-import { OrganizationFactory } from "../org/index.js"
+import {
+  cities,
+  CityService,
+  countries,
+  CountryService,
+  departments,
+  DepartmentService,
+  OrganizationFactory,
+  OrganizationService,
+  regions,
+  RegionService
+} from "../org/index.js"
 import { CaseFactory } from "../science/index.js"
 import { PeopleFactory } from "../people/index.js"
 import { APIFactory } from "../tech/index.js"
 import { TimeTestUtil } from "../time/TimeTestUtil"
 import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
-import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { AllDataService, EventDataFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 
 export class RR0TestUtil {
 
@@ -33,11 +44,18 @@ export class RR0TestUtil {
 
   readonly peopleFactory: PeopleFactory
   readonly time: TimeTestUtil
+  readonly orgService: OrganizationService<any, undefined>
+  readonly cityService: CityService
+  readonly orgFactory: OrganizationFactory
+  readonly departmentService: DepartmentService
+  readonly countryService: CountryService
+  readonly regionService: RegionService
 
   constructor(readonly rootDir = "test", readonly outDir = "out") {
     const eventFactory = new RR0EventFactory()
-    const sightingFactory = new TypedDataFactory(eventFactory, "sighting", ["index"])
-    const orgFactory = new OrganizationFactory(eventFactory)
+    const sightingFactory = new EventDataFactory(eventFactory, "sighting", ["index"])
+    const orgFactory = this.orgFactory = new OrganizationFactory(eventFactory)
+    this.orgService = new OrganizationService([], "org", orgFactory, undefined)
     this.caseFactory = new CaseFactory(eventFactory)
     this.peopleFactory = new PeopleFactory(eventFactory)
     const apiFactory = new APIFactory(eventFactory)
@@ -49,6 +67,11 @@ export class RR0TestUtil {
       //   console.debug(data)
     })
     this.time = new TimeTestUtil(this)
+    const countryService = this.countryService = new CountryService(countries, "org", orgFactory, undefined)
+    const regionService = this.regionService = new RegionService(regions, "org", orgFactory, countryService)
+    const departmentService = this.departmentService = new DepartmentService(departments, "org", orgFactory,
+      regionService)
+    this.cityService = new CityService(cities, "org", orgFactory, departmentService)
   }
 
   newContext(inputFileName: string, contents?: string, locale = "fr"): RR0Context {

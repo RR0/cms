@@ -52,7 +52,8 @@ export class RR0Messages_fr implements RR0Messages {
       in: (approximate: boolean): string => (approximate ? "vers " : "en "),
       fromTo: (startReplacement: string, endReplacement: string): string => `${startReplacement} à ${endReplacement}`,
       starting: (approximate: boolean): string => "à partir " + (approximate ? "de " : "du ")
-    }
+    },
+    place: placeMessages_fr
   }
   case = {
     classification: {

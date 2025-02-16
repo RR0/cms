@@ -3,7 +3,7 @@ import { StringUtil } from "../util/string/StringUtil.js"
 import { Gender } from "@rr0/common"
 import { CountryCode } from "../org/country/CountryCode.js"
 import { RR0Data, RR0Event } from "@rr0/data"
-import { Level2Date as EdtfDate, Level2Duration as Duration, TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate, Level2Duration as Duration } from "@rr0/time"
 
 export class People implements RR0Data {
   readonly type = "people"
@@ -46,20 +46,20 @@ export class People implements RR0Data {
     this.name = this.lastName
     if (!this.birthTime && birthTime) {
       events.push(
-        {type: "birth", time: new TimeContext(birthTime.year.value, birthTime.month.value, birthTime.day.value)})
+        {type: "event", eventType: "birth", time: birthTime, events: []})
     }
     if (!this.deathTime && deathTime) {
       events.push(
-        {type: "death", time: new TimeContext(deathTime.year.value, deathTime.month.value, deathTime.day.value)})
+        {type: "event", eventType: "death", time: deathTime, events: []})
     }
   }
 
-  get birthTime(): TimeContext {
-    return this.events.find(event => event.type === "birth")?.time
+  get birthTime(): EdtfDate {
+    return this.events.find(event => event.eventType === "birth")?.time
   }
 
-  get deathTime(): TimeContext {
-    return this.events.find(event => event.type === "death")?.time
+  get deathTime(): EdtfDate {
+    return this.events.find(event => event.eventType === "death")?.time
   }
 
   get firstAndLastName(): string {
@@ -83,7 +83,7 @@ export class People implements RR0Data {
     if (this.deathTime) {
       return true
     } else if (this.birthTime) {
-      return this.probablyDead(this.birthTime.date, from)
+      return this.probablyDead(this.birthTime, from)
     } else {
       return false
     }
@@ -93,10 +93,10 @@ export class People implements RR0Data {
     if (this.birthTime) {
       let timeDelta: Duration
       if (this.deathTime) {
-        timeDelta = Duration.between(this.birthTime.date, this.deathTime.date)
-      } else if (!this.probablyDead(this.birthTime.date)) {
-        const now = from?.getTime() ?? new EdtfDate()
-        timeDelta = Duration.between(this.birthTime.date, now)
+        timeDelta = Duration.between(this.birthTime, this.deathTime)
+      } else if (!this.probablyDead(this.birthTime)) {
+        const now = from ?? new EdtfDate()
+        timeDelta = Duration.between(this.birthTime, now)
       } else {
         return undefined
       }
@@ -105,8 +105,8 @@ export class People implements RR0Data {
   }
 
   probablyDead(birth: EdtfDate, at?: EdtfDate): boolean {
-    const now = at?.getTime() ?? new EdtfDate()
-    const timeDelta = Duration.between(this.birthTime.date, now)
+    const now = at ?? new EdtfDate()
+    const timeDelta = Duration.between(birth, now)
     return timeDelta.toSpec().years.value > 120
   }
 

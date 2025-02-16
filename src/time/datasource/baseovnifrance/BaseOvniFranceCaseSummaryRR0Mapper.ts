@@ -3,11 +3,11 @@ import { CaseMapper } from "../CaseMapper.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { DepartmentService } from "../../../org/country/region/department/DepartmentService.js"
 import { CityService } from "../../../org/country/index.js"
-import { NamedPlace } from "../rr0/NamedPlace"
-import { Source } from "@rr0/data/dist/source"
+import { Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace"
 
 /**
  * Maps a Base OVNI France case to a RR0 case.
@@ -23,7 +23,7 @@ export class BaseOvniFranceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Con
     const caseSource: Source = {
       previousSourceRefs: [], events: [],
       url: sourceCase.url, title: "cas n° " + sourceCase.id, authors: this.authors,
-      publication: {publisher: this.copyright, time: TimeContext.fromDate(sourceTime)}
+      publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
     }
     const depCode = sourceCase.depCode
     const dep = this.depService.get(depCode, undefined)
@@ -31,12 +31,12 @@ export class BaseOvniFranceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Con
     const placeName = sourceCase.city
     const city = this.cityService.find(context, placeName, dep)
     assert.ok(city, `Could not find city of name "${placeName}" in department of code "${dep.id}"`)
-    const place: NamedPlace = {name: city.getTitle(context), place: city.places[0]}
     return {
-      type: "sighting",
+      type: "event",
+      eventType: "sighting",
       events: [],
       time: sourceCase.time,
-      place,
+      place: new OrganizationPlace(city),
       description: this.getDescription(sourceCase),
       sources: [caseSource]
     }

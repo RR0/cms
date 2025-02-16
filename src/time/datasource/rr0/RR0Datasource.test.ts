@@ -3,9 +3,8 @@ import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { rr0TestCases } from "./RR0TestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
-import { rr0FileDatasource, rr0Mapper } from "./RR0Mapping.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { HtmlTag } from "../../../util/html/HtmlTag.js"
 import { RR0CaseMapping } from "./RR0CaseMapping.js"
 import { RR0Datasource } from "./RR0Datasource.js"
@@ -13,6 +12,8 @@ import { Datasource } from "../Datasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
 import { Source } from "@rr0/data/dist/source"
+import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
+import { RR0FileDatasource } from "./RR0FileDatasource"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 
@@ -29,10 +30,12 @@ export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0Ca
 
 export class RR0TestMapping implements RR0CaseMapping<RR0CaseSummary> {
   readonly datasource = new RR0TestDatasource()
-  readonly backupDatasource = rr0FileDatasource
-  readonly mapper = rr0Mapper
+  readonly backupDatasource: RR0FileDatasource
+  readonly mapper: RR0CaseSummaryMapper
 
   constructor(readonly actions: ChronologyReplacerActions) {
+    this.mapper = new RR0CaseSummaryMapper(new URL("https://rr0.org"), "time", ["Beau, Jérôme"])
+    this.backupDatasource = new RR0FileDatasource(this.mapper)
   }
 }
 
@@ -44,7 +47,7 @@ describe("RR0CaseSource", () => {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: RR0CaseSummary): TimeContext {
+    protected getTime(c: RR0CaseSummary): EdtfDate {
       return c.time
     }
 
@@ -73,7 +76,7 @@ describe("RR0CaseSource", () => {
           }
           if (publication.time) {
             const sourceContext = context.clone()
-            sourceContext.time = source.publication.time
+            sourceContext.time.date = source.publication.time
             const timeStr = this.timeTextBuilder.build(sourceContext)
             sourceItems.push(timeStr)
           }

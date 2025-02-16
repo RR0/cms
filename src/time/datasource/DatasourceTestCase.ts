@@ -1,7 +1,7 @@
 import { expect } from "@javarome/testscript"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { SourceFactory, SourceRenderer } from "../../source/index.js"
 import { RR0CaseMapping } from "./rr0/index.js"
@@ -12,10 +12,12 @@ import { TimeRenderer } from "../html/TimeRenderer.js"
 import { rr0TestUtil } from "../../test"
 import { AllDataService } from "@rr0/data"
 import { Source } from "@rr0/data/dist/source"
+import { PlaceRenderer } from "../../place/PlaceRenderer"
 
 export abstract class DatasourceTestCase<S> {
 
   timeTextBuilder = new TimeTextBuilder(this.intlOptions)
+  placeRenderer = new PlaceRenderer()
 
   protected constructor(
     readonly mapping: RR0CaseMapping<S>,
@@ -38,7 +40,7 @@ export abstract class DatasourceTestCase<S> {
     const caseContext = context.clone()
     Object.assign(caseContext, {time})
     const timeStr = this.timeTextBuilder.build(caseContext)
-    const placeStr = expected.place ? ` À <span class="place">${expected.place.name}</span>` : ""
+    const placeStr = expected.place ? this.placeRenderer.render(context, expected.place) : ""
     const expectedSources = expected.sources
     const sourceStr = expectedSources?.length > 0 ? this.expectedSourceStr(context, expectedSources, nativeCase) : ""
     expect(item.innerHTML).toBe(
@@ -80,13 +82,13 @@ export abstract class DatasourceTestCase<S> {
 
   protected abstract sortComparator(c1: S, c2: S): number
 
-  protected abstract getTime(c: S): TimeContext
+  protected abstract getTime(c: S): EdtfDate
 
   protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], nativeCase: S) {
     const datasource = this.mapping.datasource
     const source = expectedSources[0]
     const sourceContext = context.clone()
-    sourceContext.time = source.publication.time
+    sourceContext.time.date = source.publication.time
     const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext)}` : ""
     const indexStr = source.index ? `, ${source.index}` : ""
     const authorStr = datasource.authors.map(authorStr => `<span class="people">${authorStr}</span>`).join(" &amp; ")

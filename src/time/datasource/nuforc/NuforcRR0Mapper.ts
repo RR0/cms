@@ -4,7 +4,7 @@ import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NuforcCountry } from "./NuforcCountry.js"
 import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { NuforcShape } from "./NuforcShape.js"
 import { CityService } from "../../../org/country/index.js"
 import { CountryService } from "../../../org/country/CountryService.js"
@@ -25,8 +25,8 @@ import { uk } from "../../../org/uk/Uk.js"
 import { usa } from "../../../org/us/Usa.js"
 import { algeria } from "../../../org/dz/Algeria.js"
 import { panama } from "../../../org/pa/Panama.js"
-import { NamedPlace } from "../rr0/NamedPlace"
-import { Source } from "@rr0/data/dist/source"
+import { Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace"
 
 export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSummary, RR0CaseSummary> {
 
@@ -92,7 +92,7 @@ export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSum
       url: sourceCase.url,
       title: "cas n° " + sourceCase.id,
       authors: this.authors,
-      publication: {publisher: this.copyright, time: TimeContext.fromDate(sourceTime)}
+      publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
     }
     assert.ok(sourceCase.country, `NUFORC country code is ${sourceCase.country}`)
     const countryCode = NuforcRR0Mapper.countryMap[sourceCase.country]
@@ -104,12 +104,12 @@ export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSum
     const city = this.cityService.find(context, placeName, undefined)
     assert.ok(city,
       `Could not find city of name "${placeName}" in state "${sourceCase.state}" of country "${countryCode}"`)
-    const place: NamedPlace = {name: city.getTitle(context), place: city.places[0]}
     return {
-      type: "sighting",
+      type: "event",
+      eventType: "sighting",
       events: [],
       time: sourceCase.time,
-      place,
+      place: new OrganizationPlace(city),
       description: this.getDescription(sourceCase),
       sources: [caseSource]
     }

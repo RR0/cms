@@ -2,12 +2,13 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { RR0Datasource } from "./RR0Datasource.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
-import { Place } from "../../../place/index.js"
 import { CityService, Organization } from "../../../org/index.js"
-import { NamedPlace } from "./NamedPlace"
 import { Publication, Source } from "@rr0/data/dist/source"
+import { Place } from "@rr0/place"
+import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { NamedPlace } from "../../../place/NamedPlace"
 
 export class RR0HttpDatasource extends RR0Datasource {
 
@@ -17,8 +18,9 @@ export class RR0HttpDatasource extends RR0Datasource {
     super()
   }
 
-  id(dateTime: TimeContext, place: NamedPlace | undefined): string {
-    return dateTime.toString() + (place?.org ? "$" + place.org?.dirName.replaceAll("/", "_") : "")
+  static id(dateTime: EdtfDate, place: Place | undefined): string {
+    return dateTime.toString() + (place instanceof OrganizationPlace ? "$" + place.org?.dirName.replaceAll("/",
+      "_") : "")
   }
 
   getFromRows(context: HtmlRR0Context, rows: Element[]): RR0CaseSummary[] {
@@ -48,7 +50,7 @@ export class RR0HttpDatasource extends RR0Datasource {
       itemTime.updateFromStr(timeEl.dateTime)
       timeEl.remove()
     }
-    let place: NamedPlace
+    let place: Place
     const placeEl = row.querySelector(".plac")
     if (placeEl) {
       place = this.getPlace(itemContext, placeEl)
@@ -61,8 +63,18 @@ export class RR0HttpDatasource extends RR0Datasource {
     }
     const sources = this.getSources(row, itemContext)
     const description = this.getDescription(row)
-    const id = this.id(itemTime, place)
-    return {type: "sighting", events: [], url: url.href, place, time: itemTime, description, sources, id}
+    const id = RR0HttpDatasource.id(itemTime.date, place)
+    return {
+      type: "event",
+      eventType: "sighting",
+      events: [],
+      url: url.href,
+      place,
+      time: itemTime.date,
+      description,
+      sources,
+      id
+    }
   }
 
   protected async readCases(context: HtmlRR0Context): Promise<RR0CaseSummary[]> {
@@ -86,7 +98,7 @@ export class RR0HttpDatasource extends RR0Datasource {
       const pubItems = title.split(",")
       const timeStr = pubItems[pubItems.length - 1].trim()
       let publisher: string
-      const time = TimeContext.fromString(timeStr)
+      const time = EdtfDate.fromString(timeStr)
       if (time) {
         pubItems.pop()
       }
@@ -99,28 +111,21 @@ export class RR0HttpDatasource extends RR0Datasource {
     return sources
   }
 
-  protected getPlace(context: HtmlRR0Context, placeEl: Element): NamedPlace {
+  protected getPlace(context: HtmlRR0Context, placeEl: Element): Place {
     const placeStr = placeEl.textContent
     const placeParsed = RR0HttpDatasource.placeRegex.exec(placeStr)
-    let name: string
-    let place: Place
     let org: Organization | undefined
+    placeEl.remove()
     if (placeParsed) {
       const parent = undefined  // TODO: Find region from placeParsed[2]
       org = this.cityService.find(context, placeParsed[1], parent)
       if (org) {
-        name = org.getMessages(context).toTitle(context, org, {parent: true})
-        place = org.places[0]
+        return new OrganizationPlace(org)
       } else {
         context.debug(`Could not find place named "${placeParsed[1]}"`)
       }
     }
-    if (!org) {
-      name = placeStr
-      place = new Place([])
-    }
-    placeEl.remove()
-    return {name, org, place}
+    return new NamedPlace(placeStr)
   }
 
   protected getDescription(el: Element): string {

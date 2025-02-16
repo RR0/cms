@@ -6,6 +6,7 @@ import { UrecatCase, UrecatWitness } from "./UrecatCase.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
 import { MessageUtils } from "../../../lang/index.js"
 import { UrecatDatasource } from "./UrecatDatasource.js"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export class UrecatHttpDatasource extends UrecatDatasource {
 
@@ -108,16 +109,14 @@ export class UrecatHttpDatasource extends UrecatDatasource {
     const timeStr = caseLink.pathname.substring(this.searchPath.length + 2)
     const dateFields = UrecatHttpDatasource.urlDateFormat.exec(timeStr)
     const itemContext = context.clone()
-    const dateTime = itemContext.time
-    dateTime.setYear(parseInt(dateFields[1], 10))
+    const timeContext = itemContext.time
     const monthField = dateFields[2]
-    if (monthField) {
-      dateTime.setMonth(parseInt(monthField, 10))
-      const dayOfMonth = dateFields[3]
-      if (dayOfMonth) {
-        dateTime.setDayOfMonth(dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined)
-      }
-    }
+    const dayOfMonth = dateFields[3]
+    timeContext.date = new EdtfDate({
+      year: parseInt(dateFields[1], 10),
+      month: monthField ? parseInt(monthField, 10) : undefined,
+      day: dayOfMonth ? dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined : undefined
+    })
     return itemContext
   }
 
@@ -139,7 +138,7 @@ export class UrecatHttpDatasource extends UrecatDatasource {
       hour: "2-digit",
       minute: "2-digit"
     })
-    const sightingDate = caseContext.time
+    const sightingDate = caseContext.time.date
     const countStr = ObjectUtil.keyFromValue(UrecatHttpDatasource.wordToCount, witnesses.length)
     const title = `${timeStr}, ${placeName}, ${departmentOrState}, ${country}, ${countStr} ${MessageUtils.pluralWord(
       witnesses.length, "personne")}`.toUpperCase()

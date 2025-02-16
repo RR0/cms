@@ -1,6 +1,6 @@
 import { Department } from "../../../../../country/region/department/Department.js"
 import { southSavo } from "../SouthSavo.js"
-import { Place } from "../../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { SouthSavoDepartmentCode } from "../SouthSavoDepartmentCode.js"
 
 export const pieksamakiDep = Department.create(SouthSavoDepartmentCode.Pieksamaki, southSavo,

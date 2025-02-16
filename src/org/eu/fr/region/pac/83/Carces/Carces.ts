@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { VarCityCode } from "../VarCityCode.js"
+import { Var } from "../Var"
+import { City } from "../../../../../../country"
 
-export const carces = franceCity(VarCityCode.Carces, Place.fromDMS("43°28′35″N,6°11′01″E"))
+export const carces = City.create(String(VarCityCode.Carces), Var, Place.fromDMS("43°28′35″N,6°11′01″E"))

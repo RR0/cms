@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { MeuseCityCode } from "../MeuseCityCode.js"
+import { meuse } from "../Meuse"
+import { City } from "../../../../../../country"
 
-export const voidVacon = franceCity(MeuseCityCode.VoidVacon, Place.fromDMS("48° 41′ 19″N, 5° 37′ 08″E"))
+export const voidVacon = City.create(String(MeuseCityCode.VoidVacon), meuse, Place.fromDMS("48° 41′ 19″N, 5° 37′ 08″E"))

@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { GirondeCityCode } from "../GirondeCityCode.js"
+import { gironde } from "../Gironde"
+import { City } from "../../../../../../country"
 
-export const stAndreDeCubzac = franceCity(GirondeCityCode.SaintAndreDeCubzac, Place.fromDMS("44°59′44″N,0°26′41″O"))
+export const stAndreDeCubzac = City.create(String(GirondeCityCode.SaintAndreDeCubzac), gironde,
+  Place.fromDMS("44°59′44″N,0°26′41″O"))

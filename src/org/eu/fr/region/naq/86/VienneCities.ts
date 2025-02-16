@@ -1,6 +1,6 @@
-import { magne } from "./Magne/Magne.js"
+import { lavoux } from "./Lavoux/Lavoux.js"
 import { City } from "../../../../../country/region/department/city/City.js"
 
 export const vienneCities: City[] = [
-  magne
+  lavoux
 ]

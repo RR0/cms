@@ -1,5 +1,5 @@
 import { UsaStates } from "./UsaStates.js"
-import { Place } from "../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { alabama } from "./al/Alabama.js"
 import { california } from "./ca/California.js"
 import { texas } from "./tx/Texas.js"

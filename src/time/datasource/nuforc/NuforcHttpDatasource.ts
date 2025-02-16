@@ -5,7 +5,7 @@ import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
 import { ObjectUtil } from "../../../util/ObjectUtil.js"
 import { NuforcState } from "./NuforcState.js"
 import assert from "assert"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { NuforcCountry } from "./NuforcCountry.js"
 import { NuforcShape } from "./NuforcShape.js"
 import { NuforcDatasource } from "./NuforcDatasource.js"
@@ -58,19 +58,18 @@ export class NuforcHttpDatasource extends NuforcDatasource {
     return ObjectUtil.enumFromValue<NuforcState>(NuforcState, stateStr)
   }
 
-  protected getTime(dateField: HTMLTableCellElement, context: RR0Context): TimeContext {
+  protected getTime(dateField: HTMLTableCellElement, context: RR0Context): EdtfDate {
     const dateFields = NuforcHttpDatasource.dateFormat.exec(dateField.textContent)
-    const itemContext = context.clone()
-    const dateTime = itemContext.time
-    dateTime.setYear(parseInt(dateFields[3], 10))
-    dateTime.setMonth(parseInt(dateFields[1], 10))
     const dayOfMonth = dateFields[2]
-    dateTime.setDayOfMonth(dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined)
     const hour = parseInt(dateFields[4], 10)
     const minutes = parseInt(dateFields[5], 10)
-    dateTime.setHour(hour)
-    dateTime.setMinutes(minutes)
-    return dateTime
+    return new EdtfDate({
+      year: parseInt(dateFields[3], 10),
+      month: parseInt(dateFields[1], 10),
+      day: dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined,
+      hour,
+      minute: minutes
+    })
   }
 
   protected getLink(caseField: HTMLTableCellElement): URL {

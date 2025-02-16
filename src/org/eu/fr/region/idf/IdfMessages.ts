@@ -2,7 +2,7 @@ import { DepartmentMessages, RegionMessages } from "../../../../country/index.js
 import { hautsDeSeineMessages } from "./92/HautsDeSeineMessages.js"
 import { IdfDepartmentCode } from "./IdfDepartmentCode.js"
 import { oiseMessages } from "./60/OiseCityMessages.js"
-import { parisMessages } from "./75/ParisMessages.js"
+import { parisDepMessages } from "./75/ParisDepMessages.js"
 import { yvelinesMessages } from "./78/YvelinesCityMessages.js"
 import { seineEtMarneMessages } from "./77/SeineEtMarneMessages.js"
 import { valDOiseMessages } from "./95/ValDOiseMessages.js"
@@ -13,7 +13,7 @@ const idfDepartmentMessages: IdfDepartmentMessagesList = {
   [IdfDepartmentCode.Essonne]: essonneMessages,
   [IdfDepartmentCode.Oise]: oiseMessages,
   [IdfDepartmentCode.HautsDeSeine]: hautsDeSeineMessages,
-  [IdfDepartmentCode.Paris]: parisMessages,
+  [IdfDepartmentCode.Paris]: parisDepMessages,
   [IdfDepartmentCode.SeineEtMarne]: seineEtMarneMessages,
   [IdfDepartmentCode.ValDOise]: valDOiseMessages,
   [IdfDepartmentCode.Yvelines]: yvelinesMessages

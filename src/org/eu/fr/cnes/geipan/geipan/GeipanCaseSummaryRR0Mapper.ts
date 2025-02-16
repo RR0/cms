@@ -1,13 +1,14 @@
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import assert from "assert"
 import { GeipanCaseClassification } from "./GeipanCaseClassification.js"
-import { CaseMapper, NamedPlace, RR0CaseSummary } from "../../../../../../time/index.js"
+import { CaseMapper, RR0CaseSummary } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { CityService } from "../../../../../country/index.js"
 import { Organization } from "../../../../../Organization.js"
 import { france } from "../../../France.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { Source } from "@rr0/data/dist/source"
+import { Place } from "@rr0/place"
 
 export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, GeipanCaseSummary, RR0CaseSummary> {
 
@@ -44,11 +45,12 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Ge
     const caseSource: Source = {
       previousSourceRefs: [],
       events: [], url: sourceCase.url, title: "cas n° " + id, authors: this.authors,
-      publication: {publisher: this.copyright, time: TimeContext.fromDate(sourceTime)}
+      publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
     }
     const place = this.getPlace(context, sourceCase)
     return {
-      type: "sighting",
+      type: "event",
+      eventType: "sighting",
       events: [],
       id,
       time: sourceCase.time,
@@ -58,7 +60,7 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Ge
     }
   }
 
-  protected getPlace(context: HtmlRR0Context, sourceCase: GeipanCaseSummary): NamedPlace {
+  protected getPlace(context: HtmlRR0Context, sourceCase: GeipanCaseSummary): Place {
     const depCode = sourceCase.zoneCode
     assert.ok(depCode, `Should at least have one of department,region or country code`)
     const placeItems = /(.+?)(:?\s+\(([A-Z]+)\))?(:?\s+\((\d+)\))?$/.exec(sourceCase.city)
@@ -73,6 +75,6 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Ge
       assert.ok(org,
         `Could not find city "${placeName}" in department "${depCode}" nor department with this name in country "${france.id}"`)
     }
-    return {name: org.getMessages(context).toTitle(context, org, {parent: true}), org, place: org.places[0]}
+    return org.places[0]
   }
 }

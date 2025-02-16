@@ -1,6 +1,6 @@
 import * as fs from "fs"
 import { FileWriteConfig, Logger } from "ssg-api"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import * as path from "path"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Book } from "./Book.js"
@@ -48,7 +48,7 @@ export class BookService {
       const title = result[COLUMN_TITLE]
       if (timeStr) {
         const year = parseInt(timeStr, 10)
-        const time = new TimeContext(year)
+        const time = new EdtfDate({year})
         const author = result[COLUMN_AUTHOR]
         const summary = result[COLUMN_SUMMARY]
         const authorLastFirst = result[COLUMN_AUTHOR_LAST_FIRST]
@@ -74,7 +74,7 @@ export class BookService {
             authorsStr = authorsStr.substring(0, authorsStr.length - andAl.length - 1) + andAl
           }
         } while (dirName.length >= 255)
-        const parentDir = this.timeUrlBuilder.fromContext(time)
+        const parentDir = this.timeUrlBuilder.fromEdtf(time)
         const bookDir = path.join(parentDir, dirName)
         const id = result[COLUMN_ISBN]
         const book: Book = {

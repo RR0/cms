@@ -2,20 +2,23 @@ import { beforeEach, describe, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
-import { nuforcRR0Mapping } from "./NuforcRR0Mapping.js"
 import { nuforcTestCases } from "./NuforcTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/index.js"
+import { NuforcRR0Mapping } from "./NuforcRR0Mapping"
 
 describe("NuforcCaseSource", () => {
+
+  const nuforcRR0Mapping = new NuforcRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.countryService,
+    {read: ["fetch"], write: ["backup"]})
 
   const testCase = new class extends DatasourceTestCase<NuforcCaseSummary> {
     constructor(mapping: RR0CaseMapping<NuforcCaseSummary>, sourceCases: NuforcCaseSummary[]) {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: NuforcCaseSummary): TimeContext {
+    protected getTime(c: NuforcCaseSummary): EdtfDate {
       return c.time
     }
 

@@ -1,5 +1,5 @@
 import { UsaCountyCode } from "../../UsaCountyCode.js"
-import { Place } from "../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { utah } from "../Utah.js"
 import { Department } from "../../../../country/region/department/Department.js"
 

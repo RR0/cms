@@ -88,7 +88,7 @@ export class BookDirectoryStep extends DirectoryStep {
     const authorStr = authors ? authors.join(" & ") + ": " : ""
     const time = dirBook.publication.time
     if (time) {
-      const timeDetail = time.getYear()
+      const timeDetail = time.year.value
       details.push(HtmlTag.toString("time", timeDetail.toString()))
     }
     const text: (string | string[])[] = [authorStr, dirBook.title]

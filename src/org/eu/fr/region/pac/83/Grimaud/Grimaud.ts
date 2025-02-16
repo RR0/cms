@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { VarCityCode } from "../VarCityCode.js"
+import { Var } from "../Var"
+import { City } from "../../../../../../country"
 
-export const grimaud = franceCity(VarCityCode.Grimaud, Place.fromDMS("43°16′27″N,6°31′20″E"))
+export const grimaud = City.create(String(VarCityCode.Grimaud), Var, Place.fromDMS("43°16′27″N,6°31′20″E"))

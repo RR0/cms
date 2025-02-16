@@ -10,13 +10,13 @@ import { hautsDeFranceMessages } from "./region/hdf/HautsDeFranceMessages.js"
 import { grandEstMessages } from "./region/ges/GrandEstMessages.js"
 import { normandieMessages_en } from "./region/nor/NormandieMessages_en.js"
 import { laReunionRegion_en } from "./region/lre/LaReunionRegion_en.js"
-import { OrganizationKind } from "../../Organization.js"
 import { centreValDeLoireMessages } from "./region/cvl/CentreValDeLoireMessages.js"
 import { guadeloupeRegion_en } from "./region/gua/GuadeloupeRegion_en.js"
 import { bretagneMessages_en } from "./region/bre/BretagneMessages_en.js"
 import { FranceRegionCode } from "./region/FranceRegionCode.js"
 import { martiniqueRegionMessage } from "./region/mtq/MartiniqueRegionMessage.js"
 import { collectiviteOutreMerMessage_en } from "./region/com/CollectiviteOutreMerMessage_en.js"
+import { OrganizationKind } from "../../OrganizationKind"
 
 export const france_en = new FranceMessages(["France"])
 france_en[OrganizationKind.region] = {

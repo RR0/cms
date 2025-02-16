@@ -12,7 +12,7 @@ import { ObjectUtil, UrlUtil } from "../../../../../../util/index.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
 import { CountryCode } from "../../../../../country/index.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 interface QueryParameters {
   /**
@@ -96,7 +96,7 @@ export class GeipanHttpDatasource extends GeipanDatasource {
     let fields = GeipanHttpDatasource.caseFormat.exec(caseText)
     let city: string
     let zoneCode: FranceDepartementCode | FranceRegionCode | CountryCode.fr
-    let dateTime: TimeContext
+    let dateTime: EdtfDate
     if (fields) {
       city = fields[1].trim()
       zoneCode = fields[2] as GeipanZoneCode
@@ -134,13 +134,12 @@ export class GeipanHttpDatasource extends GeipanDatasource {
     }
   }
 
-  protected getTime(context: RR0Context, fields: RegExpExecArray, index: number): TimeContext {
-    const itemContext = context.clone()
-    const dateTime = itemContext.time
-    dateTime.setYear(parseInt(fields[index], 10))
-    dateTime.setMonth(parseInt(fields[index - 1], 10))
+  protected getTime(context: RR0Context, fields: RegExpExecArray, index: number): EdtfDate {
     const dayOfMonth = fields[index - 2]
-    dateTime.setDayOfMonth(dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined)
-    return dateTime
+    return new EdtfDate({
+      year: parseInt(fields[index], 10),
+      month: parseInt(fields[index - 1], 10),
+      day: dayOfMonth !== "00" ? parseInt(dayOfMonth, 10) : undefined
+    })
   }
 }

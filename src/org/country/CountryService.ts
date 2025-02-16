@@ -25,11 +25,15 @@ import { panama } from "../pa/Panama.js"
 import { taiwan } from "../tw/Taiwan.js"
 import { tunisia } from "../tn/Tunisia.js"
 import { israel } from "../il/Israel.js"
+import { china } from "../cn/China"
+import { denmark } from "../eu/dk/Denmark"
+import { spain } from "../eu/es/Spain"
+import { poland } from "../eu/pl/Poland"
 
 export class CountryService extends OrganizationService<Country> {
 }
 
-const countries: Country[] = [
+export const countries: Country[] = [
   algeria,
   new Country(CountryCode.ar),
   new Country(CountryCode.at),
@@ -39,13 +43,13 @@ const countries: Country[] = [
   canada,
   new Country(CountryCode.ch),
   new Country(CountryCode.cl),
-  new Country(CountryCode.cn),
+  china,
   colombia,
   new Country(CountryCode.cy),
   germany,
-  new Country(CountryCode.dk),
+  denmark,
   dominicanRepublic,
-  new Country(CountryCode.es),
+  spain,
   finland,
   france,
   new Country(CountryCode.gr),
@@ -65,7 +69,7 @@ const countries: Country[] = [
   panama,
   peru,
   philippines,
-  new Country(CountryCode.pl),
+  poland,
   new Country(CountryCode.pt),
   new Country(CountryCode.ro),
   russia,
@@ -82,5 +86,3 @@ const countries: Country[] = [
   new Country(CountryCode.ve),
   new Country(CountryCode.za)
 ]
-
-export const countryService = new CountryService(countries, "org", undefined)

@@ -1,4 +1,4 @@
-import { Place } from "../../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { pike } from "../Pike.js"
 import { PikeCityCode } from "../PikeCityCode.js"
 import { usaCity } from "../../../UsaCity.js"

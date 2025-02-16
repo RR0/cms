@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { MeuseCityCode } from "../MeuseCityCode.js"
+import { meuse } from "../Meuse"
+import { City } from "../../../../../../country"
 
-export const vaucouleurs = franceCity(MeuseCityCode.Vaucouleurs, Place.fromDMS("48°36′09″N,5°39′57″E"))
+export const vaucouleurs = City.create(String(MeuseCityCode.Vaucouleurs), meuse, Place.fromDMS("48°36′09″N,5°39′57″E"))

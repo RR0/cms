@@ -1,13 +1,18 @@
 import { NuforcRR0Mapper } from "./NuforcRR0Mapper.js"
 import { NuforcHttpDatasource } from "./NuforcHttpDatasource.js"
-import { cityService } from "../../../org/Cities.js"
-import { countryService } from "../../../org/country/CountryService.js"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
+import { CityService, CountryService } from "../../../org"
+import { RR0CaseMapping } from "../rr0"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
+import { NuforcCaseSummary } from "./NuforcCaseSummary"
 
 export const nuforcDatasource = new NuforcHttpDatasource()
 
-export const nuforcRR0Mapper = new NuforcRR0Mapper(cityService, countryService,
-  nuforcDatasource.baseUrl.href, nuforcDatasource.copyright, nuforcDatasource.authors)
+export class NuforcRR0Mapping implements RR0CaseMapping<NuforcCaseSummary> {
+  datasource: NuforcHttpDatasource = nuforcDatasource
+  mapper: NuforcRR0Mapper
 
-const actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}
-export const nuforcRR0Mapping = {datasource: nuforcDatasource, mapper: nuforcRR0Mapper, actions}
+  constructor(cityService: CityService, countryService: CountryService, readonly actions: ChronologyReplacerActions) {
+    this.mapper = new NuforcRR0Mapper(cityService, countryService,
+      nuforcDatasource.baseUrl.href, nuforcDatasource.copyright, nuforcDatasource.authors)
+  }
+}

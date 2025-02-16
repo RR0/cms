@@ -1,13 +1,12 @@
 import { PlaceReplacer } from "./PlaceReplacer.js"
-import { PlaceService } from "./PlaceService.js"
-import { Elevation, Place } from "./Place.js"
 import { OrganizationService } from "../org/OrganizationService.js"
 import { SsgContext } from "ssg-api"
 import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { Organization, OrganizationKind } from "../org/Organization.js"
+import { Organization } from "../org/Organization.js"
 import { OrganizationMessages } from "../org/index.js"
-import { PlaceLocation } from "@rr0/place"
+import { Elevation, Place, PlaceLocation, PlaceService } from "@rr0/place"
+import { OrganizationKind } from "../org/OrganizationKind"
 
 class MockPlaceService extends PlaceService {
 
@@ -31,7 +30,7 @@ class MockPlaceService extends PlaceService {
 class MockOrganizationService extends OrganizationService {
 
   constructor(readonly dirName: string) {
-    super([], "org", null)
+    super([], "org", rr0TestUtil.orgFactory, null)
   }
 
   async read(_fileName: string): Promise<Organization> {

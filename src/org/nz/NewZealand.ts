@@ -1,5 +1,5 @@
 import { Country, CountryCode } from "../country/index.js"
-import { Place } from "../../place/Place.js"
+import { Place } from "@rr0/place"
 import { NewZealandRegionCode } from "./region/NewZealandRegionCode.js"
 import { Region } from "../country/region/Region.js"
 

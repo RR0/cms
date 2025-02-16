@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { HauteGaronneCityCode } from "../HauteGaronneCityCode.js"
+import { hauteGaronne } from "../HauteGaronne"
+import { City } from "../../../../../../country"
 
-export const toulouse = franceCity(HauteGaronneCityCode.Toulouse, Place.fromDMS("43°36′16″N,1°26′38″E"))
+export const toulouse = City.create(String(HauteGaronneCityCode.Toulouse), hauteGaronne,
+  Place.fromDMS("43°36′16″N,1°26′38″E"))

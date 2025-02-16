@@ -4,18 +4,20 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { ufoSearchTestCases } from "./UfoSearchTestCases.js"
-import { TimeContext } from "@rr0/time"
-import { ufoSearchRR0Mapping } from "./UfoSearchMapping.js"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
+import { UfoSearchRR0Mapping } from "./UfoSearchMapping"
 
 describe("UfoSearchCaseSource", () => {
+
+  const ufoSearchRR0Mapping = new UfoSearchRR0Mapping(rr0TestUtil.cityService, {read: ["fetch"], write: ["backup"]})
 
   const testCase = new class extends DatasourceTestCase<UfoSearchCase> {
     constructor(mapping: RR0CaseMapping<UfoSearchCase>, sourceCases: UfoSearchCase[]) {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: UfoSearchCase): TimeContext {
+    protected getTime(c: UfoSearchCase): EdtfDate {
       return c.time
     }
 

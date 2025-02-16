@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { SeineMaritimeCityCode } from "../SeineMaritimeCityCode.js"
+import { seineMaritime } from "../SeineMaritime"
+import { City } from "../../../../../../country"
 
-export const crielSurMer = franceCity(SeineMaritimeCityCode.CrielSurMer, Place.fromDMS("50° 01′ 00″ N, 1° 19′ 06″ E"))
+export const crielSurMer = City.create(String(SeineMaritimeCityCode.CrielSurMer), seineMaritime,
+  Place.fromDMS("50° 01′ 00″ N, 1° 19′ 06″ E"))

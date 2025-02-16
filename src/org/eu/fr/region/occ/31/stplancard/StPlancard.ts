@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { HauteGaronneCityCode } from "../HauteGaronneCityCode.js"
+import { hauteGaronne } from "../HauteGaronne"
+import { City } from "../../../../../../country"
 
-export const stPlancard = franceCity(HauteGaronneCityCode.StPlancard, Place.fromDMS("43°10′16″N,0°34′30″E"))
+export const stPlancard = City.create(String(HauteGaronneCityCode.StPlancard), hauteGaronne,
+  Place.fromDMS("43°10′16″N,0°34′30″E"))

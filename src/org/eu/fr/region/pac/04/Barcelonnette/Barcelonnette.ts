@@ -1,6 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { AlpesDeHauteProvenceCityCode } from "../AlpesDeHauteProvenceCityCode.js"
+import { alpesDeHauteProvence } from "../AlpesDeHauteProvence"
+import { City } from "../../../../../../country"
 
-export const barcelonnette = franceCity(AlpesDeHauteProvenceCityCode.Barcelonnette,
+export const barcelonnette = City.create(String(AlpesDeHauteProvenceCityCode.Barcelonnette), alpesDeHauteProvence,
   Place.fromDMS("44°23′12″N,6°39′11″E"))

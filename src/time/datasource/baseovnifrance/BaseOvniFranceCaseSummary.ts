@@ -1,4 +1,4 @@
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export enum BaseOvniFranceTypeObservation {
   visualClose = "Visuel : proche",
@@ -104,7 +104,7 @@ export enum BaseOvniFranceSize {
 export interface BaseOvniFranceCaseSummary {
   readonly id: string
   readonly url: string
-  readonly time: TimeContext
+  readonly time: EdtfDate
   readonly city: string,
   readonly depCode: string,
 

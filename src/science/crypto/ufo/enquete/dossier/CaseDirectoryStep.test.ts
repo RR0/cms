@@ -8,6 +8,7 @@ import { CaseService } from "./CaseService.js"
 import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
 import { FileContents } from "@javarome/fileutil"
 import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { RR0CaseJson } from "./RR0CaseJson"
 
 describe("DirectoryStep", () => {
 
@@ -29,7 +30,7 @@ describe("DirectoryStep", () => {
     const casesDirectoryPath = path.join(root, "science/crypto/ufo/enquete/dossier/index.html")
     const context = rr0TestUtil.newContext(casesDirectoryPath, template)
     const eventFactory = new RR0EventFactory()
-    const dataService = new AllDataService([new TypedDataFactory<RR0Case>(eventFactory, "case")])
+    const dataService = new AllDataService([new TypedDataFactory<RR0Case, RR0CaseJson>(eventFactory, "case")])
     const caseFiles = []
     const timeService = rr0TestUtil.time.getService()
     const timeElementFactory = new TimeElementFactory(timeService.renderer)

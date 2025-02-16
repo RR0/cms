@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { SaoneEtLoireCityCode } from "../SaoneEtLoireCityCode.js"
+import { saoneEtLoire } from "../SaoneEtLoire"
+import { City } from "../../../../../../country"
 
-export const joncy = franceCity(SaoneEtLoireCityCode.Joncy, Place.fromDMS("46° 36′ 51″N, 4° 33′ 32″E"))
+export const joncy = City.create(String(SaoneEtLoireCityCode.Joncy), saoneEtLoire,
+  Place.fromDMS("46° 36′ 51″N, 4° 33′ 32″E"))

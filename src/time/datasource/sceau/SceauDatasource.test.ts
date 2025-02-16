@@ -1,17 +1,18 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { HtmlTag } from "../../../util/index.js"
 import { SceauCaseMapping } from "./SceauCaseMapping.js"
 import { SceauDatasource } from "./SceauDatasource.js"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
 import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
-import { sceauDatasource, sceauRR0Mapper } from "./SceauRR0Mapping.js"
+import { sceauDatasource } from "./SceauRR0Mapping.js"
 import { sceauTestCases } from "./SceauTestCases.js"
 import { Source } from "@rr0/data/dist/source"
+import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 
 export class SceauTestDatasource extends SceauDatasource {
 
@@ -28,12 +29,13 @@ export class SceauTestDatasource extends SceauDatasource {
 
 export class SceauTestMapping implements SceauCaseMapping {
   readonly datasource = sceauDatasource // new SceauTestDatasource()
-  readonly mapper = sceauRR0Mapper
+  readonly mapper: SceauCaseSummaryRR0Mapper
 
-  constructor(readonly actions: ChronologyReplacerActions) {
+  constructor(readonly actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}) {
+    this.mapper = new SceauCaseSummaryRR0Mapper(rr0TestUtil.cityService, sceauDatasource.baseUrl,
+      sceauDatasource.copyright, sceauDatasource.authors)
   }
 }
-
 
 describe("SCEAUCaseSource", () => {
 
@@ -42,8 +44,8 @@ describe("SCEAUCaseSource", () => {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: SceauCaseSummary): TimeContext {
-      return TimeContext.fromString(c.dateCas)
+    protected getTime(c: SceauCaseSummary): EdtfDate {
+      return EdtfDate.fromString(c.dateCas)
     }
 
     protected sortComparator(c1: SceauCaseSummary, c2: SceauCaseSummary): number {
@@ -72,7 +74,7 @@ describe("SCEAUCaseSource", () => {
           }
           if (publication.time) {
             const sourceContext = context.clone()
-            sourceContext.time = source.publication.time
+            sourceContext.time.date = source.publication.time
             const timeStr = this.timeTextBuilder.build(sourceContext)
             sourceItems.push(timeStr)
           }

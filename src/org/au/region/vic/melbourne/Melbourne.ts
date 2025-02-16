@@ -1,5 +1,5 @@
 import { VictoriaCityCode } from "../VictoriaCityCode.js"
-import { Place } from "../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { victoria } from "../Victoria.js"
 import { City } from "../../../../country/region/department/city/City.js"
 

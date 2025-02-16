@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { LoireAtlantiqueCityCode } from "../LoireAtlantiqueCityCode.js"
+import { loireAtlantique } from "../LoireAtlantique"
+import { City } from "../../../../../../country"
 
-export const reze = franceCity(LoireAtlantiqueCityCode.Reze, Place.fromDMS("47° 10′ 38″N,1°32′57″W"))
+export const reze = City.create(String(LoireAtlantiqueCityCode.Reze), loireAtlantique,
+  Place.fromDMS("47° 10′ 38″N,1°32′57″W"))

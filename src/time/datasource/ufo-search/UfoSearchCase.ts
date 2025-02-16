@@ -1,4 +1,4 @@
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export enum UfoSearchCaseType {
   letter = "letter",
@@ -104,7 +104,7 @@ export type UfoSearchCaseKeyValues = {
 export interface UfoSearchCase {
   id: string
   url?: string
-  time: TimeContext
+  time: EdtfDate
   location?: string
   desc: string,
   key_vals: UfoSearchCaseKeyValues,

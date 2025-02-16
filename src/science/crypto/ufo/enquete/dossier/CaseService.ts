@@ -4,8 +4,10 @@ import { HtmlRR0Context } from "../../../../../RR0Context.js"
 import { TimeElementFactory } from "../../../../../time/index.js"
 import { CaseFactory } from "./CaseFactory.js"
 import { AbstractDataService, AllDataService } from "@rr0/data"
+import { TimeContext } from "@rr0/time"
+import { RR0CaseJson } from "./RR0CaseJson.js"
 
-export class CaseService extends AbstractDataService<RR0Case> {
+export class CaseService extends AbstractDataService<RR0Case, RR0CaseJson> {
 
   constructor(dataService: AllDataService, factory: CaseFactory,
               protected readonly timeElementFactory: TimeElementFactory, files: string[]) {
@@ -24,7 +26,8 @@ export class CaseService extends AbstractDataService<RR0Case> {
     const time = aCase.time
     const caseContext = context.clone()
     if (time) {
-      caseContext.time = time
+      caseContext.time = new TimeContext(time.year?.value, time.month?.value, time.day?.value, time.hour?.value,
+        time.minute?.value, time.timeshift?.toString())
       const options: Intl.DateTimeFormatOptions = {year: "numeric"}
       const {result, replacement} = this.timeElementFactory.renderer.renderContent(caseContext, undefined, {url: true},
         options)

@@ -1,6 +1,6 @@
 import { CaseMapper } from "./CaseMapper.js"
 import { RR0Context } from "../../RR0Context.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
 
@@ -17,7 +17,7 @@ export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
       val = value.toISOString()
     } else if (typeof value === "string") {
       val = this.escape(value)
-    } else if (value instanceof URL || value instanceof TimeContext) {
+    } else if (value instanceof URL || value instanceof EdtfDate) {
       val = value.toString()
     } else if (Array.isArray(value)) {
       val = this.escape(value.map((item, i) => this.fieldMapper(context, String(i), item, sourceTime)).join(this.sep),

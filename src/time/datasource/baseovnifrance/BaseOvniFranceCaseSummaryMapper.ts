@@ -1,7 +1,7 @@
 import { CaseMapper } from "../CaseMapper.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { RR0Context } from "../../../RR0Context.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate, Level2Timeshift } from "@rr0/time"
 import { BaseOvniFranceCase } from "./BaseOvniFranceCase.js"
 
 /**
@@ -23,8 +23,14 @@ export class BaseOvniFranceCaseSummaryMapper implements CaseMapper<RR0Context, B
       url: new URL("listgen.php?typlist=20&page=0&numobs=" + caseNumber, this.baseUrl).href,
       city: csvCase.Ville,
       depCode: csvCase["Départ."],
-      time: new TimeContext(parseInt(dateFields[2], 10), parseInt(dateFields[1], 10), dayOfMonth,
-        parseInt(timeFields[0], 10), parseInt(timeFields[1], 10), "GMT+1"),
+      time: new EdtfDate({
+        year: parseInt(dateFields[2], 10),
+        month: parseInt(dateFields[1], 10),
+        day: dayOfMonth,
+        hour: parseInt(timeFields[0], 10),
+        minute: parseInt(timeFields[1], 10),
+        timeshift: Level2Timeshift.fromString("GMT+1")
+      }),
       physicalEffect: Boolean(csvCase["Effet Physique"]),
       witnessEffect: Boolean(csvCase["Effet témoin"]),
       entities: csvCase["Nbre entité"] > 0,

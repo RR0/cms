@@ -1,16 +1,23 @@
 import { UfoSearchHttpDatasource } from "./UfoSearchHttpDatasource.js"
 import { UfoSearchFileDatasource } from "./UfoSearchFileDatasource.js"
 import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper.js"
-import { cityService } from "../../../org/index.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
+import { RR0CaseMapping } from "../rr0"
+import { UfoSearchCase } from "./UfoSearchCase"
+import { CityService } from "../../../org"
 
 export const ufoSearchHttpDatasource = new UfoSearchHttpDatasource("https://www.ufo-search.com", "timeline/search.html")
 
-export const ufoSearchCaseRR0Mapper = new UfoSearchCaseRR0Mapper(cityService, ufoSearchHttpDatasource.baseUrl,
-  ufoSearchHttpDatasource.copyright, ufoSearchHttpDatasource.authors)
+export class UfoSearchRR0Mapping implements RR0CaseMapping<UfoSearchCase> {
 
-export const ufoSearchFileDatasource = new UfoSearchFileDatasource("time/datasource/ufo-search/majestic.json",
-  ufoSearchCaseRR0Mapper)
+  datasource = ufoSearchHttpDatasource
+  backupDatasource: UfoSearchFileDatasource
+  mapper: UfoSearchCaseRR0Mapper
 
-const actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}
-export const ufoSearchRR0Mapping = {datasource: ufoSearchHttpDatasource, mapper: ufoSearchCaseRR0Mapper, actions}
+  constructor(cityService: CityService, readonly actions: ChronologyReplacerActions) {
+    this.mapper = new UfoSearchCaseRR0Mapper(cityService, ufoSearchHttpDatasource.baseUrl,
+      ufoSearchHttpDatasource.copyright, ufoSearchHttpDatasource.authors)
+    this.backupDatasource = new UfoSearchFileDatasource("time/datasource/ufo-search/majestic.json",
+      this.mapper)
+  }
+}

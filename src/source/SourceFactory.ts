@@ -1,6 +1,6 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import path from "path"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { JSDOM } from "jsdom"
 import { HttpSource } from "../time/datasource/HttpSource.js"
 import { TimeService } from "../time"
@@ -71,7 +71,7 @@ export class SourceFactory {
     }
     const publication = source.publication
     if (publication && !publication.time) {
-      publication.time = this.time.contextFromFileName(context, href)
+      publication.time = this.time.contextFromFileName(context, href).date
     }
     if (hash) {
       source.index = hash
@@ -100,7 +100,7 @@ export class SourceFactory {
       title = href
     }
     publisher = resOut.headers.get("host")
-    const time = lastModif ? TimeContext.fromDate(new Date(lastModif)) : context.time
+    const time = lastModif ? EdtfDate.fromDate(new Date(lastModif)) : context.time.date
     const publication: Publication = {publisher, time}
     return {
       title,

@@ -3,16 +3,10 @@ import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
-import { Place } from "../place/index.js"
 import { RR0Data, RR0Event } from "@rr0/data"
 
-export enum OrganizationKind {
-  country = "country",
-  region = "region",
-  department = "department",
-  city = "city",
-  company = "company",
-}
+import { OrganizationKind } from "./OrganizationKind"
+import { Place } from "@rr0/place"
 
 export class Organization<M extends TitleMessage = OrganizationMessages> implements RR0Data {
 

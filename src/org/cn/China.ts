@@ -1,10 +1,4 @@
 import { Country, CountryCode } from "../country/index.js"
-import { Place } from "../../place/Place.js"
-import { Region } from "../country/region/Region.js"
-import { ChinaRegionCode } from "./region/ChinaRegionCode.js"
+import { Place, PlaceLocation } from "@rr0/place"
 
-export const china = new Country(CountryCode.cn)
-
-export function chinaRegion(code: ChinaRegionCode, place: Place) {
-  return new Region(code, china, [place])
-}
+export const china = new Country(CountryCode.cn, [new Place([PlaceLocation.fromDMS("35°0'N,103°0'E")])])

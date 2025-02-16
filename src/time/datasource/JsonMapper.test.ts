@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
-import { ufoSearchFileDatasource } from "./ufo-search/index.js"
 import { rr0TestUtil } from "../../test/index.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import path from "path"
+import { UfoSearchRR0Mapping } from "./ufo-search"
 
 describe("JsonMapper", () => {
 
@@ -15,6 +15,8 @@ describe("JsonMapper", () => {
   })
 
   test("read", () => {
+    const ufoSearchMapping = new UfoSearchRR0Mapping(rr0TestUtil.cityService, {read: ["fetch"], write: ["backup"]})
+    const ufoSearchFileDatasource = ufoSearchMapping.backupDatasource
     const data = fs.readFileSync(path.join("src", ufoSearchFileDatasource.fileName), {encoding: "utf-8"})
     const cases = ufoSearchFileDatasource.fileMapper.parse(context, data)
     expect(cases.length).toEqual(54751)

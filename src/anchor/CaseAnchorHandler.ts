@@ -28,12 +28,15 @@ export class CaseAnchorHandler implements AnchorHandler {
           const classificationLabels = context.messages.case.classification.hynek[hynek]
           titles.push(classificationLabels.long)
         }
-        const timeStr = aCase.time
-        if (timeStr) {
-          if (timeStr instanceof TimeContext) {
-            caseContext.time = timeStr
-          } else if (!titles.includes(timeStr)) {
-            caseContext.time.updateFromStr(timeStr)
+        const caseTime = aCase.time
+        if (caseTime) {
+          if (typeof caseTime === "string") {
+            if (!titles.includes(caseTime)) {
+              caseContext.time.updateFromStr(caseTime)
+            }
+          } else {
+            caseContext.time = new TimeContext(caseTime.year?.value, caseTime.month?.value, caseTime.day?.value,
+              caseTime.hour?.value, caseTime.minute?.value, caseTime.timeshift?.toString())
           }
           titles.push(this.timeTextBuilder.build(caseContext))
         }

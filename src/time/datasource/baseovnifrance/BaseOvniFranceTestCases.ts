@@ -1,5 +1,5 @@
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate, Level2Timeshift } from "@rr0/time"
 import { baseOvniFranceDatasource } from "./BaseOvniFranceRR0Mapping.js"
 
 export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
@@ -8,7 +8,7 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     url: new URL("listgen.php?typlist=20&page=0&numobs=2760", baseOvniFranceDatasource.baseUrl).href,
     city: "Le Mans",
     depCode: "72",
-    time: new TimeContext(1970, 3, undefined, 16, 0, "GMT+1"),
+    time: new EdtfDate({year: 1970, month: 3, hour: 16, minute: 0, timeshift: Level2Timeshift.fromString("GMT+1")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,
@@ -19,7 +19,8 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     url: new URL("listgen.php?typlist=20&page=0&numobs=1650", baseOvniFranceDatasource.baseUrl).href,
     city: "Lyon",
     depCode: "69",
-    time: new TimeContext(1970, 3, 12, 7, 40, "GMT+1"),
+    time: new EdtfDate(
+      {year: 1970, month: 3, day: 12, hour: 7, minute: 40, timeshift: Level2Timeshift.fromString("GMT+1")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,
@@ -30,7 +31,8 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     url: new URL("listgen.php?typlist=20&page=0&numobs=3088", baseOvniFranceDatasource.baseUrl).href,
     city: "Briançon",
     depCode: "05",
-    time: new TimeContext(1970, 3, 16, 20, 0, "GMT+1"),
+    time: new EdtfDate(
+      {year: 1970, month: 3, day: 16, hour: 20, minute: 0, timeshift: Level2Timeshift.fromString("GMT+1")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,
@@ -41,7 +43,8 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     url: new URL("listgen.php?typlist=20&page=0&numobs=1655", baseOvniFranceDatasource.baseUrl).href,
     city: "Chambon sur Voueize",
     depCode: "23",
-    time: new TimeContext(1970, 3, 17, 19, 15, "GMT+1"),
+    time: new EdtfDate(
+      {year: 1970, month: 3, day: 17, hour: 19, minute: 15, timeshift: Level2Timeshift.fromString("GMT+1")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,

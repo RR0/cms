@@ -82,7 +82,8 @@ export class RR0Messages_en implements RR0Messages {
       in: (approximate: boolean): string => (approximate ? "around " : ""),
       fromTo: (startReplacement: string, endReplacement: string): string => startReplacement + " to " + endReplacement,
       starting: (approximate: boolean): string => "starting " + (approximate ? "" : "the ")
-    }
+    },
+    place: placeMessages_en
   }
   case = {
     classification: caseClassification_en,

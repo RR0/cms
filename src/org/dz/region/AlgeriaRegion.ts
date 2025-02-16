@@ -1,5 +1,5 @@
 import { AlgeriaRegionCode } from "./AlgeriaRegionCode.js"
-import { Place } from "../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { algeria } from "../Algeria.js"
 import { Region } from "../../country/region/Region.js"
 import { RegionMessages } from "../../country/index.js"

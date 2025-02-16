@@ -1,16 +1,18 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import { SourceFactory, SourceRenderer } from "../source/index.js"
 import { NoteRenderer } from "../note/index.js"
-import { NamedPlace } from "./datasource/index.js"
 import { TimeElementFactory } from "./html/TimeElementFactory.js"
 import assert from "assert"
 import { RR0Data, RR0Event } from "@rr0/data"
 import { Source } from "@rr0/data/dist/source"
+import { PlaceRenderer } from "../place/PlaceRenderer"
+import { Place } from "@rr0/place"
 
 /**
  * Render a case summary as HTML.
  */
 export class EventRenderer<E extends RR0Event> {
+  placeRenderer = new PlaceRenderer()
 
   constructor(
     protected noteRenderer: NoteRenderer, protected sourceFactory: SourceFactory,
@@ -18,12 +20,12 @@ export class EventRenderer<E extends RR0Event> {
   ) {
   }
 
-  placeElement(context: HtmlRR0Context, namedPlace: NamedPlace) {
+  placeElement(context: HtmlRR0Context, place: Place) {
     const doc = context.file.document
-    const birthPlace = doc.createElement("span")
-    birthPlace.className = "place"
-    birthPlace.textContent = namedPlace.name || ""
-    return birthPlace
+    const placeEl = doc.createElement("span")
+    placeEl.className = "place"
+    placeEl.textContent = this.placeRenderer.render(context, place) || ""
+    return placeEl
   }
 
   async renderEnd(context: HtmlRR0Context, event: RR0Data, container: HTMLElement) {
@@ -40,7 +42,7 @@ export class EventRenderer<E extends RR0Event> {
 
   async render(context: HtmlRR0Context, event: E, container: HTMLElement) {
     const eventContext = context.clone()
-    const eventTime = eventContext.time = event.time
+    const eventTime = eventContext.time.date = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time`)
     container.dataset.time = eventTime.toString()
     const timeEl = this.timeElementFactory.create(eventContext, context)

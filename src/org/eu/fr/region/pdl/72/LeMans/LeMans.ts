@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { SartheCityCode } from "../SartheCityCode.js"
+import { sarthe } from "../Sarthe"
+import { City } from "../../../../../../country"
 
-export const leMans72 = franceCity(SartheCityCode.LeMans, Place.fromLocation(48.004167, 0.196944))
+export const leMans72 = City.create(String(SartheCityCode.LeMans), sarthe, Place.fromLocation(48.004167, 0.196944))

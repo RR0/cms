@@ -56,11 +56,13 @@ export class DataAnchorHandler implements AnchorHandler {
     }
     if (next) {
       linkEl.classList.add("deprecated")
-      let note = data.note
-      if (!note) {
-        note = `Remplacé par ${next}`
+      let notes = data.notes
+      if (notes?.length <= 0) {
+        notes = [`Remplacé par ${next}`]
       }
-      this.handleNote(context, linkEl, note)
+      for (const note of notes) {
+        this.handleNote(context, linkEl, note)
+      }
     }
   }
 

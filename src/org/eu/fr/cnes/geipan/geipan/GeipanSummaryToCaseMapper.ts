@@ -13,9 +13,9 @@ export class GeipanSummaryToCaseMapper implements CaseMapper<RR0Context, GeipanC
 
   map(context: RR0Context, csvCase: GeipanCaseSummary, sourceTime: Date): GeipanCase {
     const caseNumber = csvCase.id
-    const sightingYear = csvCase.time.getYear().toString()
-    const sightingMonth = csvCase.time.getMonth()?.toString() ?? "--"
-    const sightingDayOfMonth = csvCase.time.getDayOfMonth()?.toString() ?? "--"
+    const sightingYear = csvCase.time.year?.toString()
+    const sightingMonth = csvCase.time.month?.toString() ?? "--"
+    const sightingDayOfMonth = csvCase.time.day?.toString() ?? "--"
     return {
       cas_classification: csvCase.classification,
       cas_consistance_calc: 0,

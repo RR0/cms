@@ -23,12 +23,12 @@ describe("People", () => {
     expect(hynek.isDeceased()).toBe(false)
     expect(hynek.getAge()).toBe(undefined)
 
-    hynek.birthTime = new Date("1910-05-01")
+    Object.assign(hynek, {birthTime: EdtfDate.fromString("1910-05-01")})
     expect(hynek.isDeceased()).toBe(false)
     expect(hynek.isDeceased(EdtfDate.fromString("2040"))).toBe(true)
     expect(hynek.getAge(EdtfDate.fromString("1972-08-12"))).toBe(62)
 
-    hynek.deathTime = new Date("1986-04-27")
+    Object.assign(hynek, {deathTime: EdtfDate.fromString("1986-04-27")})
     expect(hynek.isDeceased()).toBe(true)
     expect(hynek.getAge(EdtfDate.fromString("1986-04-27"))).toBe(76)
     expect(hynek.getAge(EdtfDate.fromString("2020-04-27"))).toBe(76)

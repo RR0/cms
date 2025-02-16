@@ -1,3 +1,3 @@
 export enum VienneCityCode {
-  Magne = 86141,
+  Lavoux = 86124,
 }

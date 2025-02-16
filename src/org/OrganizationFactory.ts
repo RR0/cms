@@ -1,16 +1,16 @@
 import { Organization } from "./Organization.js"
 import { RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { OrganizationJson } from "./OrganizationJson"
 
-export class OrganizationFactory extends TypedDataFactory<Organization> {
+export class OrganizationFactory extends TypedDataFactory<Organization, OrganizationJson> {
 
   constructor(eventFactory: RR0EventFactory) {
     super(eventFactory, "org", ["index"])
   }
 
-  createFromData(data: Organization): Organization {
-    const id = data.id || data.dirName.replaceAll("/", "-")
-    const org = new Organization(id, data.places, data.kind, data.parent)
-    Object.assign(org, super.createFromData(data))
-    return org
+  parse(dataJson: OrganizationJson): Organization {
+    const base = super.parse(dataJson)
+    const id = base.id || dataJson.dirName.replaceAll("/", "-")
+    return new Organization(id, dataJson.places, dataJson.kind)
   }
 }

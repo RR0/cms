@@ -1,5 +1,8 @@
 import { HtmlSsgContext } from "ssg-api"
 
+/**
+ * Replaces an existing <span class="place"> tag with clickable map trigger element.
+ */
 export class PlaceReplacer {
 
   async replacement(context: HtmlSsgContext, original: HTMLElement): Promise<HTMLElement> {

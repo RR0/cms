@@ -1,3 +1,3 @@
 import { CityMessages } from "../../../../../../country/index.js"
 
-export let magneMessages = CityMessages.create("Magné")
+export let nayMessages = CityMessages.create("Nay")

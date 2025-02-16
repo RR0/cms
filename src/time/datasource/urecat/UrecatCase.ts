@@ -1,4 +1,4 @@
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export type UrecatCaseHistoryRedaction = {
   mainAuthor: string
@@ -45,7 +45,7 @@ export type UrecatBasicBaseInfo = {
    */
   caseNumber?: string
 
-  sightingDate: TimeContext
+  sightingDate: EdtfDate
   firstReportTime?: Date | string
   reportDelay?: string
   testimonyOrigin?: string
@@ -124,7 +124,7 @@ export type UrecatCaseIssue = {
 
 export interface UrecatCase {
   id: string
-  time: TimeContext
+  time: EdtfDate
   url: string
   title: string
   summary?: string

@@ -1,5 +1,5 @@
 import { PanamaRegionCode } from "./PanamaRegionCode.js"
-import { Place } from "../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { panama } from "../Panama.js"
 import { Region } from "../../country/region/Region.js"
 

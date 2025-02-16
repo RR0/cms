@@ -58,6 +58,9 @@ export type CaseMessages = {
   conclusion: CaseConclusionMessages
 }
 
+export interface RR0PlaceMessages extends PlaceMessages {
+}
+
 export interface RR0Messages {
   nonSignificantWords: string[]
   context: {
@@ -94,6 +97,7 @@ export interface RR0Messages {
       in(approximate: boolean): string
       starting(approximate: boolean): string
     }
+    place: RR0PlaceMessages
   }
   case: CaseMessages
   org: OrgRR0Messages,

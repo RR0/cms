@@ -1,5 +1,6 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { NordCityCode } from "../NordCityCode.js"
+import { nord } from "../Nord"
+import { City } from "../../../../../../country"
 
-export const thiant = franceCity(NordCityCode.Thiant, Place.fromDMS("50°18′23″N,3°26′57″E"))
+export const thiant = City.create(String(NordCityCode.Thiant), nord, Place.fromDMS("50°18′23″N,3°26′57″E"))

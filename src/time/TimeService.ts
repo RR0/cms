@@ -1,7 +1,7 @@
 import { TimeRenderer } from "./html/TimeRenderer.js"
 import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
 import { TimeUrlBuilder } from "./TimeUrlBuilder"
-import { AbstractDataService, AllDataService, RR0Event } from "@rr0/data"
+import { AbstractDataService, AllDataService, RR0Event, RR0EventJson } from "@rr0/data"
 import { HtmlRR0Context, RR0ContextImpl } from "../RR0Context"
 import { StringUtil } from "../util"
 import { TimeContext } from "@rr0/time"
@@ -11,7 +11,7 @@ export type TimeServiceOptions = {
   readonly files: string[]
 }
 
-export class TimeService extends AbstractDataService<RR0Event> {
+export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
 
   static readonly defaultRegex = /time\/(-)?(\d)\/(\d)\/(\d)\/(\d)\/?(\d{2})?\/?(\d{2})?\/?(index(_[a-z]{2})?.html)?/
 

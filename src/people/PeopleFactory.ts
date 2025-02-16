@@ -1,9 +1,11 @@
 import { People } from "./People.js"
 import path from "path"
 import { StringUtil } from "../util/index.js"
-import { RR0Data, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { PeopleJson } from "./PeopleJson"
+import { RR0EventJson } from "@rr0/data/dist/event/RR0EventJson"
 
-export class PeopleFactory extends TypedDataFactory<People> {
+export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
 
   constructor(eventFactory: RR0EventFactory) {
     super(eventFactory, "people")
@@ -27,11 +29,11 @@ export class PeopleFactory extends TypedDataFactory<People> {
       undefined, id, dirName)
   }
 
-  createFromData(data: RR0Data): People {
-    const people = this.createFromDirName(data.dirName)
-    data.name = people.name
-    Object.assign(people, super.createFromData(data))
-    let title = data.title
+  createFromData(peopleJson: PeopleJson): People {
+    const people = this.createFromDirName(peopleJson.dirName)
+    peopleJson.name = people.name
+    Object.assign(people, super.parse(peopleJson))
+    let title = peopleJson.title
     let qualifier: string | undefined
     if (title) {
       const qualifStart = title.indexOf("(")
@@ -53,6 +55,17 @@ export class PeopleFactory extends TypedDataFactory<People> {
       }
     }
     people.title = people.firstAndLastName + (qualifier ? ` (${qualifier})` : "")
+    const birthTime = peopleJson.birthTime as unknown as string
+    const events: RR0EventJson[] = peopleJson.events || []
+    if (birthTime) {
+      delete (peopleJson as any).birthTime
+      events.push({type: "event", eventType: "birth", time: birthTime, events: []})
+    }
+    const deathTime = (peopleJson as any).deathTime as unknown as string
+    if (deathTime) {
+      delete (peopleJson as any).deathTime
+      events.push({type: "event", eventType: "death", time: deathTime as any, events: []})
+    }
     return people
   }
 }

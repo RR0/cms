@@ -1,5 +1,5 @@
 import { ChinaRegionCode } from "./ChinaRegionCode.js"
-import { Place } from "../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { china } from "../China.js"
 import { Region } from "../../country/region/Region.js"
 

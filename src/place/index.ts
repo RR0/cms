@@ -1,5 +1,2 @@
-export * from "./GooglePlaceService.js"
-export * from "./Place.js"
 export * from "./PlaceReplacer.js"
 export * from "./PlaceReplacerFactory.js"
-export * from "./PlaceService.js"

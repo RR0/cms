@@ -1,5 +1,5 @@
 import { HautsDeFranceDepartmentCode } from "../HautsDeFranceDepartmentCode.js"
-import { Place } from "../../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { hautsDeFrance } from "../HautsDeFrance.js"
 import { Department } from "../../../../../country/region/department/Department.js"
 

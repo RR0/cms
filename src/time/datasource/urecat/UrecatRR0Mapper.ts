@@ -3,11 +3,11 @@ import { CaseMapper } from "../CaseMapper.js"
 import { UrecatCase } from "./UrecatCase.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { CityService } from "../../../org/country/index.js"
 import { CountryService } from "../../../org/country/CountryService.js"
-import { NamedPlace } from "../rr0/NamedPlace"
-import { Source } from "@rr0/data/dist/source"
+import { Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace"
 
 export class UrecatRR0Mapper implements CaseMapper<HtmlRR0Context, UrecatCase, RR0CaseSummary> {
 
@@ -25,7 +25,7 @@ export class UrecatRR0Mapper implements CaseMapper<HtmlRR0Context, UrecatCase, R
     const caseSource: Source = {
       events: [], previousSourceRefs: [],
       url: sourceCase.url, title: "cas n° " + sourceCase.id, authors: this.authors,
-      publication: {publisher: this.copyright, time: TimeContext.fromDate(sourceTime)}
+      publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
     }
     const location = sourceCase.basicInfo.base.location
     let sourceCountry = location.country
@@ -41,9 +41,10 @@ export class UrecatRR0Mapper implements CaseMapper<HtmlRR0Context, UrecatCase, R
     const city = this.cityService.find(context, placeName, undefined)
     assert.ok(city,
       `Could not find city of name "${placeName}" in state "${location.departmentOrState}" of country "${sourceCountry}"`)
-    const place: NamedPlace = {name: city.getTitle(context), place: city.places[0]}
+    const place = new OrganizationPlace(city)
     return {
-      type: "sighting",
+      type: "event",
+      eventType: "sighting",
       id: sourceCase.id,
       url: sourceCase.url,
       events: [],

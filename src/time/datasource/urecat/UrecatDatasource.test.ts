@@ -2,21 +2,24 @@ import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UrecatCase } from "./UrecatCase.js"
-import { urecatRR0Mapping } from "./UrecatRR0Mapping.js"
 import { urecatTestCases } from "./UrecatTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { UrecatHttpDatasource } from "./UrecatHttpDatasource.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
+import { UrecatRR0Mapping } from "./UrecatRR0Mapping"
 
 describe("UrecatCaseSource", () => {
+
+  const urecatRR0Mapping = new UrecatRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.countryService,
+    {read: ["fetch"], write: ["backup"]})
 
   const testCase = new class extends DatasourceTestCase<UrecatCase> {
     constructor(mapping: RR0CaseMapping<UrecatCase>, sourceCases: UrecatCase[]) {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: UrecatCase): TimeContext {
+    protected getTime(c: UrecatCase): EdtfDate {
       return c.basicInfo.base.sightingDate
     }
 

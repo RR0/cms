@@ -1,21 +1,24 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { geipanTestCaseSummaries } from "./GeipanTestCases.js"
-import { geipanRR0Mapping } from "./GeipanRR0Mapping.js"
+import { GeipanRR0Mapping } from "./GeipanRR0Mapping.js"
 import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase.js"
-import { RR0CaseMapping } from "../../../../../../time/index.js"
+import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { rr0TestUtil } from "../../../../../../test/index.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 describe("GeipanCaseSource", () => {
+
+  const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
+  const geipanRR0Mapping = new GeipanRR0Mapping(rr0TestUtil.cityService, actions)
 
   const testCase = new class extends DatasourceTestCase<GeipanCaseSummary> {
     constructor(mapping: RR0CaseMapping<GeipanCaseSummary>, sourceCases: GeipanCaseSummary[]) {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: GeipanCaseSummary): TimeContext {
+    protected getTime(c: GeipanCaseSummary): EdtfDate {
       return c.time
     }
 

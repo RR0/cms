@@ -2,7 +2,7 @@ import { GeipanCaseSummary, GeipanZoneCode } from "./GeipanCaseSummary.js"
 import { GeipanCase } from "./GeipanCase.js"
 import { CaseMapper } from "../../../../../../time/index.js"
 import { RR0Context } from "../../../../../../RR0Context.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 /**
  * Maps a GEIPAN CSV case to a GEIPAN summary case.
@@ -34,8 +34,8 @@ export class GeipanCaseToSummaryMapper implements CaseMapper<RR0Context, GeipanC
       city,
       zoneType: csvCase.cas_zone_type,
       zoneCode: csvCase.cas_zone_code as GeipanZoneCode,
-      time: new TimeContext(sightingYear, sightingMonth, sightingDayOfMonth),
-      postTime: new TimeContext(postYear, postMonth, postDayOfMonth),
+      time: new EdtfDate({year: sightingYear, month: sightingMonth, day: sightingDayOfMonth}),
+      postTime: new EdtfDate({year: postYear, month: postMonth, day: postDayOfMonth}),
       classification
     }
   }

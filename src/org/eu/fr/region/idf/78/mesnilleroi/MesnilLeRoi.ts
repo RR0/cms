@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { YvelinesCityCode } from "../YvelinesCityCode.js"
+import { yvelines } from "../Yvelines"
+import { City } from "../../../../../../country"
 
-export const mesnilLeRoi = franceCity(YvelinesCityCode.MesnilLeRoi, Place.fromDMS("48°56′15″N,2°07′39″E"))
+export const mesnilLeRoi = City.create(String(YvelinesCityCode.MesnilLeRoi), yvelines,
+  Place.fromDMS("48°56′15″N,2°07′39″E"))

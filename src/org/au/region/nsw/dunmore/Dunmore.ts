@@ -1,5 +1,5 @@
 import { NewSouthWalesCityCode } from "../NewSouthWalesCityCode.js"
-import { Place } from "../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { newSouthWales } from "../NewSouthWales.js"
 import { City } from "../../../../country/region/department/city/City.js"
 

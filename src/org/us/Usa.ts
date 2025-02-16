@@ -1,6 +1,6 @@
 import { Country, CountryCode } from "../country/index.js"
 import { UsaStates } from "./region/UsaStates.js"
-import { Place } from "../../place/Place.js"
+import { Place } from "@rr0/place"
 import { Region } from "../country/region/Region.js"
 
 export const usa = new Country(CountryCode.us, [])

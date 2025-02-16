@@ -1,3 +1,3 @@
 export enum PyreneesAtlantiquesCityCode {
-  Magne = 86141,
+  Nay = 64417,
 }

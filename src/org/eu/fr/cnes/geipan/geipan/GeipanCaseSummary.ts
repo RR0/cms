@@ -4,7 +4,7 @@ import { GeipanZoneType } from "./GeipanCase.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
 import { CountryCode } from "../../../../../country/index.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 
 export type GeipanZoneCode = FranceDepartementCode | FranceRegionCode | CountryCode.fr
 
@@ -14,11 +14,11 @@ export type GeipanZoneCode = FranceDepartementCode | FranceRegionCode | CountryC
 export interface GeipanCaseSummary {
   id: string
   url: string
-  time: TimeContext
+  time: EdtfDate
   sightingType?: GeipanSightingType
   city: string
   zoneCode?: GeipanZoneCode
   zoneType?: GeipanZoneType
-  postTime: TimeContext
+  postTime: EdtfDate
   classification?: GeipanCaseClassification_calc
 }

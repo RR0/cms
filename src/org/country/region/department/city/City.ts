@@ -1,5 +1,6 @@
-import { Place } from "../../../../../place/Place.js"
-import { Organization, OrganizationKind } from "../../../../Organization.js"
+import { Place } from "@rr0/place"
+import { Organization } from "../../../../Organization.js"
+import { OrganizationKind } from "../../../../OrganizationKind"
 
 export class City<P extends Organization = Organization> extends Organization {
   /**

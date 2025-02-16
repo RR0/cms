@@ -1,5 +1,5 @@
 import { ukCity } from "../../../UkCities.js"
-import { Place } from "../../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { SussexCityCode } from "../SussexCityCode.js"
 import { sussex } from "../Sussex.js"
 

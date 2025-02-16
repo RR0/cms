@@ -11,4 +11,5 @@ export enum NouvelleAquitaineDepartmentCode {
   LotEtGaronne = FranceDepartementCode.LotEtGaronne,
   Vienne = FranceDepartementCode.Vienne,
   PyreneesAtlantiques = FranceDepartementCode.PyreneesAtlantiques,
+  PyreneesOrientales = FranceDepartementCode.PyreneesOrientales,
 }

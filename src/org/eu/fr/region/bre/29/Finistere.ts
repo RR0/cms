@@ -1,5 +1,5 @@
 import { FranceDepartementCode } from "../../FranceDepartementCode.js"
-import { Place } from "../../../../../../place/Place.js"
+import { Place } from "@rr0/place"
 import { bretagne } from "../Bretagne.js"
 import { franceDepartment } from "../../FranceDepartments.js"
 

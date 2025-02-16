@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { HautesAlpesCityCode } from "../HautesAlpesCityCode.js"
+import { hautesAlpes } from "../HautesAlpes"
+import { City } from "../../../../../../country"
 
-export const briancon05 = franceCity(HautesAlpesCityCode.Briancon, Place.fromLocation(44.896389, 6.635556))
+export const briancon05 = City.create(String(HautesAlpesCityCode.Briancon), hautesAlpes,
+  Place.fromLocation(44.896389, 6.635556))

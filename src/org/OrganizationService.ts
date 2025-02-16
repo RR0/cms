@@ -1,12 +1,14 @@
-import fs from "fs"
 import { Organization } from "./Organization.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
+import { OrganizationFactory } from "./OrganizationFactory"
+import { FileContents } from "@javarome/fileutil"
 
 export class OrganizationService<O extends Organization = Organization, P extends Organization = undefined> {
 
-  constructor(readonly orgs: O[] = [], readonly rootDir: string, readonly parentService: OrganizationService) {
+  constructor(readonly orgs: O[], readonly rootDir: string, protected factory: OrganizationFactory,
+              readonly parentService: OrganizationService) {
   }
 
   static normalizeName(name: string): string {
@@ -27,7 +29,7 @@ export class OrganizationService<O extends Organization = Organization, P extend
    * @param nameToFind
    * @param parent should be context.placeContext
    */
-  find(context: RR0Context, nameToFind: string, parent: P): Organization | undefined {
+  find(context: RR0Context, nameToFind: string, parent: P): O | undefined {
     let foundOrg = this.orgs.find(someOrg => {
       const someOrgMessages = someOrg.getMessages(context)
       assert.ok(someOrgMessages, `Organization with code "${someOrg.id}" has no messages`)
@@ -55,11 +57,11 @@ export class OrganizationService<O extends Organization = Organization, P extend
     return foundOrg
   }
 
-  async read(fileName: string): Promise<Organization<any>> {
-    const fileBuffer = fs.readFileSync(this.rootDir + fileName)
-    const place = JSON.parse(fileBuffer.toString())
-    this.orgs.push(place)
-    return place
+  async read(fileName: string): Promise<O> {
+    const file = FileContents.read(this.rootDir + fileName)
+    const org = this.factory.create(file) as O
+    this.orgs.push(org)
+    return org
   }
 
   protected nameToFind(context: RR0Context, org: O, nameToFind: string) {

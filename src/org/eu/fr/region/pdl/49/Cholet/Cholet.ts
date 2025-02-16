@@ -1,5 +1,7 @@
-import { franceCity } from "../../../FranceCity.js"
-import { Place } from "../../../../../../../place/index.js"
+import { Place } from "@rr0/place"
 import { MaineEtLoireCityCode } from "../MaineEtLoireCityCode.js"
+import { maineEtLoire } from "../MaineEtLoire"
+import { City } from "../../../../../../country"
 
-export const cholet = franceCity(MaineEtLoireCityCode.Cholet, Place.fromDMS("47° 03′ 36″N, 0° 52′ 42″W"))
+export const cholet = City.create(String(MaineEtLoireCityCode.Cholet), maineEtLoire,
+  Place.fromDMS("47° 03′ 36″N, 0° 52′ 42″W"))

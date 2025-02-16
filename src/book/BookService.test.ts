@@ -7,6 +7,7 @@ import { Book } from "./Book"
 import { BookService } from "./BookService"
 import { TimeServiceOptions, TimeUrlBuilder } from "../time"
 import { rr0TestUtil, testFilePath } from "../test"
+import { BookJson } from "./BookJson"
 
 interface BookImportArgs {
   import: string
@@ -19,7 +20,7 @@ const fileName = args.import
 const dry = args.dry === "true"
 const peopleFactory = rr0TestUtil.peopleFactory
 const eventFactory = new RR0EventFactory()
-const bookFactory = new TypedDataFactory<Book>(eventFactory, "book")
+const bookFactory = new TypedDataFactory<Book, BookJson>(eventFactory, "book")
 const dataService = new AllDataService([bookFactory, peopleFactory])
 
 const outDir = "out"

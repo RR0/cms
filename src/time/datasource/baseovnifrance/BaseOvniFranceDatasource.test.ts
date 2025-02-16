@@ -3,19 +3,22 @@ import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
-import { TimeContext } from "@rr0/time"
+import { Level2Date as EdtfDate } from "@rr0/time"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
-import { baseOvniFranceRR0Mapping, baseOvniFranceSortComparator } from "./BaseOvniFranceRR0Mapping.js"
+import { BaseOvniFranceRR0Mapping, baseOvniFranceSortComparator } from "./BaseOvniFranceRR0Mapping.js"
 import { RR0CaseMapping } from "../rr0/index.js"
 
 describe("BaseOvniFranceCaseSource", () => {
+
+  const baseOvniFranceRR0Mapping = new BaseOvniFranceRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.departmentService,
+    {read: ["fetch"], write: ["backup"]})
 
   const testCase = new class extends DatasourceTestCase<BaseOvniFranceCaseSummary> {
     constructor(mapping: RR0CaseMapping<BaseOvniFranceCaseSummary>, sourceCases: BaseOvniFranceCaseSummary[]) {
       super(mapping, sourceCases)
     }
 
-    protected getTime(c: BaseOvniFranceCaseSummary): TimeContext {
+    protected getTime(c: BaseOvniFranceCaseSummary): EdtfDate {
       return c.time
     }
 
