@@ -5,8 +5,7 @@ import { Book } from "../../../book/Book.js"
 import { Article, Source } from "@rr0/data"
 import { RR0HttpDatasource } from "./RR0HttpDatasource"
 import { RR0Mapping } from "./RR0Mapping"
-import { NamedPlace } from "../../../place/NamedPlace"
-import { Place } from "@rr0/place"
+import { NamedPlace, Place } from "@rr0/place"
 
 function testCase(urlPath: string, time: EdtfDate, description: string, sources: Source[],
                   place?: Place): RR0CaseSummary {

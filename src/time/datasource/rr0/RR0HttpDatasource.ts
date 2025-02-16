@@ -6,9 +6,8 @@ import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { CityService, Organization } from "../../../org/index.js"
 import { Publication, Source } from "@rr0/data/dist/source"
-import { Place } from "@rr0/place"
+import { NamedPlace, Place } from "@rr0/place"
 import { OrganizationPlace } from "../../../place/OrganizationPlace"
-import { NamedPlace } from "../../../place/NamedPlace"
 
 export class RR0HttpDatasource extends RR0Datasource {
 
