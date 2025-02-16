@@ -98,7 +98,12 @@ export class RR0HttpDatasource extends RR0Datasource {
       const pubItems = title.split(",")
       const timeStr = pubItems[pubItems.length - 1].trim()
       let publisher: string
-      const time = EdtfDate.fromString(timeStr)
+      let time: EdtfDate | undefined
+      try {
+        time = EdtfDate.fromString(timeStr)
+      } catch (e) {
+        console.warn("Could not parse source time", e)
+      }
       if (time) {
         pubItems.pop()
       }

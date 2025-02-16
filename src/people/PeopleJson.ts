@@ -28,11 +28,17 @@ export class PeopleJson implements RR0DataJson {
    * The people has been caught lying or has confessed a hoax.
    */
   discredited = false
+
   /**
-   * @deprecated Use a "birth"-typed sub-data instead.
+   * @deprecated Use a "birth"-typed event instead.
    */
   birthTime?: EdtfDate
+
+  /**
+   * @deprecated Use a "death"-typed event instead.
+   */
   deathTime?: EdtfDate
+
   gender?: Gender
   id: string
   dirName?: string

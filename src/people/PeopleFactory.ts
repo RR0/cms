@@ -3,7 +3,6 @@ import path from "path"
 import { StringUtil } from "../util/index.js"
 import { RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { PeopleJson } from "./PeopleJson"
-import { RR0EventJson } from "@rr0/data/dist/event/RR0EventJson"
 
 export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
 
@@ -29,7 +28,7 @@ export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
       undefined, id, dirName)
   }
 
-  createFromData(peopleJson: PeopleJson): People {
+  parse(peopleJson: PeopleJson): People {
     const people = this.createFromDirName(peopleJson.dirName)
     peopleJson.name = people.name
     Object.assign(people, super.parse(peopleJson))
@@ -55,17 +54,7 @@ export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
       }
     }
     people.title = people.firstAndLastName + (qualifier ? ` (${qualifier})` : "")
-    const birthTime = peopleJson.birthTime as unknown as string
-    const events: RR0EventJson[] = peopleJson.events || []
-    if (birthTime) {
-      delete (peopleJson as any).birthTime
-      events.push({type: "event", eventType: "birth", time: birthTime, events: []})
-    }
-    const deathTime = (peopleJson as any).deathTime as unknown as string
-    if (deathTime) {
-      delete (peopleJson as any).deathTime
-      events.push({type: "event", eventType: "death", time: deathTime as any, events: []})
-    }
+    Object.assign(people, {events: peopleJson.events.map(this.eventFactory.parse)})
     return people
   }
 }
