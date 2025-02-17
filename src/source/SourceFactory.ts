@@ -71,7 +71,7 @@ export class SourceFactory {
     }
     const publication = source.publication
     if (publication && !publication.time) {
-      publication.time = this.time.contextFromFileName(context, href).date
+      publication.time = this.time.contextFromFileName(context, href)?.date
     }
     if (hash) {
       source.index = hash
