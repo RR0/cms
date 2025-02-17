@@ -46,7 +46,9 @@ export class SearchIndexStep implements SsgStep {
       context.warn("Could not find", this.fileName, "Will create it")
       existingIndex = newIndex
     }
-    context.log("Saving search index of", existingIndex.pages.length, "pages at", this.fileName)
+    const indexSize = existingIndex.pages.length
+    context.setVar("indexSize", indexSize)
+    context.log("Saving search index of", indexSize, "pages at", this.fileName)
     const indexJson = JSON.stringify(existingIndex)
     return writeFile(this.fileName, indexJson, "utf-8")
   }

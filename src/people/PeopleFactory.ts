@@ -1,8 +1,8 @@
 import { People } from "./People.js"
-import path from "path"
-import { StringUtil } from "../util/index.js"
 import { RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { PeopleJson } from "./PeopleJson"
+import { StringUtil } from "../util"
+import path from "path"
 
 export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
 
@@ -10,28 +10,14 @@ export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
     super(eventFactory, "people")
   }
 
-  /**
-   * Determine people name from directory name.
-   *
-   * @param dirName
-   */
-  createFromDirName(dirName: string): People {
-    const lastSlash = dirName.lastIndexOf("/")
-    const lastDir = dirName.substring(lastSlash + 1)
-    const title = StringUtil.camelToText(lastDir)
-    const firstSpace = title.indexOf(" ")
-    const lastName = title.substring(0, firstSpace)
-    const firstNameStr = title.substring(firstSpace + 1)
-    const firstNames = firstNameStr.split(" ")
-    const id = path.basename(dirName)
-    return new People(firstNames, lastName, undefined, undefined, undefined, false, undefined, undefined,
-      undefined, id, dirName)
-  }
-
   parse(peopleJson: PeopleJson): People {
-    const people = this.createFromDirName(peopleJson.dirName)
+    peopleJson = this.completeFromDirName(peopleJson)
+    const peopleData = super.parse(peopleJson)
+    const people = new People(peopleData.firstNames, peopleData.lastName, peopleData.occupations,
+      peopleData.occupations,
+      peopleData.countries, peopleData.discredited, peopleData.birthTime, peopleData.deathTime, peopleData.gender,
+      peopleData.id, peopleData.dirName, peopleData.image, peopleData.url, peopleData.events)
     peopleJson.name = people.name
-    Object.assign(people, super.parse(peopleJson))
     let title = peopleJson.title
     let qualifier: string | undefined
     if (title) {
@@ -54,7 +40,33 @@ export class PeopleFactory extends TypedDataFactory<People, PeopleJson> {
       }
     }
     people.title = people.firstAndLastName + (qualifier ? ` (${qualifier})` : "")
-    Object.assign(people, {events: peopleJson.events.map(this.eventFactory.parse)})
     return people
+  }
+
+  /**
+   * Determine people name from directory name.
+   *
+   * @param peopleJson
+   */
+  protected completeFromDirName(peopleJson: PeopleJson): PeopleJson {
+    const result = {...peopleJson}
+    const dirName = peopleJson.dirName
+    if (dirName) {
+      const lastSlash = dirName.lastIndexOf("/")
+      const lastDir = dirName.substring(lastSlash + 1)
+      const title = StringUtil.camelToText(lastDir)
+      const firstSpace = title.indexOf(" ")
+      const lastName = title.substring(0, firstSpace)
+      result.lastName = peopleJson.lastName || lastName
+      const firstNameStr = title.substring(firstSpace + 1)
+      const firstNames = firstNameStr.split(" ")
+      result.firstNames = peopleJson.firstNames || firstNames
+      const id = path.basename(dirName)
+      result.id = peopleJson.id || id
+      result.title = `${firstNames.join(" ")} ${lastName}`
+    } else {
+      result.dirName = ""
+    }
+    return result
   }
 }

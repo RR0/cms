@@ -1,5 +1,5 @@
 import { OrganizationPlace } from "./OrganizationPlace"
-import { Place } from "@rr0/place"
+import { NamedPlace, Place } from "@rr0/place"
 import { HtmlRR0Context } from "../RR0Context"
 
 /**
@@ -12,6 +12,8 @@ export class PlaceRenderer {
     if (place instanceof OrganizationPlace) {
       const orgPlace = place as OrganizationPlace
       placeName = orgPlace.org.getTitle(context, {parent: true})
+    } else if (place instanceof NamedPlace) {
+      placeName = place.name
     } else {
       placeName = place.locations.map(location => location.toDMS(context.place)).join(",")
     }

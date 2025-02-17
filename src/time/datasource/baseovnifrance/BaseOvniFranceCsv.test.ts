@@ -6,7 +6,7 @@ import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"
 import fs from "fs"
 import { baseOvniFranceDatasource, baseOvniFranceSortComparator } from "./BaseOvniFranceRR0Mapping.js"
-import { BaseOvniFranceCaseSummaryMapper } from "./BaseOvniFranceCaseSummaryMapper.js"
+import { BaseOvniFranceCaseSummaryCsvMapper } from "./BaseOvniFranceCaseSummaryCsvMapper.js"
 import { BaseOvniFranceCase } from "./BaseOvniFranceCase.js"
 
 describe("Base OVNI France CSV mapping", () => {
@@ -47,7 +47,7 @@ ${case1.id},http://baseovnifrance.free.fr/listgen.php?typlist=20&page=0&numobs=2
   test("read", () => {
     const fileMapper = new CsvMapper<BaseOvniFranceCase>("&")
     const data = fs.readFileSync("time/1/9/7/7/03/05_03_24_1709676761.txt", {encoding: "latin1"})
-    const csvMapper = new BaseOvniFranceCaseSummaryMapper(baseOvniFranceDatasource.baseUrl,
+    const csvMapper = new BaseOvniFranceCaseSummaryCsvMapper(baseOvniFranceDatasource.baseUrl,
       baseOvniFranceDatasource.searchPath,
       baseOvniFranceDatasource.authors)
     const cases = fileMapper.parse(data)

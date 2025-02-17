@@ -7,6 +7,7 @@ import { StringUtil } from "../util/string/StringUtil.js"
 import { PeopleService } from "./PeopleService.js"
 import { CountryCode } from "../org/country/CountryCode.js"
 import { Gender } from "@rr0/common"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
 
 export type PeopleFilter = (p: People) => boolean
 
@@ -20,7 +21,8 @@ export function peopleOccupationFilter(filterOccupations: Occupation[]): PeopleF
 export class PeopleDirectoryStep extends DirectoryStep {
 
   constructor(name: string, rootDirs: string[], excludedDirs: string[], templateFileName: string,
-              protected outputFunc: OutputFunc, config: FileWriteConfig, protected service: PeopleService,
+              protected outputFunc: OutputFunc, config: FileWriteConfig,
+              protected service: PeopleService, protected renderer: PeopleHtmlRenderer,
               protected filter: PeopleFilter = (_people: People) => true) {
     super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, name)
   }
@@ -91,7 +93,7 @@ export class PeopleDirectoryStep extends DirectoryStep {
 
   protected toListItem(context: HtmlRR0Context, people: People, pseudoPeopleList: People[],
                        allCountries: Set<CountryCode>, occupations: Set<Occupation>) {
-    const ref = this.service.getLink(context, people, pseudoPeopleList, allCountries, occupations
+    const ref = this.renderer.renderLink(context, people, pseudoPeopleList, allCountries, occupations
       /*this.filter*/ // TODO: Restore removal of already-known (as from people occupation subset) occupation
     )
     const item = context.file.document.createElement("li")

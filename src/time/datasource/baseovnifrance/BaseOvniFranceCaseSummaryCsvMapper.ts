@@ -7,7 +7,7 @@ import { BaseOvniFranceCase } from "./BaseOvniFranceCase.js"
 /**
  * Maps a Base OVNI France CSV case to a Base OVNI France case.
  */
-export class BaseOvniFranceCaseSummaryMapper implements CaseMapper<RR0Context, BaseOvniFranceCase, BaseOvniFranceCaseSummary> {
+export class BaseOvniFranceCaseSummaryCsvMapper implements CaseMapper<RR0Context, BaseOvniFranceCase, BaseOvniFranceCaseSummary> {
 
   constructor(readonly baseUrl: URL, readonly copyright: string, readonly authors: string[]) {
   }

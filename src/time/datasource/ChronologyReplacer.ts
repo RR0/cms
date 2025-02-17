@@ -44,7 +44,7 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0Context, HTMLUL
       }
       const datasourceKey = context.file.name + "$" + datasource.copyright
       if (!this.done.has(datasourceKey)) {
-        await this.aggregateDatasource(mapping, context, existingCases, casesToAdd)
+        await this.aggregateDatasource(context, mapping, existingCases, casesToAdd)
         this.done.add(datasourceKey)
         const merge = mapping.actions.write.includes("pages")
         if (merge) {
@@ -60,11 +60,15 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0Context, HTMLUL
     }
   }
 
-  protected async aggregateDatasource(mapping: RR0CaseMapping<any>, context: HtmlRR0Context,
+  protected async aggregateDatasource(context: HtmlRR0Context, mapping: RR0CaseMapping<any>,
                                       existingCases: RR0CaseSummary[], casesToAdd: RR0CaseSummary[]) {
     let fetched: any[]
     const datasource = mapping.datasource
     const backupDatasource = mapping.backupDatasource
+    if (!backupDatasource) {
+      context.warn(`${mapping.constructor.name} has no backupDatasource`)
+      return
+    }
     for (const readMethod of mapping.actions.read) {
       if (fetched) {
         break

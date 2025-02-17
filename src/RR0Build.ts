@@ -104,6 +104,7 @@ import { FileContents, writeFile } from "@javarome/fileutil"
 import { AllDataService, EventDataFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { GooglePlaceService } from "@rr0/place"
 import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
+import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer"
 
 export interface RR0BuildOptions {
   contentRoots: string[]
@@ -245,7 +246,8 @@ export class RR0Build {
     const ufoCasesExclusions = this.options.ufoCasesExclusions
     const ufoCasesStep = new CaseDirectoryStep(caseService, caseService.files, ufoCasesExclusions,
       ufoCaseDirectoryFile, outputFunc, config)
-    const peopleDirectoryFactory = new PeopleDirectoryStepFactory(outputFunc, config, peopleService,
+    const peopleRenderer = new PeopleHtmlRenderer()
+    const peopleDirectoryFactory = new PeopleDirectoryStepFactory(outputFunc, config, peopleService, peopleRenderer,
       this.options.directoryExcluded)
     const directoryOptions = this.options.directoryOptions
     for (const directoryOption in directoryOptions) {
@@ -328,7 +330,7 @@ export class RR0Build {
       new ClassDomReplaceCommand(sourceReplacerFactory, "source"),
       new DomReplaceCommand("time", new TimeReplacerFactory(timeReplacer)),
       new DomReplaceCommand("code", new CodeReplacerFactory()),
-      new ClassDomReplaceCommand(new PeopleReplacerFactory(peopleService), "people"),
+      new ClassDomReplaceCommand(new PeopleReplacerFactory(peopleService, peopleRenderer), "people"),
       new ClassDomReplaceCommand(new PlaceReplacerFactory(), "place"),
       new ClassDomReplaceCommand(new WitnessReplacerFactory(), "temoin", "temoin1", "temoin2", "temoin3"),
       new ClassDomReplaceCommand(noteReplacerFactory, "note"),

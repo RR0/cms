@@ -12,7 +12,7 @@ export class RR0Mapping implements RR0CaseMapping<RR0CaseSummary> {
   static baseUrl = new URL("https://rr0.org")
   static searchPath = "time"
   readonly datasource: RR0Datasource
-  readonly fileDatasource: RR0FileDatasource
+  readonly backupDatasource: RR0FileDatasource
   readonly mapper: RR0CaseSummaryMapper
 
   constructor(cityService: CityService, readonly actions: ChronologyReplacerActions) {
@@ -20,6 +20,6 @@ export class RR0Mapping implements RR0CaseMapping<RR0CaseSummary> {
       cityService)
     const csvMapper = this.mapper = new RR0CaseSummaryMapper(rr0HttpDatasource.baseUrl, rr0HttpDatasource.searchPath,
       rr0HttpDatasource.authors)
-    this.fileDatasource = new RR0FileDatasource(csvMapper)
+    this.backupDatasource = new RR0FileDatasource(csvMapper)
   }
 }

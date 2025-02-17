@@ -86,7 +86,7 @@ export class BaseOvniFranceHttpDatasource extends BaseOvniFranceDatasource {
     const minutes = timeFields ? parseInt(timeFields[2], 10) : undefined
     dateTime.hour = hour
     dateTime.minute = minutes
-    dateTime.timeshift = Level2Timeshift.fromString("GMT+1")
+    dateTime.timeshift = Level2Timeshift.fromString("+01") // GMT+1/UTC+1
   }
 
   protected getFromRow(context: RR0Context, row: Element): BaseOvniFranceCaseSummary {

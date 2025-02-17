@@ -1,6 +1,6 @@
 export * from "./BaseOvniFranceCase.js"
 export * from "./BaseOvniFranceCaseSummary.js"
-export * from "./BaseOvniFranceCaseSummaryMapper.js"
+export * from "./BaseOvniFranceCaseSummaryCsvMapper.js"
 export * from "./BaseOvniFranceCaseSummaryRR0Mapper.js"
 export * from "./BaseOvniFranceDatasource.js"
 export * from "./BaseOvniFranceHttpDatasource.js"

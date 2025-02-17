@@ -6,6 +6,7 @@ import { PeopleDirectoryStep, peopleOccupationFilter } from "./PeopleDirectorySt
 import { glob } from "glob"
 import { People } from "./People.js"
 import path from "path"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
 
 export type PeopleDirectoryStepOptions = {
   root: string
@@ -27,8 +28,8 @@ export type PeopleDirectoryStepOptions = {
 export class PeopleDirectoryStepFactory {
 
   constructor(
-    protected outputFunc: OutputFunc, protected config: FileWriteConfig, protected service: PeopleService,
-    protected excludedDirs: string[]
+    protected outputFunc: OutputFunc, protected config: FileWriteConfig,
+    protected service: PeopleService, protected renderer: PeopleHtmlRenderer, protected excludedDirs: string[]
   ) {
   }
 
@@ -87,7 +88,7 @@ export class PeopleDirectoryStepFactory {
       const c = peopleLetterFile.charAt(peopleLetterFile.length - 1)
       const peopleDir = `people/${c}/`
       const peopleDirectoryStep = new PeopleDirectoryStep(`directory of people with name starting with "${c}"`,
-        [peopleDir], [], path.join(peopleDir, "index.html"), this.outputFunc, this.config, this.service,
+        [peopleDir], [], path.join(peopleDir, "index.html"), this.outputFunc, this.config, this.service, this.renderer,
         (p: People) => p.dirName.startsWith(peopleDir))
       letterDirectorySteps.push(peopleDirectoryStep)
     }
@@ -96,23 +97,23 @@ export class PeopleDirectoryStepFactory {
 
   createAll(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep("all people directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service)
+      this.outputFunc, this.config, this.service, this.renderer)
   }
 
   createMilitary(dirs: string[], templateFileName: string): PeopleDirectoryStep {
     return new PeopleDirectoryStep("military people directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.military]))
+      this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([Occupation.military]))
   }
 
   createPoliticians(dirs: string[], templateFileName: string, rulersTemplateFileName?: string): PeopleDirectoryStep[] {
     const steps = [
       new PeopleDirectoryStep("politicians directories", dirs, this.excludedDirs, templateFileName,
-        this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.politician]))
+        this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([Occupation.politician]))
     ]
     if (rulersTemplateFileName) {
       steps.push(
         new PeopleDirectoryStep("politician leaders directories", dirs, this.excludedDirs, rulersTemplateFileName,
-          this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.leader]))
+          this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([Occupation.leader]))
       )
     }
     return steps
@@ -120,40 +121,41 @@ export class PeopleDirectoryStepFactory {
 
   createSoftwareEngineers(dirs: string[], templateFileName: string): PeopleDirectoryStep {
     return new PeopleDirectoryStep("software engineers directories", dirs, this.excludedDirs,
-      templateFileName, this.outputFunc, this.config, this.service,
+      templateFileName, this.outputFunc, this.config, this.service, this.renderer,
       peopleOccupationFilter([Occupation.softwareEngineer]))
   }
 
   createPilots(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep("pilots directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.astronaut, Occupation.pilot]))
+      this.outputFunc, this.config, this.service, this.renderer,
+      peopleOccupationFilter([Occupation.astronaut, Occupation.pilot]))
   }
 
   createContactees(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep("contactees directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.contactee]))
+      this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([Occupation.contactee]))
   }
 
   createAstronomers(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep("astronomers directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.astronomer]))
+      this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([Occupation.astronomer]))
   }
 
   createUfoWitnesses(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep(`UFO witnesses directories`, dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service,
+      this.outputFunc, this.config, this.service, this.renderer,
       peopleOccupationFilter(
         [Occupation.ufoWitness, Occupation.ufoWitness2, Occupation.abductee, Occupation.contactee]))
   }
 
   createUfologists(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep("ufologists directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service, peopleOccupationFilter([Occupation.ufologist]))
+      this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([Occupation.ufologist]))
   }
 
   createScientists(dirs: string[], templateFileName: string) {
     return new PeopleDirectoryStep("scientists directories", dirs, this.excludedDirs, templateFileName,
-      this.outputFunc, this.config, this.service, peopleOccupationFilter([
+      this.outputFunc, this.config, this.service, this.renderer, peopleOccupationFilter([
         Occupation.anthropologist, Occupation.astronomer, Occupation.astrophysicist, Occupation.archeologist,
         Occupation.biochemist, Occupation.biologist, Occupation.biophysicist, Occupation.botanist,
         Occupation.chemist,

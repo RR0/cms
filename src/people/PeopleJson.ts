@@ -1,48 +1,42 @@
-import { Occupation } from "./Occupation.js"
-import { Gender } from "@rr0/common"
-import { CountryCode } from "../org/country/CountryCode.js"
-import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0DataJson } from "@rr0/data/dist/RR0DataJson"
 import { RR0EventJson } from "@rr0/data/dist/event/RR0EventJson"
 
-export class PeopleJson implements RR0DataJson {
-  readonly type = "people"
+export type PeopleJson = RR0DataJson & {
+  type?: "people"
 
-  title: string
+  title?: string
 
-  name: string
+  name?: string
 
   /**
    * The people actually doesn't exist.
    */
-  hoax = false
+  hoax?: boolean
 
-  lastAndFirstName: string
-
-  firstNames: string[] = []
-  lastName = ""
-  pseudonyms: string[] = []
-  occupations: Occupation[] = []
-  countries: CountryCode[] = []
+  firstNames?: string[]
+  lastName?: string
+  pseudonyms?: string[]
+  occupations?: string[]
+  countries?: string[]
   /**
    * The people has been caught lying or has confessed a hoax.
    */
-  discredited = false
+  discredited?: boolean
 
   /**
    * @deprecated Use a "birth"-typed event instead.
    */
-  birthTime?: EdtfDate
+  birthTime?: string
 
   /**
    * @deprecated Use a "death"-typed event instead.
    */
-  deathTime?: EdtfDate
+  deathTime?: string
 
-  gender?: Gender
-  id: string
+  gender?: "male" | "female"
+  id?: string
   dirName?: string
   image?: string
   url?: string
-  events: RR0EventJson[] = []
+  events?: RR0EventJson[]
 }

@@ -3,10 +3,11 @@ import { DomReplacement } from "../time/DomReplacement.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { Occupation } from "./Occupation.js"
 import { CountryCode } from "../org/country/CountryCode.js"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
 
 export class PeopleReplacer implements DomReplacement<HtmlRR0Context> {
 
-  constructor(protected service: PeopleService) {
+  constructor(protected service: PeopleService, protected renderer: PeopleHtmlRenderer) {
   }
 
   async replacement(context: HtmlRR0Context, element: HTMLElement): Promise<HTMLElement> {
@@ -36,7 +37,7 @@ export class PeopleReplacer implements DomReplacement<HtmlRR0Context> {
       const allCountries = new Set<CountryCode>()
       const occupations = new Set<Occupation>
       const peopl = peopleList[0] || people
-      replacement = this.service.getLink(context, peopl, pseudoPeopleList, allCountries,
+      replacement = this.renderer.renderLink(context, peopl, pseudoPeopleList, allCountries,
         occupations, [], peopleContent)
     } else {
       const span = context.file.document.createElement("span") as HTMLSpanElement
