@@ -1,3 +1,4 @@
-import { Country, CountryCode } from "../country/index.js"
+import { CountryCode } from "@rr0/data"
+import { CmsCountry } from "../country/CmsCountry"
 
-export const philippines = new Country(CountryCode.ph, [])
+export const philippines = new CmsCountry(CountryCode.ph, [])

@@ -1,4 +1,5 @@
-import { Country, CountryCode } from "../country/index.js"
+import { CountryCode } from "@rr0/data"
+import { CmsCountry } from "../country/CmsCountry"
 import { Place, PlaceLocation } from "@rr0/place"
 
-export const china = new Country(CountryCode.cn, [new Place([PlaceLocation.fromDMS("35°0'N,103°0'E")])])
+export const china = new CmsCountry(CountryCode.cn, [new Place([PlaceLocation.fromDMS("35°0'N,103°0'E")])])

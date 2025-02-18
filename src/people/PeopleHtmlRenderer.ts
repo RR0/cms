@@ -1,9 +1,7 @@
 import path from "path"
-import { People } from "./People.js"
 import { HtmlRR0Context } from "../RR0Context.js"
-import { CountryCode } from "../org/index.js"
-import { Occupation } from "./Occupation.js"
 import { Gender } from "@rr0/common"
+import { CountryCode, Occupation, People } from "@rr0/data"
 
 export class PeopleHtmlRenderer {
 

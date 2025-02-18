@@ -4,11 +4,10 @@ import { Level2Date as EdtfDate } from "@rr0/time"
 import * as path from "path"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Book } from "./Book.js"
-import { People } from "../people/People.js"
-import { PeopleService } from "../people/PeopleService.js"
 import { CSVFileReader } from "../CSVFileReader.js"
 import { TimeUrlBuilder } from "../time"
 import { writeFile } from "@javarome/fileutil"
+import { People, PeopleService } from "@rr0/data"
 
 export class BookService {
 

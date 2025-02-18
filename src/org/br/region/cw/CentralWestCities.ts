@@ -1,6 +1,6 @@
 import { federalDistrictCities } from "./federaldistrict/FederalDistrictCities.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const centralWestCities: Organization[] = [
+export const centralWestCities: CmsOrganization[] = [
   ...federalDistrictCities
 ]

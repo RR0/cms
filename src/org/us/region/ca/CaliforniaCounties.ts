@@ -1,6 +1,6 @@
 import { sanDiego } from "./sandiego/SanDiego.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const californiaCounties: Organization[] = [
+export const californiaCounties: CmsOrganization[] = [
   sanDiego
 ]

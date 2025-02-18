@@ -1,4 +1,4 @@
-import { Country } from "../../country/Country.js"
-import { CountryCode } from "../../country/CountryCode.js"
+import { CountryCode } from "@rr0/data"
+import { CmsCountry } from "../../country/CmsCountry"
 
-export const finland = new Country(CountryCode.fi)
+export const finland = new CmsCountry(CountryCode.fi)

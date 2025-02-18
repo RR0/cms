@@ -1,6 +1,6 @@
 import { reims } from "./Reims/Reims.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 
-export const marneCities: Organization[] = [
+export const marneCities: CmsOrganization[] = [
   reims
 ]

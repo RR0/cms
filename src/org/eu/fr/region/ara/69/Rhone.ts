@@ -1,8 +1,8 @@
 import { FranceDepartementCode } from "../../FranceDepartementCode.js"
 import { Place } from "@rr0/place"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { auvergneRhoneAlpes } from "../AuvergneRhoneAlpes.js"
-import { OrganizationKind } from "../../../../../OrganizationKind"
+import { OrganizationKind } from "../../../../../../../../data/src/org/OrganizationKind"
 
-export const rhone = new Organization(FranceDepartementCode.Rhone, [Place.fromLocation(48, 0.316667)],
+export const rhone = new CmsOrganization(FranceDepartementCode.Rhone, [Place.fromLocation(48, 0.316667)],
   OrganizationKind.department, auvergneRhoneAlpes)

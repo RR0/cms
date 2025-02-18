@@ -1,10 +1,5 @@
 import { describe, expect, test } from "@javarome/testscript"
-import { PeopleFactory } from "./PeopleFactory"
-import { RR0EventFactory } from "@rr0/data"
-import { PeopleJson } from "./PeopleJson"
-import { People } from "./People"
-import { Occupation } from "./Occupation"
-import { CountryCode } from "../org"
+import { CountryCode, Occupation, People, PeopleFactory, PeopleJson, RR0EventFactory } from "@rr0/data"
 
 describe("PeopleFactory", () => {
 

@@ -9,14 +9,14 @@ import { occitanie } from "./occ/Occitanie.js"
 import { hautsDeFrance } from "./hdf/HautsDeFrance.js"
 import { grandEst } from "./ges/GrandEst.js"
 import { laReunion } from "./lre/LaReunion.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 import { centreValDeLoire } from "./cvl/CentreValDeLoire.js"
 import { guadeloupeRegion } from "./gua/GuadeloupeRegion.js"
 import { bretagne } from "./bre/Bretagne.js"
 import { martiniqueRegion } from "./mtq/MartiniqueRegion.js"
 import { collectiviteOutreMer } from "./com/CollectiviteOutreMer.js"
 
-export const franceRegions: Organization[] = [
+export const franceRegions: CmsOrganization[] = [
   auvergneRhoneAlpes,
   bourgogneFrancheComte,
   bretagne,

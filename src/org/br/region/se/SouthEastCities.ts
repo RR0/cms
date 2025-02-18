@@ -1,6 +1,6 @@
 import { rioDeJaneiroCities } from "./riodejaneiro/RioDeJaneiroCities.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const southEastCities: Organization[] = [
+export const southEastCities: CmsOrganization[] = [
   ...rioDeJaneiroCities
 ]

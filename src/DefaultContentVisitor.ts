@@ -4,7 +4,7 @@ import { TimeElementFactory } from "./time/html/TimeElementFactory.js"
 import { ContentVisitor } from "./RR0ContentStep.js"
 import { HtmlRR0Context } from "./RR0Context.js"
 import { EventRenderer } from "./time/EventRenderer.js"
-import { People } from "./people/People.js"
+import { People } from "../../data/src/people/People.js"
 import { AllDataService, RR0Data, RR0Event } from "@rr0/data"
 
 export class DefaultContentVisitor implements ContentVisitor {
@@ -147,7 +147,6 @@ export class DefaultContentVisitor implements ContentVisitor {
       bookEl.append(bookDateEl, " ")
       bookEl.append((people.gender === "female" ? "elle" : "il") + " écrit un livre")
       await this.eventRenderer.renderEnd(context, bookData, bookEl)
-
       parentEl.append(bookEl)
     } else {
       context.warn("no .content in " + context.file.name)

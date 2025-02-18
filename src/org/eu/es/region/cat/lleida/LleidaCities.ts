@@ -1,6 +1,6 @@
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { lleidaCity } from "./lleida/Lleida.js"
 
-export const lleidaCities: Organization[] = [
+export const lleidaCities: CmsOrganization[] = [
   lleidaCity
 ]

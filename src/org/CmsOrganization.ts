@@ -1,30 +1,21 @@
-import path from "path"
 import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
-import { RR0Data, RR0Event } from "@rr0/data"
+import { Organization } from "@rr0/data"
 
-import { OrganizationKind } from "./OrganizationKind"
+import { OrganizationKind } from "../../../data/src/org/OrganizationKind"
 import { Place } from "@rr0/place"
 
-export class Organization<M extends TitleMessage = OrganizationMessages> implements RR0Data {
-
-  readonly type = "org"
-
-  readonly dirName: string
-
-  events: RR0Event[] = []
+export class CmsOrganization<M extends TitleMessage = OrganizationMessages> extends Organization {
 
   constructor(readonly id: string, readonly places: Place[], readonly kind: OrganizationKind,
-              readonly parent?: Organization) {
-    assert.ok(id, `id must be defined for organization of type ${kind}`)
-    this.dirName = path.join(parent?.dirName ?? "org/", id)
-    assert.ok(id, `Code must be defined for organization of type ${kind}`)
+              readonly parent?: CmsOrganization) {
+    super(id, places, kind, parent)
   }
 
   getMessages(context: RR0Context): M {
-    const parent = this.parent as Organization
+    const parent = this.parent as CmsOrganization
     const parentMessages = parent ? parent.getMessages(context) : context.messages
     const messageKind = parentMessages[this.kind]
     assert.ok(messageKind, `Could not find messages of kind "${this.kind}" in ${JSON.stringify(parentMessages)}`)
@@ -35,7 +26,7 @@ export class Organization<M extends TitleMessage = OrganizationMessages> impleme
 
   getTitle(context: RR0Context, options: OrganizationMessageOptions = {parent: false}): string {
     const messages = this.getMessages(context)
-    const parent = this.parent as Organization
+    const parent = this.parent as CmsOrganization
     assert.ok(messages, `Could not find name of org "${this.id}" in parent org "${parent?.id}"`)
     let str = messages.title
     if (options.parent && parent) {

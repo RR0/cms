@@ -4,7 +4,7 @@ import { floridaCounties } from "./fl/FloridaCounties.js"
 import { texasCounties } from "./tx/TexasCounties.js"
 import { pennsylvaniaCounties } from "./pa/PennsylvaniaCounties.js"
 import { washingtonCounties } from "./wa/WashingtonCounties.js"
-import { Organization } from "../../Organization.js"
+import { CmsOrganization } from "../../CmsOrganization.js"
 import { newMexicoCounties } from "./nm/NewMexicoCounties.js"
 import { newJerseyCounties } from "./nj/NewJerseyCounties.js"
 import { newYorkCounties } from "./ny/NewYorkCounties.js"
@@ -39,7 +39,7 @@ import { virginIslandsCounties } from "./vi/VirginIslandsCounties.js"
 import { wisconsinCounties } from "./wi/WisconsinCounties.js"
 import { wyomingCounties } from "./wy/WyomingCounties.js"
 
-export const usaCounties: Organization[] = [
+export const usaCounties: CmsOrganization[] = [
   ...alabamaCounties,
   ...alaskaCounties,
   ...californiaCounties,

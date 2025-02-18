@@ -5,9 +5,9 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { CityService } from "../../../org/country/index.js"
-import { CountryService } from "../../../org/country/CountryService.js"
 import { Source } from "@rr0/data"
 import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { CountryService } from "../../../org/country/CountryService"
 
 export class UrecatRR0Mapper implements CaseMapper<HtmlRR0Context, UrecatCase, RR0CaseSummary> {
 

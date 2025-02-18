@@ -1,8 +1,8 @@
 import { albi } from "./Albi/Albi.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { castelnauDeMontmiral } from "./CastelnauDeMontmiral/CastelnauDeMontmiral.js"
 
-export const tarnCities: Organization[] = [
+export const tarnCities: CmsOrganization[] = [
   albi,
   castelnauDeMontmiral
 ]

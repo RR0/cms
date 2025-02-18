@@ -1,6 +1,6 @@
 import { cucugnan } from "./cucugnan/Cucugnan.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 
-export const audeCities: Organization[] = [
+export const audeCities: CmsOrganization[] = [
   cucugnan
 ]

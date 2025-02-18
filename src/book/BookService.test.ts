@@ -1,8 +1,7 @@
+import path from "path"
 import { ConsoleLogger, FileWriteConfig, SsgContext } from "ssg-api"
 import { CLI } from "../util/cli/CLI.js"
-import path from "path"
-import { PeopleService } from "../people"
-import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { AllDataService, PeopleService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { Book } from "./Book"
 import { BookService } from "./BookService"
 import { TimeServiceOptions, TimeUrlBuilder } from "../time"
@@ -35,7 +34,7 @@ const timeOptions: TimeServiceOptions = {
 }
 const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeOptions.root})
 let files = []
-const peopleService = new PeopleService(dataService, peopleFactory, files, rr0TestUtil.time.getService())
+const peopleService = new PeopleService(dataService, peopleFactory, {files, rootDir: testFilePath("people")})
 const books = new BookService(logger, dry, peopleService, timeUrlBuilder, config)
 books.import(fileName).then((result: Book[]) => {
     logger.log("Wrote", result.length, "books")

@@ -1,6 +1,6 @@
 import { cascade } from "./cascade/Cascade.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const montanaCounties: Organization[] = [
+export const montanaCounties: CmsOrganization[] = [
   cascade
 ]

@@ -1,6 +1,6 @@
 import { hinds } from "./hinds/Hinds.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const mississippiCounties: Organization[] = [
+export const mississippiCounties: CmsOrganization[] = [
   hinds
 ]

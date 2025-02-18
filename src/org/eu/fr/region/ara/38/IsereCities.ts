@@ -1,5 +1,5 @@
 import { saintMarcellin } from "./SaintMarcellin/SaintMarcellin.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { meylan } from "./Meylan/Meylan.js"
 import { domene } from "./Domene/Domene.js"
 import { valbonnais } from "./Valbonnais/Valbonnais.js"
@@ -10,7 +10,7 @@ import { allevard } from "./Allevard/Allevard.js"
 import { venon } from "./Venon/Venon.js"
 import { renage } from "./Renage/Renage.js"
 
-export const isereCities: Organization[] = [
+export const isereCities: CmsOrganization[] = [
   allevard,
   chirens,
   domene,

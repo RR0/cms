@@ -5,7 +5,6 @@ import {
   cities,
   CityService,
   countries,
-  CountryService,
   departments,
   DepartmentService,
   OrganizationFactory,
@@ -14,12 +13,12 @@ import {
   RegionService
 } from "../org/index.js"
 import { CaseFactory } from "../science/index.js"
-import { PeopleFactory } from "../people/index.js"
 import { APIFactory } from "../tech/index.js"
 import { TimeTestUtil } from "../time/TimeTestUtil"
 import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
-import { AllDataService, EventDataFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { AllDataService, EventDataFactory, PeopleFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { CountryService } from "../org/country/CountryService"
 
 export class RR0TestUtil {
 

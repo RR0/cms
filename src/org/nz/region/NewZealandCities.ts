@@ -1,6 +1,6 @@
-import { Organization } from "../../Organization.js"
+import { CmsOrganization } from "../../CmsOrganization.js"
 import { gisborneCities } from "./gisborne/GisborneCities.js"
 
-export const newZealandCities: Organization[] = [
+export const newZealandCities: CmsOrganization[] = [
   ...gisborneCities
 ]

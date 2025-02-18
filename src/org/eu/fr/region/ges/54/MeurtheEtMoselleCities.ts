@@ -1,9 +1,9 @@
 import { cosnesEtRomain } from "./CosnesEtRomain/CosnesEtRomain.js"
 import { nancy } from "./Nancy/Nancy.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { neuvesMaisons } from "./NeuvesMaisons/NeuvesMaisons.js"
 
-export const meurtheEtMoselleCities: Organization[] = [
+export const meurtheEtMoselleCities: CmsOrganization[] = [
   cosnesEtRomain,
   nancy,
   neuvesMaisons

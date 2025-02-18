@@ -1,8 +1,8 @@
 import { Place } from "@rr0/place"
-import { Organization } from "../../../../Organization.js"
-import { OrganizationKind } from "../../../../OrganizationKind"
+import { CmsOrganization } from "../../../../CmsOrganization.js"
+import { OrganizationKind } from "../../../../../../../data/src/org/OrganizationKind"
 
-export class City<P extends Organization = Organization> extends Organization {
+export class City<P extends CmsOrganization = CmsOrganization> extends CmsOrganization {
   /**
    *
    * @param code
@@ -13,7 +13,7 @@ export class City<P extends Organization = Organization> extends Organization {
     super(code, places, OrganizationKind.city, parent)
   }
 
-  static create(code: string, parent: Organization, place: Place) {
+  static create(code: string, parent: CmsOrganization, place: Place) {
     return new City(code, parent, [place])
   }
 }

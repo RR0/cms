@@ -1,4 +1,4 @@
-import { CountryCode } from "./country/CountryCode.js"
+import { CountryCode } from "../../../data/src/org/country/CountryCode.js"
 import { CountryMessages } from "./country/CountryMessages.js"
 
 export type CountryMessagesList

@@ -1,6 +1,6 @@
 import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
-import { Organization } from "./Organization.js"
+import { CmsOrganization } from "./CmsOrganization.js"
 
 export interface OrganizationMessageOptions {
   parent: boolean
@@ -23,7 +23,7 @@ export class OrganizationMessages {
     return this.titles[0]
   }
 
-  toTitle(context: RR0Context, org: Organization, options: OrganizationMessageOptions = {parent: true}): string {
+  toTitle(context: RR0Context, org: CmsOrganization, options: OrganizationMessageOptions = {parent: true}): string {
     const orgMessages = org.getMessages(context)
     assert.ok(orgMessages,
       `Could not find name of city with ZIP code "${org.id}" in departement "${org.parent?.id}"`)
@@ -31,7 +31,7 @@ export class OrganizationMessages {
     return this.toTitleFromName(context, org, title, options)
   }
 
-  toTitleFromName(context: RR0Context, org: Organization, title: string, options: OrganizationMessageOptions) {
+  toTitleFromName(context: RR0Context, org: CmsOrganization, title: string, options: OrganizationMessageOptions) {
     let str = org.getMessages(context).cityName(title)
     if (options.parent) {
       const parent = org.parent

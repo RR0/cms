@@ -7,7 +7,6 @@ import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { NuforcShape } from "./NuforcShape.js"
 import { CityService } from "../../../org/country/index.js"
-import { CountryService } from "../../../org/country/CountryService.js"
 import { australia } from "../../../org/au/Australia.js"
 import { brazil } from "../../../org/br/Brazil.js"
 import { canada } from "../../../org/ca/Canada.js"
@@ -27,6 +26,7 @@ import { algeria } from "../../../org/dz/Algeria.js"
 import { panama } from "../../../org/pa/Panama.js"
 import { Source } from "@rr0/data"
 import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { CountryService } from "../../../org/country/CountryService"
 
 export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSummary, RR0CaseSummary> {
 

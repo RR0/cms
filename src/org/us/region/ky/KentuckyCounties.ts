@@ -1,4 +1,4 @@
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const kentuckyCounties: Organization[] = [
+export const kentuckyCounties: CmsOrganization[] = [
 ]

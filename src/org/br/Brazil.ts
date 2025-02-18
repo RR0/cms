@@ -1,11 +1,11 @@
-import { CountryCode } from "../country/index.js"
 import { Place } from "@rr0/place"
+import { CountryCode } from "@rr0/data"
 import { BrazilRegionCode } from "./region/BrazilRegionCode.js"
-import { Organization } from "../Organization.js"
-import { OrganizationKind } from "../OrganizationKind"
+import { CmsOrganization } from "../CmsOrganization.js"
+import { OrganizationKind } from "../../../../data/src/org/OrganizationKind"
 
-export const brazil = new Organization(CountryCode.br, [], OrganizationKind.country)
+export const brazil = new CmsOrganization(CountryCode.br, [], OrganizationKind.country)
 
 export function brazilRegion(code: BrazilRegionCode, place: Place) {
-  return new Organization(code, [place], OrganizationKind.region, brazil)
+  return new CmsOrganization(code, [place], OrganizationKind.region, brazil)
 }

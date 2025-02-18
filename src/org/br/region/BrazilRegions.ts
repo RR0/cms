@@ -1,8 +1,8 @@
 import { centralWest } from "./cw/CentralWest.js"
-import { Organization } from "../../Organization.js"
+import { CmsOrganization } from "../../CmsOrganization.js"
 import { southEast } from "./se/SouthEast.js"
 
-export const brazilRegions: Organization[] = [
+export const brazilRegions: CmsOrganization[] = [
   centralWest,
   southEast
 ]

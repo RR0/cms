@@ -2,7 +2,7 @@
 
 ## Data types
 
-An [Organization](./Organization.ts) is a type of RR0 [data](../data/README.md).
+An [Organization](./CmsOrganization.ts) is a type of RR0 [data](../data/README.md).
 
 ```mermaid
 classDiagram

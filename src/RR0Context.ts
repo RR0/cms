@@ -1,6 +1,6 @@
 import { RR0Messages, ssgMessages } from "./lang/index.js"
 import { ConsoleLogger, FileWriteConfig, HtmlSsgContext, SsgContext, SsgContextImpl } from "ssg-api"
-import { People } from "./people/People.js"
+import { People } from "../../data/src/people/People.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
 import { PlaceContext } from "@rr0/place"

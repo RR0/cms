@@ -1,6 +1,6 @@
 import { pike } from "./pike/Pike.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const missouriCounties: Organization[] = [
+export const missouriCounties: CmsOrganization[] = [
   pike
 ]

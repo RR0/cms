@@ -1,6 +1,6 @@
 import { rutlandCounty } from "./rutland/Rutland.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const vermontCounties: Organization[] = [
+export const vermontCounties: CmsOrganization[] = [
   rutlandCounty
 ]

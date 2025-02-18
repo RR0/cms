@@ -1,6 +1,6 @@
 import { geneva } from "./geneva/Geneva.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const alabamaCounties: Organization[] = [
+export const alabamaCounties: CmsOrganization[] = [
   geneva
 ]

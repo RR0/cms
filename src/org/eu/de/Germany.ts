@@ -1,10 +1,10 @@
 import { GermanyRegionCode } from "./region/GermanyRegionCode.js"
-import { Country } from "../../country/Country.js"
-import { CountryCode } from "../../country/CountryCode.js"
 import { Place } from "@rr0/place"
 import { Region } from "../../country/region/Region.js"
+import { CmsCountry } from "../../country/CmsCountry"
+import { CountryCode } from "@rr0/data"
 
-export const germany = new Country(CountryCode.de)
+export const germany = new CmsCountry(CountryCode.de)
 
 export function germanyRegion(code: GermanyRegionCode, place: Place) {
   return new Region(code, germany, [place])

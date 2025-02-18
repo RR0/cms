@@ -4,7 +4,7 @@ import { UrlUtil } from "../../../util/index.js"
 import { RR0Datasource } from "./RR0Datasource.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
-import { CityService, Organization } from "../../../org/index.js"
+import { CityService, CmsOrganization } from "../../../org/index.js"
 import { Publication, Source } from "@rr0/data/dist/source"
 import { NamedPlace, Place } from "@rr0/place"
 import { OrganizationPlace } from "../../../place/OrganizationPlace"
@@ -118,7 +118,7 @@ export class RR0HttpDatasource extends RR0Datasource {
   protected getPlace(context: HtmlRR0Context, placeEl: Element): Place {
     const placeStr = placeEl.textContent
     const placeParsed = RR0HttpDatasource.placeRegex.exec(placeStr)
-    let org: Organization | undefined
+    let org: CmsOrganization | undefined
     placeEl.remove()
     if (placeParsed) {
       const parent = undefined  // TODO: Find region from placeParsed[2]

@@ -1,6 +1,6 @@
 import { dane } from "./dane/Dane.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const wisconsinCounties: Organization[] = [
+export const wisconsinCounties: CmsOrganization[] = [
   dane
 ]

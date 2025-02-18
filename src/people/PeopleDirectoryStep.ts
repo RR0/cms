@@ -1,13 +1,10 @@
-import { Occupation } from "./Occupation.js"
-import { People } from "./People.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { HtmlTag } from "../util/html/HtmlTag.js"
 import { DirectoryStep, FileWriteConfig, OutputFunc } from "ssg-api"
 import { StringUtil } from "../util/string/StringUtil.js"
-import { PeopleService } from "./PeopleService.js"
-import { CountryCode } from "../org/country/CountryCode.js"
 import { Gender } from "@rr0/common"
 import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
+import { CountryCode, Occupation, People, PeopleService } from "@rr0/data"
 
 export type PeopleFilter = (p: People) => boolean
 

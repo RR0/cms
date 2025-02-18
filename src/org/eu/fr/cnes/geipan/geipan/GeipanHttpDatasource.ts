@@ -11,8 +11,8 @@ import { RR0Context } from "../../../../../../RR0Context.js"
 import { ObjectUtil, UrlUtil } from "../../../../../../util/index.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
-import { CountryCode } from "../../../../../country/index.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
+import { CountryCode } from "@rr0/data"
 
 interface QueryParameters {
   /**

@@ -1,19 +1,17 @@
 import { PeopleReplacer } from "./PeopleReplacer.js"
-import { rr0TestUtil } from "../test/index.js"
-import { PeopleService } from "./PeopleService.js"
+import { rr0TestUtil, testFilePath } from "../test/index.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { PeopleFactory } from "./PeopleFactory.js"
 import path from "path"
-import { AllDataService, RR0EventFactory } from "@rr0/data"
+import { AllDataService, PeopleFactory, PeopleService, RR0EventFactory } from "@rr0/data"
 import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
 
 describe("PeopleReplacer", () => {
 
-  const peopleRoot = "src/people"
-  const peopleFiles = [
-    path.join(peopleRoot, "b/BeauJerome"),
-    path.join(peopleRoot, "h/HynekJosefAllen")
+  const rootDir = testFilePath("people")
+  const files = [
+    path.join(rootDir, "b/BeauJerome"),
+    path.join(rootDir, "h/HynekJosefAllen")
   ]
 
   const peopleFactory = new PeopleFactory(new RR0EventFactory())
@@ -29,7 +27,7 @@ describe("PeopleReplacer", () => {
 
   test("ignore brackets", async () => {
     const dataService = new AllDataService([peopleFactory])
-    const peopleService = new PeopleService(dataService, peopleFactory, peopleFiles, rr0TestUtil.time.getService())
+    const peopleService = new PeopleService(dataService, peopleFactory, {rootDir, files})
     const peopleRenderer = new PeopleHtmlRenderer()
     const replacer = new PeopleReplacer(peopleService, peopleRenderer)
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
@@ -51,7 +49,7 @@ describe("PeopleReplacer", () => {
 
   test("replace people tags", async () => {
     const dataService = new AllDataService([peopleFactory])
-    const peopleService = new PeopleService(dataService, peopleFactory, peopleFiles, rr0TestUtil.time.getService())
+    const peopleService = new PeopleService(dataService, peopleFactory, {rootDir, files})
     const peopleRenderer = new PeopleHtmlRenderer()
     const replacer = new PeopleReplacer(peopleService, peopleRenderer)
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")

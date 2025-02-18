@@ -1,8 +1,8 @@
 import { Place } from "@rr0/place"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 import { california } from "./California.js"
-import { OrganizationKind } from "../../../OrganizationKind"
+import { OrganizationKind } from "../../../../../../data/src/org/OrganizationKind"
 
-export function caDepartment(code: string, place: Place): Organization {
-  return new Organization(code, [place], OrganizationKind.department, california)
+export function caDepartment(code: string, place: Place): CmsOrganization {
+  return new CmsOrganization(code, [place], OrganizationKind.department, california)
 }

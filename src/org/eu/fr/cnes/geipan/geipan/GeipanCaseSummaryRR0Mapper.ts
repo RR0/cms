@@ -4,7 +4,7 @@ import { GeipanCaseClassification } from "./GeipanCaseClassification.js"
 import { CaseMapper, RR0CaseSummary } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 import { CityService } from "../../../../../country/index.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { france } from "../../../France.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { Source } from "@rr0/data/dist/source"
@@ -66,7 +66,7 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Ge
     const placeItems = /(.+?)(:?\s+\(([A-Z]+)\))?(:?\s+\((\d+)\))?$/.exec(sourceCase.city)
     const prefix = placeItems[3] ? placeItems[3] + " " : ""
     const title = prefix + placeItems[1]
-    let org: Organization
+    let org: CmsOrganization
     if (title === "NATIONAL") {
       org = france
     } else {

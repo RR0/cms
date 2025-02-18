@@ -1,7 +1,7 @@
 import { OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
 import { RR0DataJson, RR0EventJson } from "@rr0/data"
-import { OrganizationKind } from "./OrganizationKind"
+import { OrganizationKind } from "../../../data/src/org/OrganizationKind"
 import { Place } from "@rr0/place"
 
 export class OrganizationJson<M extends TitleMessage = OrganizationMessages> implements RR0DataJson {

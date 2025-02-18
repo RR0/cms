@@ -1,9 +1,10 @@
 import { NuforcRR0Mapper } from "./NuforcRR0Mapper.js"
 import { NuforcHttpDatasource } from "./NuforcHttpDatasource.js"
-import { CityService, CountryService } from "../../../org"
+import { CityService } from "../../../org"
 import { RR0CaseMapping } from "../rr0"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 import { NuforcCaseSummary } from "./NuforcCaseSummary"
+import { CountryService } from "../../../org/country/CountryService"
 
 export const nuforcDatasource = new NuforcHttpDatasource()
 

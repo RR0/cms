@@ -1,11 +1,11 @@
-import { Organization } from "./Organization.js"
+import { CmsOrganization } from "./CmsOrganization.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { OrganizationFactory } from "./OrganizationFactory"
 import { FileContents } from "@javarome/fileutil"
 
-export class OrganizationService<O extends Organization = Organization, P extends Organization = undefined> {
+export class OrganizationService<O extends CmsOrganization = CmsOrganization, P extends CmsOrganization = undefined> {
 
   constructor(readonly orgs: O[], readonly rootDir: string, protected factory: OrganizationFactory,
               readonly parentService: OrganizationService) {

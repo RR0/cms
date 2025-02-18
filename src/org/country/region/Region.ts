@@ -2,7 +2,7 @@ import { UsaStates } from "../../us/region/UsaStates.js"
 import { CanadaRegionCode } from "../../ca/region/CanadaRegionCode.js"
 import { AustraliaRegionCode } from "../../au/index.js"
 import { BrazilRegionCode } from "../../br/region/BrazilRegionCode.js"
-import { Organization } from "../../Organization.js"
+import { CmsOrganization } from "../../CmsOrganization.js"
 import { EuropeRegionCode } from "../../eu/EuropeRegionCode.js"
 import { MexicoRegionCode } from "../../mx/region/MexicoRegionCode.js"
 import { PhilippinesRegionCode } from "../../ph/region/PhilippinesRegionCode.js"
@@ -16,8 +16,8 @@ import { UkRegionCode } from "../../uk/region/UkRegionCode.js"
 import { RegionMessages } from "./RegionMessages.js"
 import { TitleMessage } from "../../TitleMessage.js"
 import { IndiaRegionCode } from "../../in/region/IndiaRegionCode.js"
-import { OrganizationKind } from "../../OrganizationKind"
 import { Place } from "@rr0/place"
+import { OrganizationKind } from "@rr0/data"
 
 export type RegionCode =
   AustraliaRegionCode
@@ -36,9 +36,9 @@ export type RegionCode =
   | SouthKoreaRegionCode
   | UsaStates
 
-export class Region<M extends TitleMessage = RegionMessages<any>, R = RegionCode> extends Organization<M> {
+export class Region<M extends TitleMessage = RegionMessages<any>, R = RegionCode> extends CmsOrganization<M> {
 
-  constructor(code: R, country: Organization, places: Place[]) {
+  constructor(code: R, country: CmsOrganization, places: Place[]) {
     super(code.toString(), places, OrganizationKind.region, country)
   }
 }

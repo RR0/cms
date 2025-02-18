@@ -2,7 +2,7 @@ import { tarrant_en } from "./tarrant/Tarrant_en.js"
 import { RegionMessages } from "../../../country/index.js"
 import { houstonMessages } from "./houston/HoustonMessages.js"
 import { houstonCityCode } from "./houston/Houston.js"
-import { OrganizationKind } from "../../../OrganizationKind"
+import { OrganizationKind } from "../../../../../../data/src/org/OrganizationKind"
 
 const texasCityMessages = {
   [houstonCityCode]: houstonMessages

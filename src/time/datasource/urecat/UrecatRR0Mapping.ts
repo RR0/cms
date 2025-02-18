@@ -3,7 +3,8 @@ import { UrecatHttpDatasource } from "./UrecatHttpDatasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { RR0CaseMapping } from "../rr0"
 import { UrecatCase } from "./UrecatCase"
-import { CityService, CountryService } from "../../../org"
+import { CityService } from "../../../org"
+import { CountryService } from "../../../org/country/CountryService"
 
 export const urecatDatasource = new UrecatHttpDatasource(new URL("https://ufologie.patrickgross.org"), "ce3")
 

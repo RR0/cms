@@ -1,6 +1,6 @@
 import { pinellas } from "./pinellas/Pinellas.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const floridaCounties: Organization[] = [
+export const floridaCounties: CmsOrganization[] = [
   pinellas
 ]

@@ -1,6 +1,6 @@
 import { tarrant } from "./tarrant/Tarrant.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const texasCounties: Organization[] = [
+export const texasCounties: CmsOrganization[] = [
   tarrant
 ]

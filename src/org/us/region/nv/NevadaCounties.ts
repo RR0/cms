@@ -1,6 +1,6 @@
 import { clark } from "./clark/Clark.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const nevadaCounties: Organization[] = [
+export const nevadaCounties: CmsOrganization[] = [
   clark
 ]

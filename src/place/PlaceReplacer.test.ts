@@ -3,10 +3,10 @@ import { OrganizationService } from "../org/OrganizationService.js"
 import { SsgContext } from "ssg-api"
 import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { Organization } from "../org/Organization.js"
+import { CmsOrganization } from "../org/CmsOrganization.js"
 import { OrganizationMessages } from "../org/index.js"
 import { Elevation, Place, PlaceLocation, PlaceService } from "@rr0/place"
-import { OrganizationKind } from "../org/OrganizationKind"
+import { OrganizationKind } from "../../../data/src/org/OrganizationKind"
 
 class MockPlaceService extends PlaceService {
 
@@ -33,7 +33,7 @@ class MockOrganizationService extends OrganizationService {
     super([], "org", rr0TestUtil.orgFactory, null)
   }
 
-  async read(_fileName: string): Promise<Organization> {
+  async read(_fileName: string): Promise<CmsOrganization> {
     let title = "Los Alamos National Laboratories"
     return {
       type: "org",

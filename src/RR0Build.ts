@@ -30,7 +30,6 @@ import {
   cities,
   CityService,
   countries,
-  CountryService,
   departments,
   DepartmentService,
   OrganizationFactory,
@@ -69,9 +68,7 @@ import {
   AuthorReplaceCommand,
   PeopleDirectoryStepFactory,
   PeopleDirectoryStepOptions,
-  PeopleFactory,
   PeopleReplacerFactory,
-  PeopleService,
   WitnessReplacerFactory
 } from "./people"
 import {
@@ -101,10 +98,18 @@ import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
-import { AllDataService, EventDataFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import {
+  AllDataService,
+  EventDataFactory,
+  PeopleFactory,
+  PeopleService,
+  RR0EventFactory,
+  TypedDataFactory
+} from "@rr0/data"
 import { GooglePlaceService } from "@rr0/place"
 import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
 import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer"
+import { CountryService } from "./org/country/CountryService"
 
 export interface RR0BuildOptions {
   contentRoots: string[]
@@ -236,7 +241,7 @@ export class RR0Build {
     const caseService = new CaseService(dataService, this.caseFactory, timeElementFactory, caseFiles)
 
     const peopleFiles = await this.peopleFactory.getFiles()
-    const peopleService = new PeopleService(dataService, this.peopleFactory, peopleFiles, timeService)
+    const peopleService = new PeopleService(dataService, this.peopleFactory, {files: peopleFiles, rootDir: "people"})
     const peopleList = await peopleService.getAll()
     context.setVar("peopleFilesCount", peopleList.length)
     const bookMeta = new Map<string, HtmlMeta>()

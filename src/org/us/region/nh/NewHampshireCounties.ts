@@ -1,6 +1,6 @@
 import { rockingham } from "./rockingham/Rockingham.js"
-import { Organization } from "../../../Organization.js"
+import { CmsOrganization } from "../../../CmsOrganization.js"
 
-export const newHampshireCounties: Organization[] = [
+export const newHampshireCounties: CmsOrganization[] = [
   rockingham
 ]

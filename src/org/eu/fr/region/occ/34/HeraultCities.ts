@@ -1,8 +1,8 @@
 import { montpellier } from "./Montpellier/Montpellier.js"
-import { Organization } from "../../../../../Organization.js"
+import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { saintGeniesDesMourgues } from "./SaintGeniesDesMourgues/SaintGeniesDesMourgues.js"
 
-export const heraultCities: Organization[] = [
+export const heraultCities: CmsOrganization[] = [
   saintGeniesDesMourgues,
   montpellier
 ]
