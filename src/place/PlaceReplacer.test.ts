@@ -6,7 +6,7 @@ import { describe, expect, test } from "@javarome/testscript"
 import { CmsOrganization } from "../org/CmsOrganization.js"
 import { OrganizationMessages } from "../org/index.js"
 import { Elevation, Place, PlaceLocation, PlaceService } from "@rr0/place"
-import { OrganizationKind } from "../../../data/src/org/OrganizationKind"
+import { OrganizationKind } from "@rr0/data"
 
 class MockPlaceService extends PlaceService {
 

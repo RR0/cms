@@ -3,8 +3,7 @@ import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
 import { Organization } from "@rr0/data"
-
-import { OrganizationKind } from "../../../data/src/org/OrganizationKind"
+import { OrganizationKind } from "@rr0/data"
 import { Place } from "@rr0/place"
 
 export class CmsOrganization<M extends TitleMessage = OrganizationMessages> extends Organization {

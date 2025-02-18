@@ -1,6 +1,6 @@
 import { Place } from "@rr0/place"
 import { CmsOrganization } from "../../../CmsOrganization.js"
-import { OrganizationKind } from "../../../../../../data/src/org/OrganizationKind"
+import { OrganizationKind } from "@rr0/data"
 
 export class Department extends CmsOrganization {
   /**

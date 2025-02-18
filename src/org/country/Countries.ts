@@ -1,5 +1,5 @@
 import { algeria } from "../dz/Algeria"
-import { CountryCode } from "../../../../data/src/org/country/CountryCode"
+import { CountryCode } from "@rr0/data"
 import { australia } from "../au/index.js"
 import { brazil } from "../br/Brazil"
 import { canada } from "../ca/Canada"

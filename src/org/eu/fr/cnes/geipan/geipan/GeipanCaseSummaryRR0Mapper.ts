@@ -7,8 +7,8 @@ import { CityService } from "../../../../../country/index.js"
 import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { france } from "../../../France.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
-import { Source } from "@rr0/data/dist/source"
 import { Place } from "@rr0/place"
+import { Source } from "@rr0/data"
 
 export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, GeipanCaseSummary, RR0CaseSummary> {
 

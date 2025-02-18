@@ -16,7 +16,7 @@ import { bretagneMessages_fr } from "./region/bre/BretagneMessages_fr.js"
 import { martiniqueRegionMessage } from "./region/mtq/MartiniqueRegionMessage.js"
 import { FranceRegionCode } from "./region/FranceRegionCode.js"
 import { collectiviteOutreMerMessage_fr } from "./region/com/CollectiviteOutreMerMessage_fr.js"
-import { OrganizationKind } from "../../../../../data/src/org/OrganizationKind"
+import { OrganizationKind } from "@rr0/data"
 
 export const france_fr = new FranceMessages(["France"])
 france_fr[OrganizationKind.region] = {

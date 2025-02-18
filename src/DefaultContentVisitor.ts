@@ -4,8 +4,7 @@ import { TimeElementFactory } from "./time/html/TimeElementFactory.js"
 import { ContentVisitor } from "./RR0ContentStep.js"
 import { HtmlRR0Context } from "./RR0Context.js"
 import { EventRenderer } from "./time/EventRenderer.js"
-import { People } from "../../data/src/people/People.js"
-import { AllDataService, RR0Data, RR0Event } from "@rr0/data"
+import { AllDataService, People, RR0Data, RR0Event } from "@rr0/data"
 
 export class DefaultContentVisitor implements ContentVisitor {
 
