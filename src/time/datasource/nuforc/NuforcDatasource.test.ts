@@ -10,8 +10,7 @@ import { NuforcRR0Mapping } from "./NuforcRR0Mapping"
 
 describe("NuforcCaseSource", () => {
 
-  const nuforcRR0Mapping = new NuforcRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.countryService,
-    {read: ["fetch"], write: ["backup"]})
+  const nuforcRR0Mapping = new NuforcRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
 
   const testCase = new class extends DatasourceTestCase<NuforcCaseSummary> {
     constructor(mapping: RR0CaseMapping<NuforcCaseSummary>, sourceCases: NuforcCaseSummary[]) {

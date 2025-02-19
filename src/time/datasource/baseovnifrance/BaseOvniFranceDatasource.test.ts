@@ -10,8 +10,7 @@ import { RR0CaseMapping } from "../rr0/index.js"
 
 describe("BaseOvniFranceCaseSource", () => {
 
-  const baseOvniFranceRR0Mapping = new BaseOvniFranceRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.departmentService,
-    {read: ["fetch"], write: ["backup"]})
+  const baseOvniFranceRR0Mapping = new BaseOvniFranceRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
 
   const testCase = new class extends DatasourceTestCase<BaseOvniFranceCaseSummary> {
     constructor(mapping: RR0CaseMapping<BaseOvniFranceCaseSummary>, sourceCases: BaseOvniFranceCaseSummary[]) {

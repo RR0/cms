@@ -11,8 +11,8 @@ import { UrecatRR0Mapping } from "./UrecatRR0Mapping"
 
 describe("UrecatCaseSource", () => {
 
-  const urecatRR0Mapping = new UrecatRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.countryService,
-    {read: ["fetch"], write: ["backup"]})
+  const urecatRR0Mapping = new UrecatRR0Mapping({read: ["fetch"], write: ["backup"]})
+  urecatRR0Mapping.init(rr0TestUtil)
 
   const testCase = new class extends DatasourceTestCase<UrecatCase> {
     constructor(mapping: RR0CaseMapping<UrecatCase>, sourceCases: UrecatCase[]) {

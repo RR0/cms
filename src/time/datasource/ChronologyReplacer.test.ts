@@ -25,8 +25,7 @@ describe("ChronologyReplacer", () => {
     const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
     const caseRenderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
       new SourceRenderer(timeTextBuilder), timeTestUtil.timeElementFactory)
-    const urecatRR0Mapping = new UrecatRR0Mapping(rr0TestUtil.cityService, rr0TestUtil.countryService,
-      {read: ["fetch"], write: ["backup"]})
+    const urecatRR0Mapping = new UrecatRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
     chronologyReplacer = new ChronologyReplacer([urecatRR0Mapping], caseRenderer)
     context = timeTestUtil.newHtmlContext("index.html")
     context.time.setYear(undefined)

@@ -11,7 +11,7 @@ import { Level2Date as EdtfDate } from "@rr0/time"
 describe("GeipanCaseSource", () => {
 
   const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
-  const geipanRR0Mapping = new GeipanRR0Mapping(rr0TestUtil.cityService, actions)
+  const geipanRR0Mapping = new GeipanRR0Mapping(actions).init(rr0TestUtil)
 
   const testCase = new class extends DatasourceTestCase<GeipanCaseSummary> {
     constructor(mapping: RR0CaseMapping<GeipanCaseSummary>, sourceCases: GeipanCaseSummary[]) {

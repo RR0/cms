@@ -10,7 +10,7 @@ import { UfoSearchRR0Mapping } from "./UfoSearchMapping"
 
 describe("UfoSearchCaseSource", () => {
 
-  const ufoSearchRR0Mapping = new UfoSearchRR0Mapping(rr0TestUtil.cityService, {read: ["fetch"], write: ["backup"]})
+  const ufoSearchRR0Mapping = new UfoSearchRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
 
   const testCase = new class extends DatasourceTestCase<UfoSearchCase> {
     constructor(mapping: RR0CaseMapping<UfoSearchCase>, sourceCases: UfoSearchCase[]) {

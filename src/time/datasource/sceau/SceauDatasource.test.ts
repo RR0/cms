@@ -14,6 +14,8 @@ import { Source } from "@rr0/data/dist/source"
 import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 
+import { BuildContext } from "../../../BuildContext"
+
 export class SceauTestDatasource extends SceauDatasource {
 
   timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
@@ -28,12 +30,16 @@ export class SceauTestDatasource extends SceauDatasource {
 }
 
 export class SceauTestMapping implements SceauCaseMapping {
-  readonly datasource = sceauDatasource // new SceauTestDatasource()
-  readonly mapper: SceauCaseSummaryRR0Mapper
+  datasource = sceauDatasource // new SceauTestDatasource()
+  mapper: SceauCaseSummaryRR0Mapper
 
   constructor(readonly actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}) {
+  }
+
+  init(build: BuildContext): this {
     this.mapper = new SceauCaseSummaryRR0Mapper(rr0TestUtil.cityService, sceauDatasource.baseUrl,
       sceauDatasource.copyright, sceauDatasource.authors)
+    return this
   }
 }
 

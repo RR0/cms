@@ -3,22 +3,25 @@ import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
 import { RR0CaseMapping } from "../rr0/index.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { CityService, DepartmentService } from "../../../org"
+import { BuildContext } from "../../../BuildContext"
 
 export const baseOvniFranceDatasource = new BaseOvniFranceHttpDatasource()
 
 export class BaseOvniFranceRR0Mapping implements RR0CaseMapping<BaseOvniFranceCaseSummary> {
 
-  readonly datasource: BaseOvniFranceHttpDatasource
-  readonly mapper: BaseOvniFranceCaseSummaryRR0Mapper
+  datasource: BaseOvniFranceHttpDatasource
+  mapper: BaseOvniFranceCaseSummaryRR0Mapper
 
-  constructor(cityService: CityService, departmentService: DepartmentService,
-              readonly actions: ChronologyReplacerActions) {
+  constructor(readonly actions: ChronologyReplacerActions) {
+  }
+
+  init(build: BuildContext) {
     const datasource = this.datasource = baseOvniFranceDatasource
     this.mapper = new BaseOvniFranceCaseSummaryRR0Mapper(
-      departmentService, cityService,
+      build.departmentService, build.cityService,
       datasource.baseUrl, datasource.copyright, datasource.authors
     )
+    return this
   }
 }
 

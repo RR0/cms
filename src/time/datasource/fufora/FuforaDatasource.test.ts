@@ -10,7 +10,7 @@ import { FuforaRR0Mapping } from "./FuforaRR0Mapping"
 
 describe("FuforaCaseSource", () => {
 
-  const fuforaRR0Mapping = new FuforaRR0Mapping(rr0TestUtil.cityService, {read: ["fetch"], write: ["backup"]})
+  const fuforaRR0Mapping = new FuforaRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
 
   const testCase = new class extends DatasourceTestCase<FuforaCaseSummary> {
     constructor(mapping: RR0CaseMapping<FuforaCaseSummary>, sourceCases: FuforaCaseSummary[]) {

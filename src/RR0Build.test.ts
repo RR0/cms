@@ -1,10 +1,21 @@
 import { glob } from "glob"
 import { describe } from "@javarome/testscript"
 import { RR0Build, RR0BuildArgs } from "./RR0Build.js"
-import { TimeServiceOptions } from "./time/index.js"
+import {
+  BaseOvniFranceRR0Mapping,
+  ChronologyReplacerActions,
+  FuforaRR0Mapping,
+  NuforcRR0Mapping,
+  RR0CaseMapping,
+  RR0Mapping,
+  SceauRR0Mapping,
+  TimeServiceOptions,
+  UrecatRR0Mapping
+} from "./time/index.js"
 import { PeopleDirectoryStepOptions } from "./people/index.js"
 import { testFilePath } from "./test"
 import * as process from "node:process"
+import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
 
 describe("Build", () => {
   console.time("ssg")
@@ -98,6 +109,21 @@ describe("Build", () => {
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
     const timeOptions: TimeServiceOptions = {root: testFilePath("time"), files: timeFiles}
+    // const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
+    // const actions: ChronologyReplacerActions = {read: [], write: ["backup"]}
+    const actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}
+    const rr0Mapping = new RR0Mapping(actions)
+    const geipanRR0Mapping = new GeipanRR0Mapping(actions)
+    const baseOvniFranceRR0Mapping = new BaseOvniFranceRR0Mapping(actions)
+    const fuforaRR0Mapping = new FuforaRR0Mapping(actions)
+    const nuforcRR0Mapping = new NuforcRR0Mapping(actions)
+    const urecatRR0Mapping = new UrecatRR0Mapping(actions)
+    const sceauRR0Mapping = new SceauRR0Mapping(actions)
+    const mappings: RR0CaseMapping<any>[] = [rr0Mapping,
+      geipanRR0Mapping,
+      baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping,
+      sceauRR0Mapping
+    ]
     const build = new RR0Build({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
       siteBaseUrl, timeFormat, directoryPages,
@@ -105,7 +131,8 @@ describe("Build", () => {
       ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"].map(testFilePath),
       sourceRegistryFileName,
       directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"].map(testFilePath),
-      directoryOptions
+      directoryOptions,
+      mappings
     })
     await build.run(args)
   })

@@ -20,7 +20,9 @@ import { FileContents } from "@javarome/fileutil"
 import { AllDataService, EventDataFactory, PeopleFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { CountryService } from "../org/country/CountryService"
 
-export class RR0TestUtil {
+import { BuildContext } from "../BuildContext"
+
+export class RR0TestUtil implements BuildContext {
 
   readonly config: FileWriteConfig = {
     getOutputPath: (context: SsgContext): string => {

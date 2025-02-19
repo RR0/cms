@@ -15,6 +15,8 @@ import { Source } from "@rr0/data/dist/source"
 import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
 import { RR0FileDatasource } from "./RR0FileDatasource"
 
+import { BuildContext } from "../../../BuildContext"
+
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 
   timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
@@ -29,13 +31,17 @@ export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0Ca
 }
 
 export class RR0TestMapping implements RR0CaseMapping<RR0CaseSummary> {
-  readonly datasource = new RR0TestDatasource()
-  readonly backupDatasource: RR0FileDatasource
-  readonly mapper: RR0CaseSummaryMapper
+  datasource = new RR0TestDatasource()
+  backupDatasource: RR0FileDatasource
+  mapper: RR0CaseSummaryMapper
 
   constructor(readonly actions: ChronologyReplacerActions) {
+  }
+
+  init(build: BuildContext): this {
     this.mapper = new RR0CaseSummaryMapper(new URL("https://rr0.org"), "time", ["Beau, Jérôme"])
     this.backupDatasource = new RR0FileDatasource(this.mapper)
+    return this
   }
 }
 
