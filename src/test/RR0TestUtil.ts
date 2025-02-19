@@ -4,10 +4,10 @@ import { FileWriteConfig, HtmlFileContents, SsgContext } from "ssg-api"
 import {
   cities,
   CityService,
+  CmsOrganizationFactory,
   countries,
   departments,
   DepartmentService,
-  OrganizationFactory,
   OrganizationService,
   regions,
   RegionService
@@ -45,7 +45,7 @@ export class RR0TestUtil {
   readonly time: TimeTestUtil
   readonly orgService: OrganizationService<any, undefined>
   readonly cityService: CityService
-  readonly orgFactory: OrganizationFactory
+  readonly orgFactory: CmsOrganizationFactory
   readonly departmentService: DepartmentService
   readonly countryService: CountryService
   readonly regionService: RegionService
@@ -53,7 +53,7 @@ export class RR0TestUtil {
   constructor(readonly rootDir = "test", readonly outDir = "out") {
     const eventFactory = new RR0EventFactory()
     const sightingFactory = new EventDataFactory(eventFactory, "sighting", ["index"])
-    const orgFactory = this.orgFactory = new OrganizationFactory(eventFactory)
+    const orgFactory = this.orgFactory = new CmsOrganizationFactory(eventFactory)
     this.orgService = new OrganizationService([], "org", orgFactory, undefined)
     this.caseFactory = new CaseFactory(eventFactory)
     this.peopleFactory = new PeopleFactory(eventFactory)

@@ -43,10 +43,12 @@ class MockOrganizationService extends OrganizationService {
       getTitle(_context: SsgContext): string {
         return title
       },
+      parent: undefined,
+      title,
       places: [new Place([new PlaceLocation(35.87555555555556, -106.32416666666666)])],
       getMessages: (_context) => new OrganizationMessages([title]),
       events: []
-    }
+    } as CmsOrganization
   }
 }
 

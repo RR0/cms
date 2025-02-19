@@ -29,10 +29,10 @@ import { PlaceReplacerFactory } from "./place/index.js"
 import {
   cities,
   CityService,
+  CmsOrganizationFactory,
   countries,
   departments,
   DepartmentService,
-  OrganizationFactory,
   OrganizationService,
   regions,
   RegionService
@@ -203,7 +203,7 @@ export class RR0Build {
     context.setVar("mail", options.mail)
     const eventFactory = new RR0EventFactory()
     this.placeService = new GooglePlaceService("place", options.googleMapsApiKey)
-    const orgFactory = new OrganizationFactory(eventFactory)
+    const orgFactory = new CmsOrganizationFactory(eventFactory)
     this.orgService = new OrganizationService([], "org", orgFactory, undefined)
     const countryService = this.countryService = new CountryService(countries, "org", orgFactory, undefined)
     const regionService = new RegionService(regions, "org", orgFactory, countryService)

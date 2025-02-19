@@ -2,15 +2,18 @@ import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { OrganizationMessageOptions, OrganizationMessages } from "./OrganizationMessages.js"
 import { TitleMessage } from "./TitleMessage.js"
-import { Organization } from "@rr0/data"
-import { OrganizationKind } from "@rr0/data"
+import { Organization, OrganizationKind } from "@rr0/data"
 import { Place } from "@rr0/place"
 
 export class CmsOrganization<M extends TitleMessage = OrganizationMessages> extends Organization {
 
-  constructor(readonly id: string, readonly places: Place[], readonly kind: OrganizationKind,
-              readonly parent?: CmsOrganization) {
+  constructor(id: string, places: Place[], kind: OrganizationKind,
+              parent?: CmsOrganization) {
     super(id, places, kind, parent)
+  }
+
+  get parent(): CmsOrganization | undefined {
+    return super.parent as any as CmsOrganization
   }
 
   getMessages(context: RR0Context): M {

@@ -9,6 +9,7 @@ import * as process from "node:process"
 describe("Build", () => {
   console.time("ssg")
   const args: RR0BuildArgs = {
+    contents: ["test/org/us/faa/index.html"],
     force: "true"
   }
   const cliContents = args.contents
@@ -96,10 +97,7 @@ describe("Build", () => {
     const sourceRegistryFileName = testFilePath("source/index.json")
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
-    const timeOptions: TimeServiceOptions = {
-      root: testFilePath("time"),
-      files: timeFiles
-    }
+    const timeOptions: TimeServiceOptions = {root: testFilePath("time"), files: timeFiles}
     const build = new RR0Build({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
       siteBaseUrl, timeFormat, directoryPages,

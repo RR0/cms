@@ -2,12 +2,12 @@ import { CmsOrganization } from "./CmsOrganization.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
-import { OrganizationFactory } from "./OrganizationFactory"
+import { CmsOrganizationFactory } from "./CmsOrganizationFactory"
 import { FileContents } from "@javarome/fileutil"
 
 export class OrganizationService<O extends CmsOrganization = CmsOrganization, P extends CmsOrganization = undefined> {
 
-  constructor(readonly orgs: O[], readonly rootDir: string, protected factory: OrganizationFactory,
+  constructor(readonly orgs: O[], readonly rootDir: string, protected factory: CmsOrganizationFactory,
               readonly parentService: OrganizationService) {
   }
 
