@@ -34,7 +34,7 @@ export class PeopleDirectoryStep extends DirectoryStep {
         for (const pseudonym of peopleInfo.pseudonyms) {
           const pseudo = new People(peopleInfo.firstNames, peopleInfo.lastName, peopleInfo.pseudonyms,
             peopleInfo.occupations, peopleInfo.countries,
-            peopleInfo.discredited, peopleInfo.birthTime, peopleInfo.deathTime, peopleInfo.gender, peopleInfo.id,
+            peopleInfo.discredited, peopleInfo.gender, peopleInfo.id,
             peopleInfo.dirName,
             peopleInfo.image)
           pseudo.lastAndFirstName = pseudonym

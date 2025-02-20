@@ -21,7 +21,7 @@ export type PeopleDirectoryStepOptions = {
 }
 
 /**
- * Scan directories for people information, then populates a template with collected data.
+ * Create directory steps for different types of people.
  */
 export class PeopleDirectoryStepFactory {
 
@@ -78,6 +78,9 @@ export class PeopleDirectoryStepFactory {
     return steps
   }
 
+  /**
+   * Create steps to generate directory pages for people with name starting with every first letter.
+   */
   async createLetters() {
     const letterDirs = await glob("people/*/")
     const peopleLetterFiles = letterDirs.filter(l => /(.+)\/[a-z]$/.test(l))

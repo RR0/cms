@@ -18,8 +18,8 @@ export class RR0HttpDatasource extends RR0Datasource {
   }
 
   static id(dateTime: EdtfDate, place: Place | undefined): string {
-    return dateTime.toString() + (place instanceof OrganizationPlace ? "$" + place.org?.dirName.replaceAll("/",
-      "_") : "")
+    const dirName = (place as OrganizationPlace).org?.dirName
+    return `${dateTime.toString()}-${place.id || (place as NamedPlace).name}`
   }
 
   getFromRows(context: HtmlRR0Context, rows: Element[]): RR0CaseSummary[] {

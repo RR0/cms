@@ -20,7 +20,7 @@ import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mappin
 describe("Build", () => {
   console.time("ssg")
   const args: RR0BuildArgs = {
-    contents: ["test/org/us/faa/index.html"],
+    contents: ["test/**/*.html"],
     force: "true"
   }
   const cliContents = args.contents
@@ -120,9 +120,9 @@ describe("Build", () => {
     const urecatRR0Mapping = new UrecatRR0Mapping(actions)
     const sceauRR0Mapping = new SceauRR0Mapping(actions)
     const mappings: RR0CaseMapping<any>[] = [rr0Mapping,
-      geipanRR0Mapping,
-      baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping,
-      sceauRR0Mapping
+      /*      geipanRR0Mapping,
+            baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping,
+            sceauRR0Mapping*/
     ]
     const build = new RR0Build({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
