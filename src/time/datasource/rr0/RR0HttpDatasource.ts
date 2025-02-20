@@ -17,11 +17,6 @@ export class RR0HttpDatasource extends RR0Datasource {
     super()
   }
 
-  static id(dateTime: EdtfDate, place: Place | undefined): string {
-    const dirName = (place as OrganizationPlace).org?.dirName
-    return `${dateTime.toString()}-${place.id || (place as NamedPlace).name}`
-  }
-
   getFromRows(context: HtmlRR0Context, rows: Element[]): RR0CaseSummary[] {
     const cases: RR0CaseSummary[] = []
     for (const row of rows) {

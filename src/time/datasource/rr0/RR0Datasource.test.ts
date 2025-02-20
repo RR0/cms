@@ -1,4 +1,4 @@
-import { beforeEach, describe, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { rr0TestCases } from "./RR0TestCases.js"
@@ -16,6 +16,9 @@ import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
 import { RR0FileDatasource } from "./RR0FileDatasource"
 
 import { BuildContext } from "../../../BuildContext"
+import { NamedPlace } from "@rr0/place"
+import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { parisCity } from "../../../org/eu/fr/region/idf/75/paris/Paris"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 
@@ -94,7 +97,7 @@ describe("RR0CaseSource", () => {
         return " " + HtmlTag.toString("span", authorStr + sourceItems.join(", "), {class: "source"})
       }).join("")
     }
-  }(new RR0TestMapping({read: ["fetch"], write: []}), rr0TestCases)
+  }(new RR0TestMapping({read: ["fetch"], write: []}).init(rr0TestUtil), rr0TestCases)
 
   let context: HtmlRR0Context
 
@@ -110,5 +113,13 @@ describe("RR0CaseSource", () => {
 
   test("render", async () => {
     await testCase.testRender(context)
+  })
+
+  test("id", async () => {
+    expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), new NamedPlace("Chatillon"))).toBe(
+      "1972-08-12$Chatillon")
+    expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), new OrganizationPlace(parisCity))).toBe(
+      "1972-08-12$city$75000")
+    expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), undefined)).toBe("1972-08-12$")
   })
 })

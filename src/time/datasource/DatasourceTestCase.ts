@@ -38,13 +38,13 @@ export abstract class DatasourceTestCase<S> {
     const expected = this.mapping.mapper.map(context, nativeCase, dataDate)
     const time = this.getTime(nativeCase)
     const caseContext = context.clone()
-    Object.assign(caseContext, {time})
+    caseContext.time.date = time
     const timeStr = this.timeTextBuilder.build(caseContext)
     const placeStr = expected.place ? this.placeRenderer.render(context, expected.place) : ""
     const expectedSources = expected.sources
     const sourceStr = expectedSources?.length > 0 ? this.expectedSourceStr(context, expectedSources, nativeCase) : ""
     expect(item.innerHTML).toBe(
-      `<time datetime="${time.toString()}">${timeStr}</time>${placeStr}, ${expected.description}${sourceStr}.`)
+      `<span class="time-resolved">${time.day ? "le" : "en"} <time datetime="${time.toString()}">${timeStr}</time></span>${placeStr}, ${expected.description}${sourceStr}.`)
   }
 
   async testRender(context: HtmlRR0Context) {

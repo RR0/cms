@@ -37,4 +37,8 @@ export class CmsOrganization<M extends TitleMessage = OrganizationMessages> exte
     }
     return str
   }
+
+  toString() {
+    return this.kind + "$" + this.id
+  }
 }

@@ -7,4 +7,8 @@ export class OrganizationPlace extends Place {
     super(org.places[0].locations, org.places[0].elevation, org.places[0].dirName)
     Object.assign(this, org.places[0])
   }
+
+  toString() {
+    return this.org?.toString() ?? super.toString()
+  }
 }
