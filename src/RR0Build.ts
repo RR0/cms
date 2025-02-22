@@ -217,8 +217,8 @@ export class RR0Build implements BuildContext {
     const apiFactory = new APIFactory(eventFactory)
     const bookFactory = new TypedDataFactory(eventFactory, "book")
     const articleFactory = new TypedDataFactory(eventFactory, "article")
-    const dataService = this.dataService = new AllDataService(
-      [orgFactory, caseFactory, peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
+    const factories = [orgFactory, caseFactory, peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory]
+    const dataService = this.dataService = new AllDataService(factories)
     dataService.getFromDir("", ["people", "case"]).then(data => {
       console.debug(data)
     })
