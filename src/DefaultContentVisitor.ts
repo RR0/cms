@@ -62,7 +62,7 @@ export class DefaultContentVisitor implements ContentVisitor {
     const container = context.file.document.createElement("p")
     const eventContext = context.clone()
     const eventTime = eventContext.time.date = event.time
-    assert.ok(eventTime, `Event of type "${event.type}" has no time`)
+    assert.ok(eventTime, `Event of type "${event.type}" has no time for paragraph`)
     container.dataset.time = eventTime.toString()
     const timeEl = this.timeElementFactory.create(eventContext, context)
     return {eventP: container, timeEl}
