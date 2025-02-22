@@ -29,6 +29,7 @@ import { uk } from "../uk/Uk"
 import { usa } from "../us/Usa"
 import { CmsCountry } from "./CmsCountry"
 import { georgia } from "../ge/Georgia"
+import { japan } from "../jp/Japan"
 
 export const countries: CmsCountry[] = [
   algeria,
@@ -57,7 +58,7 @@ export const countries: CmsCountry[] = [
   india,
   new CmsCountry(CountryCode.ir),
   new CmsCountry(CountryCode.it),
-  new CmsCountry(CountryCode.jp),
+  japan,
   new CmsCountry(CountryCode.ma),
   mexico,
   mozambique,

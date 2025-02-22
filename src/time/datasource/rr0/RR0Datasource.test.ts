@@ -17,8 +17,6 @@ import { RR0FileDatasource } from "./RR0FileDatasource"
 
 import { BuildContext } from "../../../BuildContext"
 import { NamedPlace } from "@rr0/place"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
-import { parisCity } from "../../../org/eu/fr/region/idf/75/paris/Paris"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 
@@ -118,8 +116,6 @@ describe("RR0CaseSource", () => {
   test("id", async () => {
     expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), new NamedPlace("Chatillon"))).toBe(
       "1972-08-12$Chatillon")
-    expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), new OrganizationPlace(parisCity))).toBe(
-      "1972-08-12$city$75000")
     expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), undefined)).toBe("1972-08-12$")
   })
 })

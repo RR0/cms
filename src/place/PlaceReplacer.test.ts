@@ -61,8 +61,7 @@ describe("PlaceReplacer", () => {
     return placeTag
   }
 
-  test("link to existing organization", async () => {
-    return // Disable test
+  test("link to existing organization", {skip: true}, async () => {
     const location = new PlaceLocation(35.8440582, -106.287162)
     const elevation = 2161.025390625
     const dirName = "org/us/state/nm/lanl/"

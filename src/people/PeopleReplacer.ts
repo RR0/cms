@@ -22,7 +22,7 @@ export class PeopleReplacer implements DomReplacement<HtmlRR0Context> {
     peopleStr = peopleStr.trim().replaceAll("\n", "").replace(/  /g, " ")
     let people = this.service.cache.get(peopleStr)
     if (!people) {
-      people = this.service.createFromFullName(peopleStr)
+      people = this.service.createFromTitle(peopleStr)
     }
     let url = people.dirName
     let replacement: HTMLElement
