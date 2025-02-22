@@ -15,7 +15,7 @@ export class TimeContextFilter<S extends TimeContextCase> extends ContextFilter<
   filter(c: S): boolean {
     const sightingTime = c.time
     const time = this.context.time
-    if (time) {
+    if (time && sightingTime) {
       const day = time.getDayOfMonth()
       const month = time.getMonth()
       const year = time.getYear()

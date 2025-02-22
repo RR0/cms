@@ -117,5 +117,6 @@ describe("RR0CaseSource", () => {
     expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), new NamedPlace("Chatillon"))).toBe(
       "1972-08-12$Chatillon")
     expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), undefined)).toBe("1972-08-12$")
+    expect(RR0Datasource.id(undefined, undefined)).toBe("rr0-1$")
   })
 })

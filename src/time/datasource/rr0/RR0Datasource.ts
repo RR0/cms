@@ -8,7 +8,9 @@ export class RR0ContextFilter extends TimeContextFilter<RR0CaseSummary> {
 }
 
 export abstract class RR0Datasource extends AbstractDatasource<RR0CaseSummary> {
+
   static idCount = 0
+
   static readonly placeRegex = /^(.+?)(?:\s*\((.+?)(?:\s*,\s*(.+?)(?:\s*,\s*(.+?)))?\))?$/g
 
   protected constructor() {
@@ -16,6 +18,6 @@ export abstract class RR0Datasource extends AbstractDatasource<RR0CaseSummary> {
   }
 
   static id(dateTime: EdtfDate, place: Place | undefined): string {
-    return `${dateTime?.toString() || ("rr0-" + this.idCount++)}$${(place?.toString() ?? "")}`
+    return `${dateTime?.toString() || ("rr0-" + ++this.idCount)}$${(place?.toString() ?? "")}`
   }
 }
