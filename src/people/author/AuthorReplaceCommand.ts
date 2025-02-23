@@ -1,6 +1,6 @@
 import { RegexReplacer, SsiEchoVarReplaceCommand } from "ssg-api"
 import { HtmlRR0Context } from "../../RR0Context.js"
-import { TimeService } from "../../time/TimeService.js"
+import { TimeRenderer } from "../../time"
 
 /**
  * Replaces "<!--#echo var="author" -->" and "<!--#echo var="copyright" -->"
@@ -8,7 +8,7 @@ import { TimeService } from "../../time/TimeService.js"
  */
 export class AuthorReplaceCommand extends SsiEchoVarReplaceCommand {
 
-  constructor(protected timeService: TimeService) {
+  constructor(protected timeRenderer: TimeRenderer) {
     super("author")
   }
 
@@ -23,7 +23,8 @@ export class AuthorReplaceCommand extends SsiEchoVarReplaceCommand {
           authorsHtml += authorsHtml ? ": " + copyright : copyright
         }
         if (authorsHtml && context.time.getYear()) {
-          const {result, replacement} = this.timeService.renderer.renderContent(context, undefined, {url: true})
+          const {result, replacement} = this.timeRenderer.renderContent(context, undefined,
+            {url: true, contentOnly: false})
           result.append(replacement)
           authorsHtml += ", " + result.outerHTML
         }

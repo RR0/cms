@@ -1,58 +1,17 @@
-import { TimeRenderer } from "./html/TimeRenderer.js"
 import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
-import { TimeUrlBuilder } from "./TimeUrlBuilder"
 import { AbstractDataService, AllDataService, RR0Event, RR0EventJson } from "@rr0/data"
 import { HtmlRR0Context, RR0ContextImpl } from "../RR0Context"
 import { StringUtil } from "../util"
 import { TimeContext } from "@rr0/time"
-
-export type TimeServiceOptions = {
-  readonly root: string,
-  readonly files: string[]
-}
+import { TimeOptions } from "./TimeOptions"
 
 export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
 
   static readonly defaultRegex = /time\/(-)?(\d)\/(\d)\/(\d)\/(\d)\/?(\d{2})?\/?(\d{2})?\/?(index(_[a-z]{2})?.html)?/
 
-  readonly renderer: TimeRenderer
-  readonly root: string
-
-  constructor(dataService: AllDataService, readonly textBuilder: TimeTextBuilder, readonly urlBuilder: TimeUrlBuilder,
-              options: TimeServiceOptions, readonly timePathRegex = TimeService.defaultRegex) {
+  constructor(dataService: AllDataService, protected options: TimeOptions,
+              readonly timePathRegex = TimeService.defaultRegex) {
     super(dataService, null, options.files)
-    this.root = options.root
-    this.renderer = new TimeRenderer(this, this.textBuilder)
-  }
-
-  isTimeFile(filePath: string): boolean {
-    return this.files.includes(filePath)
-  }
-
-  /**
-   * @return the found time URL or undefined if not found.
-   */
-  matchExistingTimeFile(url: string): string | undefined {
-    while (url && url !== this.root && this.files.indexOf(`${url}/index.html`) < 0) {
-      const slash = url.lastIndexOf("/")
-      url = url.substring(0, slash)
-    }
-    return url === this.root ? undefined : url
-  }
-
-  /**
-   * Instantiate a Date object matching an ISO date ("1972-08-12 16:34" for instance).
-   *
-   * Approximated dates like "~1972" will be converted to exact dates ("1972").
-   *
-   * @param isoDate
-   */
-  dateFromIso(isoDate: string): Date {
-    isoDate = isoDate.replace("~", "")
-    if (isoDate.charAt(0) === "-") {
-      isoDate = "-" + "0".repeat(7 - isoDate.length) + isoDate.substring(1)
-    }
-    return new Date(isoDate)
   }
 
   parseFileName(fileName: string): RegExpExecArray | null {

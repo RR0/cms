@@ -1,10 +1,11 @@
 import { TimeReplacer } from "./TimeReplacer.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
+import { TimeUrlBuilder } from "../TimeUrlBuilder"
 
 export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
 
-  constructor(protected readonly replacer: TimeReplacer) {
+  constructor(protected readonly replacer: TimeReplacer, protected readonly timeUrlBuilder: TimeUrlBuilder) {
   }
 
   /**
@@ -16,7 +17,7 @@ export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
     return {
       replace: (original: HTMLTimeElement): Promise<HTMLElement> => {
         return this.replacer.replacement(
-          this.replacer.factory.renderer.service.isTimeFile(context.file.name) ? context.clone() : context, original)
+          this.timeUrlBuilder.isTimeFile(context.file.name) ? context.clone() : context, original)
       }
     }
   }

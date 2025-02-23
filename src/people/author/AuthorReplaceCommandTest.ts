@@ -11,7 +11,7 @@ describe("AuthorReplaceCommand", async () => {
 
   test("no author", async () => {
     const timeFile = rr0TestUtil.time.filePath("1/9/5/4/index.html")
-    const command = new AuthorReplaceCommand(timeService)
+    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     await command.execute(context)
@@ -21,7 +21,7 @@ describe("AuthorReplaceCommand", async () => {
 
   test("author only", async () => {
     const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
-    const command = new AuthorReplaceCommand(timeService)
+    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     context.file.meta.author.push("Beau, Jérôme")
@@ -34,7 +34,7 @@ describe("AuthorReplaceCommand", async () => {
 
   test("copyright only", async () => {
     const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
-    const command = new AuthorReplaceCommand(timeService)
+    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     context.file.meta.copyright = "Some publication"
@@ -48,7 +48,7 @@ describe("AuthorReplaceCommand", async () => {
 
   test("author with copyright", async () => {
     const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
-    const command = new AuthorReplaceCommand(timeService)
+    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
     const context = rr0TestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     context.file.meta.author.push("Beau, Jérôme")

@@ -9,7 +9,8 @@ describe("OpenGraphCommand", () => {
   test("time page", () => {
     const timeFile = rr0TestUtil.time.filePath("0/0/6/5/index.html")
     const context = rr0TestUtil.newHtmlContext(timeFile, "")
-    const command = new OpenGraphCommand(outDir, [context.file.name], "https://rr0.org", rr0TestUtil.time.getService())
+    const command = new OpenGraphCommand(outDir, [context.file.name], "https://rr0.org", rr0TestUtil.time.getService(),
+      rr0TestUtil.time.timeTextBuilder)
     expect(command.getInfoStr(context)).toBe("Chronologie, RR0.org")
   })
 })

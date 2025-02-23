@@ -8,14 +8,14 @@ import {
   EventReplacerFactory,
   HttpSource,
   RR0CaseMapping,
-  RR0Mapping,
   SsiTitleReplaceCommand,
   TimeElementFactory,
   TimeLinkDefaultHandler,
+  TimeOptions,
+  TimeRenderer,
   TimeReplacer,
   TimeReplacerFactory,
   TimeService,
-  TimeServiceOptions,
   TimeTextBuilder,
   TimeUrlBuilder
 } from "./time"
@@ -35,7 +35,6 @@ import {
 import { HtmlRR0Context, RR0ContextImpl } from "./RR0Context.js"
 import { HtmlTable } from "./util/index.js"
 import {
-  AngularExpressionReplaceCommand,
   ClassDomReplaceCommand,
   ContentStepConfig,
   CopyStep,
@@ -50,15 +49,9 @@ import {
   OutputFunc,
   Ssg,
   SsgContext,
-  SsiEchoVarReplaceCommand,
-  SsiIfReplaceCommand,
   SsiIncludeReplaceCommand,
-  SsiIncludeReplaceCommandTransformer,
-  SsiLastModifiedReplaceCommand,
-  SsiSetVarReplaceCommand,
-  StringEchoVarReplaceCommand
+  SsiIncludeReplaceCommandTransformer
 } from "ssg-api"
-import { LanguageReplaceCommand } from "./lang/index.js"
 import {
   AuthorReplaceCommand,
   PeopleDirectoryStepFactory,
@@ -80,17 +73,13 @@ import { MetaLinkReplaceCommand } from "./MetaLinkReplaceCommand.js"
 import { OutlineReplaceCommand } from "./outline/index.js"
 import { ImageCommand } from "./ImageCommand.js"
 import { SearchIndexStep, SearchVisitor } from "./search/index.js"
-import { BaseReplaceCommand } from "./BaseReplaceCommand.js"
 import { OpenGraphCommand } from "./OpenGraphCommand.js"
-import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
 import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
 import { IndexedReplacerFactory } from "./index/IndexedReplacerFactory.js"
 import { APIFactory, CodeReplacerFactory } from "./tech/index.js"
 import { ContentVisitor, RR0ContentStep, RR0ContentStepOptions } from "./RR0ContentStep.js"
 import { UnitReplaceCommand } from "./value/index.js"
 import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
-
-import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
 import {
@@ -105,6 +94,7 @@ import { GooglePlaceService } from "@rr0/place"
 import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer"
 import { CountryService } from "./org/country/CountryService"
 import { BuildContext } from "./BuildContext"
+import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace"
 
 export interface RR0BuildOptions {
   contentRoots: string[]
@@ -113,7 +103,7 @@ export interface RR0BuildOptions {
   locale: string,
   googleMapsApiKey: string
   mail: string
-  timeOptions: TimeServiceOptions
+  timeOptions: TimeOptions
   siteBaseUrl: string
   timeFormat: Intl.DateTimeFormatOptions
   directoryPages: string[]
@@ -123,6 +113,7 @@ export interface RR0BuildOptions {
   directoryExcluded: string[],
   directoryOptions: PeopleDirectoryStepOptions
   mappings: RR0CaseMapping<any>[]
+  contentReplacers: ReplaceCommand<HtmlRR0Context>[]
 }
 
 export interface RR0BuildArgs {
@@ -178,14 +169,16 @@ export class RR0Build implements BuildContext {
   readonly context: RR0ContextImpl
   readonly placeService: GooglePlaceService
   readonly orgService: OrganizationService<any>
-  readonly timeService: TimeService
   readonly caseFactory: CaseFactory
   readonly dataService: AllDataService
   readonly peopleFactory: PeopleFactory
-  readonly timeTextBuilder: TimeTextBuilder
   readonly cityService: CityService
   readonly departmentService: DepartmentService
   readonly countryService: CountryService
+  readonly timeTextBuilder: TimeTextBuilder
+  readonly timeService: TimeService
+  readonly timeRenderer: TimeRenderer
+  readonly timeUrlBuilder: TimeUrlBuilder
 
   constructor(protected options: RR0BuildOptions) {
     this.config = {
@@ -209,8 +202,7 @@ export class RR0Build implements BuildContext {
     this.cityService = cityService
     const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(options.timeFormat)
     const timeOptions = options.timeOptions
-    const timeRoot = timeOptions.root
-    const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeRoot})
+    const timeUrlBuilder = this.timeUrlBuilder = new TimeUrlBuilder(timeOptions)
     const sightingFactory = new EventDataFactory(eventFactory, "sighting", ["index"])
     const caseFactory = this.caseFactory = new CaseFactory(eventFactory)
     const peopleFactory = this.peopleFactory = new PeopleFactory(eventFactory)
@@ -222,15 +214,16 @@ export class RR0Build implements BuildContext {
     dataService.getFromDir("", ["people", "case"]).then(data => {
       console.debug(data)
     })
-    this.timeService = new TimeService(dataService, timeTextBuilder, timeUrlBuilder, timeOptions)
+    this.timeRenderer = new TimeRenderer(timeUrlBuilder, timeTextBuilder)
+    this.timeService = new TimeService(dataService, timeOptions)
   }
 
   async run(args: RR0BuildArgs) {
     const context = this.context
     const timeFiles = this.options.timeOptions.files
     context.setVar("timeFilesCount", timeFiles.length)
-    const timeService = this.timeService
-    const timeElementFactory = new TimeElementFactory(timeService.renderer)
+    const timeRenderer = this.timeRenderer
+    const timeElementFactory = new TimeElementFactory(timeRenderer)
     const timeReplacer = new TimeReplacer(timeElementFactory)
 
     const caseFiles = await this.caseFactory.getFiles()
@@ -258,9 +251,10 @@ export class RR0Build implements BuildContext {
     const peopleSteps = await peopleDirectoryFactory.create(directoryOptions)
     // Publish case.json files so that vraiufo.com will find them
     const copies = this.options.copies
-    copies.push(...(ufoCasesStep.config.rootDirs).map(dir => path.join(dir, "case.json")))
+    const ufoCasesRootDirs = ufoCasesStep.config.rootDirs
+    copies.push(...ufoCasesRootDirs.map(dir => path.join(dir, "case.json")))
     const outDir = this.options.outDir
-    await writeFile(path.join(outDir, "casesDirs.json"), JSON.stringify(ufoCasesStep.config.rootDirs), "utf-8")
+    await writeFile(path.join(outDir, "casesDirs.json"), JSON.stringify(ufoCasesRootDirs), "utf-8")
     const dirsContainingPeopleJson = peopleSteps.reduce((rootDirs, peopleStep) => {
       rootDirs.push(...peopleStep.config.rootDirs)
       return rootDirs
@@ -278,57 +272,29 @@ export class RR0Build implements BuildContext {
     const baseUrl = this.options.siteBaseUrl
     const timeFormat = this.options.timeFormat
     const sourceRegistryFileName = this.options.sourceRegistryFileName
+    const timeService = this.timeService
     const sourceFactory = new PersistentSourceRegistry(dataService, http, baseUrl, sourceRegistryFileName,
       timeFormat, timeService)
     const noteCounter = new NoteFileCounter()
     const noteRenderer = new NoteRenderer(noteCounter)
     const caseRenderer = new CaseSummaryRenderer(noteRenderer, sourceFactory, sourceRenderer, timeElementFactory)
-    const mappings = this.options.mappings || [new RR0Mapping({read: ["fetch"], write: ["backup"]})]
+    const mappings = this.options.mappings || []
     mappings.forEach(mapping => mapping.init(this))
+    const timeUrlBuilder = this.timeUrlBuilder
     const databaseAggregationCommand = new DomReplaceCommand(".contents ul",
-      new ChronologyReplacerFactory(timeService,
-        mappings, caseRenderer)
+      new ChronologyReplacerFactory(timeUrlBuilder, mappings, caseRenderer)
     )
     const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {
       let title: string | undefined
       title = timeService.titleFromFile(context, context.file.name, timeTextBuilder)
       return title
     }
-    const pageReplaceCommands = [
-      new BaseReplaceCommand("/"),
-      new LanguageReplaceCommand(),
-      new SsiEchoVarReplaceCommand("copyright", [rr0DefaultCopyright]),
-      new StringEchoVarReplaceCommand(),
-      new AngularExpressionReplaceCommand(),
-      new SsiIfReplaceCommand(),
-      new SsiSetVarReplaceCommand("title", (_match: string, ...args: any[]) => `<title>${args[0]}</title>`),
-      new SsiSetVarReplaceCommand("url",
-        (_match: string, ...args: any[]) => `<meta name="url" content="${args[0]}"/>`),
-      new SsiLastModifiedReplaceCommand(timeFormat),
-      new SsiTitleReplaceCommand([timeDefaultHandler]),
-      new DescriptionReplaceCommand("UFO data for french-reading people", "abstract"),
-      new AuthorReplaceCommand(timeService)
-    ]
     const sourceCounter = new SourceFileCounter()
     const sourceReplacer = new SourceReplacer(sourceRenderer, sourceFactory, sourceCounter)
     const sourceReplacerFactory = new SourceReplacerFactory(sourceReplacer)
     const noteReplacer = new NoteReplacer(noteRenderer)
     const noteReplacerFactory = new NoteReplacerFactory(noteReplacer)
     const eventReplacer = new EventReplacer(caseRenderer, dataService)
-    const contentsReplaceCommand = [
-      new ClassDomReplaceCommand(new EventReplacerFactory(eventReplacer), "event"),
-      new ClassDomReplaceCommand(sourceReplacerFactory, "source"),
-      new DomReplaceCommand("time", new TimeReplacerFactory(timeReplacer)),
-      new DomReplaceCommand("code", new CodeReplacerFactory()),
-      new ClassDomReplaceCommand(new PeopleReplacerFactory(peopleService, peopleRenderer), "people"),
-      new ClassDomReplaceCommand(new PlaceReplacerFactory(), "place"),
-      new ClassDomReplaceCommand(new WitnessReplacerFactory(), "temoin", "temoin1", "temoin2", "temoin3"),
-      new ClassDomReplaceCommand(noteReplacerFactory, "note"),
-      new ClassDomReplaceCommand(new IndexedReplacerFactory(), "indexed"),
-      new UnitReplaceCommand(),
-      new MetaLinkReplaceCommand(new TimeLinkDefaultHandler(timeService, timeTextBuilder)),
-      databaseAggregationCommand
-    ]
     const ssg = new Ssg(config)
     const getOutputPath = (context: SsgContext): string => path.join(outDir, context.file.name)
     const force = args.force === "true"
@@ -360,8 +326,7 @@ export class RR0Build implements BuildContext {
         replacements: [new class extends SsiIncludeReplaceCommand {
           protected filePath(context: SsgContext, fileNameArg: string): string {
             const dirName = path.dirname(context.file.name)
-            return fileNameArg.startsWith("/") ?
-              path.join(process.cwd(), fileNameArg) : path.join(dirName, fileNameArg)
+            return fileNameArg.startsWith("/") ? path.join(process.cwd(), fileNameArg) : path.join(dirName, fileNameArg)
           }
         }([csvTransformer])],
         getOutputPath
@@ -373,11 +338,30 @@ export class RR0Build implements BuildContext {
     ssg.add(ufoCasesStep)
     ssg.add(...peopleSteps)
     if (contentRoots) {
-      const contentVisitor = new DefaultContentVisitor(dataService, caseRenderer as any, timeElementFactory)
+      const contentVisitor = new DefaultContentVisitor(dataService, caseRenderer, timeElementFactory)
       const contentVisitors: ContentVisitor[] = [contentVisitor, searchVisitor]
       if (args.books) {
         contentVisitors.push(new BookContentVisitor(bookMeta, bookLinks))
       }
+      const pageReplaceCommands = [
+        ...this.options.contentReplacers,
+        new SsiTitleReplaceCommand([timeDefaultHandler]),
+        new AuthorReplaceCommand(timeRenderer)
+      ]
+      const contentsReplaceCommand = [
+        new ClassDomReplaceCommand(new EventReplacerFactory(eventReplacer), "event"),
+        new ClassDomReplaceCommand(sourceReplacerFactory, "source"),
+        new DomReplaceCommand("time", new TimeReplacerFactory(timeReplacer, timeUrlBuilder)),
+        new DomReplaceCommand("code", new CodeReplacerFactory()),
+        new ClassDomReplaceCommand(new PeopleReplacerFactory(peopleService, peopleRenderer), "people"),
+        new ClassDomReplaceCommand(new PlaceReplacerFactory(), "place"),
+        new ClassDomReplaceCommand(new WitnessReplacerFactory(), "temoin", "temoin1", "temoin2", "temoin3"),
+        new ClassDomReplaceCommand(noteReplacerFactory, "note"),
+        new ClassDomReplaceCommand(new IndexedReplacerFactory(), "indexed"),
+        new UnitReplaceCommand(),
+        new MetaLinkReplaceCommand(new TimeLinkDefaultHandler(timeService, timeUrlBuilder, timeTextBuilder)),
+        databaseAggregationCommand
+      ]
       const contentReplacements = [
         ...pageReplaceCommands,
         ...contentsReplaceCommand,
@@ -385,7 +369,7 @@ export class RR0Build implements BuildContext {
         new AnchorReplaceCommand(baseUrl,
           [new CaseAnchorHandler(caseService, timeTextBuilder), new DataAnchorHandler(dataService)]),
         new ImageCommand(outDir, 275, 500),
-        new OpenGraphCommand(outDir, timeFiles, baseUrl, timeService)
+        new OpenGraphCommand(outDir, timeFiles, baseUrl, timeService, timeTextBuilder)
       ]
       ssg.add(new RR0ContentStep({
         contentConfigs: [{roots: contentRoots, replacements: contentReplacements, getOutputPath}],

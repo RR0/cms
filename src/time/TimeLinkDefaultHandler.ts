@@ -3,19 +3,21 @@ import { HtmlRR0Context } from "../RR0Context.js"
 import { Link, LinkType } from "ssg-api"
 import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
 import { TimeService } from "./TimeService"
+import { TimeUrlBuilder } from "./TimeUrlBuilder"
 
 export class TimeLinkDefaultHandler implements LinkHandler<HtmlRR0Context> {
 
-  constructor(protected service: TimeService, protected timeTextBuilder: TimeTextBuilder) {
+  constructor(protected service: TimeService, protected urlBuilder: TimeUrlBuilder,
+              protected timeTextBuilder: TimeTextBuilder) {
   }
 
   contents(context: HtmlRR0Context): Link | undefined {
     const prevLink = this.prev(context)
     if (prevLink) {
-      const service = this.service
-      let contentUrl = service.matchExistingTimeFile(prevLink.url.substring(1))
-      if (contentUrl != service.root) {
-        const text = service.titleFromFile(context, contentUrl, this.timeTextBuilder)
+      const urlBuilder = this.urlBuilder
+      let contentUrl = urlBuilder.matchExistingTimeFile(prevLink.url.substring(1))
+      if (contentUrl != urlBuilder.options.rootDir) {
+        const text = this.service.titleFromFile(context, contentUrl, this.timeTextBuilder)
         if (text) {
           return {type: LinkType.prev, text, url: "/" + contentUrl}
         }

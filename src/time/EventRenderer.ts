@@ -7,11 +7,13 @@ import { RR0Data, RR0Event } from "@rr0/data"
 import { Source } from "@rr0/data/dist/source"
 import { PlaceRenderer } from "../place/PlaceRenderer"
 import { Place } from "@rr0/place"
+import { TimeRenderOptions } from "./html"
 
 /**
  * Render a case summary as HTML.
  */
 export class EventRenderer<E extends RR0Event> {
+
   placeRenderer = new PlaceRenderer()
 
   constructor(
@@ -40,12 +42,13 @@ export class EventRenderer<E extends RR0Event> {
     container.append(".")
   }
 
-  async render(context: HtmlRR0Context, event: E, container: HTMLElement) {
+  async render(context: HtmlRR0Context, event: E, container: HTMLElement,
+               options: TimeRenderOptions = {url: true, contentOnly: false}) {
     const eventContext = context.clone()
     const eventTime = eventContext.time.date = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time`)
     container.dataset.time = eventTime.toString()
-    const timeEl = this.timeElementFactory.create(eventContext, context)
+    const timeEl = this.timeElementFactory.create(eventContext, context, options)
     container.append(timeEl)
     const place = event.place
     if (place) {

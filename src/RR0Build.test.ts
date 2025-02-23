@@ -9,7 +9,7 @@ import {
   RR0CaseMapping,
   RR0Mapping,
   SceauRR0Mapping,
-  TimeServiceOptions,
+  TimeOptions,
   UrecatRR0Mapping
 } from "./time/index.js"
 import { PeopleDirectoryStepOptions } from "./people/index.js"
@@ -108,7 +108,7 @@ describe("Build", () => {
     const sourceRegistryFileName = testFilePath("source/index.json")
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
-    const timeOptions: TimeServiceOptions = {root: testFilePath("time"), files: timeFiles}
+    const timeOptions: TimeOptions = {rootDir: testFilePath("time"), files: timeFiles}
     // const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
     // const actions: ChronologyReplacerActions = {read: [], write: ["backup"]}
     const actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}

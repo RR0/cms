@@ -10,9 +10,8 @@ describe("AnchorReplaceCommand", () => {
 
   test("replace anchor tag", async () => {
     const dataService = rr0TestUtil.dataService
-    const timeService = rr0TestUtil.time.getService()
     const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
-    const timeRenderer = new TimeRenderer(timeService, timeTextBuilder)
+    const timeRenderer = new TimeRenderer(rr0TestUtil.time.urlBuilder, timeTextBuilder)
     const timeElementFactory = new TimeElementFactory(timeRenderer)
     const roswellUrl = "/src/science/crypto/ufo/enquete/dossier/Roswell"
     const caseFiles = [path.join(roswellUrl, "index.html")]

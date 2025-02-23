@@ -4,7 +4,7 @@ import { CLI } from "../util/cli/CLI.js"
 import { AllDataService, PeopleService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { Book } from "./Book"
 import { BookService } from "./BookService"
-import { TimeServiceOptions, TimeUrlBuilder } from "../time"
+import { TimeOptions, TimeUrlBuilder } from "../time"
 import { rr0TestUtil, testFilePath } from "../test"
 import { BookJson } from "./BookJson"
 
@@ -28,11 +28,11 @@ const config: FileWriteConfig = {
     return path.join(outDir, context.file.name)
   }
 }
-const timeOptions: TimeServiceOptions = {
-  root: testFilePath("time"),
+const timeOptions: TimeOptions = {
+  rootDir: testFilePath("time"),
   files: []
 }
-const timeUrlBuilder = new TimeUrlBuilder({rootDir: timeOptions.root})
+const timeUrlBuilder = new TimeUrlBuilder(timeOptions)
 let files = []
 const peopleService = new PeopleService(dataService, peopleFactory, {files, rootDir: testFilePath("people")})
 const books = new BookService(logger, dry, peopleService, timeUrlBuilder, config)

@@ -12,7 +12,7 @@ export class TimeElementFactory {
   }
 
   create(context: HtmlRR0Context, previousContext: HtmlRR0Context | undefined,
-         options: TimeRenderOptions = {url: true}): HTMLElement | undefined {
+         options: TimeRenderOptions = {url: true, contentOnly: false}): HTMLElement | undefined {
     let replacement: HTMLElement | undefined
     const time = context.time
     const interval = time.interval as Level2Interval
@@ -64,7 +64,7 @@ export class TimeElementFactory {
   }
 
   protected valueReplacement(context: HtmlRR0Context, previousContext: RR0Context | undefined,
-                   options: TimeRenderOptions = {url: true}): HTMLElement | undefined {
+                             options: TimeRenderOptions = {url: true, contentOnly: false}): HTMLElement | undefined {
     let replacement
     if (context.time.duration) {
       replacement = this.durationReplacement(context)
@@ -114,7 +114,8 @@ export class TimeElementFactory {
   }
 
   protected dateTimeReplacement(
-    context: HtmlRR0Context, previousContext: RR0Context | null, options: TimeRenderOptions = {url: true}
+    context: HtmlRR0Context, previousContext: RR0Context | null,
+    options: TimeRenderOptions = {url: true, contentOnly: false}
   ): HTMLElement | undefined {
     let replacement: HTMLElement | undefined = undefined
     if (context.time.isDefined()) {

@@ -29,7 +29,8 @@ export class CaseService extends AbstractDataService<RR0Case, RR0CaseJson> {
       caseContext.time = new TimeContext(time.year?.value, time.month?.value, time.day?.value, time.hour?.value,
         time.minute?.value, time.timeshift?.toString())
       const options: Intl.DateTimeFormatOptions = {year: "numeric"}
-      const {result, replacement} = this.timeElementFactory.renderer.renderContent(caseContext, undefined, {url: true},
+      const {result, replacement} = this.timeElementFactory.renderer.renderContent(caseContext, undefined,
+        {url: true, contentOnly: false},
         options)
       result.append(replacement)
       details.push(result.outerHTML)

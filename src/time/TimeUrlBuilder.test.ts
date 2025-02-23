@@ -9,7 +9,8 @@ describe("TimeUrlBuilder", () => {
 
   const config = rr0TestUtil.config
   const rootDir = rr0TestUtil.time.fullRoot
-  const timeUrlBuilder = new TimeUrlBuilder({rootDir})
+  const timeOptions = {rootDir, files: []}
+  const timeUrlBuilder = new TimeUrlBuilder(timeOptions)
 
   test("builds year", () => {
     {

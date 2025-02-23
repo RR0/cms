@@ -3,27 +3,31 @@ import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { RelativeTimeTextBuilder } from "../text/RelativeTimeTextBuilder.js"
 import { UrlUtil } from "../../util/url/UrlUtil.js"
 import { TimeReplacer } from "./TimeReplacer.js"
-import { TimeService } from "../TimeService"
+import { TimeUrlBuilder } from "../TimeUrlBuilder"
 
 export interface TimeRenderOptions {
   url: boolean
+  contentOnly: boolean
 }
 
 export class TimeRenderer {
 
   protected readonly relativeTextBuilder: RelativeTimeTextBuilder
 
-  constructor(readonly service: TimeService, protected textBuilder: TimeTextBuilder) {
+  constructor(readonly urlBuilder: TimeUrlBuilder, protected textBuilder: TimeTextBuilder) {
     this.relativeTextBuilder = new RelativeTimeTextBuilder(textBuilder)
   }
 
   render(context: HtmlRR0Context, previousContext?: RR0Context,
-         options: TimeRenderOptions = {url: true}): HTMLElement {
+         options: TimeRenderOptions = {url: true, contentOnly: false}): HTMLElement {
     const {result, replacement} = this.renderContent(context, previousContext, options)
-    const timeMessages = context.messages.context.time
-    const time = context.time
-    const message = time.getDayOfMonth() ? timeMessages.on : timeMessages.in
-    result.append(message(time.approximate), replacement)
+    if (!options.contentOnly) {
+      const timeMessages = context.messages.context.time
+      const time = context.time
+      const message = time.getDayOfMonth() ? timeMessages.on : timeMessages.in
+      result.append(message(time.approximate))
+    }
+    result.append(replacement)
     return result
   }
 
@@ -33,7 +37,7 @@ export class TimeRenderer {
     replacement: HTMLElement
   } {
     const time = context.time
-    const absoluteTimeUrl = this.service.urlBuilder.fromContext(time)
+    const absoluteTimeUrl = this.urlBuilder.fromContext(time)
     const title = this.textBuilder.build(context, renderOptions)
     const text = (previousContext ? this.relativeTextBuilder.build(previousContext, context) : undefined) || title
     const file = context.file
@@ -46,7 +50,7 @@ export class TimeRenderer {
     }
     timeEl.textContent = text
     const dirName = currentFileName.substring(0, currentFileName.indexOf("/index"))
-    const existingUrl = options.url && this.service.matchExistingTimeFile(absoluteTimeUrl)
+    const existingUrl = options.url && this.urlBuilder.matchExistingTimeFile(absoluteTimeUrl)
     if (existingUrl && existingUrl !== dirName) {
       const a = replacement = doc.createElement("a") as HTMLAnchorElement
       a.href = UrlUtil.absolute(existingUrl)

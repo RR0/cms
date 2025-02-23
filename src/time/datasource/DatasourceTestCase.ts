@@ -56,7 +56,8 @@ export abstract class DatasourceTestCase<S> {
     const http = new HttpSource()
     const timeService = await rr0TestUtil.time.getService()
     const sourceFactory = new SourceFactory(dataService, http, baseUrl, this.intlOptions, timeService)
-    const timeElementFactory = new TimeElementFactory(new TimeRenderer(timeService, this.timeTextBuilder))
+    const timeElementFactory = new TimeElementFactory(
+      new TimeRenderer(rr0TestUtil.time.urlBuilder, this.timeTextBuilder))
     const eventRenderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
       new SourceRenderer(this.timeTextBuilder), timeElementFactory)
     const items = []

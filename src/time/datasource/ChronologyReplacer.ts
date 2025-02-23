@@ -33,7 +33,6 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0Context, HTMLUL
       const datasource = mapping.datasource
       if (datasource instanceof RR0HttpDatasource) {
         datasource.http = new class extends HttpSource {
-
           async get(queryUrl: URL, init: RequestInit = {}, resOut: Partial<Response> = {}): Promise<HTMLElement> {
             return context.file.document.documentElement
           }
@@ -52,7 +51,7 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0Context, HTMLUL
           for (const c of allCases) {
             const outDoc = context.file.document
             const eventEl = outDoc.createElement("li")
-            await this.renderer.render(context, c, eventEl)
+            await this.renderer.render(context, c, eventEl, {url: true, contentOnly: true})
             element.append(eventEl)
           }
         }

@@ -1,9 +1,8 @@
 import path from "path"
 import { Level2Date as EdtfDate, TimeContext } from "@rr0/time"
+import { TimeOptions } from "./TimeOptions"
 
-export type TimeUrlBuilderOptions = {
-  rootDir: string
-}
+export type TimeUrlBuilderOptions = TimeOptions
 
 export class TimeUrlBuilder {
 
@@ -30,5 +29,21 @@ export class TimeUrlBuilder {
       url += `/${day.toString().padStart(2, "0")}`
     }
     return url
+  }
+
+  isTimeFile(filePath: string): boolean {
+    return this.options.files.includes(filePath)
+  }
+
+  /**
+   * @return the found time URL or undefined if not found.
+   */
+  matchExistingTimeFile(url: string): string | undefined {
+    const rootDir = this.options.rootDir
+    while (url && url !== rootDir && !this.isTimeFile(`${url}/index.html`)) {
+      const slash = url.lastIndexOf("/")
+      url = url.substring(0, slash)
+    }
+    return url === rootDir ? undefined : url
   }
 }

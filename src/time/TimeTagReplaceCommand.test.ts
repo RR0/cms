@@ -7,13 +7,13 @@ import path from "path"
 
 describe("HtmlTagReplaceCommand", async () => {
 
-  const timeRoot = rr0TestUtil.time.timeOptions.root
-  await rr0TestUtil.time.getService(
-    {root: path.join(rr0TestUtil.rootDir, timeRoot), files: ["time/2/0/0/4/index.html"]})
+  const timeRoot = rr0TestUtil.time.timeOptions.rootDir
+  const timeService = await rr0TestUtil.time.getService(
+    {rootDir: path.join(rr0TestUtil.rootDir, timeRoot), files: ["time/2/0/0/4/index.html"]})
 
   test("replace time tag", async () => {
     const replacer = new TimeReplacer(rr0TestUtil.time.timeElementFactory)
-    const command = new DomReplaceCommand("time", new TimeReplacerFactory(replacer))
+    const command = new DomReplaceCommand("time", new TimeReplacerFactory(replacer, rr0TestUtil.time.urlBuilder))
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html",
       `<time>2004</time> <a href="/science/crypto/ufo/enquete/dossier/Roswell">Roswell</a>`)
     await command.execute(context)
