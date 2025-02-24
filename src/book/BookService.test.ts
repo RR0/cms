@@ -4,9 +4,10 @@ import { CLI } from "../util/cli/CLI.js"
 import { AllDataService, PeopleService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { Book } from "./Book"
 import { BookService } from "./BookService"
-import { TimeOptions, TimeUrlBuilder } from "../time"
+import { TimeUrlBuilder } from "../time"
 import { rr0TestUtil, testFilePath } from "../test"
 import { BookJson } from "./BookJson"
+import { TimeOptions } from "../time/TimeOptions"
 
 interface BookImportArgs {
   import: string

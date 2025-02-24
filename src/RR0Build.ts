@@ -11,7 +11,6 @@ import {
   SsiTitleReplaceCommand,
   TimeElementFactory,
   TimeLinkDefaultHandler,
-  TimeOptions,
   TimeRenderer,
   TimeReplacer,
   TimeReplacerFactory,
@@ -95,6 +94,7 @@ import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer"
 import { CountryService } from "./org/country/CountryService"
 import { BuildContext } from "./BuildContext"
 import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace"
+import { TimeOptions } from "./time/TimeOptions"
 
 export interface RR0BuildOptions {
   contentRoots: string[]

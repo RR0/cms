@@ -9,13 +9,25 @@ import {
   RR0CaseMapping,
   RR0Mapping,
   SceauRR0Mapping,
-  TimeOptions,
   UrecatRR0Mapping
 } from "./time/index.js"
 import { PeopleDirectoryStepOptions } from "./people/index.js"
 import { testFilePath } from "./test"
 import * as process from "node:process"
 import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
+import { BaseReplaceCommand } from "./BaseReplaceCommand"
+import { LanguageReplaceCommand } from "./lang"
+import {
+  AngularExpressionReplaceCommand,
+  SsiEchoVarReplaceCommand,
+  SsiIfReplaceCommand,
+  SsiLastModifiedReplaceCommand,
+  SsiSetVarReplaceCommand,
+  StringEchoVarReplaceCommand
+} from "ssg-api"
+import { rr0DefaultCopyright } from "./RR0DefaultCopyright"
+import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand"
+import { TimeOptions } from "./time/TimeOptions"
 
 describe("Build", () => {
   console.time("ssg")
@@ -132,7 +144,20 @@ describe("Build", () => {
       sourceRegistryFileName,
       directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"].map(testFilePath),
       directoryOptions,
-      mappings
+      mappings,
+      contentReplacers: [
+        new BaseReplaceCommand("/"),
+        new LanguageReplaceCommand(),
+        new SsiEchoVarReplaceCommand("copyright", [rr0DefaultCopyright]),
+        new StringEchoVarReplaceCommand(),
+        new AngularExpressionReplaceCommand(),
+        new SsiIfReplaceCommand(),
+        new SsiSetVarReplaceCommand("title", (_match: string, ...args: any[]) => `<title>${args[0]}</title>`),
+        new SsiSetVarReplaceCommand("url",
+          (_match: string, ...args: any[]) => `<meta name="url" content="${args[0]}"/>`),
+        new SsiLastModifiedReplaceCommand(timeFormat),
+        new DescriptionReplaceCommand("UFO data for french-reading people", "abstract")
+      ]
     })
     await build.run(args)
   })

@@ -1,14 +1,8 @@
 import path from "path"
-import {
-  TimeElementFactory,
-  TimeOptions,
-  TimeRenderer,
-  TimeService,
-  TimeTextBuilder,
-  TimeUrlBuilder
-} from "../time/index.js"
+import { TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder, TimeUrlBuilder } from "../time/index.js"
 import { RR0TestUtil, rr0TestUtil } from "../test"
 import { HtmlRR0Context } from "../RR0Context"
+import { TimeOptions } from "./TimeOptions"
 
 export class TimeTestUtil {
 
@@ -44,6 +38,7 @@ export class TimeTestUtil {
       || this.timeOptions.rootDir !== options.rootDir
       || JSON.stringify(this.timeService.files) !== JSON.stringify(options.files)
     ) {
+      this.timeOptions = options
       this.timeService = new TimeService(rr0TestUtil.dataService, options)
       this.timeElementFactory = new TimeElementFactory(this.timeRenderer)
     }

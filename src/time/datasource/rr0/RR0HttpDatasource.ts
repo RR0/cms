@@ -96,7 +96,7 @@ export class RR0HttpDatasource extends RR0Datasource {
       try {
         time = EdtfDate.fromString(timeStr)
       } catch (e) {
-        console.warn("Could not parse source time", e)
+        // console.warn("Could not parse source time", e)
       }
       if (time) {
         pubItems.pop()
