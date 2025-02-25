@@ -1,5 +1,12 @@
 import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
-import { AbstractDataService, AllDataService, RR0Event, RR0EventJson } from "@rr0/data"
+import {
+  AbstractDataService,
+  AllDataService,
+  EventDataFactory,
+  RR0Event,
+  RR0EventFactory,
+  RR0EventJson
+} from "@rr0/data"
 import { HtmlRR0Context, RR0ContextImpl } from "../RR0Context"
 import { StringUtil } from "../util"
 import { TimeContext } from "@rr0/time"
@@ -11,15 +18,16 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
 
   constructor(dataService: AllDataService, protected options: TimeOptions,
               readonly timePathRegex = TimeService.defaultRegex) {
-    super(dataService, null, options.files)
+    super(dataService, new EventDataFactory(new RR0EventFactory(),
+        ["birth", "death", "image", "book", "article", "sighting", "nationality", "move", "occupation"], options.files),
+      options.files)
   }
 
   parseFileName(fileName: string): RegExpExecArray | null {
     return this.timePathRegex.exec(fileName)
   }
 
-  titleFromFile(context: HtmlRR0Context, fileName: string,
-                timeTextBuilder: TimeTextBuilder): string | undefined {
+  titleFromFile(context: HtmlRR0Context, fileName: string, timeTextBuilder: TimeTextBuilder): string | undefined {
     let title: string | undefined
     const timeContext = this.contextFromFileName(context, fileName)
     if (timeContext) {
@@ -59,7 +67,7 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
     return timeContext
   }
 
-  gSetTimeFromPath(context: HtmlRR0Context, filePath: string): TimeContext | undefined {
+  setContextFromFile(context: HtmlRR0Context, filePath: string): TimeContext | undefined {
     const time = context.time
     time.reset()
     const newTimeContext = this.contextFromFileName(context, filePath)
@@ -71,14 +79,4 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
     }
     return newTimeContext
   }
-
-  setContextFromFile(context: HtmlRR0Context, filePath: string) {
-    this.setTimeFromPath(context, filePath)
-  }
-
-  protected setTimeFromPath(context: HtmlRR0Context, filePath: string) {
-    context.time.reset()  // Don't use time context from previous page.
-    this.gSetTimeFromPath(context, filePath)
-  }
-
 }

@@ -1,6 +1,6 @@
 import { glob } from "glob"
 import { describe } from "@javarome/testscript"
-import { RR0Build, RR0BuildArgs } from "./RR0Build.js"
+import { CMSGenerationOptions, CMSGenerator } from "./CMSGenerator.js"
 import {
   BaseOvniFranceRR0Mapping,
   ChronologyReplacerActions,
@@ -11,7 +11,7 @@ import {
   SceauRR0Mapping,
   UrecatRR0Mapping
 } from "./time/index.js"
-import { PeopleDirectoryStepOptions } from "./people/index.js"
+import { PeopleDirectoryStepOptions, WitnessReplacerFactory } from "./people/index.js"
 import { testFilePath } from "./test"
 import * as process from "node:process"
 import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
@@ -19,6 +19,8 @@ import { BaseReplaceCommand } from "./BaseReplaceCommand"
 import { LanguageReplaceCommand } from "./lang"
 import {
   AngularExpressionReplaceCommand,
+  ClassDomReplaceCommand,
+  DomReplaceCommand,
   SsiEchoVarReplaceCommand,
   SsiIfReplaceCommand,
   SsiLastModifiedReplaceCommand,
@@ -28,10 +30,25 @@ import {
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright"
 import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand"
 import { TimeOptions } from "./time/TimeOptions"
+import { CodeReplacerFactory } from "./tech"
+import { PlaceReplacerFactory } from "./place"
+import { IndexedReplacerFactory, UnitReplaceCommand } from "./index"
+
+export async function getTimeFiles(): Promise<string[]> {
+  const minusYearFiles = await glob(testFilePath("time/-?/?/?/?/index.html"))
+  const year1Files = await glob(testFilePath("time/?/index.html"))
+  const year2Files = await glob(testFilePath("time/?/?/index.html"))
+  const year3Files = await glob(testFilePath("time/?/?/?/index.html"))
+  const year4Files = await glob(testFilePath("time/?/?/?/?/index.html"))
+  const monthFiles = await glob(testFilePath("time/?/?/?/?/??/index.html"))
+  const dayFiles = await glob(testFilePath("time/?/?/?/?/??/??/index.html"))
+  return year1Files.concat(year2Files).concat(year3Files).concat(year4Files).concat(
+    minusYearFiles).concat(monthFiles).concat(dayFiles).sort()
+}
 
 describe("Build", () => {
   console.time("ssg")
-  const args: RR0BuildArgs = {
+  const args: CMSGenerationOptions = {
     contents: ["test/**/*.html"],
     force: "true"
   }
@@ -86,18 +103,6 @@ describe("Build", () => {
     minute: "2-digit"
   }
 
-  async function getTimeFiles(): Promise<string[]> {
-    const minusYearFiles = await glob(testFilePath("time/-?/?/?/?/index.html"))
-    const year1Files = await glob(testFilePath("time/?/index.html"))
-    const year2Files = await glob(testFilePath("time/?/?/index.html"))
-    const year3Files = await glob(testFilePath("time/?/?/?/index.html"))
-    const year4Files = await glob(testFilePath("time/?/?/?/?/index.html"))
-    const monthFiles = await glob(testFilePath("time/?/?/?/?/??/index.html"))
-    const dayFiles = await glob(testFilePath("time/?/?/?/?/??/??/index.html"))
-    return year1Files.concat(year2Files).concat(year3Files).concat(year4Files).concat(
-      minusYearFiles).concat(monthFiles).concat(dayFiles).sort()
-  }
-
   const directoryPages = [
     "people/index.html", "people/witness/index.html", "people/militaires.html", "people/scientifiques.html",
     "people/astronomes.html", "people/politicians.html", "people/dirigeants.html", "people/pilotes.html",
@@ -131,12 +136,32 @@ describe("Build", () => {
     const nuforcRR0Mapping = new NuforcRR0Mapping(actions)
     const urecatRR0Mapping = new UrecatRR0Mapping(actions)
     const sceauRR0Mapping = new SceauRR0Mapping(actions)
-    const mappings: RR0CaseMapping<any>[] = [rr0Mapping,
+    const mappings: RR0CaseMapping<any>[] = [rr0Mapping
       /*      geipanRR0Mapping,
             baseOvniFranceRR0Mapping, fuforaRR0Mapping, nuforcRR0Mapping, urecatRR0Mapping,
             sceauRR0Mapping*/
     ]
-    const build = new RR0Build({
+    const pageReplacers = [
+      new BaseReplaceCommand("/"),
+      new LanguageReplaceCommand(),
+      new SsiEchoVarReplaceCommand("copyright", [rr0DefaultCopyright]),
+      new StringEchoVarReplaceCommand(),
+      new AngularExpressionReplaceCommand(),
+      new SsiIfReplaceCommand(),
+      new SsiSetVarReplaceCommand("title", (_match: string, ...args: any[]) => `<title>${args[0]}</title>`),
+      new SsiSetVarReplaceCommand("url",
+        (_match: string, ...args: any[]) => `<meta name="url" content="${args[0]}"/>`),
+      new SsiLastModifiedReplaceCommand(timeFormat),
+      new DescriptionReplaceCommand("UFO data for french-reading people", "abstract")
+    ]
+    const contentsReplacers = [
+      new DomReplaceCommand("code", new CodeReplacerFactory()),
+      new ClassDomReplaceCommand(new PlaceReplacerFactory(), "place"),
+      new ClassDomReplaceCommand(new WitnessReplacerFactory(), "temoin", "temoin1", "temoin2", "temoin3"),
+      new ClassDomReplaceCommand(new IndexedReplacerFactory(), "indexed"),
+      new UnitReplaceCommand()
+    ]
+    const build = new CMSGenerator({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
       siteBaseUrl, timeFormat, directoryPages,
       ufoCaseDirectoryFile: testFilePath("science/crypto/ufo/enquete/dossier/index.html"),
@@ -145,20 +170,8 @@ describe("Build", () => {
       directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"].map(testFilePath),
       directoryOptions,
       mappings,
-      contentReplacers: [
-        new BaseReplaceCommand("/"),
-        new LanguageReplaceCommand(),
-        new SsiEchoVarReplaceCommand("copyright", [rr0DefaultCopyright]),
-        new StringEchoVarReplaceCommand(),
-        new AngularExpressionReplaceCommand(),
-        new SsiIfReplaceCommand(),
-        new SsiSetVarReplaceCommand("title", (_match: string, ...args: any[]) => `<title>${args[0]}</title>`),
-        new SsiSetVarReplaceCommand("url",
-          (_match: string, ...args: any[]) => `<meta name="url" content="${args[0]}"/>`),
-        new SsiLastModifiedReplaceCommand(timeFormat),
-        new DescriptionReplaceCommand("UFO data for french-reading people", "abstract")
-      ]
+      contentReplacers: [...pageReplacers, ...contentsReplacers]
     })
-    await build.run(args)
+    await build.generate(args)
   })
 })

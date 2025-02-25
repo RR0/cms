@@ -14,7 +14,7 @@ import { Source } from "@rr0/data/dist/source"
 import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
 
-import { BuildContext } from "../../../BuildContext"
+import { CMSContext } from "../../../CMSContext"
 
 export class SceauTestDatasource extends SceauDatasource {
 
@@ -36,7 +36,7 @@ export class SceauTestMapping implements SceauCaseMapping {
   constructor(readonly actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}) {
   }
 
-  init(build: BuildContext): this {
+  init(build: CMSContext): this {
     this.mapper = new SceauCaseSummaryRR0Mapper(rr0TestUtil.cityService, sceauDatasource.baseUrl,
       sceauDatasource.copyright, sceauDatasource.authors)
     return this

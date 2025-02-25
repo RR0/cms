@@ -1,7 +1,7 @@
 import { CaseMapping } from "../CaseMapping.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
-import { BuildContext } from "../../../BuildContext"
+import { CMSContext } from "../../../CMSContext"
 
 /**
  * Maps some datasource case to a RR0 case.
@@ -9,5 +9,5 @@ import { BuildContext } from "../../../BuildContext"
  * @param S The source case type.
  */
 export interface RR0CaseMapping<S> extends CaseMapping<HtmlRR0Context, S, RR0CaseSummary> {
-  init(build: BuildContext): this
+  init(build: CMSContext): this
 }

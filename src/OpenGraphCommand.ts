@@ -60,7 +60,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
     if (this.timeFiles.includes(fileName)) {
       timeStr = "Chronologie"
     } else {
-      const timeContext = this.timeService.gSetTimeFromPath(context, fileName)
+      const timeContext = this.timeService.setContextFromFile(context, fileName)
       if (timeContext) {
         context.time.setYear(timeContext.getYear())
         context.time.setMonth(timeContext.getMonth())

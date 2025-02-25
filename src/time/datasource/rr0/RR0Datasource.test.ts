@@ -15,7 +15,7 @@ import { Source } from "@rr0/data/dist/source"
 import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
 import { RR0FileDatasource } from "./RR0FileDatasource"
 
-import { BuildContext } from "../../../BuildContext"
+import { CMSContext } from "../../../CMSContext"
 import { NamedPlace } from "@rr0/place"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
@@ -39,7 +39,7 @@ export class RR0TestMapping implements RR0CaseMapping<RR0CaseSummary> {
   constructor(readonly actions: ChronologyReplacerActions) {
   }
 
-  init(build: BuildContext): this {
+  init(build: CMSContext): this {
     this.mapper = new RR0CaseSummaryMapper(new URL("https://rr0.org"), "time", ["Beau, Jérôme"])
     this.backupDatasource = new RR0FileDatasource(this.mapper)
     return this

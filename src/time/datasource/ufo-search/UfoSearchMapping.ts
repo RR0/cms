@@ -5,7 +5,7 @@ import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { RR0CaseMapping } from "../rr0"
 import { UfoSearchCase } from "./UfoSearchCase"
 
-import { BuildContext } from "../../../BuildContext"
+import { CMSContext } from "../../../CMSContext"
 
 export const ufoSearchHttpDatasource = new UfoSearchHttpDatasource("https://www.ufo-search.com", "timeline/search.html")
 
@@ -18,7 +18,7 @@ export class UfoSearchRR0Mapping implements RR0CaseMapping<UfoSearchCase> {
   constructor(readonly actions: ChronologyReplacerActions) {
   }
 
-  init(build: BuildContext): this {
+  init(build: CMSContext): this {
     this.mapper = new UfoSearchCaseRR0Mapper(build.cityService, ufoSearchHttpDatasource.baseUrl,
       ufoSearchHttpDatasource.copyright, ufoSearchHttpDatasource.authors)
     this.backupDatasource = new UfoSearchFileDatasource("time/datasource/ufo-search/majestic.json",

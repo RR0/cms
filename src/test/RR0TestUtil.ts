@@ -20,9 +20,9 @@ import { FileContents } from "@javarome/fileutil"
 import { AllDataService, EventDataFactory, PeopleFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { CountryService } from "../org/country/CountryService"
 
-import { BuildContext } from "../BuildContext"
+import { CMSContext } from "../CMSContext"
 
-export class RR0TestUtil implements BuildContext {
+export class RR0TestUtil implements CMSContext {
 
   readonly config: FileWriteConfig = {
     getOutputPath: (context: SsgContext): string => {
@@ -54,7 +54,7 @@ export class RR0TestUtil implements BuildContext {
 
   constructor(readonly rootDir = "test", readonly outDir = "out") {
     const eventFactory = new RR0EventFactory()
-    const sightingFactory = new EventDataFactory(eventFactory, "sighting", ["index"])
+    const sightingFactory = new EventDataFactory(eventFactory, ["sighting"], ["index"])
     const orgFactory = this.orgFactory = new CmsOrganizationFactory(eventFactory)
     this.orgService = new OrganizationService([], "org", orgFactory, undefined)
     this.caseFactory = new CaseFactory(eventFactory)

@@ -4,7 +4,7 @@ import { GeipanFileDatasource } from "./GeipanFileDatasource.js"
 
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
-import { BuildContext } from "../../../../../../BuildContext"
+import { CMSContext } from "../../../../../../CMSContext"
 
 export const geipanHttpDatasource = new GeipanHttpDatasource(new URL("https://geipan.fr"), "fr/recherche/cas")
 export const geipanFileDatasource = new GeipanFileDatasource("org/eu/fr/cnes/geipan/export_cas_pub_20210219111412.csv",
@@ -19,7 +19,7 @@ export class GeipanRR0Mapping implements RR0CaseMapping<GeipanCaseSummary> {
   constructor(readonly actions: ChronologyReplacerActions) {
   }
 
-  init(build: BuildContext) {
+  init(build: CMSContext) {
     this.mapper = new GeipanCaseSummaryRR0Mapper(build.cityService, geipanHttpDatasource.baseUrl,
       geipanHttpDatasource.copyright, geipanHttpDatasource.authors)
     return this

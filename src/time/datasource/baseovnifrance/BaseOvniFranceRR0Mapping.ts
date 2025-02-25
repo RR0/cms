@@ -3,7 +3,7 @@ import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
 import { RR0CaseMapping } from "../rr0/index.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { BuildContext } from "../../../BuildContext"
+import { CMSContext } from "../../../CMSContext"
 
 export const baseOvniFranceDatasource = new BaseOvniFranceHttpDatasource()
 
@@ -15,7 +15,7 @@ export class BaseOvniFranceRR0Mapping implements RR0CaseMapping<BaseOvniFranceCa
   constructor(readonly actions: ChronologyReplacerActions) {
   }
 
-  init(build: BuildContext) {
+  init(build: CMSContext) {
     const datasource = this.datasource = baseOvniFranceDatasource
     this.mapper = new BaseOvniFranceCaseSummaryRR0Mapper(
       build.departmentService, build.cityService,

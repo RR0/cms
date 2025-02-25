@@ -25,7 +25,6 @@ describe("TimeReplacer", async () => {
       path.join(timeRoot, "2/0/0/7/06/15/index.html")
     ]
   }
-  const timeService = await rr0TestUtil.time.getService(timeOptions)
   const textBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
   const timeRenderer = new TimeRenderer(rr0TestUtil.time.urlBuilder, textBuilder)
   const timeElementFactory = new TimeElementFactory(timeRenderer)

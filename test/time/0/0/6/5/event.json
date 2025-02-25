@@ -1,0 +1,19 @@
+{
+  "type": "event",
+  "title": "65",
+  "events": [
+    {
+      "type": "event",
+      "eventType": "sighting",
+      "time": "65",
+      "place": "Jérusalem",
+      "description": "Dans le ciel, observation d'une étoile semblable à une épée immobile. Le phénomène aurait été accompagné de l'apparition d'une étrange lumière dans le temple.",
+      "sources": [
+        {
+          "author": "Flavius Josèphe",
+          "title": "Guerre Juive"
+        }
+      ]
+    }
+  ]
+}

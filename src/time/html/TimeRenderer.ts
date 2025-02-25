@@ -37,14 +37,15 @@ export class TimeRenderer {
     replacement: HTMLElement
   } {
     const time = context.time
-    const absoluteTimeUrl = this.urlBuilder.fromContext(time)
+    const date = time.date
+    const absoluteTimeUrl = this.urlBuilder.fromEdtf(date)
     const title = this.textBuilder.build(context, renderOptions)
     const text = (previousContext ? this.relativeTextBuilder.build(previousContext, context) : undefined) || title
     const file = context.file
     const currentFileName = file.name
     const doc = file.document
     let replacement: HTMLElement | undefined
-    const timeEl = TimeReplacer.resolvedTime(context, time.toString())
+    const timeEl = TimeReplacer.resolvedTime(context, date.toString())
     if (title !== text) {
       timeEl.title = title
     }
