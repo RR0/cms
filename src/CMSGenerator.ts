@@ -74,7 +74,7 @@ import { OpenGraphCommand } from "./OpenGraphCommand.js"
 import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
 import { APIFactory } from "./tech/index.js"
 import { ContentVisitor, RR0ContentStep, RR0ContentStepOptions } from "./RR0ContentStep.js"
-import { DefaultContentVisitor } from "./DefaultContentVisitor.js"
+import { DataContentVisitor } from "./DataContentVisitor.js"
 import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
 import {
@@ -214,7 +214,8 @@ export class CMSGenerator implements CMSContext {
 
   async generate(args: CMSGenerationOptions) {
     const timeContext = new TimeContext()
-    const context = new RR0ContextImpl(this.options.locale, timeContext, this.config)
+    const context = new RR0ContextImpl(this.options.locale, timeContext, this.config, undefined, undefined, undefined,
+      this)
     context.setVar("mapsApiKey", this.options.googleMapsApiKey)
     context.setVar("mail", this.options.mail)
     const config = this.config
@@ -229,12 +230,9 @@ export class CMSGenerator implements CMSContext {
     const timeRenderer = this.timeRenderer
 
     const timeFormat = this.options.timeFormat
-    const {timeFiles, timeElementFactory, timeReplacer, timeDefaultHandler} = this.setupTime(context)
+    const {timeFiles, timeElementFactory, timeReplacer} = this.setupTime(context)
 
     const {caseService, ufoCasesStep} = await this.setupCases(timeElementFactory)
-
-    const bookMeta = new Map<string, HtmlMeta>()
-    const bookLinks = new Map<string, HtmlLinks>()
 
     const peopleRenderer = new PeopleHtmlRenderer()
     const {peopleService, peopleSteps} = await this.peopleSetup(context, peopleRenderer, this.options.copies)
@@ -244,8 +242,7 @@ export class CMSGenerator implements CMSContext {
     const searchVisitor = new SearchVisitor(
       {notIndexedUrls: ["404.html", "Referencement.html"], indexWords: false}, timeTextBuilder
     )
-    const {sourceRenderer, sourceFactory, sourceReplacerFactory} = this.setupSources(
-      timeTextBuilder, timeFormat)
+    const {sourceRenderer, sourceFactory, sourceReplacerFactory} = this.setupSources(timeTextBuilder, timeFormat)
 
     const {noteRenderer, noteReplacerFactory} = this.setupNotes()
 
@@ -297,11 +294,11 @@ export class CMSGenerator implements CMSContext {
     ssg.add(ufoCasesStep)
     ssg.add(...peopleSteps)
     if (contentRoots) {
-      const contentVisitor = new DefaultContentVisitor(dataService, caseRenderer, timeElementFactory)
-      const contentVisitors: ContentVisitor[] = [contentVisitor, searchVisitor]
-      if (args.books) {
-        contentVisitors.push(new BookContentVisitor(bookMeta, bookLinks))
-      }
+      const dataContentVisitor = new DataContentVisitor(dataService, caseRenderer, timeElementFactory)
+      const contentVisitors: ContentVisitor[] = [dataContentVisitor, searchVisitor]
+      const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => this.timeService.titleFromFile(
+        context,
+        context.file.name, this.timeTextBuilder)
       const pageReplaceCommands = [
         new SsiTitleReplaceCommand([timeDefaultHandler]),
         new AuthorReplaceCommand(timeRenderer),
@@ -329,9 +326,12 @@ export class CMSGenerator implements CMSContext {
         contentConfigs: [{roots: contentRoots, replacements: contentReplacements, getOutputPath}],
         outputFunc, fileVisitors: [], contentVisitors, force, name: "contents replacements", toProcess
       }, timeService))
-    }
-    if (args.books) {
-      ssg.add(await BookDirectoryStep.create(outputFunc, config, bookMeta, bookLinks))
+      if (args.books) {
+        const bookMeta = new Map<string, HtmlMeta>()
+        const bookLinks = new Map<string, HtmlLinks>()
+        contentVisitors.push(new BookContentVisitor(bookMeta, bookLinks))
+        ssg.add(await BookDirectoryStep.create(outputFunc, config, bookMeta, bookLinks))
+      }
     }
     const reindex = args.reindex
     if (reindex?.includes("search")) {
@@ -378,12 +378,7 @@ export class CMSGenerator implements CMSContext {
     context.setVar("timeFilesCount", timeFiles.length)
     const timeElementFactory = new TimeElementFactory(this.timeRenderer)
     const timeReplacer = new TimeReplacer(timeElementFactory)
-    const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {
-      let title: string | undefined
-      title = this.timeService.titleFromFile(context, context.file.name, this.timeTextBuilder)
-      return title
-    }
-    return {timeFiles, timeElementFactory, timeReplacer, timeDefaultHandler}
+    return {timeFiles, timeElementFactory, timeReplacer}
   }
 
   protected async peopleSetup(context: RR0ContextImpl, peopleRenderer: PeopleHtmlRenderer, copies: string[]) {

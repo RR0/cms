@@ -41,13 +41,17 @@ export class RR0TestMapping implements RR0CaseMapping<RR0CaseSummary> {
 
   init(build: CMSContext): this {
     this.mapper = new RR0CaseSummaryMapper(new URL("https://rr0.org"), "time", ["Beau, Jérôme"])
-    this.backupDatasource = new RR0FileDatasource(this.mapper)
+    this.backupDatasource = new class extends RR0FileDatasource {
+
+    }(this.mapper)
     return this
   }
 }
 
 
 describe("RR0CaseSource", () => {
+
+  const rr0TestMapping = new RR0TestMapping({read: ["fetch"], write: []})
 
   const testCase = new class extends DatasourceTestCase<RR0CaseSummary> {
     constructor(mapping: RR0CaseMapping<RR0CaseSummary>, sourceCases: RR0CaseSummary[]) {
@@ -95,7 +99,7 @@ describe("RR0CaseSource", () => {
         return " " + HtmlTag.toString("span", authorStr + sourceItems.join(", "), {class: "source"})
       }).join("")
     }
-  }(new RR0TestMapping({read: ["fetch"], write: []}).init(rr0TestUtil), rr0TestCases)
+  }(rr0TestMapping.init(rr0TestUtil), rr0TestCases)
 
   let context: HtmlRR0Context
 

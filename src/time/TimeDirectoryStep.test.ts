@@ -4,7 +4,7 @@ import { TimeDirectoryStep } from "./TimeDirectoryStep.js"
 import { FileContents } from "@javarome/fileutil"
 import { rr0TestUtil, testFilePath } from "../test"
 import { TimeOptions } from "./TimeOptions"
-import { getTimeFiles } from "../RR0Build.test"
+import { getTimeFiles } from "../CMSGenerator.test"
 import path from "path"
 import { TimeService } from "./TimeService"
 import { AllDataService, RR0EventFactory } from "@rr0/data"
@@ -30,7 +30,7 @@ describe("TimeDirectoryStep", () => {
     const timeOptions: TimeOptions = {rootDir: timeRoot, files: await getTimeFiles()}
     const dataService = new AllDataService([new RR0EventFactory()])
     const timeService = new TimeService(dataService, timeOptions)
-    const timesDirectoryPath = testFilePath("time/index.html")
+    const timesDirectoryPath = testFilePath("time/0/0/6/5/index.html")
     const context = rr0TestUtil.newContext(timesDirectoryPath, template)
     const ufoTimesExclusions = []
     const timeDirs = timeService.files.map(timePath => path.dirname(timePath))

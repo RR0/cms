@@ -67,9 +67,7 @@ export class SearchVisitor implements FileVisitor {
       if (titleIndexed) {
         this.handleAlreadyIndexed(title, url, titleIndexed)
       }
-      const indexContext = context.clone()
-      const time = this.timeTextBuilder.build(indexContext,
-        {year: "numeric", month: "short", day: "numeric"}).toLowerCase()
+      const time = this.timeTextBuilder.build(context, {year: "numeric", month: "short", day: "numeric"}).toLowerCase()
       indexedPages.push({title, url, time})
     }
     if (this.config.indexWords) {

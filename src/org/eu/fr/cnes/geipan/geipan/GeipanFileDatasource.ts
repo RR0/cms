@@ -19,7 +19,7 @@ export class GeipanFileDatasource extends GeipanDatasource implements Datasource
     super()
   }
 
-  save(context: HtmlRR0Context, fetched: GeipanCaseSummary[], fetchTime: Date): void {
+  save(context: HtmlRR0Context, fetched: GeipanCaseSummary[], fetchTime: Date): string {
     const nativeCases = fetched.map(summary => this.writeMapper.map(context, summary, fetchTime))
     return this.file.write(context, nativeCases, fetchTime, this)
   }

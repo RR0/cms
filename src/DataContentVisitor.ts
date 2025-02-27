@@ -6,7 +6,10 @@ import { HtmlRR0Context } from "./RR0Context.js"
 import { EventRenderer } from "./time/EventRenderer.js"
 import { AllDataService, People, RR0Data, RR0Event } from "@rr0/data"
 
-export class DefaultContentVisitor implements ContentVisitor {
+/**
+ * Insert content in context file, according to data found in .json files aside of it.
+ */
+export class DataContentVisitor implements ContentVisitor {
 
   constructor(protected service: AllDataService, protected eventRenderer: EventRenderer<RR0Event>,
               protected timeElementFactory: TimeElementFactory) {

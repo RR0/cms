@@ -26,7 +26,7 @@ export class CsvFileSource<S> extends FileSource {
     return super.fileName(context, datasource) + ".csv"
   }
 
-  write(context: HtmlRR0Context, datasourceCases: S[], fetchTime: Date, datasource: Datasource<any>) {
+  write(context: HtmlRR0Context, datasourceCases: S[], fetchTime: Date, datasource: Datasource<any>): string {
     const csvContents = this.mapper.mapAll(context, datasourceCases, fetchTime)
     return super.writeContents(context, csvContents, datasource)
   }

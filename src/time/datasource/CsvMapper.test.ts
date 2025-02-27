@@ -10,6 +10,7 @@ import { geipanTestCaseSummaries } from "../../org/eu/fr/cnes/geipan/geipan/Geip
 import { GeipanCase } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCase.js"
 import { geipanFileDatasource, geipanHttpDatasource } from "../../org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping.js"
 import { GeipanCaseToSummaryMapper } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCaseToSummaryMapper.js"
+import { RR0CaseSummary } from "./rr0"
 
 describe("CsvMapper", () => {
 
@@ -44,6 +45,44 @@ describe("CsvMapper", () => {
           c => `${c.id},${c.url},${c.city},${c.zoneType},${c.zoneCode},${c.time},${c.postTime},${c.classification}`)
         .join("\n")
     expect(csvContents).toBe(expectedCsv)
+  })
+
+  describe("mapper", () => {
+
+    const date = new Date("2025-01-01")
+    const context = rr0TestUtil.newHtmlContext("time/1/9/7/0/03/index.html")
+
+    test("string", () => {
+      const mapper = new CsvMapper<RR0CaseSummary>(";")
+      expect(mapper.fieldMapper(context, "key1", "val1", date)).toBe("val1")
+      expect(Array.from(mapper.fields)).toEqual(["key1"])
+    })
+
+    describe("object", () => {
+
+      test("level 0", () => {
+        const mapper = new CsvMapper<RR0CaseSummary>(";")
+        const csvLine = mapper.fieldMapper(context, "obj1", {prop1: "propVal1", prop2: 12}, date)
+        expect(Array.from(mapper.fields)).toEqual(["obj1.prop1", "obj1.prop2"])
+        expect(csvLine).toBe("propVal1;12")
+      })
+
+      test("level 1", () => {
+        const mapper = new CsvMapper<RR0CaseSummary>(";")
+        const csvLine = mapper.fieldMapper(context, "obj1",
+          {prop1: "propVal1", prop2: 12, prop3: {prop31: "prop31Val"}}, date)
+        expect(Array.from(mapper.fields)).toEqual(["obj1.prop1", "obj1.prop2", "obj1.prop3.prop31"])
+        expect(csvLine).toBe("propVal1;12;prop31Val")
+      })
+
+      test("level 2", () => {
+        const mapper = new CsvMapper<RR0CaseSummary>(";")
+        const csvLine = mapper.fieldMapper(context, "obj1",
+          {prop1: "propVal1", prop2: 12, prop3: {prop31: "prop31Val", prop4: {key4: "value4"}}}, date)
+        expect(Array.from(mapper.fields)).toEqual(["obj1.prop1", "obj1.prop2", "obj1.prop3.prop31"])
+        expect(csvLine).toBe("propVal1;12;prop31Val")
+      })
+    })
   })
 
   test("read", () => {

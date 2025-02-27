@@ -161,7 +161,7 @@ describe("Build", () => {
       new ClassDomReplaceCommand(new IndexedReplacerFactory(), "indexed"),
       new UnitReplaceCommand()
     ]
-    const build = new CMSGenerator({
+    const generator = new CMSGenerator({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
       siteBaseUrl, timeFormat, directoryPages,
       ufoCaseDirectoryFile: testFilePath("science/crypto/ufo/enquete/dossier/index.html"),
@@ -172,6 +172,6 @@ describe("Build", () => {
       mappings,
       contentReplacers: [...pageReplacers, ...contentsReplacers]
     })
-    await build.generate(args)
+    await generator.generate(args)
   })
 })

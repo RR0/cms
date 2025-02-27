@@ -30,8 +30,10 @@ export class FileSource {
     return FileContents.read(this.fileName(context, datasource), this.encoding)
   }
 
-  writeContents(context: HtmlSsgContext, contents: string | NodeJS.ArrayBufferView, datasource: Datasource<any>) {
+  writeContents(context: HtmlSsgContext, contents: string | NodeJS.ArrayBufferView,
+                datasource: Datasource<any>): string {
     const fileName = this.fileName(context, datasource)
     fs.writeFileSync(fileName, contents, {encoding: this.encoding})
+    return fileName
   }
 }

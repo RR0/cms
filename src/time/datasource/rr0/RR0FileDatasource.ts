@@ -15,7 +15,7 @@ export class RR0FileDatasource extends RR0Datasource implements Datasource<RR0Ca
     super()
   }
 
-  save(context: HtmlRR0Context, fetched: any[], fetchTime: Date): void {
+  save(context: HtmlRR0Context, fetched: any[], fetchTime: Date): string {
     return this.file.write(context, fetched, fetchTime, this)
   }
 

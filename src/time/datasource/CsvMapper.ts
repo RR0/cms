@@ -7,10 +7,10 @@ export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
   readonly fields = new Set<string>()
 
   constructor(
-    readonly sep = ",", readonly escapeStr = "\"", readonly prefix = "") {
+    readonly sep = ",", readonly escapeStr = "\"", readonly prefix = "", protected maxLevel = 1) {
   }
 
-  readonly fieldMapper = (context: RR0Context, key: string, value: any, sourceTime: Date): string => {
+  readonly fieldMapper = (context: RR0Context, key: string, value: any, sourceTime: Date, level = 0): string => {
     let addField = true
     let val: any
     if (value instanceof Date) {
@@ -20,17 +20,20 @@ export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
     } else if (value instanceof URL || value instanceof EdtfDate) {
       val = value.toString()
     } else if (Array.isArray(value)) {
-      val = this.escape(value.map((item, i) => this.fieldMapper(context, String(i), item, sourceTime)).join(this.sep),
+      val = this.escape(
+        value.map((item, i) => this.fieldMapper(context, String(i), item, sourceTime, level + 1)).join(this.sep),
         true)
     } else if (typeof value === "object") {
-      const subMapper = new CsvMapper(this.sep, this.escapeStr, this.prefix + key + ".")
-      const subValues = subMapper.map(context, value, sourceTime)
-      let addSubFields = !isFinite(key as any)
-      if (addSubFields) {
-        subMapper.fields.forEach(subField => this.fields.add(subField))
+      if (level <= this.maxLevel) {
+        const subMapper = new CsvMapper(this.sep, this.escapeStr, this.prefix + key + ".", level)
+        const subValues = subMapper.map(context, value, sourceTime, level + 1)
+        let addSubFields = !isFinite(key as any)
+        if (addSubFields) {
+          subMapper.fields.forEach(subField => this.fields.add(subField))
+        }
+        val = subValues
       }
       addField = false
-      val = subValues
     } else {
       val = value
     }
@@ -46,11 +49,12 @@ export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
    * @param context
    * @param sourceCase
    * @param sourceTime
+   * @param level
    */
-  map(context: RR0Context, sourceCase: S, sourceTime: Date): string {
-    const entries = Array.from(Object.entries(sourceCase)).sort((entry1, entry2) => entry1[0].localeCompare(entry2[0]))
-    return entries.map(entry => this.fieldMapper(context, entry[0], entry[1], sourceTime)).join(
-      this.sep)
+  map(context: RR0Context, sourceCase: S, sourceTime: Date, level = 0): string {
+    const sourceCaseEntries = Object.entries(sourceCase)
+    const entries = Array.from(sourceCaseEntries).sort((entry1, entry2) => entry1[0].localeCompare(entry2[0]))
+    return entries.map(entry => this.fieldMapper(context, entry[0], entry[1], sourceTime, level)).join(this.sep)
   }
 
   /**

@@ -4,6 +4,7 @@ import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
 import { PlaceContext } from "@rr0/place"
 import { People } from "@rr0/data"
+import { CMSContext } from "./CMSContext"
 
 export interface RR0Context extends SsgContext {
 
@@ -20,6 +21,7 @@ export interface HtmlRR0Context extends HtmlSsgContext {
   people: People
   readonly images: Set<string>
   readonly config: FileWriteConfig
+  readonly cms: CMSContext
 
   clone(locale?: string): HtmlRR0Context
 }
@@ -32,7 +34,7 @@ export class RR0ContextImpl extends SsgContextImpl {
 
   constructor(locale: string, readonly time: TimeContext, readonly config: FileWriteConfig,
               readonly people = undefined, currentFile: FileContents | undefined = undefined,
-              readonly messages: RR0Messages = ssgMessages[locale]) {
+              readonly messages: RR0Messages = ssgMessages[locale], readonly cms: CMSContext = undefined) {
     super(locale, new Map(), "RR0", new ConsoleLogger("RR0"), currentFile)
     while (!this.messages) {
       if (locale.length > 2) {
@@ -58,7 +60,8 @@ export class RR0ContextImpl extends SsgContextImpl {
   }
 
   clone(locale = this.locale): RR0ContextImpl {
-    return new RR0ContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file)
+    return new RR0ContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file, this.messages,
+      this.cms)
   }
 
   toString() {

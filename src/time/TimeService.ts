@@ -31,8 +31,8 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
     let title: string | undefined
     const timeContext = this.contextFromFileName(context, fileName)
     if (timeContext) {
-      const pageContext = new RR0ContextImpl(context.locale, timeContext, context.config, context.people,
-        context.file)
+      const pageContext = new RR0ContextImpl(context.locale, timeContext, context.config, context.people, context.file,
+        context.messages, context.cms)
       title = timeTextBuilder.build(pageContext)
       title = StringUtil.capitalizeFirstLetter(title)
     }

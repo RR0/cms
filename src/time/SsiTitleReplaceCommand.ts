@@ -6,7 +6,9 @@ import { HtmlRR0Context } from "../RR0Context.js"
  * with a link if there's a <meta name="url"> content.
  */
 export class SsiTitleReplaceCommand extends SsiEchoVarReplaceCommand {
-
+  /**
+   * @param defaultHandlers Will generate a title for a given context/file, if no title is found.
+   */
   constructor(protected defaultHandlers: StringContextHandler[] = []) {
     super("title")
   }
@@ -14,18 +16,22 @@ export class SsiTitleReplaceCommand extends SsiEchoVarReplaceCommand {
   protected async createReplacer(context: HtmlRR0Context): Promise<RegexReplacer> {
     return {
       replace: (_match: string, ..._args: any[]): string => {
-        const inputFile = context.file
-        let title = inputFile.title
-        if (!title) {
-          this.defaultHandlers.some(handle => !title && (title = handle(context)))
-        }
-        if (!title) {
-          title = inputFile.name
-        }
-        inputFile.title = title
-        const titleUrl = inputFile.meta.url
-        return titleUrl ? `<a href="${titleUrl}" target="_blank">${title}</a>` : title
+        context.file.title = this.getTitle(context)
+        const titleUrl = context.file.meta.url
+        return titleUrl ? `<a href="${titleUrl}" target="_blank">${(this.getTitle(context))}</a>` : this.getTitle(
+          context)
       }
     }
+  }
+
+  protected getTitle(context: HtmlRR0Context) {
+    let title = context.file.title
+    if (!title) {
+      this.defaultHandlers.some(handle => !title && (title = handle(context)))
+    }
+    if (!title) {
+      title = context.file.name
+    }
+    return title
   }
 }
