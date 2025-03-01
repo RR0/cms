@@ -6,6 +6,7 @@ import { TimeElementFactory } from "./TimeElementFactory.js"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import path from "path"
 import { TimeOptions } from "../TimeOptions"
+import { TimeUrlBuilder } from "../TimeUrlBuilder"
 
 describe("TimeReplacer", async () => {
 
@@ -26,7 +27,7 @@ describe("TimeReplacer", async () => {
     ]
   }
   const textBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
-  const timeRenderer = new TimeRenderer(rr0TestUtil.time.urlBuilder, textBuilder)
+  const timeRenderer = new TimeRenderer(new TimeUrlBuilder(timeOptions), textBuilder)
   const timeElementFactory = new TimeElementFactory(timeRenderer)
   const replacer = new TimeReplacer(timeElementFactory)
 
@@ -41,8 +42,8 @@ describe("TimeReplacer", async () => {
       timeEl.textContent = "2003"
       const replacement = await replacer.replacement(context, timeEl)
       expect(replacement.outerHTML).toBe(
-        `<span class="time-resolved">en <a href="${path.join("/", timeOptions.rootDir,
-          "2/0/0/3/")}"><time datetime="2003">2003</time></a></span>`)
+        `<span class="time-resolved">en <a href="${path.join("/",
+          rr0TestUtil.time.filePath("2/0/0/3/"))}"><time datetime="2003">2003</time></a></span>`)
       expect(context.time.getYear()).toBe(2003)
       expect(context.time.getMonth()).toBe(undefined)
       expect(context.time.getDayOfMonth()).toBe(undefined)

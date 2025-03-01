@@ -7,11 +7,8 @@ describe("TitleReplaceCommand", () => {
 
   let timeTextBuilder = rr0TestUtil.time.timeTextBuilder
 
-  const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => {
-    let title: string | undefined
-    title = rr0TestUtil.time.getService().titleFromFile(context, context.file.name, timeTextBuilder)
-    return title
-  }
+  const timeDefaultHandler = (context: HtmlRR0Context): string | undefined => rr0TestUtil.time.getService().titleFromFile(
+    context, context.file.name, timeTextBuilder)
 
   describe("Time page", () => {
 

@@ -34,17 +34,26 @@ export class RR0ContextImpl extends SsgContextImpl {
 
   constructor(locale: string, readonly time: TimeContext, readonly config: FileWriteConfig,
               readonly people = undefined, currentFile: FileContents | undefined = undefined,
-              readonly messages: RR0Messages = ssgMessages[locale], readonly cms: CMSContext = undefined) {
+              protected _messages?: RR0Messages, readonly cms: CMSContext = undefined) {
     super(locale, new Map(), "RR0", new ConsoleLogger("RR0"), currentFile)
-    while (!this.messages) {
-      if (locale.length > 2) {
-        locale = locale.substring(0, 2)   // Fallback to language without country specifics
-      } else {
-        locale = "fr" // Default language
-      }
-      this.messages = ssgMessages[locale]
-    }
     this.place = new PlaceContext(locale, this.messages.context.place)
+  }
+
+  get messages(): RR0Messages {
+    let messages = this._messages
+    if (!messages) {
+      let locale = this.locale
+      while (!messages) {
+        if (locale.length > 2) {
+          locale = locale.substring(0, 2)   // Fallback to language without country specifics
+        }
+        messages = ssgMessages[locale]
+        if (!messages) {
+          locale = "fr" // Default language
+        }
+      }
+    }
+    return messages
   }
 
   read(filePath: string): FileContents {

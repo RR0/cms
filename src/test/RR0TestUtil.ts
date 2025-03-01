@@ -97,8 +97,10 @@ export class RR0TestUtil implements CMSContext {
     const title = titleExec && titleExec.length > 0 ? titleExec[1].trim() : undefined
     const currentFile = context.file
     const lang = currentFile.lang
-    context.file = new HtmlFileContents(currentFile.name, currentFile.encoding, currentFile.contents,
-      currentFile.lastModified, lang, {author: []}, {}, title)
+    const htmlFile = new HtmlFileContents(currentFile.name, currentFile.encoding, currentFile.contents,
+      currentFile.lastModified, lang)
+    context.file = htmlFile
+    htmlFile.title = title
     const htmlContext = context as HtmlRR0Context
     const timeContext = this.time.getService().contextFromFileName(htmlContext, inputFileName)
     Object.assign(htmlContext.time, timeContext)
@@ -107,7 +109,3 @@ export class RR0TestUtil implements CMSContext {
 }
 
 export const rr0TestUtil = new RR0TestUtil()
-
-export function testFilePath(filePath: string) {
-  return path.join(rr0TestUtil.rootDir, filePath)
-}

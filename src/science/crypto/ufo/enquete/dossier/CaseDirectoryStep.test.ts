@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { SsgContext } from "ssg-api"
 import { CaseDirectoryStep } from "./CaseDirectoryStep.js"
-import { rr0TestUtil, testFilePath } from "../../../../../test/index.js"
+import { rr0TestUtil } from "../../../../../test/index.js"
 import { RR0Case } from "./RR0Case.js"
 import { CaseService } from "./CaseService.js"
 import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
@@ -24,7 +24,7 @@ describe("DirectoryStep", () => {
 <!--#echo var="directories" -->
 <p>After</p>
 <!--#include virtual="/footer.html" -->`
-    const casesDirectoryPath = testFilePath("science/crypto/ufo/enquete/dossier/index.html")
+    const casesDirectoryPath = rr0TestUtil.filePath("science/crypto/ufo/enquete/dossier/index.html")
     const context = rr0TestUtil.newContext(casesDirectoryPath, template)
     const eventFactory = new RR0EventFactory()
     const dataService = new AllDataService([new TypedDataFactory<RR0Case, RR0CaseJson>(eventFactory, "case")])

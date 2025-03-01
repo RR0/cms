@@ -9,12 +9,16 @@ export class TimeTestUtil {
   readonly timeTextBuilder: TimeTextBuilder
   timeElementFactory: TimeElementFactory
   timeOptions: TimeOptions = {rootDir: "time", files: []}
-  urlBuilder = new TimeUrlBuilder(this.timeOptions)
+  urlBuilder: TimeUrlBuilder
   protected timeService: TimeService
   readonly fullRoot: string
   readonly timeRenderer: TimeRenderer
 
   constructor(rr0TestUtil: RR0TestUtil) {
+    this.urlBuilder = new TimeUrlBuilder(this.timeOptions)
+    Object.assign(this.urlBuilder,
+      {...this.urlBuilder.options, rootDir: rr0TestUtil.filePath(this.timeOptions.rootDir)})
+    console.log(this.urlBuilder.options)
     this.timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
     this.fullRoot = path.join(rr0TestUtil.rootDir, this.timeOptions.rootDir)
     this.timeRenderer = new TimeRenderer(this.urlBuilder, this.timeTextBuilder)
@@ -39,6 +43,7 @@ export class TimeTestUtil {
       || JSON.stringify(this.timeService.files) !== JSON.stringify(options.files)
     ) {
       this.timeOptions = options
+      Object.assign(this.urlBuilder.options, options)
       this.timeService = new TimeService(rr0TestUtil.dataService, options)
       this.timeElementFactory = new TimeElementFactory(this.timeRenderer)
     }

@@ -4,12 +4,13 @@ import { describe, expect, test } from "@javarome/testscript"
 import { DomReplaceCommand } from "ssg-api"
 import { TimeReplacer } from "./html/TimeReplacer.js"
 import path from "path"
+import { TimeOptions } from "./TimeOptions"
 
 describe("HtmlTagReplaceCommand", async () => {
 
   const timeRoot = rr0TestUtil.time.timeOptions.rootDir
-  const timeService = await rr0TestUtil.time.getService(
-    {rootDir: path.join(rr0TestUtil.rootDir, timeRoot), files: ["time/2/0/0/4/index.html"]})
+  const timeOptions: TimeOptions = {rootDir: timeRoot, files: [rr0TestUtil.time.filePath("2/0/0/4/index.html")]}
+  const timeService = await rr0TestUtil.time.getService(timeOptions)
 
   test("replace time tag", async () => {
     const replacer = new TimeReplacer(rr0TestUtil.time.timeElementFactory)

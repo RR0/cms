@@ -16,8 +16,9 @@ export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
   async create(context: HtmlRR0Context): Promise<DomReplacer> {
     return {
       replace: (original: HTMLTimeElement): Promise<HTMLElement> => {
-        return this.replacer.replacement(
-          this.timeUrlBuilder.isTimeFile(context.file.name) ? context.clone() : context, original)
+        const isTimeFile = this.timeUrlBuilder.isTimeFile(context.file.name)
+        const replacementContext = isTimeFile ? context.clone() : context
+        return this.replacer.replacement(replacementContext, original)
       }
     }
   }

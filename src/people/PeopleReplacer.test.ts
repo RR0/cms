@@ -1,5 +1,5 @@
 import { PeopleReplacer } from "./PeopleReplacer.js"
-import { rr0TestUtil, testFilePath } from "../test/index.js"
+import { rr0TestUtil } from "../test/index.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
 import path from "path"
@@ -8,7 +8,7 @@ import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
 
 describe("PeopleReplacer", () => {
 
-  const rootDir = testFilePath("people")
+  const rootDir = rr0TestUtil.filePath("people")
   const files = [
     path.join(rootDir, "b/BeauJerome"),
     path.join(rootDir, "h/HynekJosefAllen")
