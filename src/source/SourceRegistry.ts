@@ -1,8 +1,7 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import { HttpSource, TimeService } from "../time/index.js"
 import { SourceFactory } from "./SourceFactory.js"
-import { AllDataService } from "@rr0/data"
-import { Source } from "@rr0/data/dist/source"
+import { AllDataService, RR0SourceType, Source } from "@rr0/data"
 
 /**
  * Create Source objects and register them.
@@ -22,7 +21,7 @@ export class SourceRegistry extends SourceFactory {
    * @param context
    * @param href The anchor's URL string.
    */
-  async createExternal(context: HtmlRR0Context, href: string): Promise<Source> {
+  async createExternal(context: HtmlRR0Context, href: string): Promise<Source<RR0SourceType>> {
     let source = await this.get(href)
     if (!source) {
       source = await super.createExternal(context, href)
@@ -31,11 +30,11 @@ export class SourceRegistry extends SourceFactory {
     return source
   }
 
-  protected async get(href: string): Promise<Source> {
+  protected async get(href: string): Promise<Source<RR0SourceType>> {
     return this.registry[href]
   }
 
-  protected async register(href: string, source: Source) {
+  protected async register(href: string, source: Source<RR0SourceType>) {
     this.registry[href] = source
   }
 }

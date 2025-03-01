@@ -1,1 +1,1 @@
-export * from "./enquete"
+export * from "./enquete/index.js"

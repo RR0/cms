@@ -27,7 +27,7 @@ import { tunisia_fr } from "./tn/Tunisia_fr.js"
 import { ecuador_fr } from "./ec/Ecuador_fr.js"
 import { egypt_fr } from "./eg/Egypt_fr.js"
 import { georgia_fr } from "./ge/Georgia_fr.js"
-import { china_fr } from "./cn/ChinaMessages_fr"
+import { china_fr } from "./cn/ChinaMessages_fr.js"
 
 /**
  * Country messages in French language.

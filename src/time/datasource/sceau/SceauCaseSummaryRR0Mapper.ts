@@ -5,8 +5,8 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "../rr0/index.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { CityService } from "../../../org/index.js"
-import { Source } from "@rr0/data"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { RR0SourceType, Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
 
 /**
  * Maps SCEAU cases to RR0 cases.
@@ -19,7 +19,7 @@ export class SceauCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Sce
 
   map(context: HtmlRR0Context, sourceCase: SceauCaseSummary, sourceTime: Date): RR0CaseSummary {
     const id = sourceCase.id
-    const source: Source = {
+    const source: Source<RR0SourceType> = {
       previousSourceRefs: [], events: [],
       url: sourceCase.url, title: "cas n° " + id, authors: this.authors,
       publication: {

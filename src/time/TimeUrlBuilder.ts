@@ -1,6 +1,6 @@
 import path from "path"
 import { Level2Date as EdtfDate, TimeContext } from "@rr0/time"
-import { TimeOptions } from "./TimeOptions"
+import { TimeOptions } from "./TimeOptions.js"
 
 export type TimeUrlBuilderOptions = TimeOptions
 

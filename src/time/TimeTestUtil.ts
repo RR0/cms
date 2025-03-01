@@ -1,8 +1,8 @@
 import path from "path"
 import { TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder, TimeUrlBuilder } from "../time/index.js"
-import { RR0TestUtil, rr0TestUtil } from "../test"
-import { HtmlRR0Context } from "../RR0Context"
-import { TimeOptions } from "./TimeOptions"
+import { RR0TestUtil, rr0TestUtil } from "../test/index.js"
+import { HtmlRR0Context } from "../RR0Context.js"
+import { TimeOptions } from "./TimeOptions.js"
 
 export class TimeTestUtil {
 

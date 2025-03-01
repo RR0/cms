@@ -1,10 +1,10 @@
 import { describe, expect, test } from "@javarome/testscript"
-import { OrganizationPlace } from "./OrganizationPlace"
-import { parisCity } from "../org/eu/fr/region/idf/75/paris/Paris"
-import { RR0Datasource } from "../time"
+import { OrganizationPlace } from "./OrganizationPlace.js"
+import { parisCity } from "../org/eu/fr/region/idf/75/paris/Paris.js"
+import { RR0Datasource } from "../time/datasource/rr0/RR0Datasource.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { CountryCode } from "@rr0/data"
-import { CmsCountry } from "../org/country/CmsCountry"
+import { CmsCountry } from "../org/country/CmsCountry.js"
 
 describe("OrganizationPlace", () => {
 

@@ -4,8 +4,8 @@ import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { RR0CaseMapping } from "./RR0CaseMapping.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { RR0FileDatasource } from "./RR0FileDatasource.js"
-import { RR0Datasource } from "./RR0Datasource"
-import { CMSContext } from "../../../CMSContext"
+import { RR0Datasource } from "./RR0Datasource.js"
+import { CMSContext } from "../../../CMSContext.js"
 
 export class RR0Mapping implements RR0CaseMapping<RR0CaseSummary> {
 

@@ -10,11 +10,11 @@ import { rr0TestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { sceauDatasource } from "./SceauRR0Mapping.js"
 import { sceauTestCases } from "./SceauTestCases.js"
-import { Source } from "@rr0/data/dist/source"
-import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
+import { RR0SourceType, Source } from "@rr0/data"
+import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper.js"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 
-import { CMSContext } from "../../../CMSContext"
+import { CMSContext } from "../../../CMSContext.js"
 
 export class SceauTestDatasource extends SceauDatasource {
 
@@ -63,7 +63,8 @@ describe("SCEAUCaseSource", () => {
     /**
      * Specialization of sources for SCEAU cases
      */
-    protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], _nativeCase: SceauCaseSummary) {
+    protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source<RR0SourceType>[],
+                                _nativeCase: SceauCaseSummary) {
       return expectedSources.map(source => {
         const sourceItems: string[] = []
         let authorStr = source.authors.map(author => `<span class="people">${author}</span>`).join(" &amp; ")

@@ -4,7 +4,7 @@ import { HtmlRR0Context } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
 import path from "path"
 import { AllDataService, PeopleFactory, PeopleService, RR0EventFactory } from "@rr0/data"
-import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 
 describe("PeopleReplacer", () => {
 

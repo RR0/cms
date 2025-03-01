@@ -1,5 +1,5 @@
 import { HtmlRR0Context } from "./RR0Context.js"
-import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace/ReplaceCommand.js"
+import { ReplaceCommand } from "ssg-api"
 
 /**
  * Adds an "abstract" HTML paragraph from a <meta name="description">, if any.

@@ -2,7 +2,7 @@ import { AnchorReplaceCommand } from "./AnchorReplaceCommand.js"
 import { rr0TestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { CaseAnchorHandler } from "./CaseAnchorHandler.js"
-import { CaseService } from "../science/index.js"
+import { CaseService } from "../science/crypto/ufo/enquete/dossier/CaseService.js"
 import { TimeElementFactory, TimeRenderer, TimeTextBuilder } from "../time/index.js"
 import path from "path"
 

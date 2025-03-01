@@ -1,4 +1,4 @@
-import { DirectoryStep, FileWriteConfig, OutputFunc } from "ssg-api"
+import { DirectoryStep, DirectoryStepConfig, FileWriteConfig, OutputFunc } from "ssg-api"
 import { HtmlRR0Context, RR0Context } from "../../../../../RR0Context.js"
 import { StringUtil } from "../../../../../util/string/StringUtil.js"
 import { RR0Case } from "./RR0Case.js"
@@ -19,7 +19,8 @@ export class CaseDirectoryStep extends DirectoryStep {
    */
   constructor(protected caseService: CaseService, rootDirs: string[], excludedDirs: string[], templateFileName: string,
               protected outputFunc: OutputFunc, config: FileWriteConfig) {
-    super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, "case directory")
+    super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath} as DirectoryStepConfig,
+      "case directory")
   }
 
   /**
@@ -59,7 +60,8 @@ export class CaseDirectoryStep extends DirectoryStep {
   protected async processDirs(context: HtmlRR0Context, dirNames: string[]): Promise<void> {
     const cases = await this.scan(context, dirNames)
     const ul = this.toList(context, cases)
-    const outputPath = this.config.getOutputPath(context)
+    const config = this.config as DirectoryStepConfig
+    const outputPath = config.getOutputPath(context)
     const output = context.newOutput(outputPath)
     output.contents = context.file.contents.replace(`<!--#echo var="directories" -->`, ul.outerHTML)
     await this.outputFunc(context, output)

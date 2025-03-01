@@ -1,7 +1,7 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import { TimeTextBuilder } from "../time/index.js"
 import { TimeContext } from "@rr0/time"
-import { Source } from "@rr0/data/dist/source"
+import { RR0SourceType, Source } from "@rr0/data"
 
 /**
  * Render a case summary for a RR0 web page.
@@ -11,14 +11,14 @@ export class SourceRenderer {
   constructor(readonly timeTextBuilder: TimeTextBuilder) {
   }
 
-  render(context: HtmlRR0Context, source: Source): HTMLElement {
+  render(context: HtmlRR0Context, source: Source<RR0SourceType>): HTMLElement {
     const sourceEl = context.file.document.createElement("span")
     sourceEl.className = "source"
     this.renderContent(context, source, sourceEl)
     return sourceEl
   }
 
-  renderContent(context: HtmlRR0Context, source: Source, container: HTMLElement): void {
+  renderContent(context: HtmlRR0Context, source: Source<RR0SourceType>, container: HTMLElement): void {
     const doc = context.file.document
     const sourceContext = context.clone()
     const authors = source.authors

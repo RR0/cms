@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "./test"
-import { ssgMessages } from "./lang"
+import { rr0TestUtil } from "./test/index.js"
+import { ssgMessages } from "./lang/index.js"
 
 describe("RROContextImpl", () => {
 

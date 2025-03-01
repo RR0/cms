@@ -1,4 +1,4 @@
-import { Datasource } from "./Datasource"
+import { Datasource } from "./Datasource.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import { ContextFilter } from "./ContextFilter.js"
 import { TimeContextFilter } from "./TimeContextFilter.js"

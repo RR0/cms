@@ -1,4 +1,4 @@
-import { CmsOrganization } from "../org"
+import { CmsOrganization } from "../org/CmsOrganization.js"
 import { Place } from "@rr0/place"
 
 export class OrganizationPlace extends Place {

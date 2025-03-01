@@ -9,11 +9,12 @@ import { leMans72 } from "../../../org/eu/fr/region/pdl/72/LeMans/LeMans.js"
 import { lyon69 } from "../../../org/eu/fr/region/ara/69/Lyon/Lyon.js"
 import { briancon05 } from "../../../org/eu/fr/region/pac/05/briancon/Briancon.js"
 import { chambonSurVoueize23 } from "../../../org/eu/fr/region/naq/23/Chambon/Chambon.js"
-import { RR0CaseSummary } from "../rr0"
-import { Source } from "@rr0/data/dist/source"
-import { BaseOvniFranceCaseSummaryRR0Mapper } from "./BaseOvniFranceCaseSummaryRR0Mapper"
+import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
+import { RR0SourceType, Source } from "@rr0/data"
+import { BaseOvniFranceCaseSummaryRR0Mapper } from "./BaseOvniFranceCaseSummaryRR0Mapper.js"
 
-function expectedSource(datasource: BaseOvniFranceHttpDatasource, dataDate: Date, caseNumber: string): Source {
+function expectedSource(datasource: BaseOvniFranceHttpDatasource, dataDate: Date,
+                        caseNumber: string): Source<RR0SourceType> {
   const url = new URL(datasource.searchPath + "?typlist=20&page=0&numobs=" + caseNumber, datasource.baseUrl).href
   return {
     previousSourceRefs: [], events: [],

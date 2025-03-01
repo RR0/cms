@@ -9,10 +9,9 @@ import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
 import { HttpSource } from "./HttpSource.js"
 import { TimeElementFactory } from "../html/TimeElementFactory.js"
 import { TimeRenderer } from "../html/TimeRenderer.js"
-import { rr0TestUtil } from "../../test"
-import { AllDataService } from "@rr0/data"
-import { Source } from "@rr0/data/dist/source"
-import { PlaceRenderer } from "../../place/PlaceRenderer"
+import { rr0TestUtil } from "../../test/index.js"
+import { AllDataService, RR0SourceType, Source } from "@rr0/data"
+import { PlaceRenderer } from "../../place/PlaceRenderer.js"
 
 export abstract class DatasourceTestCase<S> {
 
@@ -85,7 +84,7 @@ export abstract class DatasourceTestCase<S> {
 
   protected abstract getTime(c: S): EdtfDate
 
-  protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], nativeCase: S) {
+  protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source<RR0SourceType>[], nativeCase: S) {
     const datasource = this.mapping.datasource
     const source = expectedSources[0]
     const sourceContext = context.clone()

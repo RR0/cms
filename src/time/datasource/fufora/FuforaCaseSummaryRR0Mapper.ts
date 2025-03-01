@@ -5,8 +5,8 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { CityService } from "../../../org/country/index.js"
-import { Source } from "@rr0/data/dist/source"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { RR0SourceType, Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
 
 /**
  * Maps FUFORA cases to RR0 cases.
@@ -19,7 +19,7 @@ export class FuforaCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Fu
 
   map(context: HtmlRR0Context, sourceCase: FuforaCaseSummary, sourceTime: Date): RR0CaseSummary {
     const id = sourceCase.id
-    const source: Source = {
+    const source: Source<RR0SourceType> = {
       previousSourceRefs: [], events: [],
       url: sourceCase.url, title: "cas n° " + id, authors: this.authors,
       publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}

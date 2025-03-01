@@ -1,5 +1,5 @@
 export * from "./UrecatCase.js"
 export * from "./UrecatDatasource.js"
 export * from "./UrecatHttpDatasource.js"
-export * from "./UrecatRR0Mapper"
+export * from "./UrecatRR0Mapper.js"
 export * from "./UrecatRR0Mapping.js"

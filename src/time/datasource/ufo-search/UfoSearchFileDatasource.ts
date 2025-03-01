@@ -4,7 +4,7 @@ import { JsonMapper } from "../JsonMapper.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper.js"
 import { FileContents } from "@javarome/fileutil"
-import { FileDatasource } from "../FileDatasource"
+import { FileDatasource } from "../FileDatasource.js"
 
 class FileMapper extends JsonMapper<UfoSearchCase> {
 

@@ -5,9 +5,9 @@ import { RR0Datasource } from "./RR0Datasource.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { CityService, CmsOrganization } from "../../../org/index.js"
-import { Publication, Source } from "@rr0/data/dist/source"
+import { Publication, RR0SourceType, Source } from "@rr0/data"
 import { NamedPlace, Place } from "@rr0/place"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
 
 export class RR0HttpDatasource extends RR0Datasource {
 
@@ -78,8 +78,8 @@ export class RR0HttpDatasource extends RR0Datasource {
     return this.getFromRows(context, rows)
   }
 
-  protected getSources(row: Element, itemContext: HtmlRR0Context): Source[] {
-    const sources: Source[] = []
+  protected getSources(row: Element, itemContext: HtmlRR0Context): Source<RR0SourceType>[] {
+    const sources: Source<RR0SourceType>[] = []
     const sourceEls = row.querySelectorAll(".source-id")
     for (const sourceEl of sourceEls) {
       const id = sourceEl.childNodes[0].textContent
@@ -104,7 +104,7 @@ export class RR0HttpDatasource extends RR0Datasource {
       publisher = pubItems.splice(1, pubItems.length - 1).map(item => item.trim()).join(", ").trim()
       const publication: Publication = {publisher, time}
       title = pubItems[0]
-      const source: Source = {events: [], title, id, authors, publication, previousSourceRefs: []}
+      const source: Source<RR0SourceType> = {events: [], title, id, authors, publication, previousSourceRefs: []}
       sources.push(source)
     }
     return sources

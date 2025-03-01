@@ -1,6 +1,5 @@
 import { CmsOrganization } from "./CmsOrganization.js"
-import { OrganizationFactory, RR0EventFactory } from "@rr0/data"
-import { OrganizationJson } from "@rr0/data/dist/org/OrganizationJson"
+import { OrganizationFactory, OrganizationJson, RR0EventFactory } from "@rr0/data"
 
 export class CmsOrganizationFactory extends OrganizationFactory {
 

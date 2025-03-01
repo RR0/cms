@@ -4,7 +4,7 @@ import {
   GeipanCaseClassification,
   GeipanCaseClassification_calc,
   GeipanCaseClassification_minus
-} from "./GeipanCaseClassification"
+} from "./GeipanCaseClassification.js"
 import { GeipanDatasource } from "./GeipanDatasource.js"
 import { HttpSource } from "../../../../../../time/index.js"
 import { RR0Context } from "../../../../../../RR0Context.js"

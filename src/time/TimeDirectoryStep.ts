@@ -1,9 +1,9 @@
-import { DirectoryStep, FileWriteConfig, OutputFunc } from "ssg-api"
+import { DirectoryStep, DirectoryStepConfig, FileWriteConfig, OutputFunc } from "ssg-api"
 import { TimeService } from "./TimeService.js"
-import { HtmlRR0Context, RR0Context } from "../RR0Context"
-import { StringUtil } from "../util"
+import { HtmlRR0Context, RR0Context } from "../RR0Context.js"
+import { StringUtil } from "../util/index.js"
 import { RR0Event } from "@rr0/data"
-import { TimeElementFactory } from "./html"
+import { TimeElementFactory } from "./html/index.js"
 
 /**
  * Builds a directory page for UFO times.
@@ -22,7 +22,8 @@ export class TimeDirectoryStep extends DirectoryStep {
   constructor(protected service: TimeService, protected elementFactory: TimeElementFactory, rootDirs: string[],
               excludedDirs: string[], templateFileName: string,
               protected outputFunc: OutputFunc, config: FileWriteConfig) {
-    super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, "time directory")
+    super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath} as DirectoryStepConfig,
+      "time directory")
   }
 
   /**
@@ -67,7 +68,8 @@ export class TimeDirectoryStep extends DirectoryStep {
   protected async processDirs(context: HtmlRR0Context, dirNames: string[]): Promise<void> {
     const events = await this.scan(context, dirNames)
     const ul = this.toList(context, events)
-    const outputPath = this.config.getOutputPath(context)
+    const config = this.config as DirectoryStepConfig
+    const outputPath = config.getOutputPath(context)
     const output = context.newOutput(outputPath)
     output.contents = context.file.contents.replace(`<!--#echo var="directories" -->`, ul.outerHTML)
     await this.outputFunc(context, output)

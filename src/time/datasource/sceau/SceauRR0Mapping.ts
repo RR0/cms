@@ -3,7 +3,7 @@ import { RR0CaseMapping } from "../rr0/index.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper.js"
-import { CMSContext } from "../../../CMSContext"
+import { CMSContext } from "../../../CMSContext.js"
 
 export const sceauDatasource = new SceauHttpDatasource(new URL("https://sceau-archives-ovni.org"))
 

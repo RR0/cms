@@ -2,13 +2,13 @@ import { describe, expect, test } from "@javarome/testscript"
 import { SsgContext } from "ssg-api"
 import { TimeDirectoryStep } from "./TimeDirectoryStep.js"
 import { FileContents } from "@javarome/fileutil"
-import { rr0TestUtil } from "../test"
-import { TimeOptions } from "./TimeOptions"
-import { getTimeFiles } from "../CMSGenerator.test"
+import { rr0TestUtil } from "../test/index.js"
+import { TimeOptions } from "./TimeOptions.js"
+import { getTimeFiles } from "../CMSGenerator.test.js"
 import path from "path"
-import { TimeService } from "./TimeService"
+import { TimeService } from "./TimeService.js"
 import { AllDataService, RR0EventFactory } from "@rr0/data"
-import { TimeElementFactory } from "./html"
+import { TimeElementFactory } from "./html/index.js"
 
 describe("TimeDirectoryStep", () => {
 

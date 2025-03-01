@@ -11,11 +11,11 @@ import { RR0Datasource } from "./RR0Datasource.js"
 import { Datasource } from "../Datasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
-import { Source } from "@rr0/data/dist/source"
-import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
-import { RR0FileDatasource } from "./RR0FileDatasource"
+import { RR0SourceType, Source } from "@rr0/data"
+import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper.js"
+import { RR0FileDatasource } from "./RR0FileDatasource.js"
 
-import { CMSContext } from "../../../CMSContext"
+import { CMSContext } from "../../../CMSContext.js"
 import { NamedPlace } from "@rr0/place"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
@@ -70,7 +70,8 @@ describe("RR0CaseSource", () => {
     /**
      * Specialization of sources for RR0 cases
      */
-    protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source[], _nativeCase: RR0CaseSummary) {
+    protected expectedSourceStr(context: HtmlRR0Context, expectedSources: Source<RR0SourceType>[],
+                                _nativeCase: RR0CaseSummary) {
       return expectedSources.map(source => {
         const sourceItems: string[] = []
         let authorStr = source.authors.map(author => `<span class="people">${author}</span>`).join(" &amp; ")

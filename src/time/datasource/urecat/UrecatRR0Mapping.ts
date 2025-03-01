@@ -1,9 +1,9 @@
 import { UrecatRR0Mapper } from "./UrecatRR0Mapper.js"
 import { UrecatHttpDatasource } from "./UrecatHttpDatasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { RR0CaseMapping } from "../rr0"
-import { UrecatCase } from "./UrecatCase"
-import { CMSContext } from "../../../CMSContext"
+import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
+import { UrecatCase } from "./UrecatCase.js"
+import { CMSContext } from "../../../CMSContext.js"
 
 export const urecatDatasource = new UrecatHttpDatasource(new URL("https://ufologie.patrickgross.org"), "ce3")
 

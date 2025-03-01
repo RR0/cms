@@ -2,10 +2,10 @@ import { UfoSearchHttpDatasource } from "./UfoSearchHttpDatasource.js"
 import { UfoSearchFileDatasource } from "./UfoSearchFileDatasource.js"
 import { UfoSearchCaseRR0Mapper } from "./UfoSearchCaseRR0Mapper.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { RR0CaseMapping } from "../rr0"
-import { UfoSearchCase } from "./UfoSearchCase"
+import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
+import { UfoSearchCase } from "./UfoSearchCase.js"
 
-import { CMSContext } from "../../../CMSContext"
+import { CMSContext } from "../../../CMSContext.js"
 
 export const ufoSearchHttpDatasource = new UfoSearchHttpDatasource("https://www.ufo-search.com", "timeline/search.html")
 

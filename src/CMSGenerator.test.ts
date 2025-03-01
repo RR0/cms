@@ -13,9 +13,9 @@ import {
 } from "./time/index.js"
 import { PeopleDirectoryStepOptions, WitnessReplacerFactory } from "./people/index.js"
 import * as process from "node:process"
-import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping"
-import { BaseReplaceCommand } from "./BaseReplaceCommand"
-import { LanguageReplaceCommand } from "./lang"
+import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping.js"
+import { BaseReplaceCommand } from "./BaseReplaceCommand.js"
+import { LanguageReplaceCommand } from "./lang/LanguageReplaceCommand.js"
 import {
   AngularExpressionReplaceCommand,
   ClassDomReplaceCommand,
@@ -26,13 +26,13 @@ import {
   SsiSetVarReplaceCommand,
   StringEchoVarReplaceCommand
 } from "ssg-api"
-import { rr0DefaultCopyright } from "./RR0DefaultCopyright"
-import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand"
-import { TimeOptions } from "./time/TimeOptions"
-import { CodeReplacerFactory } from "./tech"
-import { PlaceReplacerFactory } from "./place"
-import { IndexedReplacerFactory, UnitReplaceCommand } from "./index"
-import { rr0TestUtil } from "./test"
+import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
+import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
+import { TimeOptions } from "./time/TimeOptions.js"
+import { CodeReplacerFactory } from "./tech/index.js"
+import { PlaceReplacerFactory } from "./place/index.js"
+import { IndexedReplacerFactory, UnitReplaceCommand } from "./index.js"
+import { rr0TestUtil } from "./test/index.js"
 
 export async function getTimeFiles(): Promise<string[]> {
   const minusYearFiles = await glob(rr0TestUtil.filePath("time/-?/?/?/?/index.html"))

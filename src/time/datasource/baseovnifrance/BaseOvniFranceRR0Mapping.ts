@@ -3,7 +3,7 @@ import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
 import { RR0CaseMapping } from "../rr0/index.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
-import { CMSContext } from "../../../CMSContext"
+import { CMSContext } from "../../../CMSContext.js"
 
 export const baseOvniFranceDatasource = new BaseOvniFranceHttpDatasource()
 

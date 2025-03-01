@@ -1,6 +1,6 @@
-import { RR0CaseSummaryJson } from "../../../../../time/datasource/rr0/RR0CaseSummaryJson"
-import { CaseConclusion } from "./CaseConclusion"
-import { HynekClassification } from "./HynekClassification"
+import { RR0CaseSummaryJson } from "../../../../../time/datasource/rr0/RR0CaseSummaryJson.js"
+import { CaseConclusion } from "./CaseConclusion.js"
+import { HynekClassification } from "./HynekClassification.js"
 
 export interface RR0CaseJson extends RR0CaseSummaryJson {
   classification?: {

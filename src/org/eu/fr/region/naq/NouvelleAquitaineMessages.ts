@@ -10,7 +10,7 @@ import { girondeMessages } from "./33/GirondeMessages.js"
 import { lotEtGaronneMessages } from "./47/LotEtGaronneMessages.js"
 import { dordogneMessages } from "./24/DordogneMessages.js"
 import { pyreneesOrientalesMessages } from "../occ/66/PyreneesOrientalesMessages.js"
-import { pyreneesAtlantiquesMessages } from "./64/PyreneesAtlantiquesMessages"
+import { pyreneesAtlantiquesMessages } from "./64/PyreneesAtlantiquesMessages.js"
 
 const nouvelleAquitaineMessageList: { [key in NouvelleAquitaineDepartmentCode]: DepartmentMessages<any> } = {
   [NouvelleAquitaineDepartmentCode.Charente]: charenteMessages,

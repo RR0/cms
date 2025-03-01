@@ -1,9 +1,9 @@
 import { HtmlRR0Context } from "../RR0Context.js"
 import { HtmlTag } from "../util/html/HtmlTag.js"
-import { DirectoryStep, FileWriteConfig, OutputFunc } from "ssg-api"
+import { DirectoryStep, DirectoryStepConfig, FileWriteConfig, OutputFunc } from "ssg-api"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Gender } from "@rr0/common"
-import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 import { CountryCode, Occupation, People, PeopleService } from "@rr0/data"
 
 export type PeopleFilter = (p: People) => boolean
@@ -21,13 +21,14 @@ export class PeopleDirectoryStep extends DirectoryStep {
               protected outputFunc: OutputFunc, config: FileWriteConfig,
               protected service: PeopleService, protected renderer: PeopleHtmlRenderer,
               protected filter: PeopleFilter = (_people: People) => true) {
-    super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath}, name)
+    super({rootDirs, excludedDirs, templateFileName, getOutputPath: config.getOutputPath} as DirectoryStepConfig, name)
   }
 
   protected async processDirs(context: HtmlRR0Context, dirNames: string[]): Promise<void> {
     const allPeopleList = await this.service.getAll()
     let peopleList = allPeopleList.filter(this.filter)
-    const outputPath = this.config.getOutputPath(context)
+    const config = this.config as DirectoryStepConfig
+    const outputPath = config.getOutputPath(context)
     const output = context.newOutput(outputPath)
     const pseudoPeopleList = peopleList.reduce((prevPeopleList: People[], peopleInfo: People) => {
       if (peopleInfo.pseudonyms?.length > 0) {

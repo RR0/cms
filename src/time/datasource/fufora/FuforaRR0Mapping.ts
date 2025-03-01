@@ -2,8 +2,8 @@ import { FuforaHttpDatasource } from "./FuforaHttpDatasource.js"
 import { FuforaCaseSummaryRR0Mapper } from "./FuforaCaseSummaryRR0Mapper.js"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
-import { CMSContext } from "../../../CMSContext"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
+import { CMSContext } from "../../../CMSContext.js"
 
 export const fuforaDatasource = new FuforaHttpDatasource(new URL("https://www.fufora.fi"), "ufodb2/ufohaku.php")
 

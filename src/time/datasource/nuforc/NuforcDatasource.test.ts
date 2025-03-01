@@ -6,7 +6,7 @@ import { nuforcTestCases } from "./NuforcTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/index.js"
-import { NuforcRR0Mapping } from "./NuforcRR0Mapping"
+import { NuforcRR0Mapping } from "./NuforcRR0Mapping.js"
 
 describe("NuforcCaseSource", () => {
 

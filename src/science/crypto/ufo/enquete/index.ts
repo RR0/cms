@@ -1,1 +1,1 @@
-export * from "./dossier"
+export * from "./dossier/index.js"

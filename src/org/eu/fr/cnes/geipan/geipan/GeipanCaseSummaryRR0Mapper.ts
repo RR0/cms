@@ -8,7 +8,7 @@ import { CmsOrganization } from "../../../../../CmsOrganization.js"
 import { france } from "../../../France.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { Place } from "@rr0/place"
-import { Source } from "@rr0/data"
+import { RR0SourceType, Source } from "@rr0/data"
 
 export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, GeipanCaseSummary, RR0CaseSummary> {
 
@@ -42,7 +42,7 @@ export class GeipanCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Context, Ge
 
   map(context: HtmlRR0Context, sourceCase: GeipanCaseSummary, sourceTime: Date): RR0CaseSummary {
     const id = sourceCase.id
-    const caseSource: Source = {
+    const caseSource: Source<RR0SourceType> = {
       previousSourceRefs: [],
       events: [], url: sourceCase.url, title: "cas n° " + id, authors: this.authors,
       publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}

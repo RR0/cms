@@ -2,7 +2,7 @@ import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { AbstractDatasource } from "../AbstractDatasource.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { Place } from "@rr0/place"
-import { StringUtil } from "../../../util"
+import { StringUtil } from "../../../util/string/StringUtil.js"
 
 export abstract class RR0Datasource extends AbstractDatasource<RR0CaseSummary> {
 

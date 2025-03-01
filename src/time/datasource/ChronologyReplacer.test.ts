@@ -8,7 +8,7 @@ import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { HttpSource } from "./HttpSource.js"
 import { AllDataService } from "@rr0/data"
-import { UrecatRR0Mapping } from "./urecat"
+import { UrecatRR0Mapping } from "./urecat/UrecatRR0Mapping.js"
 
 describe("ChronologyReplacer", () => {
 

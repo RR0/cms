@@ -2,12 +2,12 @@ import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
 import { UrlUtil } from "../../../util/index.js"
 import { Book } from "../../../book/Book.js"
-import { Article, Source } from "@rr0/data"
-import { RR0HttpDatasource } from "./RR0HttpDatasource"
-import { RR0Mapping } from "./RR0Mapping"
+import { Article, RR0SourceType, Source } from "@rr0/data"
+import { RR0HttpDatasource } from "./RR0HttpDatasource.js"
+import { RR0Mapping } from "./RR0Mapping.js"
 import { NamedPlace, Place } from "@rr0/place"
 
-function testCase(urlPath: string, time: EdtfDate, description: string, sources: Source[],
+function testCase(urlPath: string, time: EdtfDate, description: string, sources: Source<RR0SourceType>[],
                   place?: Place): RR0CaseSummary {
   const path = UrlUtil.join(RR0Mapping.searchPath, urlPath)
   const url = new URL(path, RR0Mapping.baseUrl).href

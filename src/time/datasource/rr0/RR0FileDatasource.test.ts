@@ -1,8 +1,8 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../../../test/index.js"
 import { rr0TestCases } from "./RR0TestCases.js"
-import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper"
-import { RR0FileDatasource } from "./RR0FileDatasource"
+import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper.js"
+import { RR0FileDatasource } from "./RR0FileDatasource.js"
 
 
 describe("RR0FileDatasource", () => {

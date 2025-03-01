@@ -4,7 +4,7 @@ import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
 import { PlaceContext } from "@rr0/place"
 import { People } from "@rr0/data"
-import { CMSContext } from "./CMSContext"
+import { CMSContext } from "./CMSContext.js"
 
 export interface RR0Context extends SsgContext {
 

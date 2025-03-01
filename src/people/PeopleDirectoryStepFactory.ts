@@ -3,7 +3,7 @@ import { RR0FileUtil } from "../util/file/RR0FileUtil.js"
 import { PeopleDirectoryStep, peopleOccupationFilter } from "./PeopleDirectoryStep.js"
 import { glob } from "glob"
 import path from "path"
-import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 import { Occupation, People, PeopleService } from "@rr0/data"
 
 export type PeopleDirectoryStepOptions = {

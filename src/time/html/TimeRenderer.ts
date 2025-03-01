@@ -3,7 +3,7 @@ import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import { RelativeTimeTextBuilder } from "../text/RelativeTimeTextBuilder.js"
 import { UrlUtil } from "../../util/url/UrlUtil.js"
 import { TimeReplacer } from "./TimeReplacer.js"
-import { TimeUrlBuilder } from "../TimeUrlBuilder"
+import { TimeUrlBuilder } from "../TimeUrlBuilder.js"
 
 export interface TimeRenderOptions {
   url: boolean

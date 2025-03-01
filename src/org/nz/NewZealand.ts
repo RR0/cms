@@ -1,5 +1,5 @@
 import { CountryCode } from "@rr0/data"
-import { CmsCountry } from "../country/CmsCountry"
+import { CmsCountry } from "../country/CmsCountry.js"
 import { Place } from "@rr0/place"
 import { NewZealandRegionCode } from "./region/NewZealandRegionCode.js"
 import { Region } from "../country/region/Region.js"

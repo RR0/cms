@@ -6,7 +6,7 @@ import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { FuforaCaseSummary } from "./FuforaCaseSummary.js"
 import { RR0CaseMapping } from "../rr0/index.js"
-import { FuforaRR0Mapping } from "./FuforaRR0Mapping"
+import { FuforaRR0Mapping } from "./FuforaRR0Mapping.js"
 
 describe("FuforaCaseSource", () => {
 

@@ -1,7 +1,7 @@
 import { TimeReplacer } from "./TimeReplacer.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
-import { TimeUrlBuilder } from "../TimeUrlBuilder"
+import { TimeUrlBuilder } from "../TimeUrlBuilder.js"
 
 export class TimeReplacerFactory implements ReplacerFactory<DomReplacer> {
 

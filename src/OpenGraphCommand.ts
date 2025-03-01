@@ -1,4 +1,4 @@
-import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace/ReplaceCommand.js"
+import { ReplaceCommand } from "ssg-api"
 import { HtmlRR0Context } from "./RR0Context.js"
 import { Canvas, CanvasRenderingContext2D, createCanvas, loadImage } from "canvas"
 import fs from "fs"

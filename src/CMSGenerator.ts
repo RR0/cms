@@ -17,8 +17,8 @@ import {
   TimeService,
   TimeTextBuilder,
   TimeUrlBuilder
-} from "./time"
-import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/index.js"
+} from "./time/index.js"
+import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/crypto/ufo/enquete/dossier/index.js"
 import {
   cities,
   CityService,
@@ -45,6 +45,7 @@ import {
   HtmlMeta,
   HtmlSsgContext,
   OutputFunc,
+  ReplaceCommand,
   Ssg,
   SsgContext,
   SsiIncludeReplaceCommand,
@@ -55,7 +56,7 @@ import {
   PeopleDirectoryStepFactory,
   PeopleDirectoryStepOptions,
   PeopleReplacerFactory
-} from "./people"
+} from "./people/index.js"
 import {
   PersistentSourceRegistry,
   SourceFileCounter,
@@ -63,7 +64,7 @@ import {
   SourceRenderer,
   SourceReplacer,
   SourceReplacerFactory
-} from "./source"
+} from "./source/index.js"
 import { NoteFileCounter, NoteRenderer, NoteReplacer, NoteReplacerFactory } from "./note/index.js"
 import { AnchorReplaceCommand, CaseAnchorHandler, DataAnchorHandler } from "./anchor/index.js"
 import { MetaLinkReplaceCommand } from "./MetaLinkReplaceCommand.js"
@@ -86,11 +87,10 @@ import {
   TypedDataFactory
 } from "@rr0/data"
 import { GooglePlaceService } from "@rr0/place"
-import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer"
-import { CountryService } from "./org/country/CountryService"
-import { CMSContext } from "./CMSContext"
-import { ReplaceCommand } from "ssg-api/dist/src/step/content/replace"
-import { TimeOptions } from "./time/TimeOptions"
+import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer.js"
+import { CountryService } from "./org/country/CountryService.js"
+import { CMSContext } from "./CMSContext.js"
+import { TimeOptions } from "./time/TimeOptions.js"
 
 export interface CMSGeneratorOptions {
   contentRoots: string[]

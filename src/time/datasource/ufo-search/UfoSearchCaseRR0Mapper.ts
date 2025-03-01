@@ -5,8 +5,8 @@ import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "../rr0/index.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { CityService } from "../../../org/index.js"
-import { Source } from "@rr0/data"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { RR0SourceType, Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
 
 export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0Context, UfoSearchCase, RR0CaseSummary> {
 
@@ -24,7 +24,7 @@ export class UfoSearchCaseRR0Mapper implements CaseMapper<HtmlRR0Context, UfoSea
     const url = sourceCase.url
     const title = "cas n° " + sourceCase.id
     const publication = {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
-    const caseSource: Source = {url, title, authors, publication, events: [], previousSourceRefs: []}
+    const caseSource: Source<RR0SourceType> = {url, title, authors, publication, events: [], previousSourceRefs: []}
     const placeName = sourceCase.location
     const place = placeName ? this.getPlace(context, placeName) : undefined
     return {

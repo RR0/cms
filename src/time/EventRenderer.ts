@@ -3,11 +3,10 @@ import { SourceFactory, SourceRenderer } from "../source/index.js"
 import { NoteRenderer } from "../note/index.js"
 import { TimeElementFactory } from "./html/TimeElementFactory.js"
 import assert from "assert"
-import { RR0Data, RR0Event } from "@rr0/data"
-import { Source } from "@rr0/data/dist/source"
-import { PlaceRenderer } from "../place/PlaceRenderer"
+import { RR0Data, RR0Event, RR0SourceType, Source } from "@rr0/data"
+import { PlaceRenderer } from "../place/PlaceRenderer.js"
 import { Place } from "@rr0/place"
-import { TimeRenderOptions } from "./html"
+import { TimeRenderOptions } from "./html/index.js"
 
 /**
  * Render a case summary as HTML.
@@ -74,7 +73,7 @@ export class EventRenderer<E extends RR0Event> {
     }
   }
 
-  async renderSources(context: HtmlRR0Context, sources: Source[], container: HTMLElement) {
+  async renderSources(context: HtmlRR0Context, sources: Source<RR0SourceType>[], container: HTMLElement) {
     for (const source of sources) {
       const href = source.url
       const resolvedSource = source.title || !href ? source : await this.sourceFactory.create(context, href.toString())

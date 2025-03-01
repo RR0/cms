@@ -4,7 +4,7 @@ import { GeipanFileDatasource } from "./GeipanFileDatasource.js"
 
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
-import { CMSContext } from "../../../../../../CMSContext"
+import { CMSContext } from "../../../../../../CMSContext.js"
 
 export const geipanHttpDatasource = new GeipanHttpDatasource(new URL("https://geipan.fr"), "fr/recherche/cas")
 export const geipanFileDatasource = new GeipanFileDatasource("org/eu/fr/cnes/geipan/export_cas_pub_20210219111412.csv",

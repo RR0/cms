@@ -1,5 +1,5 @@
 import { Chapter } from "./Chapters.js"
-import { SourceJson } from "@rr0/data/dist/source"
+import { SourceJson } from "@rr0/data"
 
 export interface BookJson extends SourceJson {
 

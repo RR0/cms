@@ -1,7 +1,7 @@
 import { PeopleReplacer } from "./PeopleReplacer.js"
 import { DomReplacer, ReplacerFactory } from "ssg-api"
 import { HtmlRR0Context } from "../RR0Context.js"
-import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 import { PeopleService } from "@rr0/data"
 
 /**

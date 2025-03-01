@@ -1,9 +1,9 @@
 import { NuforcRR0Mapper } from "./NuforcRR0Mapper.js"
 import { NuforcHttpDatasource } from "./NuforcHttpDatasource.js"
-import { RR0CaseMapping } from "../rr0"
-import { ChronologyReplacerActions } from "../ChronologyReplacerActions"
-import { NuforcCaseSummary } from "./NuforcCaseSummary"
-import { CMSContext } from "../../../CMSContext"
+import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
+import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
+import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
+import { CMSContext } from "../../../CMSContext.js"
 
 export const nuforcDatasource = new NuforcHttpDatasource()
 

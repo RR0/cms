@@ -6,11 +6,11 @@ import { Level2Date as EdtfDate } from "@rr0/time"
 import { SourceFactory, SourceRenderer } from "../source/index.js"
 import { NoteFileCounter, NoteRenderer } from "../note/index.js"
 import { HautsDeSeineCityCode } from "../org/eu/fr/region/idf/92/HautsDeSeineCityCode.js"
-import { AllDataService, Source } from "@rr0/data"
+import { AllDataService, RR0SourceType, Source } from "@rr0/data"
 import { Place } from "@rr0/place"
-import { OrganizationPlace } from "../place/OrganizationPlace"
-import { hautsDeSeine } from "../org/eu/fr/region/idf/92/HautsDeSeine"
-import { City } from "../org"
+import { OrganizationPlace } from "../place/OrganizationPlace.js"
+import { hautsDeSeine } from "../org/eu/fr/region/idf/92/HautsDeSeine.js"
+import { City } from "../org/country/region/department/city/City.js"
 
 describe("TimeEventRenderer", () => {
 
@@ -28,7 +28,7 @@ describe("TimeEventRenderer", () => {
       Place.fromLocation(48.891944, 2.207222))
     const namedPlace = new OrganizationPlace(city)
     const sourceMonth = 12
-    const unreacheableSource: Source = {
+    const unreacheableSource: Source<RR0SourceType> = {
       events: [], previousSourceRefs: [],
       url: "https://somesite.com/case1",
       title: "Case 1",

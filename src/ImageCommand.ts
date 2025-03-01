@@ -2,7 +2,7 @@ import { DomReplaceCommand, DomReplacer } from "ssg-api"
 import { HtmlRR0Context } from "./RR0Context.js"
 import * as path from "path"
 import * as fs from "fs"
-import sizeOf from "image-size"
+import { imageSizeFromFile } from "image-size/fromFile"
 
 /**
  * Register images (`<img>` tags) required in an HTML file.
@@ -47,7 +47,7 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
             src)
           imgEl.loading = "lazy"
           if (!isExternal && !imgEl.width && !imgEl.height) {
-            const dimensions = sizeOf(imgPath)
+            const dimensions = await imageSizeFromFile(imgPath)
             let width = dimensions.width
             let height = dimensions.height
             if (width > this.maxWidth) {

@@ -5,7 +5,7 @@ import * as path from "path"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { Book } from "./Book.js"
 import { CSVFileReader } from "../CSVFileReader.js"
-import { TimeUrlBuilder } from "../time"
+import { TimeUrlBuilder } from "../time/TimeUrlBuilder.js"
 import { writeFile } from "@javarome/fileutil"
 import { People, PeopleService } from "@rr0/data"
 

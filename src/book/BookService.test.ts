@@ -2,11 +2,11 @@ import path from "path"
 import { ConsoleLogger, FileWriteConfig, SsgContext } from "ssg-api"
 import { CLI } from "../util/cli/CLI.js"
 import { AllDataService, PeopleService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
-import { Book } from "./Book"
-import { BookService } from "./BookService"
-import { TimeUrlBuilder } from "../time"
-import { rr0TestUtil } from "../test"
-import { BookJson } from "./BookJson"
+import { Book } from "./Book.js"
+import { BookService } from "./BookService.js"
+import { TimeUrlBuilder } from "../time/TimeUrlBuilder.js"
+import { rr0TestUtil } from "../test/index.js"
+import { BookJson } from "./BookJson.js"
 
 interface BookImportArgs {
   import: string

@@ -4,7 +4,7 @@ import { describe, expect, test } from "@javarome/testscript"
 import { DomReplaceCommand } from "ssg-api"
 import { TimeReplacer } from "./html/TimeReplacer.js"
 import path from "path"
-import { TimeOptions } from "./TimeOptions"
+import { TimeOptions } from "./TimeOptions.js"
 
 describe("HtmlTagReplaceCommand", async () => {
 

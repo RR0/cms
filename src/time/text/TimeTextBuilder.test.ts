@@ -1,7 +1,7 @@
 import { TimeContext } from "@rr0/time"
 import { RR0ContextImpl } from "../../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../test"
+import { rr0TestUtil } from "../../test/index.js"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 
 describe("timeTextBuilder", () => {

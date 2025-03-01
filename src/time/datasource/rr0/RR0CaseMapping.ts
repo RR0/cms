@@ -1,7 +1,7 @@
 import { CaseMapping } from "../CaseMapping.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
-import { CMSContext } from "../../../CMSContext"
+import { CMSContext } from "../../../CMSContext.js"
 
 /**
  * Maps some datasource case to a RR0 case.

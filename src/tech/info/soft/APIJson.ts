@@ -1,4 +1,4 @@
-import { RR0DataJson } from "@rr0/data/dist/RR0DataJson"
+import { RR0DataJson } from "@rr0/data"
 
 export interface APIJson extends RR0DataJson {
 

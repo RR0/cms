@@ -12,12 +12,12 @@ import { stPetersburg } from "../../../org/us/region/fl/pinellas/stpetersburg/St
 import { monessen } from "../../../org/us/region/pa/westmoreland/monessen/Monessen.js"
 import { bonneyLake } from "../../../org/us/region/wa/pierce/bonneylake/BonneyLake.js"
 import { slocomb } from "../../../org/us/region/al/geneva/slocomb/Slocomb.js"
-import { RR0CaseSummary } from "../rr0"
-import { Source } from "@rr0/data/dist/source"
-import { NuforcRR0Mapper } from "./NuforcRR0Mapper"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
+import { RR0SourceType, Source } from "@rr0/data"
+import { NuforcRR0Mapper } from "./NuforcRR0Mapper.js"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
 
-function expectedSource(datasource: NuforcHttpDatasource, dataDate: Date, caseNumber: string): Source {
+function expectedSource(datasource: NuforcHttpDatasource, dataDate: Date, caseNumber: string): Source<RR0SourceType> {
   const url = new URL("sighting/?id=" + caseNumber, datasource.baseUrl).href
   return {
     previousSourceRefs: [], events: [],

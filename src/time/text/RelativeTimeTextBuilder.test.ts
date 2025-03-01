@@ -1,5 +1,5 @@
 import { RelativeTimeTextBuilder } from "./RelativeTimeTextBuilder.js"
-import { rr0TestUtil } from "../../test"
+import { rr0TestUtil } from "../../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 

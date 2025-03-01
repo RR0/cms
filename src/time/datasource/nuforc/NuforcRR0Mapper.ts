@@ -24,9 +24,9 @@ import { uk } from "../../../org/uk/Uk.js"
 import { usa } from "../../../org/us/Usa.js"
 import { algeria } from "../../../org/dz/Algeria.js"
 import { panama } from "../../../org/pa/Panama.js"
-import { Source } from "@rr0/data"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
-import { CountryService } from "../../../org/country/CountryService"
+import { RR0SourceType, Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
+import { CountryService } from "../../../org/country/CountryService.js"
 
 export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSummary, RR0CaseSummary> {
 
@@ -86,7 +86,7 @@ export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSum
   }
 
   map(context: HtmlRR0Context, sourceCase: NuforcCaseSummary, sourceTime: Date): RR0CaseSummary {
-    const caseSource: Source = {
+    const caseSource: Source<RR0SourceType> = {
       previousSourceRefs: [],
       events: [],
       url: sourceCase.url,

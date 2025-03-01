@@ -1,6 +1,6 @@
-import { OrganizationPlace } from "./OrganizationPlace"
+import { OrganizationPlace } from "./OrganizationPlace.js"
 import { NamedPlace, Place } from "@rr0/place"
-import { HtmlRR0Context } from "../RR0Context"
+import { HtmlRR0Context } from "../RR0Context.js"
 
 /**
  * Convert a place to a <span class="place"> tag with the place name (or location)

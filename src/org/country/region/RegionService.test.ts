@@ -3,7 +3,7 @@ import { ileDeFrance } from "../../eu/fr/region/idf/Idf.js"
 import { france } from "../../eu/fr/France.js"
 import { alabama } from "../../us/region/al/Alabama.js"
 import { usa } from "../../us/Usa.js"
-import { rr0TestUtil } from "../../../test"
+import { rr0TestUtil } from "../../../test/index.js"
 
 describe("RegionService", () => {
 

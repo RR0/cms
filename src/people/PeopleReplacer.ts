@@ -1,6 +1,6 @@
 import { DomReplacement } from "../time/DomReplacement.js"
 import { HtmlRR0Context } from "../RR0Context.js"
-import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer"
+import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 import { CountryCode, Occupation, PeopleService } from "@rr0/data"
 
 export class PeopleReplacer implements DomReplacement<HtmlRR0Context> {

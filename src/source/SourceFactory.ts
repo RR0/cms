@@ -3,10 +3,9 @@ import path from "path"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { JSDOM } from "jsdom"
 import { HttpSource } from "../time/datasource/HttpSource.js"
-import { TimeService } from "../time"
+import { TimeService } from "../time/TimeService.js"
 import { FileContents } from "@javarome/fileutil"
-import { AllDataService } from "@rr0/data"
-import { Publication, Source } from "@rr0/data/dist/source"
+import { AllDataService, Publication, RR0SourceType, Source } from "@rr0/data"
 
 /**
  * Create Source objects.
@@ -23,7 +22,7 @@ export class SourceFactory {
    * @param context
    * @param href The anchor's URL string.
    */
-  async create(context: HtmlRR0Context, href: string): Promise<Source> {
+  async create(context: HtmlRR0Context, href: string): Promise<Source<RR0SourceType>> {
     return href.startsWith("http") ? await this.createExternal(context, href) : await this.createInternal(context, href)
   }
 
@@ -33,7 +32,7 @@ export class SourceFactory {
    * @param context
    * @param href
    */
-  async createInternal(context: HtmlRR0Context, href: string): Promise<Source> {
+  async createInternal(context: HtmlRR0Context, href: string): Promise<Source<RR0SourceType>> {
     if (path.dirname(href).startsWith("/")) {
       href = href.substring(1)
     }
@@ -46,7 +45,7 @@ export class SourceFactory {
       hash = undefined
     }
     const ext = path.extname(href)
-    let source: Source
+    let source: Source<RR0SourceType>
     const sourceTypes = ["article", "book", "website",
       undefined   // TODO: Remove undefined when type is set in all .json files
     ]
@@ -56,12 +55,13 @@ export class SourceFactory {
         source = await this.fromPage(href, hash)
         break
       case ".json":
-        const sources = await this.dataService.getFromDir<Source>(path.dirname(href), sourceTypes,
+        const sources = await this.dataService.getFromDir<Source<RR0SourceType>>(path.dirname(href), sourceTypes,
           [path.basename(href)])
         source = sources?.[0]
         break
       default: {
-        const sources = await this.dataService.getFromDir<Source>(ext ? path.dirname(href) : href, sourceTypes,
+        const sources = await this.dataService.getFromDir<Source<RR0SourceType>>(ext ? path.dirname(href) : href,
+          sourceTypes,
           ["index.json", "people.json"])
         source = sources?.[0]
         if (!source) {
@@ -76,7 +76,7 @@ export class SourceFactory {
     if (hash) {
       source.index = hash
     }
-    return source as Source
+    return source as Source<RR0SourceType>
   }
 
   /**
@@ -85,7 +85,7 @@ export class SourceFactory {
    * @param context
    * @param href
    */
-  async createExternal(context: HtmlRR0Context, href: string): Promise<Source> {
+  async createExternal(context: HtmlRR0Context, href: string): Promise<Source<RR0SourceType>> {
     const resOut: Partial<Response> = {}
     let title: string
     let lastModif: string
@@ -111,7 +111,7 @@ export class SourceFactory {
     }
   }
 
-  async fromPage(href: string, hash = ""): Promise<Source> {
+  async fromPage(href: string, hash = ""): Promise<Source<RR0SourceType>> {
     const filePath = path.extname(href) ? href : path.join(href, "index.html")
     const fileContents = FileContents.read(filePath)
     const doc = new JSDOM(fileContents.contents).window.document.documentElement

@@ -2,7 +2,7 @@ import { CmsOrganization } from "./CmsOrganization.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
-import { CmsOrganizationFactory } from "./CmsOrganizationFactory"
+import { CmsOrganizationFactory } from "./CmsOrganizationFactory.js"
 import { FileContents } from "@javarome/fileutil"
 
 export class OrganizationService<O extends CmsOrganization = CmsOrganization, P extends CmsOrganization = undefined> {

@@ -4,7 +4,7 @@ import { rr0TestUtil } from "../../test/index.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import path from "path"
-import { UfoSearchRR0Mapping } from "./ufo-search"
+import { UfoSearchRR0Mapping } from "./ufo-search/index.js"
 
 describe("JsonMapper", () => {
 

@@ -7,7 +7,7 @@ import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { UrecatHttpDatasource } from "./UrecatHttpDatasource.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
-import { UrecatRR0Mapping } from "./UrecatRR0Mapping"
+import { UrecatRR0Mapping } from "./UrecatRR0Mapping.js"
 
 describe("UrecatCaseSource", () => {
 

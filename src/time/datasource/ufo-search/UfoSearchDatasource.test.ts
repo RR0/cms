@@ -6,7 +6,7 @@ import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { ufoSearchTestCases } from "./UfoSearchTestCases.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
-import { UfoSearchRR0Mapping } from "./UfoSearchMapping"
+import { UfoSearchRR0Mapping } from "./UfoSearchMapping.js"
 
 describe("UfoSearchCaseSource", () => {
 

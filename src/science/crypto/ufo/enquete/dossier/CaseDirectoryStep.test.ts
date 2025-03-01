@@ -7,7 +7,7 @@ import { CaseService } from "./CaseService.js"
 import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
 import { FileContents } from "@javarome/fileutil"
 import { AllDataService, RR0EventFactory, TypedDataFactory } from "@rr0/data"
-import { RR0CaseJson } from "./RR0CaseJson"
+import { RR0CaseJson } from "./RR0CaseJson.js"
 
 describe("DirectoryStep", () => {
 

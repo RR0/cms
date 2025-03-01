@@ -6,7 +6,7 @@ import { europeRegions } from "../../eu/EuropeRegions.js"
 import { Region } from "./Region.js"
 import { OrganizationService } from "../../OrganizationService.js"
 import { indiaRegions } from "../../in/region/IndiaRegions.js"
-import { CmsCountry } from "../CmsCountry"
+import { CmsCountry } from "../CmsCountry.js"
 
 export class RegionService extends OrganizationService<Region, CmsCountry> {
 }

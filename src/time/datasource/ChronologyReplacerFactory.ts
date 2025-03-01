@@ -3,7 +3,7 @@ import { ChronologyReplacer } from "./ChronologyReplacer.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import { CaseSummaryRenderer } from "../CaseSummaryRenderer.js"
 import { RR0CaseMapping } from "./rr0/RR0CaseMapping.js"
-import { TimeUrlBuilder } from "../TimeUrlBuilder"
+import { TimeUrlBuilder } from "../TimeUrlBuilder.js"
 
 export class ChronologyReplacerFactory implements ReplacerFactory<DomReplacer> {
 

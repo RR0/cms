@@ -1,7 +1,7 @@
 import { Chapter } from "./Chapters.js"
-import { Source } from "@rr0/data/dist/source"
+import { Source } from "@rr0/data"
 
-export interface Book extends Source {
+export class Book extends Source<"book"> {
 
   type: "book"
 

@@ -1,5 +1,5 @@
 import { Place } from "@rr0/place"
-import { CmsOrganization } from "../CmsOrganization"
+import { CmsOrganization } from "../CmsOrganization.js"
 import { CountryCode, OrganizationKind } from "@rr0/data"
 
 export class CmsCountry extends CmsOrganization {

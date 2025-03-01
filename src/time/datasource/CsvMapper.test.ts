@@ -10,7 +10,7 @@ import { geipanTestCaseSummaries } from "../../org/eu/fr/cnes/geipan/geipan/Geip
 import { GeipanCase } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCase.js"
 import { geipanFileDatasource, geipanHttpDatasource } from "../../org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping.js"
 import { GeipanCaseToSummaryMapper } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCaseToSummaryMapper.js"
-import { RR0CaseSummary } from "./rr0"
+import { RR0CaseSummary } from "./rr0/RR0CaseSummary.js"
 
 describe("CsvMapper", () => {
 

@@ -1,12 +1,12 @@
 import { TimeReplacer } from "./TimeReplacer.js"
-import { rr0TestUtil } from "../../test"
+import { rr0TestUtil } from "../../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { TimeRenderer } from "./TimeRenderer.js"
 import { TimeElementFactory } from "./TimeElementFactory.js"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"
 import path from "path"
-import { TimeOptions } from "../TimeOptions"
-import { TimeUrlBuilder } from "../TimeUrlBuilder"
+import { TimeOptions } from "../TimeOptions.js"
+import { TimeUrlBuilder } from "../TimeUrlBuilder.js"
 
 describe("TimeReplacer", async () => {
 

@@ -6,8 +6,8 @@ import { RR0CaseSummary } from "../rr0/RR0CaseSummary.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { DepartmentService } from "../../../org/country/region/department/DepartmentService.js"
 import { CityService } from "../../../org/country/index.js"
-import { Source } from "@rr0/data"
-import { OrganizationPlace } from "../../../place/OrganizationPlace"
+import { RR0SourceType, Source } from "@rr0/data"
+import { OrganizationPlace } from "../../../place/OrganizationPlace.js"
 
 /**
  * Maps a Base OVNI France case to a RR0 case.
@@ -20,7 +20,7 @@ export class BaseOvniFranceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Con
   }
 
   map(context: HtmlRR0Context, sourceCase: BaseOvniFranceCaseSummary, sourceTime: Date): RR0CaseSummary {
-    const caseSource: Source = {
+    const caseSource: Source<RR0SourceType> = {
       previousSourceRefs: [], events: [],
       url: sourceCase.url, title: "cas n° " + sourceCase.id, authors: this.authors,
       publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
