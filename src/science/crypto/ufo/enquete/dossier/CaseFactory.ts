@@ -8,8 +8,14 @@ export class CaseFactory extends TypedDataFactory<RR0Case, RR0CaseJson> {
 
   parse(dataJson: RR0CaseJson): RR0Case {
     const parsedCase = super.parse(dataJson)
-    parsedCase.time = EdtfDate.fromString(dataJson.time)
-    parsedCase.place = new NamedPlace(dataJson.place)
+    const time = dataJson.time
+    if (time) {
+      parsedCase.time = EdtfDate.fromString(time)
+    }
+    const placeName = dataJson.place
+    if (placeName) {
+      parsedCase.place = new NamedPlace(placeName)
+    }
     parsedCase.classification = dataJson.classification
     parsedCase.conclusion = dataJson.conclusion
     return parsedCase
