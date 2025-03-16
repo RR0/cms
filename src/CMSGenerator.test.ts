@@ -49,7 +49,7 @@ export async function getTimeFiles(): Promise<string[]> {
 describe("Build", () => {
   console.time("ssg")
   const args: CMSGenerationOptions = {
-    contents: ["test/people/a/Aristote/*.html"],
+    contents: ["test/**/*.html"],
     force: "true"
   }
   const cliContents = args.contents

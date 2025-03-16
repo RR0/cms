@@ -61,7 +61,7 @@ export class PeopleHtmlRenderer {
         titles.push(occupationMsg(gender))
       }
     }
-    const text = content || people.lastAndFirstName
+    const text = content || people.lastAndFirstName || people.title
     const doc = context.file.document
     const link = doc.createElement("a")
     link.innerHTML = text
