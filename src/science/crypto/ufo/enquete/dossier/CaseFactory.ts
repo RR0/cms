@@ -10,7 +10,7 @@ export class CaseFactory extends TypedDataFactory<RR0Case, RR0CaseJson> {
     const parsedCase = super.parse(dataJson)
     const time = dataJson.time
     if (time) {
-      parsedCase.time = EdtfDate.fromString(time)
+      Object.assign(parsedCase, {time: EdtfDate.fromString(time)})
     }
     const placeName = dataJson.place
     if (placeName) {

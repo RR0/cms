@@ -16,10 +16,10 @@ export class SsiTitleReplaceCommand extends SsiEchoVarReplaceCommand {
   protected async createReplacer(context: HtmlRR0Context): Promise<RegexReplacer> {
     return {
       replace: (_match: string, ..._args: any[]): string => {
-        context.file.title = this.getTitle(context)
+        const titleStr = this.getTitle(context)
+        context.file.title = titleStr
         const titleUrl = context.file.meta.url
-        return titleUrl ? `<a href="${titleUrl}" target="_blank">${(this.getTitle(context))}</a>` : this.getTitle(
-          context)
+        return titleUrl ? `<a href="${titleUrl}" target="_blank">${titleStr}</a>` : titleStr
       }
     }
   }

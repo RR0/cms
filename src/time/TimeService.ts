@@ -77,6 +77,9 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
       time.setDayOfMonth(newTimeContext.getDayOfMonth())
       // context.time.from = context.time
     }
+    // TODO: Set people + parent context if filePath under people root dir
+    // TODO: Set place + parent context if filePath under place root dir
+    // TODO: Set place + parent context if filePath under org root dir
     return newTimeContext
   }
 }

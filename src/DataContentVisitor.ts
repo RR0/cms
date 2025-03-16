@@ -37,28 +37,31 @@ export class DataContentVisitor implements ContentVisitor {
     this.processURL(context, data)
     const events = data.events.sort(
       (event1, event2) => event1.time ? event2.time ? event1.time.isBefore(event2.time) ? -1 : 1 : -1 : 1)
-    const doc = context.file.document
     for (const event of events) {
-      switch (event.eventType) {
-        case "birth":
-          await this.processBirth(context, event, data)
-          break
-        case "book":
-          await this.processBook(context, event)
-          break
-        case "image":
-          await this.processImage(context, event)
-          break
-        case "death":
-          await this.processDeath(context, event, data)
-          break
-        default:
-          const {eventP, timeEl} = this.timeParagraph(context, event)
-          await this.eventRenderer.render(context, event, eventP)
-          doc.append(eventP)
-      }
+      await this.processEvent(context, event, data)
     }
     context.file.contents = context.file.serialize()
+  }
+
+  protected async processEvent(context: HtmlRR0Context, event: RR0Event, data: RR0Data) {
+    switch (event.eventType) {
+      case "birth":
+        await this.processBirth(context, event, data)
+        break
+      case "book":
+        await this.processBook(context, event)
+        break
+      case "image":
+        await this.processImage(context, event)
+        break
+      case "death":
+        await this.processDeath(context, event, data)
+        break
+      default:
+        const {eventP, timeEl} = this.timeParagraph(context, event)
+        await this.eventRenderer.render(context, event, eventP)
+        context.file.document.append(eventP)
+    }
   }
 
   protected timeParagraph(context: HtmlRR0Context, event: RR0Event) {

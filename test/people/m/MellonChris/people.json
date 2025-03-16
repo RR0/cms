@@ -1,0 +1,22 @@
+{
+  "lastName": "Mellon",
+  "firstNames": [
+    "Christopher",
+    "K."
+  ],
+  "url": "https://www.christophermellon.net",
+  "occupations": [
+    "writer",
+    "ufologist",
+    "politician"
+  ],
+  "countries": [
+    "us"
+  ],
+  "events": [
+    {
+      "type": "birth",
+      "time": "1957-10-02"
+    }
+  ]
+}

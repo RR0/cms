@@ -24,8 +24,8 @@
       <button class="toggle">Carte</button>
     </li>
   </ul>
-  <script async src="/search/SearchComponent.mjs" type="module"></script>
-  <script async src="/time/DualRangeComponent.mjs" type="module"></script>
+  <script async src="/test/search/SearchComponent.mjs" type="module"></script>
+  <script async src="/test/time/DualRangeComponent.mjs" type="module"></script>
 </nav>
 <script>
   const summary = document.getElementById("out-top")
@@ -33,7 +33,7 @@
     summary.textContent = entries[0].intersectionRatio < 0.3 ? document.title : "Sommaire"
   }, { threshold: [0, 0.3, 1] })
   observer.observe(document.querySelector("#main-header"))
-  document.querySelector("rr0-search").placeholder = "Rechercher parmi ${indexSize} pages..."
+  document.querySelector("rr0-search").placeholder = "Rechercher parmi ${contentTotal} pages..."
   <!--#include virtual="/test/place/index.js" -->
 </script>
 <div aria-hidden="true" class="anchor" id="_top"></div>
