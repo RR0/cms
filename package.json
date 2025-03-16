@@ -39,6 +39,7 @@
     "glob": "^11.0.1",
     "image-size": "^2.0.1",
     "jsdom": "^26.0.0",
+    "netlify-cli": "^19.0.2",
     "selenium-webdriver": "^4.29.0",
     "ssg-api": "^1.16.15"
   },
