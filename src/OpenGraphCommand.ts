@@ -48,13 +48,13 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
     ogMeta.setAttribute("property", "og:image")
     ogMeta.setAttribute("content", imageUrl)
     outDoc.head.append(ogMeta)
-    context.file.contents = outDoc.documentElement.outerHTML
+    const docType = outDoc.doctype ? `<!DOCTYPE ${outDoc.doctype.name}>` : ""
+    context.file.contents = `${docType}${outDoc.documentElement.outerHTML}`
   }
 
   getInfoStr(context: HtmlRR0Context) {
     const authors = context.file.meta.author
     const authorsStr = authors && authors.length > 0 ? authors.join(" & ") : ""
-
     let timeStr = ""
     const fileName = context.file.name
     if (this.timeFiles.includes(fileName)) {
@@ -70,7 +70,6 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
         timeStr = this.timeTextBuilder.build(context)
       }
     }
-
     const copyrightStr = context.file.meta.copyright || "RR0.org"
     let infoStr = authorsStr ? authorsStr : ""
     infoStr = infoStr ? [infoStr, copyrightStr].join(" : ") : copyrightStr
