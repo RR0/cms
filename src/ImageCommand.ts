@@ -11,7 +11,7 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
 
   constructor(protected outBaseDir: string, protected maxWidth: number, protected maxHeight: number,
               protected baseUrl = "") {
-    super("img", undefined)
+    super("img:not(.raw)", undefined)
   }
 
   protected async createReplacer(context: HtmlRR0Context): Promise<DomReplacer<HTMLImageElement>> {

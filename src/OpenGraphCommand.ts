@@ -158,6 +158,8 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
     canvasCtx.closePath()
   }
 
+  readonly supportedFiles = "img[src$='.png'],img[src$='.jpg'],img[src$='.gif']"
+
   /**
    * Draw a height-scaled image on the right of the canvas.
    *
@@ -168,7 +170,7 @@ export class OpenGraphCommand implements ReplaceCommand<HtmlRR0Context> {
    */
   protected async drawImage(context: HtmlRR0Context, canvasCtx: CanvasRenderingContext2D, dy = 0) {
     const outDoc = context.file.document
-    const docImages = outDoc.documentElement.getElementsByTagName("img")
+    const docImages = outDoc.documentElement.querySelectorAll(this.supportedFiles)
     let widthRatio = 0.5
     let imageIndex = 0
     if (imageIndex < docImages.length) {
