@@ -102,7 +102,6 @@ describe("Build", () => {
     hour: "2-digit",
     minute: "2-digit"
   }
-
   const directoryPages = [
     "people/index.html", "people/witness/index.html", "people/militaires.html", "people/scientifiques.html",
     "people/astronomes.html", "people/politicians.html", "people/dirigeants.html", "people/pilotes.html",
