@@ -34,7 +34,8 @@ export class DescriptionReplaceCommand implements ReplaceCommand<HtmlRR0Context>
       descriptionMeta.name = "description"
       descriptionMeta.content = file.meta.description
       outDoc.head.append(descriptionMeta)
-      context.file.contents = `<DOCTYPE ${outDoc.doctype.name}>${outDoc.documentElement.outerHTML}`
+      const docType = outDoc.doctype ? `<DOCTYPE ${outDoc.doctype.name}>` : ""
+      context.file.contents = `${docType}${outDoc.documentElement.outerHTML}`
     }
   }
 
