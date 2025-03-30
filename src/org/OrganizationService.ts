@@ -4,18 +4,23 @@ import { RR0Context } from "../RR0Context.js"
 import assert from "assert"
 import { CmsOrganizationFactory } from "./CmsOrganizationFactory.js"
 import { FileContents } from "@javarome/fileutil"
+import { AbstractDataService, AllDataService, OrganizationJson } from "@rr0/data"
+import { DataOptions } from "../DataOptions.js"
 
-export class OrganizationService<O extends CmsOrganization = CmsOrganization, P extends CmsOrganization = undefined> {
+export type OrganizationServiceConfig = DataOptions
 
-  constructor(readonly orgs: O[], readonly rootDir: string, protected factory: CmsOrganizationFactory,
-              readonly parentService: OrganizationService) {
+export class OrganizationService<O extends CmsOrganization = CmsOrganization, P extends CmsOrganization = undefined> extends AbstractDataService<O, OrganizationJson> {
+
+  constructor(dataService: AllDataService, factory: CmsOrganizationFactory, protected config: OrganizationServiceConfig,
+              readonly parentService: OrganizationService, protected orgs: O[]) {
+    super(dataService, factory as any, config.files)
   }
 
   static normalizeName(name: string): string {
     return StringUtil.removeAccents(name.toLowerCase().replaceAll(" ", "-"))
   }
 
-  get(code: string, parent: P = undefined): O | undefined {
+  getById(code: string, parent: P = undefined): O | undefined {
     return this.orgs.find(org => {
       const foundParent = !parent || org.parent === parent
       const foundOrg = org.id === code ? org : undefined
@@ -58,8 +63,8 @@ export class OrganizationService<O extends CmsOrganization = CmsOrganization, P 
   }
 
   async read(fileName: string): Promise<O> {
-    const file = FileContents.read(this.rootDir + fileName)
-    const org = this.factory.create(file) as O
+    const file = FileContents.read(this.config.rootDir + fileName)
+    const org = this.factory.createFromFile(file) as O
     this.orgs.push(org)
     return org
   }

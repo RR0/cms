@@ -7,8 +7,8 @@ describe("CountryService", () => {
 
   test("get", () => {
     const countryService = rr0TestUtil.countryService
-    expect(countryService.get(france.id)).toBe(france)
-    expect(countryService.get(usa.id)).toBe(usa)
-    expect(countryService.get(usa.id)).not.toBe(france)
+    expect(countryService.getById(france.id)).toBe(france)
+    expect(countryService.getById(usa.id)).toBe(usa)
+    expect(countryService.getById(usa.id)).not.toBe(france)
   })
 })

@@ -31,7 +31,7 @@ import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
 import { TimeOptions } from "./time/TimeOptions.js"
 import { CodeReplacerFactory } from "./tech/index.js"
 import { PlaceReplacerFactory } from "./place/index.js"
-import { IndexedReplacerFactory, UnitReplaceCommand } from "./index.js"
+import { DataOptions, IndexedReplacerFactory, UnitReplaceCommand } from "./index.js"
 import { rr0TestUtil } from "./test/index.js"
 
 export async function getTimeFiles(): Promise<string[]> {
@@ -108,6 +108,7 @@ describe("Build", () => {
     "people/contactes.html", "people/ufologues.html", "tech/info/Personnes.html", "people/Contributeurs.html"
   ].map(path => rr0TestUtil.filePath(path))
   getTimeFiles().then(async (timeFiles) => {
+    const orgFiles = await glob("test/org/**/index.html")
     const directoryOptions: PeopleDirectoryStepOptions = {
       root: rr0TestUtil.filePath("people/index.html"),
       scientists: rr0TestUtil.filePath("people/scientifiques.html"),
@@ -125,6 +126,11 @@ describe("Build", () => {
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
     const timeOptions: TimeOptions = {rootDir: rr0TestUtil.filePath("time"), files: timeFiles}
+    const orgOptions: DataOptions = {rootDir: rr0TestUtil.filePath("org"), files: orgFiles}
+    const dataOptions = {
+      time: timeOptions,
+      org: orgOptions
+    }
     // const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
     // const actions: ChronologyReplacerActions = {read: [], write: ["backup"]}
     const actions: ChronologyReplacerActions = {read: ["fetch"], write: ["backup"]}
@@ -161,7 +167,7 @@ describe("Build", () => {
       new UnitReplaceCommand()
     ]
     const generator = new CMSGenerator({
-      contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, timeOptions,
+      contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, dataOptions,
       siteBaseUrl, timeFormat, directoryPages,
       ufoCaseDirectoryFile: rr0TestUtil.filePath("science/crypto/ufo/enquete/dossier/index.html"),
       ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"].map(path => rr0TestUtil.filePath(path)),

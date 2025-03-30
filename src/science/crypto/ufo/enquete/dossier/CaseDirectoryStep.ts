@@ -77,7 +77,7 @@ export class CaseDirectoryStep extends DirectoryStep {
     const cases: RR0Case[] = []
     for (const dirName of dirNames) {
       try {
-        const dirCases = await this.caseService.get(dirName)
+        const dirCases = await this.caseService.getFromDir(dirName)
         cases.push(...dirCases)
       } catch (e) {
         context.warn(`${dirName} has no case.json description`)

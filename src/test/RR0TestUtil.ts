@@ -21,6 +21,7 @@ import { AllDataService, EventDataFactory, PeopleFactory, RR0EventFactory, Typed
 import { CountryService } from "../org/country/CountryService.js"
 
 import { CMSContext } from "../CMSContext.js"
+import { DataOptions } from "../DataOptions.js"
 
 export class RR0TestUtil implements CMSContext {
 
@@ -52,27 +53,30 @@ export class RR0TestUtil implements CMSContext {
   readonly countryService: CountryService
   readonly regionService: RegionService
 
-  constructor(readonly rootDir = "test", readonly outDir = "out") {
+  constructor(readonly rootDir = "test", readonly outDir = "out", orgFiles: string[] = []) {
     const eventFactory = new RR0EventFactory()
     const sightingFactory = new EventDataFactory(eventFactory, ["sighting"], ["index"])
     const orgFactory = this.orgFactory = new CmsOrganizationFactory(eventFactory)
-    this.orgService = new OrganizationService([], "org", orgFactory, undefined)
     this.caseFactory = new CaseFactory(eventFactory)
     this.peopleFactory = new PeopleFactory(eventFactory)
     const apiFactory = new APIFactory(eventFactory)
     const bookFactory = new TypedDataFactory(eventFactory, "book")
     const articleFactory = new TypedDataFactory(eventFactory, "article")
-    this.dataService = new AllDataService(
+    const dataService = this.dataService = new AllDataService(
       [orgFactory, this.caseFactory, this.peopleFactory, bookFactory, articleFactory, sightingFactory, apiFactory])
-    this.dataService.getFromDir("", ["people", "case"]).then(data => {
+    dataService.getFromDir("", ["people", "case"]).then(data => {
       //   console.debug(data)
     })
+    const orgConfig: DataOptions = {rootDir: this.filePath("org"), files: orgFiles}
+    this.orgService = new OrganizationService(dataService, orgFactory, orgConfig, undefined, [])
     this.time = new TimeTestUtil(this)
-    const countryService = this.countryService = new CountryService(countries, "org", orgFactory, undefined)
-    const regionService = this.regionService = new RegionService(regions, "org", orgFactory, countryService)
-    const departmentService = this.departmentService = new DepartmentService(departments, "org", orgFactory,
-      regionService)
-    this.cityService = new CityService(cities, "org", orgFactory, departmentService)
+    const countryService = this.countryService = new CountryService(dataService, orgFactory, orgConfig, undefined,
+      countries)
+    const regionService = this.regionService = new RegionService(dataService, orgFactory, orgConfig, countryService,
+      regions)
+    const departmentService = this.departmentService = new DepartmentService(dataService, orgFactory, orgConfig,
+      regionService, departments)
+    this.cityService = new CityService(dataService, orgFactory, orgConfig, departmentService, cities)
   }
 
   newContext(inputFileName: string, contents?: string, locale = "fr"): RR0Context {

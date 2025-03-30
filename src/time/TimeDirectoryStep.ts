@@ -85,7 +85,7 @@ export class TimeDirectoryStep extends DirectoryStep {
     const events: RR0Event[] = []
     for (const dirName of dirNames) {
       try {
-        const dirEvents = await this.service.get(dirName)
+        const dirEvents = await this.service.getFromDir(dirName)
         events.push(...dirEvents)
       } catch (e) {
         context.warn(`${dirName} has no event.json description`)

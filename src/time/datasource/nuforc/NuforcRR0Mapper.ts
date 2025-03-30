@@ -97,7 +97,7 @@ export class NuforcRR0Mapper implements CaseMapper<HtmlRR0Context, NuforcCaseSum
     assert.ok(sourceCase.country, `NUFORC country code is ${sourceCase.country}`)
     const countryCode = NuforcRR0Mapper.countryMap[sourceCase.country]
     assert.ok(countryCode, `Could not find RR0 country to map from NUFORC code ${countryCode}`)
-    const country = this.countryService.get(countryCode)
+    const country = this.countryService.getById(countryCode)
     assert.ok(country, `Could not find country "${countryCode}"`)
     const placeItems = /(.+?)(:?\s+\((.+)\))?$/.exec(sourceCase.city)
     const placeName = placeItems[1]

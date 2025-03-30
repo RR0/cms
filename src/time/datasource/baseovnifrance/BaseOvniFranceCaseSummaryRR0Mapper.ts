@@ -26,7 +26,7 @@ export class BaseOvniFranceCaseSummaryRR0Mapper implements CaseMapper<HtmlRR0Con
       publication: {publisher: this.copyright, time: EdtfDate.fromDate(sourceTime)}
     }
     const depCode = sourceCase.depCode
-    const dep = this.depService.get(depCode, undefined)
+    const dep = this.depService.getById(depCode, undefined)
     assert.ok(dep, `Could not find department "${depCode}"`)
     const placeName = sourceCase.city
     const city = this.cityService.find(context, placeName, dep)

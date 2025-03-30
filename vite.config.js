@@ -5,6 +5,6 @@ export default {
     assetsDir: "out/"
   },
   preview: {
-    open: "test/people/index.html"
+    open: "test/index.html"
   }
 }

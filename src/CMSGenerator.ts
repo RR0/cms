@@ -91,6 +91,7 @@ import { PeopleHtmlRenderer } from "./people/PeopleHtmlRenderer.js"
 import { CountryService } from "./org/country/CountryService.js"
 import { CMSContext } from "./CMSContext.js"
 import { TimeOptions } from "./time/TimeOptions.js"
+import { DataOptions } from "./DataOptions.js"
 
 export interface CMSGeneratorOptions {
   contentRoots: string[]
@@ -99,7 +100,10 @@ export interface CMSGeneratorOptions {
   locale: string,
   googleMapsApiKey: string
   mail: string
-  timeOptions: TimeOptions
+  dataOptions: {
+    time: TimeOptions
+    org: DataOptions
+  }
   siteBaseUrl: string
   timeFormat: Intl.DateTimeFormatOptions
   directoryPages: string[]
@@ -164,7 +168,7 @@ export class CMSGenerator implements CMSContext {
   readonly config: FileWriteConfig
   readonly context: RR0ContextImpl
   readonly placeService: GooglePlaceService
-  readonly orgService: OrganizationService<any>
+  readonly orgService: OrganizationService
   readonly caseFactory: CaseFactory
   readonly dataService: AllDataService
   readonly peopleFactory: PeopleFactory
@@ -175,7 +179,7 @@ export class CMSGenerator implements CMSContext {
   readonly timeService: TimeService
   readonly timeRenderer: TimeRenderer
   readonly timeUrlBuilder: TimeUrlBuilder
-  readonly http: HttpSource
+  readonly http = new HttpSource()
 
   constructor(protected options: CMSGeneratorOptions) {
     this.config = {
@@ -185,17 +189,7 @@ export class CMSGenerator implements CMSContext {
     }
     const eventFactory = new RR0EventFactory()
     const orgFactory = new CmsOrganizationFactory(eventFactory)
-    const countryService = this.countryService = new CountryService(countries, "org", orgFactory, undefined)
-    const regionService = new RegionService(regions, "org", orgFactory, countryService)
-    const departmentService = this.departmentService = new DepartmentService(departments, "org", orgFactory,
-      regionService)
-    const cityService = new CityService(cities, "org", orgFactory, departmentService)
-    this.placeService = new GooglePlaceService("place", options.googleMapsApiKey)
-    this.orgService = new OrganizationService([], "org", orgFactory, undefined)
-    this.cityService = cityService
-    const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(options.timeFormat)
-    const timeOptions = options.timeOptions
-    const timeUrlBuilder = this.timeUrlBuilder = new TimeUrlBuilder(timeOptions)
+    const orgConfig: DataOptions = options.dataOptions.org
     const sightingFactory = new EventDataFactory(eventFactory, ["sighting"], ["index"])
     const caseFactory = this.caseFactory = new CaseFactory(eventFactory)
     const peopleFactory = this.peopleFactory = new PeopleFactory(eventFactory)
@@ -207,9 +201,22 @@ export class CMSGenerator implements CMSContext {
     dataService.getFromDir("", ["people", "case"]).then(data => {
       console.debug(data)
     })
+
+    this.orgService = new OrganizationService(dataService, orgFactory, orgConfig, undefined, [])
+    const countryService = this.countryService = new CountryService(dataService, orgFactory, orgConfig, undefined,
+      countries)
+    const regionService = new RegionService(dataService, orgFactory, orgConfig, countryService, regions)
+    const departmentService = this.departmentService = new DepartmentService(dataService, orgFactory, orgConfig,
+      regionService, departments)
+    const cityService = new CityService(dataService, orgFactory, orgConfig, departmentService, cities)
+    this.placeService = new GooglePlaceService("place", options.googleMapsApiKey)
+    this.cityService = cityService
+
+    const timeTextBuilder = this.timeTextBuilder = new TimeTextBuilder(options.timeFormat)
+    const timeOptions = options.dataOptions.time
+    const timeUrlBuilder = this.timeUrlBuilder = new TimeUrlBuilder(timeOptions)
     this.timeRenderer = new TimeRenderer(timeUrlBuilder, timeTextBuilder)
     this.timeService = new TimeService(dataService, timeOptions)
-    this.http = new HttpSource()
   }
 
   async generate(args: CMSGenerationOptions) {
@@ -234,7 +241,7 @@ export class CMSGenerator implements CMSContext {
 
     const orgFactory = dataService.factories.find(f => f.type === "org")
     if (orgFactory) {
-      const orgFiles = await orgFactory.getFiles()
+      const orgFiles = this.options.dataOptions.org.files
       context.setVar("orgFilesCount", orgFiles.length)
     }
     const placeFactory = dataService.factories.find(f => f.type === "place")
@@ -372,8 +379,7 @@ export class CMSGenerator implements CMSContext {
     }
   }
 
-  protected setupSources(timeTextBuilder: TimeTextBuilder,
-                         timeFormat: Intl.DateTimeFormatOptions) {
+  protected setupSources(timeTextBuilder: TimeTextBuilder, timeFormat: Intl.DateTimeFormatOptions) {
     const sourceRenderer = new SourceRenderer(timeTextBuilder)
     const sourceFactory = new PersistentSourceRegistry(this.dataService, this.http, this.options.siteBaseUrl,
       this.options.sourceRegistryFileName, timeFormat, this.timeService)
@@ -384,7 +390,7 @@ export class CMSGenerator implements CMSContext {
   }
 
   protected setupTime(context: RR0ContextImpl) {
-    const timeFiles = this.options.timeOptions.files
+    const timeFiles = this.options.dataOptions.time.files
     context.setVar("timeFilesCount", timeFiles.length)
     const timeElementFactory = new TimeElementFactory(this.timeRenderer)
     const timeReplacer = new TimeReplacer(timeElementFactory)
@@ -396,7 +402,7 @@ export class CMSGenerator implements CMSContext {
     const peopleService = new PeopleService(this.dataService, this.peopleFactory,
       {files: peopleFiles, rootDir: "people"})
     const peopleList = await peopleService.getAll()
-    context.setVar("peopleFilesCount", peopleList.length)
+    context.setVar("peopleFilesCount", peopleFiles.length)
     const peopleDirectoryFactory = new PeopleDirectoryStepFactory(outputFunc, this.config, peopleService,
       peopleRenderer,
       this.options.directoryExcluded)

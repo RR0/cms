@@ -12,7 +12,7 @@ export class CaseAnchorHandler implements AnchorHandler {
 
   async handle(context: HtmlRR0Context, link: HTMLAnchorElement, pathToSearch: string) {
     if (!link.title) {
-      const foundCases = await this.caseService.get(pathToSearch)
+      const foundCases = await this.caseService.getFromDir(pathToSearch)
       const aCase = foundCases[0]
       if (aCase) {
         const caseContext = context.clone()

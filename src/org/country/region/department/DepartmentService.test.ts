@@ -9,8 +9,8 @@ describe("DepartmentService", () => {
 
   test("get", () => {
     const departmentService = rr0TestUtil.departmentService
-    expect(departmentService.get(hautsDeSeine.id, ileDeFrance)).toBe(hautsDeSeine)
-    expect(departmentService.get(hautsDeSeine.id, undefined)).toBe(hautsDeSeine)
-    expect(departmentService.get(sanDiego.id, california)).toBe(sanDiego)
+    expect(departmentService.getById(hautsDeSeine.id, ileDeFrance)).toBe(hautsDeSeine)
+    expect(departmentService.getById(hautsDeSeine.id, undefined)).toBe(hautsDeSeine)
+    expect(departmentService.getById(sanDiego.id, california)).toBe(sanDiego)
   })
 })

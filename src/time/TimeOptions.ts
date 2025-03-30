@@ -1,4 +1,3 @@
-export type TimeOptions = {
-  readonly rootDir: string,
-  readonly files: string[]
-}
+import { DataOptions } from "../DataOptions.js"
+
+export type TimeOptions = DataOptions

@@ -30,7 +30,7 @@ class MockPlaceService extends PlaceService {
 class MockOrganizationService extends OrganizationService {
 
   constructor(readonly dirName: string) {
-    super([], "org", rr0TestUtil.orgFactory, null)
+    super(null!, rr0TestUtil.orgFactory, {rootDir: "", files: []}, null, [])
   }
 
   async read(_fileName: string): Promise<CmsOrganization> {

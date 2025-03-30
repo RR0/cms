@@ -9,8 +9,8 @@ describe("RegionService", () => {
 
   test("get", () => {
     const regionService = rr0TestUtil.regionService
-    expect(regionService.get(ileDeFrance.id, france)).toBe(ileDeFrance)
-    expect(regionService.get(alabama.id, usa)).toBe(alabama)
-    expect(regionService.get(alabama.id, france)).toBeUndefined()
+    expect(regionService.getById(ileDeFrance.id, france)).toBe(ileDeFrance)
+    expect(regionService.getById(alabama.id, usa)).toBe(alabama)
+    expect(regionService.getById(alabama.id, france)).toBeUndefined()
   })
 })

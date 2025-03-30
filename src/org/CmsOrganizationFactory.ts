@@ -1,7 +1,7 @@
 import { CmsOrganization } from "./CmsOrganization.js"
 import { OrganizationFactory, OrganizationJson, RR0EventFactory } from "@rr0/data"
 
-export class CmsOrganizationFactory extends OrganizationFactory {
+export class CmsOrganizationFactory extends OrganizationFactory<CmsOrganization, OrganizationJson> {
 
   constructor(eventFactory: RR0EventFactory) {
     super(eventFactory)
