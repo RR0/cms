@@ -232,10 +232,20 @@ export class CMSGenerator implements CMSContext {
     const timeFormat = this.options.timeFormat
     const {timeFiles, timeElementFactory, timeReplacer} = this.setupTime(context)
 
+    const orgFactory = dataService.factories.find(f => f.type === "org")
+    if (orgFactory) {
+      const orgFiles = await orgFactory.getFiles()
+      context.setVar("orgFilesCount", orgFiles.length)
+    }
+    const placeFactory = dataService.factories.find(f => f.type === "place")
+    if (placeFactory) {
+      const placeFiles = await placeFactory.getFiles()
+      context.setVar("placeFilesCount", placeFiles.length)
+    }
     const {caseService, ufoCasesStep} = await this.setupCases(timeElementFactory)
 
     const peopleRenderer = new PeopleHtmlRenderer()
-    const {peopleService, peopleSteps} = await this.peopleSetup(context, peopleRenderer, this.options.copies)
+    const {peopleService, peopleSteps} = await this.setupPeople(context, peopleRenderer, this.options.copies)
 
     const timeTextBuilder = this.timeTextBuilder
 
@@ -381,7 +391,7 @@ export class CMSGenerator implements CMSContext {
     return {timeFiles, timeElementFactory, timeReplacer}
   }
 
-  protected async peopleSetup(context: RR0ContextImpl, peopleRenderer: PeopleHtmlRenderer, copies: string[]) {
+  protected async setupPeople(context: RR0ContextImpl, peopleRenderer: PeopleHtmlRenderer, copies: string[]) {
     const peopleFiles = await this.peopleFactory.getFiles()
     const peopleService = new PeopleService(this.dataService, this.peopleFactory,
       {files: peopleFiles, rootDir: "people"})
