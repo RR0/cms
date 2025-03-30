@@ -11,7 +11,9 @@ describe("PeopleReplacer", () => {
   const rootDir = rr0TestUtil.filePath("people")
   const files = [
     path.join(rootDir, "b/BeauJerome"),
-    path.join(rootDir, "h/HynekJosefAllen")
+    path.join(rootDir, "h/HynekJosefAllen"),
+    path.join(rootDir, "r/ReaganRonald"),
+    path.join(rootDir, "v/VertongenJeanLuc")
   ]
 
   const peopleFactory = new PeopleFactory(new RR0EventFactory())
@@ -54,10 +56,16 @@ describe("PeopleReplacer", () => {
     const replacer = new PeopleReplacer(peopleService, peopleRenderer)
     const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
-      const peopleWithTitle = createPeopleElement(context, "Ronald Reagan", "Ronald Wilson Reagan")
-      let replacement = await replacer.replacement(context, peopleWithTitle)
+      const peopleWithTitle = createPeopleElement(context, "Jean-Luc Vertongen")
+      const replacement = await replacer.replacement(context, peopleWithTitle)
       expect(replacement.outerHTML).toBe(
-        `<span translate="no"><a href="/src/people/r/ReaganRonald/">Ronald Reagan</a></span>`)
+        `<span class="peopl" translate="no"><a href="/src/people/v/VertongenJeanLuc/">Jean-Luc Vertongen</a></span>`)
+    }
+    {
+      const peopleWithTitle = createPeopleElement(context, "Ronald Reagan", "Ronald Wilson Reagan")
+      const replacement = await replacer.replacement(context, peopleWithTitle)
+      expect(replacement.outerHTML).toBe(
+        `<span class="peopl" translate="no"><a href="/src/people/r/ReaganRonald/">Ronald Reagan</a></span>`)
     }
     {
       const peopleWithFullName = createPeopleElement(context, "Jérôme Beau")
