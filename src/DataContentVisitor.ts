@@ -78,7 +78,6 @@ export class DataContentVisitor implements ContentVisitor {
     const doc = context.file.document
     const contents = doc.querySelector(".contents")
     if (contents) {
-      const side = context.people ? "left" : "right"
       const imgEl = contents.querySelector("img")
       const caption = imageData.name
       const src = imageData.url
@@ -89,12 +88,9 @@ export class DataContentVisitor implements ContentVisitor {
         const figcaptionEl = doc.createElement("figcaption")
         figcaptionEl.innerHTML = caption
         await this.eventRenderer.renderEnd(context, imageData, figcaptionEl)
-
         const figureEl = doc.createElement("figure")
-        figureEl.classList.add(side, "side")
         figureEl.append(imgEl)
         figureEl.append(figcaptionEl)
-
         const insertEl = contents.querySelector("*")
         contents.insertBefore(figureEl, insertEl)
       }
@@ -134,7 +130,6 @@ export class DataContentVisitor implements ContentVisitor {
       eventP.append(birthPlace)
     }
     await this.eventRenderer.renderEnd(context, event, eventP)
-
     const insertEl = context.file.document.querySelector(".contents > p:last-of-type")
     if (insertEl) {
       insertEl.parentNode.append(eventP)

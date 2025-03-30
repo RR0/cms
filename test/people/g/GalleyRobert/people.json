@@ -1,0 +1,20 @@
+{
+  "occupations": [
+    "military"
+  ],
+  "countries": [
+    "fr"
+  ],
+  "events": [
+    {
+      "type": "birth",
+      "time": "1921-01-11",
+      "place": "Paris 5e"
+    },
+    {
+      "type": "death",
+      "time": "2012-06-08",
+      "place": "Troyes"
+    }
+  ]
+}
