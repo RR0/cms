@@ -290,7 +290,7 @@ export class CMSGenerator implements CMSContext {
     const htAccessToNetlifyConfig: ContentStepConfig = {
       replacements: [new HtAccessToNetlifyConfigReplaceCommand(this.options.siteBaseUrl)],
       roots: [".htaccess"],
-      getOutputPath: (_context: SsgContext) => path.join(outDir, "netlify.toml")
+      getOutputPath: (_context: SsgContext) => "netlify.toml"
     }
     const contentRoots = this.options.contentRoots
     const contentStepOptions: RR0ContentStepOptions = {
