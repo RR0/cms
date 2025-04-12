@@ -19,6 +19,7 @@ export class NoteRenderer {
     const anchor = doc.createElement("span")
     anchor.id = noteId
     anchor.className = "anchor"
+    anchor.ariaHidden = "true"
     replacement.append(anchor, contents)
     return replacement
   }

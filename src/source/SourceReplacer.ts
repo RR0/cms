@@ -19,6 +19,7 @@ export class SourceReplacer {
     const replacement = outputDoc.createElement("span")
     replacement.className = "source-id"
     replacement.ariaLabel = "Source"
+    replacement.ariaHidden = "true"
     const sourceId = this.counter.next(context)
     replacement.textContent = sourceId
     const sourceContentsEl = outputDoc.createElement("span")
@@ -26,6 +27,7 @@ export class SourceReplacer {
     await this.content(context, original, sourceContentsEl)
     const anchor = outputDoc.createElement("span")
     anchor.id = sourceId
+    anchor.ariaHidden = "true"
     anchor.className = "anchor"
     replacement.append(anchor, sourceContentsEl)
     return replacement
