@@ -65,7 +65,7 @@ export class TimeElementFactory {
 
   protected valueReplacement(context: HtmlRR0Context, previousContext: RR0Context | undefined,
                              options: TimeRenderOptions = {url: true, contentOnly: false}): HTMLElement | undefined {
-    let replacement
+    let replacement: HTMLElement | undefined
     if (context.time.duration) {
       replacement = this.durationReplacement(context)
     } else {
