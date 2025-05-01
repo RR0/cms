@@ -38,7 +38,6 @@ export class EventRenderer<E extends RR0Event> {
     if (notes) {
       await this.renderNotes(context, notes, container)
     }
-    container.append(".")
   }
 
   async render(context: HtmlRR0Context, event: E, container: HTMLElement,
