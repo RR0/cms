@@ -88,7 +88,7 @@ export class PeopleHtmlRenderer {
     if (portraitUrl) {
       const portraitElem = doc.createElement("img")
       portraitElem.src = path.join("/", portraitUrl)
-      portraitElem.alt = people.lastAndFirstName
+      portraitElem.alt = text
       portraitElem.className = "portrait"
       portraitElem.loading = "lazy"
       portraitElem.width = 75
