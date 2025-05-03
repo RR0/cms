@@ -404,15 +404,4 @@ export class TimeContext {
   isSet(value) {
     return value !== void 0 && value != null
   }
-
-  /**
-   * @param {HTMLElement} original
-   */
-  parse(original) {
-    const previousSibling = original.previousSibling
-    if (previousSibling) {
-      const previousWords = previousSibling.textContent.split(" ")
-      //this.messages.fromTo()
-    }
-  }
 }

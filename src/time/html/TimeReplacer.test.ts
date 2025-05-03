@@ -42,7 +42,7 @@ describe("TimeReplacer", async () => {
       timeEl.textContent = "2003"
       const replacement = await replacer.replacement(context, timeEl)
       expect(replacement.outerHTML).toBe(
-        `<span class="time-resolved">en <a href="${path.join("/",
+        `<span class="time-resolved"><a href="${path.join("/",
           rr0TestUtil.time.filePath("2/0/0/3/"))}"><time datetime="2003">2003</time></a></span>`)
       expect(context.time.getYear()).toBe(2003)
       expect(context.time.getMonth()).toBe(undefined)
@@ -57,7 +57,7 @@ describe("TimeReplacer", async () => {
       timeEl.innerHTML = "2003\n      "
       const replacement = await replacer.replacement(context, timeEl)
       expect(replacement.outerHTML).toBe(
-        `<span class="time-resolved">en <a href="${path.join("/", timeOptions.rootDir,
+        `<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
           "2/0/0/3/")}"><time datetime="2003">2003</time></a></span>`)
       expect(context.time.getYear()).toBe(2003)
       expect(context.time.getMonth()).toBe(undefined)
@@ -76,8 +76,8 @@ describe("TimeReplacer", async () => {
     const replaced = await replacer.replacement(context, original)
     expect(replaced.outerHTML)
       .toBe(
-        `<span class="time-interval"><span class="time-resolved">en <a href="${path.join("/", timeOptions.rootDir,
-          "2/0/0/3/")}"><time datetime="2003">2003</time></a></span> à <span class="time-resolved">en <a href="${path.join(
+        `<span class="time-interval"><span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
+          "2/0/0/3/")}"><time datetime="2003">2003</time></a></span> à <span class="time-resolved"><a href="${path.join(
           "/",
           timeOptions.rootDir, "2/0/0/4/")}"><time datetime="2004">2004</time></a></span></span>`)
     expect(context.time.getYear()).toBe(2004)
@@ -110,7 +110,7 @@ describe("TimeReplacer", async () => {
       original.textContent = "2003-12-24T10:22CDT"
       const replacement = await replacer.replacement(context, original)
       expect(replacement.outerHTML)
-        .toBe(`<span class="time-resolved">le <a href="${path.join("/", timeOptions.rootDir,
+        .toBe(`<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
           "2/0/0/3/12/24/")}"><time datetime="2003-12-24T10:22-05">mercredi 24 décembre 2003 à 10:22</time></a></span>`)  // TODO: Text should have timezone info
       expect(context.time.getYear()).toBe(2003)
       expect(context.time.getMonth()).toBe(12)
@@ -140,7 +140,7 @@ describe("TimeReplacer", async () => {
     original.textContent = "2004-09"
     const replacement = await replacer.replacement(context, original)
     expect(replacement.outerHTML).toBe(
-      `<span class="time-resolved">en <a href="${path.join("/", timeOptions.rootDir,
+      `<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
         "2/0/0/4/09/")}"><time datetime="2004-09">septembre 2004</time></a></span>`)
     expect(context.time.getYear()).toBe(2004)
     expect(context.time.getMonth()).toBe(9)
@@ -157,7 +157,7 @@ describe("TimeReplacer", async () => {
       timeEl.textContent = "2005-08-23"
       const replacement = await replacer.replacement(context, timeEl)
       expect(replacement.outerHTML).toBe(
-        `<span class="time-resolved">le <a href="${path.join("/", timeOptions.rootDir,
+        `<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
           "2/0/0/5/08/23/")}"><time datetime="2005-08-23">mardi 23 août 2005</time></a></span>`)
       expect(context.time.getYear()).toBe(2005)
       expect(context.time.getMonth()).toBe(8)
@@ -172,13 +172,13 @@ describe("TimeReplacer", async () => {
     const timeEl = context.file.document.createElement("time")
     timeEl.textContent = "2005"
     const replacement = await replacer.replacement(context, timeEl)
-    expect(replacement.outerHTML).toBe(`<span class="time-resolved">en <a href="${rr0TestUtil.time.url(
+    expect(replacement.outerHTML).toBe(`<span class="time-resolved"><a href="${rr0TestUtil.time.url(
       "2/0/0/5/")}"><time datetime="2005">2005</time></a></span>`)
     const original = context.file.document.createElement("time")
     const datetime = "2006"
     original.textContent = datetime
     const replacement2 = await replacer.replacement(context, original)
-    expect(replacement2.outerHTML).toBe(`<span class="time-resolved">en <a href="${rr0TestUtil.time.url(
+    expect(replacement2.outerHTML).toBe(`<span class="time-resolved"><a href="${rr0TestUtil.time.url(
       "2/0/0/6/")}"><time datetime="${datetime}" title="2006">l'année suivante</time></a></span>`)
   })
 
@@ -189,7 +189,7 @@ describe("TimeReplacer", async () => {
     timeEl.textContent = datetime
     const replacement = await replacer.replacement(context, timeEl)
     expect(replacement.outerHTML)
-      .toBe(`<span class="time-resolved">le <time datetime="${datetime}">vendredi 1 octobre 1954</time></span>`)
+      .toBe(`<span class="time-resolved"><time datetime="${datetime}">vendredi 1 octobre 1954</time></span>`)
   })
 
   describe("parse duration", () => {
@@ -210,7 +210,7 @@ describe("TimeReplacer", async () => {
         const ctxElement = context.file.document.createElement("time")
         ctxElement.textContent = "1947-07-02"
         const replacement1 = await replacer.replacement(context, ctxElement)
-        expect(replacement1.outerHTML).toBe(`<span class="time-resolved">le <a href="${rr0TestUtil.time.url(
+        expect(replacement1.outerHTML).toBe(`<span class="time-resolved"><a href="${rr0TestUtil.time.url(
           "1/9/4/7/07/02/")}"><time datetime="1947-07-02">mercredi 2 juillet 1947</time></a></span>`)
       }
       {
@@ -239,7 +239,7 @@ describe("TimeReplacer", async () => {
       timeEl.textContent = "2006-07-14 17:56"
       const replacement = await replacer.replacement(context, timeEl)
       expect(replacement.outerHTML).toBe(
-        `<span class="time-resolved">le <a href="${path.join("/", timeOptions.rootDir,
+        `<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
           "2/0/0/6/07/14/")}"><time datetime="2006-07-14T17:56">vendredi 14 juillet 2006 à 17:56</time></a></span>`)
       expect(context.time.getYear()).toBe(2006)
       expect(context.time.getMonth()).toBe(7)
@@ -252,7 +252,7 @@ describe("TimeReplacer", async () => {
       timeEl1.textContent = "2007-06-15 18:47"
       const replacement1 = await replacer.replacement(context, timeEl1)
       expect(replacement1.outerHTML).toBe(
-        `<span class="time-resolved">le <a href="${path.join("/", timeOptions.rootDir,
+        `<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
           "2/0/0/7/06/15/")}"><time datetime="2007-06-15T18:47">vendredi 15 juin 2007 à 18:47</time></a></span>`)
       expect(context.time.getYear()).toBe(2007)
       expect(context.time.getMonth()).toBe(6)
