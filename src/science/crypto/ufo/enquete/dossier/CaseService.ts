@@ -4,8 +4,8 @@ import { HtmlRR0Context } from "../../../../../RR0Context.js"
 import { TimeElementFactory } from "../../../../../time/index.js"
 import { CaseFactory } from "./CaseFactory.js"
 import { AbstractDataService, AllDataService } from "@rr0/data"
-import { TimeContext } from "@rr0/time"
 import { RR0CaseJson } from "./RR0CaseJson.js"
+import { TimeContext } from "../../../../../time/TimeContext.mjs"
 
 export class CaseService extends AbstractDataService<RR0Case, RR0CaseJson> {
 

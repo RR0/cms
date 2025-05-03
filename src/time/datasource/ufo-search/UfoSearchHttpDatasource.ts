@@ -2,11 +2,11 @@ import { RR0Context } from "../../../RR0Context.js"
 import { UfoSearchDatasource } from "./UfoSearchDatasource.js"
 import { UrlUtil } from "../../../util/index.js"
 import { JSDOM } from "jsdom"
-import { TimeContext } from "@rr0/time"
 import { HttpSource } from "../HttpSource.js"
 import { By } from "selenium-webdriver"
 import assert from "assert"
 import { UfoSearchCase, UfoSearchCaseType } from "./UfoSearchCase.js"
+import { TimeContext } from "../../TimeContext.mjs"
 
 interface QueryParameters {
   sy?: number

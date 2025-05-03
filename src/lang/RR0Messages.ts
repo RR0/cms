@@ -3,6 +3,7 @@ import { CaseConclusion } from "../science/crypto/ufo/enquete/dossier/RR0Case.js
 import { PeopleMessages } from "../people/PeopleMessages.js"
 import { OrgRR0Messages } from "../org/OrgRR0Messages.js"
 import { PlaceMessages } from "@rr0/place"
+import { RR0TimeMessages } from "../time/RR0TimeMessages.js"
 
 export class MessageUtils {
 
@@ -64,39 +65,7 @@ export interface RR0PlaceMessages extends PlaceMessages {
 export interface RR0Messages {
   nonSignificantWords: string[]
   context: {
-    time: {
-      duration: {
-        days: (d: number) => string
-        hours: (h: number) => string
-        minutes: (mn: number) => string
-        seconds: (mn: number) => string
-        lastSeparator: string
-        approximate(txt: string): string
-      },
-      relative: {
-        hour: {
-          before: string
-          after: string
-        },
-        year: {
-          before: string
-          after: string
-        },
-        month: {
-          before: string
-          after: string
-          later: string
-        },
-        day: {
-          before: string
-          after: string
-        }
-      },
-      fromTo(startReplacement: string, endReplacement: string): string
-      on(approximate: boolean): string
-      in(approximate: boolean): string
-      starting(approximate: boolean): string
-    }
+    time: RR0TimeMessages
     place: RR0PlaceMessages
   }
   case: CaseMessages

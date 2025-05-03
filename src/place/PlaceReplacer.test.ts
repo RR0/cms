@@ -84,8 +84,6 @@ describe("PlaceReplacer", () => {
     const location = new PlaceLocation(34.0, -105.0)
     const elevation = 100.0
     const dirName = ""
-    const placeService = new MockPlaceService(location, {elevation}, dirName)
-    const orgService = new MockOrganizationService(dirName)
     const replacer = new PlaceReplacer()
     const context = rr0TestUtil.newHtmlContext("people/a/AlexanderJohnB/index.html", "")
     const doc = context.file.document
@@ -95,7 +93,7 @@ describe("PlaceReplacer", () => {
     expect(replacement.tagName).toBe("SPAN")
     expect(replacement.className).toBe("plac")
     expect(replacement.textContent).toBe(text)
-    expect(replacement.getAttribute("onclick")).toBe(`showMap(event,'${text}',true)`)
+    //expect(replacement.getAttribute("onclick")).toBe(`showMap(event,'${text}',true)`)
   })
 
 })

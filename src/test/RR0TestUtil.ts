@@ -15,13 +15,13 @@ import {
 import { CaseFactory } from "../science/index.js"
 import { APIFactory } from "../tech/index.js"
 import { TimeTestUtil } from "../time/TimeTestUtil.js"
-import { TimeContext } from "@rr0/time"
 import { FileContents } from "@javarome/fileutil"
 import { AllDataService, EventDataFactory, PeopleFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { CountryService } from "../org/country/CountryService.js"
 
 import { CMSContext } from "../CMSContext.js"
 import { DataOptions } from "../DataOptions.js"
+import { TimeContext } from "../time/TimeContext.mjs"
 
 export class RR0TestUtil implements CMSContext {
 

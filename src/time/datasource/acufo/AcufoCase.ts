@@ -1,5 +1,5 @@
-import { TimeContext } from "@rr0/time"
 import { City } from "../../../org/country/region/department/city/City.js"
+import { TimeContext } from "../../TimeContext.mjs"
 
 export type AcufoCaseDataTime = {
   dateTime: TimeContext

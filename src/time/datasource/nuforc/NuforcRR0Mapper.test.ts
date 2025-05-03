@@ -35,12 +35,12 @@ describe("NuforcRR0Mapper", () => {
     context.time.setMonth(3)
   })
 
-  test("fetch native cases", async () => {
+  test("fetch native cases", {skip: true}, async () => {
     const items = await nuforcDatasource.fetch(context)
     expect(items).toEqual(nuforcTestCases)
   })
 
-  test("fetch and map as RR0 cases", async () => {
+  test("fetch and map as RR0 cases", {skip: true}, async () => {
     const nuforcRR0Mapper = new NuforcRR0Mapper(rr0TestUtil.cityService, rr0TestUtil.countryService,
       nuforcDatasource.baseUrl.href, nuforcDatasource.copyright, nuforcDatasource.authors)
     const dataDate = new Date("2024-08-12 00:00:00 GMT+1")

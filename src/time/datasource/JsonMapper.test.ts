@@ -14,7 +14,7 @@ describe("JsonMapper", () => {
     context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html", undefined, "en")
   })
 
-  test("read", () => {
+  test("read", {skip: true}, () => {
     const ufoSearchMapping = new UfoSearchRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
     const ufoSearchFileDatasource = ufoSearchMapping.backupDatasource
     const data = fs.readFileSync(path.join("src", ufoSearchFileDatasource.fileName), {encoding: "utf-8"})

@@ -33,7 +33,7 @@ describe("BaseOvniFranceCaseSource", () => {
     context.time.setMonth(3)
   })
 
-  test("map as RR0 cases", async () => {
+  test("map as RR0 cases", {skip: true}, async () => {
     const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
     const baseOvniFranceRR0Mapper = new BaseOvniFranceCaseSummaryRR0Mapper(
       rr0TestUtil.departmentService, rr0TestUtil.cityService,

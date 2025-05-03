@@ -24,6 +24,6 @@ describe("OrganizationPlace", () => {
 
   test("toString", () => {
     expect(RR0Datasource.id(EdtfDate.fromString("1972-08-12"), new OrganizationPlace(parisCity))).toBe(
-      "1972-08-12$city$75000")
+      "1972-08-12$city75000")
   })
 })

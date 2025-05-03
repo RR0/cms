@@ -1,8 +1,9 @@
 import { placeMessages_en } from "@rr0/place"
-import { CaseClassificationMessages, CaseConclusionMessages, MessageUtils, RR0Messages } from "./RR0Messages.js"
+import { CaseClassificationMessages, CaseConclusionMessages, RR0Messages } from "./RR0Messages.js"
 import { countryMessageList_en } from "../org/CountryMessageList_en.js"
 import { peopleMessages_en } from "../people/PeopleMessages_en.js"
 import { orgMessages_en } from "../org/OrgRR0Messages_en.js"
+import { RR0TimeMessages_en } from "../time/RR0TimeMessages_en.js"
 
 const caseClassification_en: CaseClassificationMessages = {
   hynek: {
@@ -50,39 +51,7 @@ const caseConclusion_en: CaseConclusionMessages = {
 export class RR0Messages_en implements RR0Messages {
   nonSignificantWords = ["my", "the", "we", "they", "want", "she", "them"]
   context = {
-    time: {
-      duration: {
-        days: (d: number): string => MessageUtils.plural(d, "day"),
-        hours: (d: number): string => MessageUtils.plural(d, "hour"),
-        minutes: (mn: number): string => MessageUtils.plural(mn, "minute"),
-        seconds: (s: number): string => MessageUtils.plural(s, "second"),
-        lastSeparator: " and ",
-        approximate: (txt: string): string => `${txt} approximately`
-      },
-      relative: {
-        year: {
-          before: "the year before",
-          after: "the year after"
-        },
-        month: {
-          before: "le month before",
-          after: "the month after",
-          later: "a month later"
-        },
-        day: {
-          before: "the day before",
-          after: "the day after"
-        },
-        hour: {
-          before: "one hour before",
-          after: "one hour later"
-        }
-      },
-      on: (approximate: boolean): string => (approximate ? "around " : "on "),
-      in: (approximate: boolean): string => (approximate ? "around " : ""),
-      fromTo: (startReplacement: string, endReplacement: string): string => startReplacement + " to " + endReplacement,
-      starting: (approximate: boolean): string => "starting " + (approximate ? "" : "the ")
-    },
+    time: new RR0TimeMessages_en(),
     place: placeMessages_en
   }
   case = {

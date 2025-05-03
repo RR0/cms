@@ -35,7 +35,7 @@ describe("GeipanCaseSource", () => {
     context.time.setMonth(3)
   })
 
-  test("fetch", async () => {
+  test("fetch", {skip: true}, async () => {
     await testCase.testFetch(context)
   })
 

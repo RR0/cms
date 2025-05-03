@@ -38,6 +38,6 @@ describe("TimeDirectoryStep", () => {
     const step = new TimeDirectoryStep(timeService, timeElementFactory, timeDirs, ufoTimesExclusions,
       timesDirectoryPath, outputFunc, rr0TestUtil.config)
     const stepResult = await step.execute(context)
-    expect(stepResult.directoryCount).toBe(22)
+    expect(stepResult.directoryCount).toBe(23)
   })
 })

@@ -8,7 +8,7 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     url: new URL("listgen.php?typlist=20&page=0&numobs=2760", baseOvniFranceDatasource.baseUrl).href,
     city: "Le Mans",
     depCode: "72",
-    time: new EdtfDate({year: 1970, month: 3, hour: 16, minute: 0, timeshift: Level2Timeshift.fromString("GMT+1")}),
+    time: new EdtfDate({year: 1970, month: 3, hour: 16, minute: 0, timeshift: Level2Timeshift.fromString("CET")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,
@@ -20,7 +20,7 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     city: "Lyon",
     depCode: "69",
     time: new EdtfDate(
-      {year: 1970, month: 3, day: 12, hour: 7, minute: 40, timeshift: Level2Timeshift.fromString("GMT+1")}),
+      {year: 1970, month: 3, day: 12, hour: 7, minute: 40, timeshift: Level2Timeshift.fromString("CET")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,
@@ -32,7 +32,7 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     city: "Briançon",
     depCode: "05",
     time: new EdtfDate(
-      {year: 1970, month: 3, day: 16, hour: 20, minute: 0, timeshift: Level2Timeshift.fromString("GMT+1")}),
+      {year: 1970, month: 3, day: 16, hour: 20, minute: 0, timeshift: Level2Timeshift.fromString("CET")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,
@@ -44,7 +44,7 @@ export const baseOvniFranceTestCases: BaseOvniFranceCaseSummary[] = [
     city: "Chambon sur Voueize",
     depCode: "23",
     time: new EdtfDate(
-      {year: 1970, month: 3, day: 17, hour: 19, minute: 15, timeshift: Level2Timeshift.fromString("GMT+1")}),
+      {year: 1970, month: 3, day: 17, hour: 19, minute: 15, timeshift: Level2Timeshift.fromString("CET")}),
     physicalEffect: false,
     witnessEffect: false,
     entities: false,

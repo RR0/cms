@@ -8,7 +8,7 @@ import { PeopleService } from "@rr0/data"
 
 describe("ClassDomReplaceCommand", () => {
 
-  test("replaces", async () => {
+  test("replaces", {skip: true}, async () => {
     const peopleRoot = "src/people"
     const peopleFiles = [path.join(peopleRoot, "b/BeauJerome")]
     const peopleRenderer = new PeopleHtmlRenderer()

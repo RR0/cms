@@ -11,7 +11,7 @@ describe("DepartmentMessages", () => {
   let context: RR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.newContext("time/1/9/7/0/03/index.html")
+    context = rr0TestUtil.newContext(rr0TestUtil.filePath("time/1/9/7/0/03/index.html"))
   })
 
   test("toTitle", () => {
@@ -25,6 +25,6 @@ describe("DepartmentMessages", () => {
 
   test("toTitle with region and country", () => {
     expect(hautsDeSeineMessages.toTitle(context, hautsDeSeine, {parent: true})).toBe(
-      `${hautsDeSeineMessages.title}, ${idfMessages.title}, ${france_fr.title}`)
+      `${hautsDeSeineMessages.title} (${idfMessages.title} (${france_fr.title}))`)
   })
 })

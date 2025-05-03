@@ -9,8 +9,8 @@ import {
 } from "@rr0/data"
 import { HtmlRR0Context, RR0ContextImpl } from "../RR0Context.js"
 import { StringUtil } from "../util/index.js"
-import { TimeContext } from "@rr0/time"
 import { TimeOptions } from "./TimeOptions.js"
+import { TimeContext } from "./TimeContext.mjs"
 
 export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
 

@@ -1,9 +1,9 @@
-import { TimeContext } from "@rr0/time"
 import { RR0ContextImpl } from "../RR0Context.js"
 import { FileWriteConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
 import { rr0TestUtil } from "../test/index.js"
 import { FileContents } from "@javarome/fileutil"
+import { TimeContext } from "./TimeContext.mjs"
 
 describe("Time", () => {
 

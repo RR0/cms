@@ -29,7 +29,7 @@ export class BaseOvniFranceCaseSummaryCsvMapper implements CaseMapper<RR0Context
         day: dayOfMonth,
         hour: parseInt(timeFields[0], 10),
         minute: parseInt(timeFields[1], 10),
-        timeshift: Level2Timeshift.fromString("GMT+1")
+        timeshift: Level2Timeshift.fromString("CET")
       }),
       physicalEffect: Boolean(csvCase["Effet Physique"]),
       witnessEffect: Boolean(csvCase["Effet témoin"]),

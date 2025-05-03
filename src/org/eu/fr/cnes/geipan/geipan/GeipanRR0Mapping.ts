@@ -7,7 +7,8 @@ import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../tim
 import { CMSContext } from "../../../../../../CMSContext.js"
 
 export const geipanHttpDatasource = new GeipanHttpDatasource(new URL("https://geipan.fr"), "fr/recherche/cas")
-export const geipanFileDatasource = new GeipanFileDatasource("org/eu/fr/cnes/geipan/export_cas_pub_20210219111412.csv",
+export const geipanFileDatasource = new GeipanFileDatasource(
+  "src/org/eu/fr/cnes/geipan/geipan/export_cas_pub_20210219111412.csv",
   "latin1")
 
 export class GeipanRR0Mapping implements RR0CaseMapping<GeipanCaseSummary> {

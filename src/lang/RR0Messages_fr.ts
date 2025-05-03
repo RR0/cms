@@ -1,7 +1,8 @@
 import { placeMessages_fr } from "@rr0/place"
-import { CaseConclusionMessages, MessageUtils, RR0Messages } from "./RR0Messages.js"
+import { CaseConclusionMessages, RR0Messages } from "./RR0Messages.js"
 import { peopleMessages_fr } from "../people/index.js"
 import { countryMessageList_fr, orgMessages_fr } from "../org/index.js"
+import { RR0TimeMessages_fr } from "../time/RR0TimeMessages_fr.js"
 
 const caseConclusion_fr: CaseConclusionMessages = {
   unknown: "inexpliqué",
@@ -20,39 +21,7 @@ export class RR0Messages_fr implements RR0Messages {
     "espère", "auparavant", "voulait", "amène", "bonnes", "fameux", "constituant"
   ]
   context = {
-    time: {
-      duration: {
-        days: (d: number): string => MessageUtils.plural(d, "jour"),
-        hours: (d: number): string => MessageUtils.plural(d, "heure"),
-        minutes: (mn: number): string => MessageUtils.plural(mn, "minute"),
-        seconds: (s: number): string => MessageUtils.plural(s, "seconde"),
-        lastSeparator: " et ",
-        approximate: (txt: string): string => `environ ${txt}`
-      },
-      relative: {
-        year: {
-          before: "l'année d'avant",
-          after: "l'année suivante"
-        },
-        month: {
-          before: "le mois précédent",
-          after: "le mois suivant",
-          later: "un mois plus tard"
-        },
-        day: {
-          before: "la veille",
-          after: "le lendemain"
-        },
-        hour: {
-          before: "une heure auparavant",
-          after: "une heure plus tard"
-        }
-      },
-      on: (approximate: boolean): string => (approximate ? "vers " : "") + "le ",
-      in: (approximate: boolean): string => (approximate ? "vers " : "en "),
-      fromTo: (startReplacement: string, endReplacement: string): string => `${startReplacement} à ${endReplacement}`,
-      starting: (approximate: boolean): string => "à partir " + (approximate ? "de " : "du ")
-    },
+    time: new RR0TimeMessages_fr(),
     place: placeMessages_fr
   }
   case = {

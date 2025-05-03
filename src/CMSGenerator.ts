@@ -76,7 +76,6 @@ import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
 import { APIFactory } from "./tech/index.js"
 import { ContentVisitor, RR0ContentStep, RR0ContentStepOptions } from "./RR0ContentStep.js"
 import { DataContentVisitor } from "./DataContentVisitor.js"
-import { TimeContext } from "@rr0/time"
 import { FileContents, writeFile } from "@javarome/fileutil"
 import {
   AllDataService,
@@ -92,6 +91,7 @@ import { CountryService } from "./org/country/CountryService.js"
 import { CMSContext } from "./CMSContext.js"
 import { TimeOptions } from "./time/TimeOptions.js"
 import { DataOptions } from "./DataOptions.js"
+import { TimeContext } from "./time/TimeContext.mjs"
 
 export interface CMSGeneratorOptions {
   contentRoots: string[]

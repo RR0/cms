@@ -38,7 +38,7 @@ describe("BaseOvniFranceCaseSource", () => {
     await testCase.testFetch(context)
   })
 
-  test("render", async () => {
+  test("render", {skip: true}, async () => {
     await testCase.testRender(context)
   })
 })

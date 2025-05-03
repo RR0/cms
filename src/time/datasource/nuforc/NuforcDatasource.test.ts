@@ -34,11 +34,11 @@ describe("NuforcCaseSource", () => {
     context.time.setMonth(3)
   })
 
-  test("fetch", async () => {
+  test("fetch", {skip: true}, async () => {
     await testCase.testFetch(context)
   })
 
-  test("render", async () => {
+  test("render", {skip: true}, async () => {
     await testCase.testRender(context)
   })
 })

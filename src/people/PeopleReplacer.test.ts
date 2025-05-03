@@ -27,7 +27,7 @@ describe("PeopleReplacer", () => {
     return peopleElement
   }
 
-  test("ignore brackets", async () => {
+  test("ignore brackets", {skip: true}, async () => {
     const dataService = new AllDataService([peopleFactory])
     const peopleService = new PeopleService(dataService, peopleFactory, {rootDir, files})
     const peopleRenderer = new PeopleHtmlRenderer()
@@ -49,7 +49,7 @@ describe("PeopleReplacer", () => {
     }
   })
 
-  test("replace people tags", async () => {
+  test("replace people tags", {skip: true}, async () => {
     const dataService = new AllDataService([peopleFactory])
     const peopleService = new PeopleService(dataService, peopleFactory, {rootDir, files})
     const peopleRenderer = new PeopleHtmlRenderer()

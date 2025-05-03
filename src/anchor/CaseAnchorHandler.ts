@@ -3,7 +3,7 @@ import { HtmlRR0Context } from "RR0Context.js"
 import { TimeTextBuilder } from "../time/index.js"
 import { CaseService } from "../science/crypto/ufo/enquete/dossier/CaseService.js"
 import path from "path"
-import { TimeContext } from "@rr0/time"
+import { TimeContext } from "../time/TimeContext.mjs"
 
 export class CaseAnchorHandler implements AnchorHandler {
 
