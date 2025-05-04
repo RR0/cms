@@ -25,7 +25,7 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
       const valid = context.time.updateFromStr(timeStr)
-      replacement = valid && this.factory.create(context, previousContext)
+      replacement = valid && this.factory.create(context, previousContext, {url: true, contentOnly: true})
       if (!replacement) {
         replacement = origEl
         // replacement.setAttribute("datetime", context.time.toString())

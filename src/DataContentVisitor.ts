@@ -70,7 +70,7 @@ export class DataContentVisitor implements ContentVisitor {
     const eventTime = eventContext.time.date = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time for paragraph`)
     container.dataset.time = eventTime.toString()
-    const timeEl = this.timeElementFactory.create(eventContext, context)
+    const timeEl = this.timeElementFactory.create(eventContext, context, {url: true, contentOnly: false})
     return {eventP: container, timeEl}
   }
 
@@ -143,7 +143,7 @@ export class DataContentVisitor implements ContentVisitor {
       const bookEl = doc.createElement("p")
       const people = context.people as unknown as People
       const birthContext = context.clone()
-      const bookDateEl = this.timeElementFactory.create(birthContext, context)
+      const bookDateEl = this.timeElementFactory.create(birthContext, context, {url: true, contentOnly: false})
       bookEl.append(bookDateEl, " ")
       bookEl.append((people.gender === "female" ? "elle" : "il") + " écrit un livre")
       await this.eventRenderer.renderEnd(context, bookData, bookEl)

@@ -12,7 +12,7 @@ export class TimeElementFactory {
   }
 
   create(context: HtmlRR0Context, previousContext: HtmlRR0Context | undefined,
-         options: TimeRenderOptions = {url: true, contentOnly: true}): HTMLElement | undefined {
+         options: TimeRenderOptions): HTMLElement | undefined {
     let replacement: HTMLElement | undefined
     const time = context.time
     const interval = time.interval as Level2Interval
