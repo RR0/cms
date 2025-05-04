@@ -2,7 +2,7 @@
   "name": "@rr0/cms",
   "type": "module",
   "author": "Jérôme Beau <rr0@rr0.org> (https://rr0.org)",
-  "version": "0.3.40",
+  "version": "0.3.42",
   "description": "RR0 Content Management System (CMS)",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",

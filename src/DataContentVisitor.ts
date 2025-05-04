@@ -111,7 +111,8 @@ export class DataContentVisitor implements ContentVisitor {
         eventP.append(this.eventRenderer.placeElement(context, eventPlace))
       }
       await this.eventRenderer.renderEnd(context, event, eventP)
-      const insertEl = parentEl.firstElementChild
+      const allExergues = context.file.document.querySelectorAll(".exergue")
+      const insertEl = allExergues[allExergues.length - 1]?.nextElementSibling || parentEl.firstElementChild
       parentEl.insertBefore(eventP, insertEl)
     } else {
       context.warn("no .content in", context.file.name)
