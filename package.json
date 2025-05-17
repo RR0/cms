@@ -2,7 +2,7 @@
   "name": "@rr0/cms",
   "type": "module",
   "author": "Jérôme Beau <rr0@rr0.org> (https://rr0.org)",
-  "version": "0.3.43",
+  "version": "0.3.44",
   "description": "RR0 Content Management System (CMS)",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,7 +25,7 @@
     "circular-deps": "dpdm src",
     "prepublishOnly": "npm run build && npm test",
     "test": "testscript",
-    "test-one": "rm -Rf out && tsx src/lang/LanguageReplaceCommand.test.ts",
+    "test-one": "rm -Rf out && tsx src/CMSGenerator.test.ts",
     "test-ci": "rm -Rf out && testscript"
   },
   "dependencies": {
