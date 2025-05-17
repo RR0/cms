@@ -19,18 +19,26 @@ export class LanguageReplaceCommand extends DomReplaceCommand<HTMLElement, HtmlR
           const langInfo = inputFile.lang
           const variants = langInfo.variants
           const foundLang = langInfo.lang
-          const pageLang = variants.includes("en") ?
-            foundLang ? foundLang : "fr" : variants.includes("fr") ?
-              foundLang ? foundLang : "en"
-              : "fr"
+          let pageLang: string
+          const hasEnglishVariant = variants.includes("en")
+          if (hasEnglishVariant) {
+            pageLang = foundLang ? foundLang : "fr"
+          } else {
+            if (variants.includes("fr")) {
+              pageLang = foundLang && foundLang !== "fr" ? foundLang : "en"
+            } else {
+              pageLang = "fr"
+            }
+          }
           context.file.document.documentElement.lang = inputFile.lang.lang = pageLang
           const langVariants = variants.length == 1 && variants[0] == "" ? [pageLang == "fr" ? "en" : "fr"] : variants
           const fileName = inputFile.name
           for (let i = 0; i < langVariants.length; i++) {
             const langVariant = langVariants[i]
             const altLink = doc.createElement("a")
-            altLink.href = "/" + fileName.replace((foundLang ? "_" + foundLang : "") + ".",
-              `${variants[i] == "" ? "" : "_" + langVariant}.`)
+            const toReplace = (foundLang ? "_" + foundLang : "") + "."
+            const replacement = `${variants[i] == "" ? "" : "_" + langVariant}.`
+            altLink.href = "/" + fileName.replace(toReplace, replacement)
             const altText = langVariant === "en" ? "English version" : "Version française"
             altLink.textContent = Buffer.from(altText, "utf-8").toString()
             original.appendChild(altLink)

@@ -2,7 +2,7 @@
   "name": "@rr0/cms",
   "type": "module",
   "author": "Jérôme Beau <rr0@rr0.org> (https://rr0.org)",
-  "version": "0.3.42",
+  "version": "0.3.43",
   "description": "RR0 Content Management System (CMS)",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,7 +25,7 @@
     "circular-deps": "dpdm src",
     "prepublishOnly": "npm run build && npm test",
     "test": "testscript",
-    "test-one": "rm -Rf out && tsx src/CMSGenerator.test.ts",
+    "test-one": "rm -Rf out && tsx src/lang/LanguageReplaceCommand.test.ts",
     "test-ci": "rm -Rf out && testscript"
   },
   "dependencies": {
@@ -37,10 +37,10 @@
     "@rr0/time": "^0.11.1",
     "canvas": "^3.1.0",
     "csv-parser": "^3.2.0",
-    "glob": "^11.0.1",
-    "image-size": "^2.0.1",
-    "jsdom": "^26.0.0",
-    "selenium-webdriver": "^4.30.0",
+    "glob": "^11.0.2",
+    "image-size": "^2.0.2",
+    "jsdom": "^26.1.0",
+    "selenium-webdriver": "^4.32.0",
     "ssg-api": "^1.16.15"
   },
   "devDependencies": {
