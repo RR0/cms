@@ -49,10 +49,10 @@ export class DataContentVisitor implements ContentVisitor {
         await this.processBirth(context, event, data)
         break
       case "book":
-        await this.processBook(context, event)
+        await this.processBook(context, event, data)
         break
       case "image":
-        await this.processImage(context, event)
+        await this.processImage(context, event, data)
         break
       case "death":
         await this.processDeath(context, event, data)
@@ -74,7 +74,7 @@ export class DataContentVisitor implements ContentVisitor {
     return {eventP: container, timeEl}
   }
 
-  protected async processImage(context: HtmlRR0Context, imageData: RR0Data) {
+  protected async processImage(context: HtmlRR0Context, event: RR0Event, imageData: RR0Data) {
     const doc = context.file.document
     const contents = doc.querySelector(".contents")
     if (contents) {
@@ -137,18 +137,16 @@ export class DataContentVisitor implements ContentVisitor {
     }
   }
 
-  protected async processBook(context: HtmlRR0Context, bookData: RR0Data) {
+  protected async processBook(context: HtmlRR0Context, event: RR0Event, bookData: RR0Data) {
     const doc = context.file.document
     const parentEl = doc.querySelector(".contents")
     if (parentEl) {
-      const bookEl = doc.createElement("p")
+      const {eventP, timeEl} = this.timeParagraph(context, event)
+      eventP.append(timeEl, " ")
       const people = context.people as unknown as People
-      const birthContext = context.clone()
-      const bookDateEl = this.timeElementFactory.create(birthContext, context, {url: true, contentOnly: false})
-      bookEl.append(bookDateEl, " ")
-      bookEl.append((people.gender === "female" ? "elle" : "il") + " écrit un livre")
-      await this.eventRenderer.renderEnd(context, bookData, bookEl)
-      parentEl.append(bookEl)
+      eventP.append((people.gender === "female" ? "elle" : "il") + " écrit un livre")
+      await this.eventRenderer.renderEnd(context, event, eventP)
+      parentEl.append(eventP)
     } else {
       context.warn("no .content in " + context.file.name)
     }
