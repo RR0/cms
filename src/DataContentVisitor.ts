@@ -52,7 +52,7 @@ export class DataContentVisitor implements ContentVisitor {
         await this.processBook(context, event, data)
         break
       case "image":
-        await this.processImage(context, event, data)
+        await this.processImage(context, event)
         break
       case "death":
         await this.processDeath(context, event, data)
@@ -74,20 +74,20 @@ export class DataContentVisitor implements ContentVisitor {
     return {eventP: container, timeEl}
   }
 
-  protected async processImage(context: HtmlRR0Context, event: RR0Event, imageData: RR0Data) {
+  protected async processImage(context: HtmlRR0Context, event: RR0Event) {
     const doc = context.file.document
     const contents = doc.querySelector(".contents")
     if (contents) {
       const imgEl = contents.querySelector("img")
-      const caption = imageData.name
-      const src = imageData.url
+      const caption = event.name
+      const src = event.url
       if (imgEl?.src !== src) {
         const imgEl = doc.createElement("img")
         imgEl.src = src
-        imgEl.alt = imageData.title
+        imgEl.alt = event.title
         const figcaptionEl = doc.createElement("figcaption")
         figcaptionEl.innerHTML = caption
-        await this.eventRenderer.renderEnd(context, imageData, figcaptionEl)
+        await this.eventRenderer.renderEnd(context, event, figcaptionEl)
         const figureEl = doc.createElement("figure")
         figureEl.append(imgEl)
         figureEl.append(figcaptionEl)
