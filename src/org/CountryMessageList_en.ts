@@ -63,6 +63,7 @@ export const countryMessageList_en: CountryMessagesList = {
   kr: southKorea_en,
   ma: CountryMessages.create("Morocco"),
   mx: CountryMessages.create("Mexico"),
+  my: CountryMessages.create("Malaysia"),
   mz: mozambique_en,
   nl: CountryMessages.create("Netherlands"),
   no: CountryMessages.create("Norway"),
