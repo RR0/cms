@@ -79,14 +79,14 @@ export class DataContentVisitor implements ContentVisitor {
     const contents = doc.querySelector(".contents")
     if (contents) {
       const imgEl = contents.querySelector("img")
-      const caption = event.name
-      const src = event.url
-      if (imgEl?.src !== src) {
+      const eventCaption = event.name
+      const eventSsrc = event.url
+      if (imgEl && ![imgEl.src, path.join("/", path.dirname(context.file.name), imgEl.src)].includes(eventSsrc)) {
         const imgEl = doc.createElement("img")
-        imgEl.src = src
+        imgEl.src = eventSsrc
         imgEl.alt = event.title
         const figcaptionEl = doc.createElement("figcaption")
-        figcaptionEl.innerHTML = caption
+        figcaptionEl.innerHTML = eventCaption
         await this.eventRenderer.renderEnd(context, event, figcaptionEl)
         const figureEl = doc.createElement("figure")
         figureEl.append(imgEl)

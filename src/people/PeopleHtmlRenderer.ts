@@ -1,12 +1,9 @@
 import path from "path"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { Gender } from "@rr0/common"
-import { CountryCode, Occupation, People } from "@rr0/data"
+import { AbstractDataFactory, CountryCode, Occupation, People } from "@rr0/data"
 
 export class PeopleHtmlRenderer {
-
-  constructor(protected defaultPreviewFileNames = ["portrait.jpg", "portrait.gif", "portrait.png", "portrait.webp"]) {
-  }
 
   renderLink(
     context: HtmlRR0Context, people: People, pseudoPeopleList: People[], allCountries: Set<CountryCode>,
@@ -80,7 +77,7 @@ export class PeopleHtmlRenderer {
     let portraitUrl = people.image
     const imageEvents = events.filter(event => event.eventType === "image")
     if (!portraitUrl) {
-      const portraitEvent = imageEvents.find(event => this.defaultPreviewFileNames.includes(event.url))
+      const portraitEvent = imageEvents.find(event => AbstractDataFactory.defaultPreviewFileNames.includes(event.url))
       if (portraitEvent) {
         portraitUrl = path.join("/", people.dirName, portraitEvent.url)
       }

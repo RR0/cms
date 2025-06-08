@@ -2,7 +2,7 @@
   "name": "@rr0/cms",
   "type": "module",
   "author": "Jérôme Beau <rr0@rr0.org> (https://rr0.org)",
-  "version": "0.3.48",
+  "version": "0.3.49",
   "description": "RR0 Content Management System (CMS)",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,7 +23,6 @@
     "preview": "vite preview --host",
     "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
     "circular-deps": "dpdm src",
-    "prepublishOnly": "npm run build && npm run test-ci",
     "test": "testscript",
     "test-one": "rm -Rf out && tsx src/CMSGenerator.test.ts",
     "test-ci": "rm -Rf out && testscript"
@@ -46,10 +45,10 @@
   "devDependencies": {
     "@javarome/testscript": "^0.13.1",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.13.11",
-    "tsx": "4.19.3",
-    "typescript": "^5.8.2",
-    "vite": "^6.2.2"
+    "@types/node": "^22.15.30",
+    "tsx": "4.19.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
   },
   "keywords": [
     "cms",
