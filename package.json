@@ -23,6 +23,7 @@
     "preview": "vite preview --host",
     "build": "rm -Rf dist && tsc --project tsconfig.prod.json",
     "circular-deps": "dpdm src",
+    "prepublishOnly": "npm run build && npm run test-ci",
     "test": "testscript",
     "test-one": "rm -Rf out && tsx src/CMSGenerator.test.ts",
     "test-ci": "rm -Rf out && testscript"
