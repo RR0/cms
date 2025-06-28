@@ -963,3 +963,7 @@ RewriteCond %{HTTP_REFERER} !^https://vraiufo.com$      [NC]
 RewriteCond %{HTTP_REFERER} !^https://vraiufo.fr/.*$      [NC]
 RewriteCond %{HTTP_REFERER} !^https://vraiufo.fr$      [NC]
 RewriteRule .*\.(jpg|jpeg|jpe|gif|bmp|png)$ https://rr0.org/Referencement.html [R,NC]
+
+Header add Access-Control-Allow-Origin: "https://vraiufo.com"
+Header add Access-Control-Allow-Methods: "GET"
+Header add Access-Control-Allow-Headers: "*"
