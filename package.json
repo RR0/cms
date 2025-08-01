@@ -25,7 +25,7 @@
     "circular-deps": "dpdm src",
     "prepublishOnly": "npm run build && npm run test-ci",
     "test": "testscript",
-    "test-one": "rm -Rf out && tsx src/CMSGenerator.test.ts",
+    "test-one": "rm -Rf out && tsx src/people/PeopleReplacer.test.ts",
     "test-ci": "rm -Rf out && testscript"
   },
   "dependencies": {
