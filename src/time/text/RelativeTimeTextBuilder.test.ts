@@ -1,16 +1,16 @@
 import { RelativeTimeTextBuilder } from "./RelativeTimeTextBuilder.js"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 
 describe("RelativeTimeTextBuilder", () => {
 
-  const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
+  const timeTextBuilder = new TimeTextBuilder(cmsTestUtil.intlOptions)
   const relativeTimeTextBuilder = new RelativeTimeTextBuilder(timeTextBuilder)
 
   test("next year", () => {
     {
-      const previousContext = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
+      const previousContext = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "")
       previousContext.time.setYear(2003)
       const context = previousContext.clone()
       context.time.setYear(2004)
@@ -23,7 +23,7 @@ describe("RelativeTimeTextBuilder", () => {
   })
 
   test("change year", () => {
-    const previousContext = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
+    const previousContext = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "")
     previousContext.time.setYear(1947)
     const context = previousContext.clone()
     context.time.setYear(1990)
@@ -35,7 +35,7 @@ describe("RelativeTimeTextBuilder", () => {
 
   test("next month", () => {
     {
-      const context1 = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
+      const context1 = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "")
       context1.time.setYear(2003)
       {
         context1.time.setMonth(2)
@@ -64,7 +64,7 @@ describe("RelativeTimeTextBuilder", () => {
       expect(s4).toBe("vendredi 24 janvier")
     }
     {
-      const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
       context.time.setYear(2003)
       context.time.setMonth(9)
       const previousContext = context.clone()
@@ -76,7 +76,7 @@ describe("RelativeTimeTextBuilder", () => {
 
   test("next day", () => {
     {
-      const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "")
       context.time.setYear(2003)
       context.time.setMonth(9)
       context.time.setDayOfMonth(23)
@@ -86,7 +86,7 @@ describe("RelativeTimeTextBuilder", () => {
       expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("le lendemain")
     }
     {
-      const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
       context.time.setYear(2003)
       context.time.setMonth(9)
       context.time.setDayOfMonth(23)
@@ -101,7 +101,7 @@ describe("RelativeTimeTextBuilder", () => {
 
     test("next", () => {
       {
-        let previousContext = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "")
+        let previousContext = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "")
         const context = previousContext.clone()
         context.time.setYear(2003)
         context.time.setMonth(9)
@@ -115,7 +115,7 @@ describe("RelativeTimeTextBuilder", () => {
         expect(relativeTimeTextBuilder.build(previousContext, context)).toBe("17:43")
       }
       {
-        let previousContext = rr0TestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
+        let previousContext = cmsTestUtil.time.newHtmlContext("1/9/9/0/08", "<html lang='en'></html>")
         const context = previousContext.clone()
         context.time.setYear(2003)
         context.time.setMonth(9)

@@ -5,13 +5,13 @@ import { GeipanRR0Mapping } from "./GeipanRR0Mapping.js"
 import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase.js"
 import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
-import { rr0TestUtil } from "../../../../../../test/index.js"
+import { cmsTestUtil } from "../../../../../../test/index.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 
 describe("GeipanCaseSource", () => {
 
   const actions: ChronologyReplacerActions = {read: ["backup", "fetch"], write: ["backup", "pages"]}
-  const geipanRR0Mapping = new GeipanRR0Mapping(actions).init(rr0TestUtil)
+  const geipanRR0Mapping = new GeipanRR0Mapping(actions).init(cmsTestUtil)
 
   const testCase = new class extends DatasourceTestCase<GeipanCaseSummary> {
     constructor(mapping: RR0CaseMapping<GeipanCaseSummary>, sourceCases: GeipanCaseSummary[]) {
@@ -30,7 +30,7 @@ describe("GeipanCaseSource", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1977)
     context.time.setMonth(3)
   })

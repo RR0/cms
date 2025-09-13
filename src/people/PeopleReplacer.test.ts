@@ -1,5 +1,5 @@
 import { PeopleReplacer } from "./PeopleReplacer.js"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
 import path from "path"
@@ -8,7 +8,7 @@ import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 
 describe("PeopleReplacer", () => {
 
-  const rootDir = rr0TestUtil.filePath("people")
+  const rootDir = cmsTestUtil.filePath("people")
   const files = [
     path.join(rootDir, "j/Jésus"),
     path.join(rootDir, "b/BeauJerome"),
@@ -34,7 +34,7 @@ describe("PeopleReplacer", () => {
     const peopleService = new PeopleService(dataService, peopleFactory, {rootDir, files})
     const peopleRenderer = new PeopleHtmlRenderer()
     const replacer = new PeopleReplacer(peopleService, peopleRenderer)
-    const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+    const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
       const lastnameFirstElement = createPeopleElement(context,
         "Hynek, Josef Allen (Northwestern University, Evanston, Illinois)")
@@ -56,7 +56,7 @@ describe("PeopleReplacer", () => {
     const peopleService = new PeopleService(dataService, peopleFactory, {rootDir, files})
     const peopleRenderer = new PeopleHtmlRenderer()
     const replacer = new PeopleReplacer(peopleService, peopleRenderer)
-    const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+    const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     {
       const peopleWithTitle = createPeopleElement(context, "Jésus")
       const replacement = await replacer.replacement(context, peopleWithTitle)

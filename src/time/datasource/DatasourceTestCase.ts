@@ -9,7 +9,7 @@ import { NoteFileCounter, NoteRenderer } from "../../note/index.js"
 import { HttpSource } from "./HttpSource.js"
 import { TimeElementFactory } from "../html/TimeElementFactory.js"
 import { TimeRenderer } from "../html/TimeRenderer.js"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import { AllDataService, RR0SourceType, Source } from "@rr0/data"
 import { PlaceRenderer } from "../../place/PlaceRenderer.js"
 
@@ -53,10 +53,10 @@ export abstract class DatasourceTestCase<S> {
     const dataService = new AllDataService([])
     const baseUrl = "https://rr0.org"
     const http = new HttpSource()
-    const timeService = await rr0TestUtil.time.getService()
+    const timeService = await cmsTestUtil.time.getService()
     const sourceFactory = new SourceFactory(dataService, http, baseUrl, this.intlOptions, timeService)
     const timeElementFactory = new TimeElementFactory(
-      new TimeRenderer(rr0TestUtil.time.urlBuilder, this.timeTextBuilder))
+      new TimeRenderer(cmsTestUtil.time.urlBuilder, this.timeTextBuilder))
     const eventRenderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
       new SourceRenderer(this.timeTextBuilder), timeElementFactory)
     const items = []

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UrecatCase } from "./UrecatCase.js"
 import { urecatTestCases } from "./UrecatTestCases.js"
@@ -12,7 +12,7 @@ import { UrecatRR0Mapping } from "./UrecatRR0Mapping.js"
 describe("UrecatCaseSource", () => {
 
   const urecatRR0Mapping = new UrecatRR0Mapping({read: ["fetch"], write: ["backup"]})
-  urecatRR0Mapping.init(rr0TestUtil)
+  urecatRR0Mapping.init(cmsTestUtil)
 
   const testCase = new class extends DatasourceTestCase<UrecatCase> {
     constructor(mapping: RR0CaseMapping<UrecatCase>, sourceCases: UrecatCase[]) {
@@ -31,7 +31,7 @@ describe("UrecatCaseSource", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/7/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/7/03/index.html")
   })
 
   test("witnesses", () => {

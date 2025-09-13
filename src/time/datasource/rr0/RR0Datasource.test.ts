@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { rr0TestCases } from "./RR0TestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
@@ -20,7 +20,7 @@ import { NamedPlace } from "@rr0/place"
 
 export class RR0TestDatasource extends RR0Datasource implements Datasource<RR0CaseSummary> {
 
-  timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
+  timeTextBuilder = new TimeTextBuilder(cmsTestUtil.intlOptions)
 
   constructor() { // Makes inherited constructor public
     super()
@@ -100,12 +100,12 @@ describe("RR0CaseSource", () => {
         return " " + HtmlTag.toString("span", authorStr + sourceItems.join(", "), {class: "source"})
       }).join("")
     }
-  }(rr0TestMapping.init(rr0TestUtil), rr0TestCases)
+  }(rr0TestMapping.init(cmsTestUtil), rr0TestCases)
 
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1970)
     context.time.setMonth(3)
   })

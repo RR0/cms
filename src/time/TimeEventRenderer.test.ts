@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@javarome/testscript"
 import { CaseSummaryRenderer } from "./CaseSummaryRenderer.js"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 import { HttpSource, RR0CaseSummary } from "./datasource/index.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { SourceFactory, SourceRenderer } from "../source/index.js"
@@ -17,13 +17,13 @@ describe("TimeEventRenderer", () => {
   const dataService = new AllDataService([])
   const baseUrl = "https://rr0.org"
   const http = new HttpSource()
-  const sourceFactory = new SourceFactory(dataService, http, baseUrl, rr0TestUtil.intlOptions,
-    rr0TestUtil.time.getService())
+  const sourceFactory = new SourceFactory(dataService, http, baseUrl, cmsTestUtil.intlOptions,
+    cmsTestUtil.time.getService())
   const renderer = new CaseSummaryRenderer(new NoteRenderer(new NoteFileCounter()), sourceFactory,
-    new SourceRenderer(rr0TestUtil.time.timeTextBuilder), rr0TestUtil.time.timeElementFactory)
+    new SourceRenderer(cmsTestUtil.time.timeTextBuilder), cmsTestUtil.time.timeElementFactory)
 
   test("render event", async () => {
-    const context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    const context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     const city = City.create(String(HautsDeSeineCityCode.Nanterre), hautsDeSeine,
       Place.fromLocation(48.891944, 2.207222))
     const namedPlace = new OrganizationPlace(city)

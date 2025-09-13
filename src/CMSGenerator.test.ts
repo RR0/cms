@@ -32,16 +32,16 @@ import { TimeOptions } from "./time/TimeOptions.js"
 import { CodeReplacerFactory } from "./tech/index.js"
 import { PlaceReplacerFactory } from "./place/index.js"
 import { DataOptions, IndexedReplacerFactory, UnitReplaceCommand } from "./index.js"
-import { rr0TestUtil } from "./test/index.js"
+import { cmsTestUtil } from "./test/index.js"
 
 export async function getTimeFiles(): Promise<string[]> {
-  const minusYearFiles = await glob(rr0TestUtil.filePath("time/-?/?/?/?/index.html"))
-  const year1Files = await glob(rr0TestUtil.filePath("time/?/index.html"))
-  const year2Files = await glob(rr0TestUtil.filePath("time/?/?/index.html"))
-  const year3Files = await glob(rr0TestUtil.filePath("time/?/?/?/index.html"))
-  const year4Files = await glob(rr0TestUtil.filePath("time/?/?/?/?/index.html"))
-  const monthFiles = await glob(rr0TestUtil.filePath("time/?/?/?/?/??/index.html"))
-  const dayFiles = await glob(rr0TestUtil.filePath("time/?/?/?/?/??/??/index.html"))
+  const minusYearFiles = await glob(cmsTestUtil.filePath("time/-?/?/?/?/index.html"))
+  const year1Files = await glob(cmsTestUtil.filePath("time/?/index.html"))
+  const year2Files = await glob(cmsTestUtil.filePath("time/?/?/index.html"))
+  const year3Files = await glob(cmsTestUtil.filePath("time/?/?/?/index.html"))
+  const year4Files = await glob(cmsTestUtil.filePath("time/?/?/?/?/index.html"))
+  const monthFiles = await glob(cmsTestUtil.filePath("time/?/?/?/?/??/index.html"))
+  const dayFiles = await glob(cmsTestUtil.filePath("time/?/?/?/?/??/??/index.html"))
   return year1Files.concat(year2Files).concat(year3Files).concat(year4Files).concat(
     minusYearFiles).concat(monthFiles).concat(dayFiles).sort()
 }
@@ -72,7 +72,7 @@ describe("Build", () => {
       "tech/**/*.html",
       "udb/*.html",
       "js/**/*.html"
-    ].map(rr0TestUtil.filePath)
+    ].map(cmsTestUtil.filePath)
   const copiesArg = args.copies
   const copies = copiesArg ? copiesArg : [
     "favicon.ico", "manifest.json", "opensearch.xml", "apple-touch-icon.png", "apple-touch-icon_400x400.png", "screenshot1.jpg",
@@ -88,7 +88,7 @@ describe("Build", () => {
     "time/DualRangeComponent.mjs",
     "index/index.js", "lang/form.js", "lang/form.css", "lang/speech.js", "lang/speech.css",
     "croyance/divin/theisme/mono/livre/islam/coran/index.js"
-  ].map(path => rr0TestUtil.filePath(path))
+  ].map(path => cmsTestUtil.filePath(path))
   const outDir = "out"
   const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY
   if (!googleMapsApiKey) {
@@ -106,27 +106,27 @@ describe("Build", () => {
     "people/index.html", "people/witness/index.html", "people/militaires.html", "people/scientifiques.html",
     "people/astronomes.html", "people/politicians.html", "people/dirigeants.html", "people/pilotes.html",
     "people/contactes.html", "people/ufologues.html", "tech/info/Personnes.html", "people/Contributeurs.html"
-  ].map(path => rr0TestUtil.filePath(path))
+  ].map(path => cmsTestUtil.filePath(path))
   getTimeFiles().then(async (timeFiles) => {
     const orgFiles = await glob("test/org/**/index.html")
     const directoryOptions: PeopleDirectoryStepOptions = {
-      root: rr0TestUtil.filePath("people/index.html"),
-      scientists: rr0TestUtil.filePath("people/scientifiques.html"),
-      ufologists: rr0TestUtil.filePath("people/ufologues.html"),
-      ufoWitnesses: rr0TestUtil.filePath("people/witness/index.html"),
-      astronomers: rr0TestUtil.filePath("people/astronomes.html"),
-      contactees: rr0TestUtil.filePath("people/contactes.html"),
-      pilots: rr0TestUtil.filePath("people/pilotes.html"),
-      military: rr0TestUtil.filePath("people/militaires.html"),
-      softwareEngineers: rr0TestUtil.filePath("tech/info/Personnes.html"),
-      politicians: rr0TestUtil.filePath("people/politicians.html"),
-      rulers: rr0TestUtil.filePath("people/dirigeants.html")
+      root: cmsTestUtil.filePath("people/index.html"),
+      scientists: cmsTestUtil.filePath("people/scientifiques.html"),
+      ufologists: cmsTestUtil.filePath("people/ufologues.html"),
+      ufoWitnesses: cmsTestUtil.filePath("people/witness/index.html"),
+      astronomers: cmsTestUtil.filePath("people/astronomes.html"),
+      contactees: cmsTestUtil.filePath("people/contactes.html"),
+      pilots: cmsTestUtil.filePath("people/pilotes.html"),
+      military: cmsTestUtil.filePath("people/militaires.html"),
+      softwareEngineers: cmsTestUtil.filePath("tech/info/Personnes.html"),
+      politicians: cmsTestUtil.filePath("people/politicians.html"),
+      rulers: cmsTestUtil.filePath("people/dirigeants.html")
     }
-    const sourceRegistryFileName = rr0TestUtil.filePath("source/index.json")
+    const sourceRegistryFileName = cmsTestUtil.filePath("source/index.json")
     const siteBaseUrl = "https://rr0.org/"
     const mail = "rr0@rr0.org"
-    const timeOptions: TimeOptions = {rootDir: rr0TestUtil.filePath("time"), files: timeFiles}
-    const orgOptions: DataOptions = {rootDir: rr0TestUtil.filePath("org"), files: orgFiles}
+    const timeOptions: TimeOptions = {rootDir: cmsTestUtil.filePath("time"), files: timeFiles}
+    const orgOptions: DataOptions = {rootDir: cmsTestUtil.filePath("org"), files: orgFiles}
     const dataOptions = {
       time: timeOptions,
       org: orgOptions
@@ -169,11 +169,11 @@ describe("Build", () => {
     const generator = new CMSGenerator({
       contentRoots, copies, outDir, locale: "fr", googleMapsApiKey, mail, dataOptions,
       siteBaseUrl, timeFormat, directoryPages,
-      ufoCaseDirectoryFile: rr0TestUtil.filePath("science/crypto/ufo/enquete/dossier/index.html"),
-      ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"].map(path => rr0TestUtil.filePath(path)),
+      ufoCaseDirectoryFile: cmsTestUtil.filePath("science/crypto/ufo/enquete/dossier/index.html"),
+      ufoCasesExclusions: ["science/crypto/ufo/enquete/dossier/canular"].map(path => cmsTestUtil.filePath(path)),
       sourceRegistryFileName,
       directoryExcluded: ["people/Astronomers_fichiers", "people/witness", "people/author"].map(
-        path => rr0TestUtil.filePath(path)),
+        path => cmsTestUtil.filePath(path)),
       directoryOptions,
       mappings,
       contentReplacers: [...pageReplacers, ...contentsReplacers]

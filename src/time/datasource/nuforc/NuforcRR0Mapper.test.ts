@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { NuforcHttpDatasource } from "./NuforcHttpDatasource.js"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { nuforcDatasource } from "./NuforcRR0Mapping.js"
@@ -30,7 +30,7 @@ describe("NuforcRR0Mapper", () => {
 
   let context: HtmlRR0Context
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1970)
     context.time.setMonth(3)
   })
@@ -41,7 +41,7 @@ describe("NuforcRR0Mapper", () => {
   })
 
   test("fetch and map as RR0 cases", {skip: true}, async () => {
-    const nuforcRR0Mapper = new NuforcRR0Mapper(rr0TestUtil.cityService, rr0TestUtil.countryService,
+    const nuforcRR0Mapper = new NuforcRR0Mapper(cmsTestUtil.cityService, cmsTestUtil.countryService,
       nuforcDatasource.baseUrl.href, nuforcDatasource.copyright, nuforcDatasource.authors)
     const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
     const testCases = nuforcTestCases.sort(

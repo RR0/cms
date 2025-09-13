@@ -1,7 +1,7 @@
 import { PlaceReplacer } from "./PlaceReplacer.js"
 import { OrganizationService } from "../org/OrganizationService.js"
 import { SsgContext } from "ssg-api"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { CmsOrganization } from "../org/CmsOrganization.js"
 import { OrganizationMessages } from "../org/index.js"
@@ -30,7 +30,7 @@ class MockPlaceService extends PlaceService {
 class MockOrganizationService extends OrganizationService {
 
   constructor(readonly dirName: string) {
-    super(null!, rr0TestUtil.orgFactory, {rootDir: "", files: []}, null, [])
+    super(null!, cmsTestUtil.orgFactory, {rootDir: "", files: []}, null, [])
   }
 
   async read(_fileName: string): Promise<CmsOrganization> {
@@ -68,7 +68,7 @@ describe("PlaceReplacer", () => {
     const placeService = new MockPlaceService(location, {elevation}, dirName)
     const orgService = new MockOrganizationService(dirName)
     const replacer = new PlaceReplacer()
-    const context = rr0TestUtil.newHtmlContext("people/a/AlexanderJohnB/index.html", "")
+    const context = cmsTestUtil.newHtmlContext("people/a/AlexanderJohnB/index.html", "")
     const doc = context.file.document
     const text = "LANL"
     const placeTag = createPlaceTag(doc, text)
@@ -85,7 +85,7 @@ describe("PlaceReplacer", () => {
     const elevation = 100.0
     const dirName = ""
     const replacer = new PlaceReplacer()
-    const context = rr0TestUtil.newHtmlContext("people/a/AlexanderJohnB/index.html", "")
+    const context = cmsTestUtil.newHtmlContext("people/a/AlexanderJohnB/index.html", "")
     const doc = context.file.document
     const text = "Non existing"
     const placeTag = createPlaceTag(doc, text)

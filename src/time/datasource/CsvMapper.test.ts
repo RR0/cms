@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
 import { RR0Context } from "../../RR0Context.js"
 import { CsvMapper } from "./CsvMapper.js"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import path from "path"
 import * as process from "node:process"
 import { GeipanCaseSummary } from "../../org/eu/fr/cnes/geipan/geipan/GeipanCaseSummary.js"
@@ -20,7 +20,7 @@ describe("CsvMapper", () => {
   let mapper: CsvMapper<GeipanCaseSummary>
 
   beforeEach(() => {
-    context = rr0TestUtil.newContext(path.join(rr0TestUtil.rootDir, "time/1/9/7/0/03/index.html"))
+    context = cmsTestUtil.newContext(path.join(cmsTestUtil.rootDir, "time/1/9/7/0/03/index.html"))
     mapper = new CsvMapper()
   })
 
@@ -50,7 +50,7 @@ describe("CsvMapper", () => {
   describe("mapper", () => {
 
     const date = new Date("2025-01-01")
-    const context = rr0TestUtil.newHtmlContext("time/1/9/7/0/03/index.html")
+    const context = cmsTestUtil.newHtmlContext("time/1/9/7/0/03/index.html")
 
     test("string", () => {
       const mapper = new CsvMapper<RR0CaseSummary>(";")

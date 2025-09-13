@@ -1,13 +1,13 @@
 import { RR0ContextImpl } from "../../RR0Context.js"
 import { describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 import { TimeContext } from "../TimeContext.mjs"
 
 describe("timeTextBuilder", () => {
 
-  const config = rr0TestUtil.config
-  const timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
+  const config = cmsTestUtil.config
+  const timeTextBuilder = new TimeTextBuilder(cmsTestUtil.intlOptions)
 
   test("prints year", () => {
     {

@@ -23,7 +23,7 @@ import { CMSContext } from "../CMSContext.js"
 import { DataOptions } from "../DataOptions.js"
 import { TimeContext } from "../time/TimeContext.mjs"
 
-export class RR0TestUtil implements CMSContext {
+export class CMSTestUtil implements CMSContext {
 
   readonly config: FileWriteConfig = {
     getOutputPath: (context: SsgContext): string => {
@@ -112,4 +112,4 @@ export class RR0TestUtil implements CMSContext {
   }
 }
 
-export const rr0TestUtil = new RR0TestUtil()
+export const cmsTestUtil = new CMSTestUtil()

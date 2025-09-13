@@ -1,5 +1,5 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { fuforaTestCases } from "./FuforaTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
@@ -10,7 +10,7 @@ import { FuforaRR0Mapping } from "./FuforaRR0Mapping.js"
 
 describe("FuforaCaseSource", () => {
 
-  const fuforaRR0Mapping = new FuforaRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
+  const fuforaRR0Mapping = new FuforaRR0Mapping({read: ["fetch"], write: ["backup"]}).init(cmsTestUtil)
 
   const testCase = new class extends DatasourceTestCase<FuforaCaseSummary> {
     constructor(mapping: RR0CaseMapping<FuforaCaseSummary>, sourceCases: FuforaCaseSummary[]) {
@@ -29,7 +29,7 @@ describe("FuforaCaseSource", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.newHtmlContext("time/1/9/7/0/11/index.html")
+    context = cmsTestUtil.newHtmlContext("time/1/9/7/0/11/index.html")
     context.time.setYear(1970)
     context.time.setMonth(11)
   })

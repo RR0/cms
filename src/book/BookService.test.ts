@@ -5,7 +5,7 @@ import { AllDataService, PeopleService, RR0EventFactory, TypedDataFactory } from
 import { Book } from "./Book.js"
 import { BookService } from "./BookService.js"
 import { TimeUrlBuilder } from "../time/TimeUrlBuilder.js"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 import { BookJson } from "./BookJson.js"
 
 interface BookImportArgs {
@@ -18,7 +18,7 @@ const args = new CLI().getArgs<BookImportArgs>()
 const fileName = args.import
 if (fileName) {
   const dry = args.dry === "true"
-  const peopleFactory = rr0TestUtil.peopleFactory
+  const peopleFactory = cmsTestUtil.peopleFactory
   const eventFactory = new RR0EventFactory()
   const bookFactory = new TypedDataFactory<Book, BookJson>(eventFactory, "book")
   const dataService = new AllDataService([bookFactory, peopleFactory])
@@ -29,9 +29,9 @@ if (fileName) {
       return path.join(outDir, context.file.name)
     }
   }
-  const timeUrlBuilder = new TimeUrlBuilder(rr0TestUtil.time.timeOptions)
+  const timeUrlBuilder = new TimeUrlBuilder(cmsTestUtil.time.timeOptions)
   let files = []
-  const peopleService = new PeopleService(dataService, peopleFactory, {files, rootDir: rr0TestUtil.filePath("people")})
+  const peopleService = new PeopleService(dataService, peopleFactory, {files, rootDir: cmsTestUtil.filePath("people")})
   const books = new BookService(logger, dry, peopleService, timeUrlBuilder, config)
   books.import(fileName).then((result: Book[]) => {
       logger.log("Wrote", result.length, "books")

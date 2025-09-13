@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import fs from "fs"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import path from "path"
@@ -11,11 +11,11 @@ describe("JsonMapper", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html", undefined, "en")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html", undefined, "en")
   })
 
   test("read", {skip: true}, () => {
-    const ufoSearchMapping = new UfoSearchRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
+    const ufoSearchMapping = new UfoSearchRR0Mapping({read: ["fetch"], write: ["backup"]}).init(cmsTestUtil)
     const ufoSearchFileDatasource = ufoSearchMapping.backupDatasource
     const data = fs.readFileSync(path.join("src", ufoSearchFileDatasource.fileName), {encoding: "utf-8"})
     const cases = ufoSearchFileDatasource.fileMapper.parse(context, data)

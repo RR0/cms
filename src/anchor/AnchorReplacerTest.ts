@@ -1,5 +1,5 @@
 import { AnchorReplacer } from "./AnchorReplacer.js"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 
 import { JSDOM } from "jsdom"
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
@@ -13,7 +13,7 @@ describe("AnchorReplacer", () => {
   })
 
   test("parse relative internal url", async () => {
-    const context = rr0TestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
+    const context = cmsTestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
     const replacer = new AnchorReplacer("https://rr0.org/", [])
     const a = document.createElement("a")
     a.href = "Roswell"
@@ -24,7 +24,7 @@ describe("AnchorReplacer", () => {
   })
 
   test("parse absolute internal file", async () => {
-    const context = rr0TestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
+    const context = cmsTestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
     const replacer = new AnchorReplacer("https://rr0.org/", [])
     const a = document.createElement("a")
     a.href = "/Contact.html"
@@ -35,7 +35,7 @@ describe("AnchorReplacer", () => {
   })
 
   test("parse absolute internal url", async () => {
-    const context = rr0TestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
+    const context = cmsTestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
     const replacer = new AnchorReplacer("https://rr0.org/", [])
     const a = document.createElement("a")
     a.href = "/time/pluies"
@@ -46,7 +46,7 @@ describe("AnchorReplacer", () => {
   })
 
   test("parse absolute external url", async () => {
-    const context = rr0TestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
+    const context = cmsTestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
     const replacer = new AnchorReplacer("https://rr0.org/", [])
     const a = document.createElement("a")
     a.href = "https://wikipedia.org"
@@ -57,7 +57,7 @@ describe("AnchorReplacer", () => {
   })
 
   test("parse url with anchor", async () => {
-    const context = rr0TestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
+    const context = cmsTestUtil.newHtmlContext("science/crypto/ufo/enquete/dossier", "")
     const replacer = new AnchorReplacer("https://rr0.org/", [])
     const a = document.createElement("a")
     a.href = "enquete/dossier/11Septembre/WTC/crashes#passeport"

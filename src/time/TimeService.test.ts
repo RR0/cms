@@ -1,13 +1,13 @@
 import { RR0ContextImpl } from "../RR0Context.js"
 import { FileWriteConfig } from "ssg-api"
 import { describe, expect, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 import { FileContents } from "@javarome/fileutil"
 import { TimeContext } from "./TimeContext.mjs"
 
 describe("Time", () => {
 
-  const time = rr0TestUtil.time.getService()
+  const time = cmsTestUtil.time.getService()
 
   test("parse", () => {
     const exec = time.parseFileName("time/-0/0/1/1/index.html")
@@ -23,7 +23,7 @@ describe("Time", () => {
   })
 
   describe("contextFromFile", () => {
-    const config: FileWriteConfig = rr0TestUtil.config
+    const config: FileWriteConfig = cmsTestUtil.config
     const timeContext = new TimeContext()
     const context = new RR0ContextImpl("fr", timeContext, config)
 

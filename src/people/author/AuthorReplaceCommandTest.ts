@@ -1,18 +1,18 @@
 import { AuthorReplaceCommand } from "./AuthorReplaceCommand.js"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { RelativeTimeTextBuilder } from "../../time/index.js"
 
 describe("AuthorReplaceCommand", async () => {
 
-  const timeTextBuilder = rr0TestUtil.time.timeTextBuilder
+  const timeTextBuilder = cmsTestUtil.time.timeTextBuilder
   const relativeTimeTextBuilder = new RelativeTimeTextBuilder(timeTextBuilder)
-  const timeService = await rr0TestUtil.time.getService()
+  const timeService = await cmsTestUtil.time.getService()
 
   test("no author", async () => {
-    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/index.html")
-    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
-    const context = rr0TestUtil.newHtmlContext(timeFile,
+    const timeFile = cmsTestUtil.time.filePath("1/9/5/4/index.html")
+    const command = new AuthorReplaceCommand(cmsTestUtil.time.timeRenderer)
+    const context = cmsTestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     await command.execute(context)
     expect(context.file.meta.author).toEqual([])
@@ -20,9 +20,9 @@ describe("AuthorReplaceCommand", async () => {
   })
 
   test("author only", async () => {
-    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
-    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
-    const context = rr0TestUtil.newHtmlContext(timeFile,
+    const timeFile = cmsTestUtil.time.filePath("1/9/5/4/10/index.html")
+    const command = new AuthorReplaceCommand(cmsTestUtil.time.timeRenderer)
+    const context = cmsTestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     context.file.meta.author.push("Beau, Jérôme")
     const time = relativeTimeTextBuilder.build(undefined, context)
@@ -33,9 +33,9 @@ describe("AuthorReplaceCommand", async () => {
   })
 
   test("copyright only", async () => {
-    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
-    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
-    const context = rr0TestUtil.newHtmlContext(timeFile,
+    const timeFile = cmsTestUtil.time.filePath("1/9/5/4/10/index.html")
+    const command = new AuthorReplaceCommand(cmsTestUtil.time.timeRenderer)
+    const context = cmsTestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     context.file.meta.copyright = "Some publication"
     const time = relativeTimeTextBuilder.build(undefined, context)
@@ -47,9 +47,9 @@ describe("AuthorReplaceCommand", async () => {
   })
 
   test("author with copyright", async () => {
-    const timeFile = rr0TestUtil.time.filePath("1/9/5/4/10/index.html")
-    const command = new AuthorReplaceCommand(rr0TestUtil.time.timeRenderer)
-    const context = rr0TestUtil.newHtmlContext(timeFile,
+    const timeFile = cmsTestUtil.time.filePath("1/9/5/4/10/index.html")
+    const command = new AuthorReplaceCommand(cmsTestUtil.time.timeRenderer)
+    const context = cmsTestUtil.newHtmlContext(timeFile,
       `This is published by <!--#echo var="author" -->!`)
     context.file.meta.author.push("Beau, Jérôme")
     context.file.meta.copyright = "Some publication"

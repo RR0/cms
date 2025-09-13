@@ -6,7 +6,7 @@ import { HtmlTag } from "../../../util/index.js"
 import { SceauCaseMapping } from "./SceauCaseMapping.js"
 import { SceauDatasource } from "./SceauDatasource.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { sceauDatasource } from "./SceauRR0Mapping.js"
 import { sceauTestCases } from "./SceauTestCases.js"
@@ -18,7 +18,7 @@ import { CMSContext } from "../../../CMSContext.js"
 
 export class SceauTestDatasource extends SceauDatasource {
 
-  timeTextBuilder = new TimeTextBuilder(rr0TestUtil.intlOptions)
+  timeTextBuilder = new TimeTextBuilder(cmsTestUtil.intlOptions)
 
   constructor() { // Makes inherited constructor public
     super()
@@ -37,7 +37,7 @@ export class SceauTestMapping implements SceauCaseMapping {
   }
 
   init(build: CMSContext): this {
-    this.mapper = new SceauCaseSummaryRR0Mapper(rr0TestUtil.cityService, sceauDatasource.baseUrl,
+    this.mapper = new SceauCaseSummaryRR0Mapper(cmsTestUtil.cityService, sceauDatasource.baseUrl,
       sceauDatasource.copyright, sceauDatasource.authors)
     return this
   }
@@ -98,7 +98,7 @@ describe("SCEAUCaseSource", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1970)
     context.time.setMonth(3)
   })

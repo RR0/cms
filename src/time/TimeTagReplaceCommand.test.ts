@@ -1,5 +1,5 @@
 import { TimeReplacerFactory } from "./html/TimeReplacerFactory.js"
-import { rr0TestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/index.js"
 import { describe, expect, test } from "@javarome/testscript"
 import { DomReplaceCommand } from "ssg-api"
 import { TimeReplacer } from "./html/TimeReplacer.js"
@@ -8,14 +8,14 @@ import { TimeOptions } from "./TimeOptions.js"
 
 describe("HtmlTagReplaceCommand", async () => {
 
-  const timeRoot = rr0TestUtil.time.timeOptions.rootDir
-  const timeOptions: TimeOptions = {rootDir: timeRoot, files: [rr0TestUtil.time.filePath("2/0/0/4/index.html")]}
-  const timeService = await rr0TestUtil.time.getService(timeOptions)
+  const timeRoot = cmsTestUtil.time.timeOptions.rootDir
+  const timeOptions: TimeOptions = {rootDir: timeRoot, files: [cmsTestUtil.time.filePath("2/0/0/4/index.html")]}
+  const timeService = await cmsTestUtil.time.getService(timeOptions)
 
   test("replace time tag", async () => {
-    const replacer = new TimeReplacer(rr0TestUtil.time.timeElementFactory)
-    const command = new DomReplaceCommand("time", new TimeReplacerFactory(replacer, rr0TestUtil.time.urlBuilder))
-    const context = rr0TestUtil.time.newHtmlContext("1/9/9/0/08/index.html",
+    const replacer = new TimeReplacer(cmsTestUtil.time.timeElementFactory)
+    const command = new DomReplaceCommand("time", new TimeReplacerFactory(replacer, cmsTestUtil.time.urlBuilder))
+    const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html",
       `<time>2004</time> <a href="/science/crypto/ufo/enquete/dossier/Roswell">Roswell</a>`)
     await command.execute(context)
     expect(context.file.contents).toBe(

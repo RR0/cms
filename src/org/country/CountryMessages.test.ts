@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { france_fr } from "../eu/fr/France_fr.js"
-import { rr0TestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/index.js"
 import { RR0Context } from "../../RR0Context.js"
 import { france_en } from "../eu/fr/France_en.js"
 import { usa_fr } from "../us/Usa_fr.js"
@@ -13,7 +13,7 @@ describe("CountryMessages", () => {
   let context: RR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.newContext(rr0TestUtil.filePath("time/1/9/7/0/03/index.html"))
+    context = cmsTestUtil.newContext(cmsTestUtil.filePath("time/1/9/7/0/03/index.html"))
   })
 
   test("toTitle", () => {

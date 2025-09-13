@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"
@@ -28,7 +28,7 @@ describe("BaseOvniFranceCaseSource", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1970)
     context.time.setMonth(3)
   })
@@ -36,7 +36,7 @@ describe("BaseOvniFranceCaseSource", () => {
   test("map as RR0 cases", {skip: true}, async () => {
     const dataDate = new Date("2024-08-12 00:00:00 GMT+1")
     const baseOvniFranceRR0Mapper = new BaseOvniFranceCaseSummaryRR0Mapper(
-      rr0TestUtil.departmentService, rr0TestUtil.cityService,
+      cmsTestUtil.departmentService, cmsTestUtil.cityService,
       baseOvniFranceDatasource.baseUrl, baseOvniFranceDatasource.copyright, baseOvniFranceDatasource.authors
     )
     const mapped = baseOvniFranceTestCases.map(sourceCase => baseOvniFranceRR0Mapper.map(context, sourceCase, dataDate))

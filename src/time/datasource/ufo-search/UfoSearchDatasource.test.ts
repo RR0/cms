@@ -1,5 +1,5 @@
 import { beforeEach, describe, test } from "@javarome/testscript"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UfoSearchCase } from "./UfoSearchCase.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
@@ -10,7 +10,7 @@ import { UfoSearchRR0Mapping } from "./UfoSearchMapping.js"
 
 describe("UfoSearchCaseSource", () => {
 
-  const ufoSearchRR0Mapping = new UfoSearchRR0Mapping({read: ["fetch"], write: ["backup"]}).init(rr0TestUtil)
+  const ufoSearchRR0Mapping = new UfoSearchRR0Mapping({read: ["fetch"], write: ["backup"]}).init(cmsTestUtil)
 
   const testCase = new class extends DatasourceTestCase<UfoSearchCase> {
     constructor(mapping: RR0CaseMapping<UfoSearchCase>, sourceCases: UfoSearchCase[]) {
@@ -29,7 +29,7 @@ describe("UfoSearchCaseSource", () => {
   let context: HtmlRR0Context
 
   beforeEach(() => {
-    context = rr0TestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+    context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
     context.time.setYear(1977)
     context.time.setMonth(3)
   })

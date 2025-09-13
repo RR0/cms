@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from "@javarome/testscript"
 import { RR0Context } from "../../../RR0Context.js"
 import { CsvMapper } from "../CsvMapper.js"
-import { rr0TestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/index.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"
 import fs from "fs"
@@ -17,7 +17,7 @@ describe("Base OVNI France CSV mapping", () => {
   let mapper: CsvMapper<BaseOvniFranceCaseSummary>
 
   beforeEach(() => {
-    context = rr0TestUtil.newContext(rr0TestUtil.filePath("time/1/9/7/0/03/index.html"))
+    context = cmsTestUtil.newContext(cmsTestUtil.filePath("time/1/9/7/0/03/index.html"))
     mapper = new CsvMapper()
   })
 
@@ -46,7 +46,7 @@ ${case1.id},http://baseovnifrance.free.fr/listgen.php?typlist=20&page=0&numobs=2
 
   test("read", () => {
     const fileMapper = new CsvMapper<BaseOvniFranceCase>("&")
-    const data = fs.readFileSync(rr0TestUtil.filePath("time/1/9/7/7/03/05_03_24_1709676761.txt"), {encoding: "latin1"})
+    const data = fs.readFileSync(cmsTestUtil.filePath("time/1/9/7/7/03/05_03_24_1709676761.txt"), {encoding: "latin1"})
     const csvMapper = new BaseOvniFranceCaseSummaryCsvMapper(baseOvniFranceDatasource.baseUrl,
       baseOvniFranceDatasource.searchPath,
       baseOvniFranceDatasource.authors)
