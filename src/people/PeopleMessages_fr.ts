@@ -44,6 +44,7 @@ export let peopleMessages_fr = {
     hypnotherapist: (_gender: Gender) => "hypnothérapeute",
     illusionist: (_gender: Gender) => "illusionniste",
     journalist: (_gender: Gender) => "journaliste",
+    judge: (_gender: Gender) => "juge",
     lawyer: (gender: Gender) => gender === Gender.male ? "avocat" : "avocate",
     librarian: (_gender: Gender) => "bibliothécaire",
     leader: (gender: Gender) => gender === Gender.male ? "dirigeant" : "dirigeante",

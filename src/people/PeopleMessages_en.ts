@@ -46,6 +46,7 @@ export let peopleMessages_en: PeopleMessages = {
     hypnotherapist: (_gender: Gender) => "hypnotherapist",
     illusionist: (_gender: Gender) => "illusionist",
     journalist: (_gender: Gender) => "journalist",
+    judge: (_gender: Gender) => "judge",
     librarian: (_gender: Gender) => "librarian",
     leader: (_gender: Gender) => "leader",
     lawyer: (_gender: Gender) => "lawyer",
