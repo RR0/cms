@@ -26,7 +26,7 @@ export class SourceRenderer {
       let sep: string = ""
       for (const author of authors) {
         const peopleTag = doc.createElement("span")
-        peopleTag.className = "people"
+        peopleTag.className = "peopl"
         peopleTag.textContent = author
         container.append(sep, peopleTag)
         sep = " & "   // Will be escaped as &amp;
