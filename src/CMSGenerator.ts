@@ -429,7 +429,7 @@ export class CMSGenerator implements CMSContext {
     return {noteRenderer, noteReplacerFactory}
   }
 
-  private async setupCases(timeElementFactory: TimeElementFactory) {
+  protected async setupCases(timeElementFactory: TimeElementFactory) {
     const caseFiles = await this.caseFactory.getFiles()
     const caseService = new CaseService(this.dataService, this.caseFactory, timeElementFactory, caseFiles)
     const ufoCaseDirectoryFile = this.options.ufoCaseDirectoryFile
