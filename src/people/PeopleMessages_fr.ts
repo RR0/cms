@@ -1,6 +1,7 @@
 import { Gender } from "@rr0/common"
+import { PeopleMessages } from "./PeopleMessages.js"
 
-export let peopleMessages_fr = {
+export let peopleMessages_fr: PeopleMessages = {
   birth: " naît ",
   death: " décède ",
   occupation: {
