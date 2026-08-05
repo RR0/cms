@@ -45,6 +45,24 @@ export class TimeTextBuilder {
     if (timeZone) {
       // printOptions.timeZoneName = context.time.options.timeZoneName
     }
+    if (!Object.values(printOptions).some(value => value !== undefined)) {
+      if (year) {
+        printOptions.year = this.options.year
+      }
+      if (month) {
+        printOptions.month = this.options.month
+      }
+      if (dayOfMonth) {
+        printOptions.day = this.options.day
+        printOptions.weekday = this.options.weekday
+      }
+      if (hour) {
+        printOptions.hour = this.options.hour
+      }
+      if (minutes) {
+        printOptions.minute = this.options.minute
+      }
+    }
     let text: string
     if (Number.isNaN(date.getTime())) {
       text = ""

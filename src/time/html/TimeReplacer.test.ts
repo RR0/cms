@@ -88,6 +88,20 @@ describe("TimeReplacer", async () => {
     expect(context.time.getTimeZone()).toBe(undefined)
   })
 
+  test("renders a year interval after a more precise date in the same year", async () => {
+    const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+    const previous = context.file.document.createElement("time")
+    previous.textContent = "1951-05"
+    await replacer.replacement(context, previous)
+
+    const interval = context.file.document.createElement("time")
+    interval.textContent = "1951/1955"
+    const replaced = await replacer.replacement(context, interval)
+
+    expect(replaced.outerHTML).toBe(
+      `<span class="time-interval"><span class="time-resolved"><time datetime="1951">1951</time></span> à <span class="time-resolved"><time datetime="1955">1955</time></span></span>`)
+  })
+
   test("parses unsupported", async () => {
     const interval = "moi"
     const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
