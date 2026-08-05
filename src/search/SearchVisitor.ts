@@ -3,6 +3,7 @@ import { HtmlRR0Context } from "../RR0Context.js"
 import fs from "fs"
 import { TimeTextBuilder } from "../time/text/TimeTextBuilder.js"
 import { FileVisitor } from "../RR0ContentStep.js"
+import path from "path"
 
 export type PageInfo = {
   title: string
@@ -34,6 +35,11 @@ export type SearchCommandConfig = {
  */
 export class SearchVisitor implements FileVisitor {
 
+  static resultTitle(pageInfo: PageInfo): string {
+    const {title, time} = pageInfo
+    return title + (time && time !== title.toLowerCase() ? ` (${time})` : "")
+  }
+
   readonly index: SearchIndex = {
     pages: [],
     words: {}
@@ -58,17 +64,21 @@ export class SearchVisitor implements FileVisitor {
 
   async visit(context: HtmlRR0Context): Promise<void> {
     const file = context.file
-    const title = file.title
-    const outDir = "out/"
-    const url = file.name.startsWith(outDir) ? file.name.substring(outDir.length) : file.name
-    if (title && !this.config.notIndexedUrls.includes(url)) {
+    const pageInfo = this.pageInfo(context)
+    if (pageInfo) {
       const indexedPages = this.index.pages
-      const titleIndexed = indexedPages.find(page => page.title === title && page.url !== url)
+      const pageIndex = indexedPages.findIndex(page => page.url === pageInfo.url)
+      const resultTitle = SearchVisitor.resultTitle(pageInfo)
+      const titleIndexed = indexedPages.find(
+        page => SearchVisitor.resultTitle(page) === resultTitle && page.url !== pageInfo.url)
       if (titleIndexed) {
-        this.handleAlreadyIndexed(title, url, titleIndexed)
+        this.handleAlreadyIndexed(resultTitle, pageInfo.url, titleIndexed)
       }
-      const time = this.timeTextBuilder.build(context, {year: "numeric", month: "short", day: "numeric"}).toLowerCase()
-      indexedPages.push({title, url, time})
+      if (pageIndex >= 0) {
+        indexedPages[pageIndex] = pageInfo
+      } else {
+        indexedPages.push(pageInfo)
+      }
     }
     if (this.config.indexWords) {
       this.indexWords(context, file)
@@ -78,8 +88,24 @@ export class SearchVisitor implements FileVisitor {
     }
   }
 
-  protected handleAlreadyIndexed(title: string, url: string, titleIndexed: PageInfo) {
-    throw new Error(`Title "${title}" with URL ${url} is already indexed with URL ${titleIndexed.url}`)
+  pageInfo(context: HtmlRR0Context, contentRoot?: string): PageInfo | undefined {
+    const file = context.file
+    const url = contentRoot
+      ? path.relative(contentRoot, file.name).split(path.sep).join("/")
+      : file.name.startsWith("out/") ? file.name.substring("out/".length) : file.name
+    return this.pageInfoFrom(file.title, url, context)
+  }
+
+  pageInfoFrom(title: string, url: string, context: HtmlRR0Context): PageInfo | undefined {
+    if (!title || this.config.notIndexedUrls.includes(url)) {
+      return undefined
+    }
+    const time = this.timeTextBuilder.build(context, {year: "numeric", month: "short", day: "numeric"}).toLowerCase()
+    return {title, url, time}
+  }
+
+  protected handleAlreadyIndexed(resultTitle: string, url: string, titleIndexed: PageInfo) {
+    throw new Error(`Search result "${resultTitle}" with URL ${url} is already indexed with URL ${titleIndexed.url}`)
   }
 
   protected getContents(doc: Document) {

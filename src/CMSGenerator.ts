@@ -257,7 +257,15 @@ export class CMSGenerator implements CMSContext {
     const timeTextBuilder = this.timeTextBuilder
 
     const searchVisitor = new SearchVisitor(
-      {notIndexedUrls: ["404.html", "Referencement.html"], indexWords: false}, timeTextBuilder
+      {
+        notIndexedUrls: [
+          "404.html",
+          "Referencement.html",
+          "org/ca/company/avro/Avrocar/index.html",
+          "org/renseignement.html",
+          "time/1/9/7/7/Poher_Matrice/app/dist/index.html"
+        ], indexWords: false
+      }, timeTextBuilder
     )
     const {sourceRenderer, sourceFactory, sourceReplacerFactory} = this.setupSources(timeTextBuilder, timeFormat)
 
@@ -352,7 +360,8 @@ export class CMSGenerator implements CMSContext {
     }
     const reindex = args.reindex
     if (reindex?.includes("search")) {
-      ssg.add(new SearchIndexStep("search/index.json", searchVisitor))
+      ssg.add(new SearchIndexStep("search/index.json", searchVisitor, outDir,
+        (context, fileName) => timeService.setContextFromFile(context, fileName)))
     }
     if (reindex?.includes("sources")) {
       ssg.add(new SourceIndexStep(this.options.sourceRegistryFileName, sourceFactory))
@@ -374,6 +383,7 @@ export class CMSGenerator implements CMSContext {
       } catch (e) {
         context.error(err)
       }
+      throw err
     } finally {
       console.timeEnd("ssg")
     }
