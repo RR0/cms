@@ -66,7 +66,8 @@ export class CsvMapper<S> implements CaseMapper<RR0Context, S, string> {
    */
   mapAll(context: RR0Context, sourceCases: S[], sourceTime: Date): string {
     const values = sourceCases.map(c => this.map(context, c, sourceTime))
-    return Array.from(this.fields).join(this.sep) + "\n" + values.join("\n")
+    const header = Array.from(this.fields).sort((field1, field2) => field1.localeCompare(field2))
+    return header.join(this.sep) + "\n" + values.join("\n")
   }
 
   escape(value: string, force?: boolean): string {
