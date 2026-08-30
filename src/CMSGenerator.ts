@@ -40,6 +40,7 @@ import {
   FileCopyConfig,
   FileWriteConfig,
   HtAccessToNetlifyConfigReplaceCommand,
+  HtAccessToNetlifyRedirectsReplaceCommand,
   HtmlFileContents,
   HtmlLinks,
   HtmlMeta,
@@ -106,17 +107,32 @@ export interface CMSGeneratorOptions {
   }
   siteBaseUrl: string
   /**
-   * A file holding the part of `netlify.toml` that is NOT derived from `.htaccess` — what a host
-   * needs that Apache cannot say: a redirect carrying its own status or `force`, one to an absolute
-   * URL on another domain, a header scoped to anything narrower than the whole site, a build or
-   * plugin section.
+   * Where the redirects read out of `.htaccess` are written, and in which of Netlify's two formats.
    *
-   * Without it those lines have nowhere to live but the generated file itself, where every full
-   * build wipes them — which is exactly how this site's `ufoathome.org` redirects and its CORS
-   * headers disappeared twice. See ssg-api's HtAccessReplaceCommand for the mechanism; naming a file
-   * that is not there fails the build rather than dropping it in silence.
+   * Defaults to a `netlify.toml` at the repository root, which is what this has always produced.
+   *
+   * The `redirects` format writes Netlify's plainer `_redirects` instead, and the reason to choose
+   * it is WHERE it can be put. `netlify.toml` is read from the CLONE, before any build command runs,
+   * so a site built by Netlify from git must keep it in version control — a generated file, tracked,
+   * inviting exactly the hand-edit that overwrites itself. `_redirects` and `_headers` are read from
+   * the DEPLOYED directory, so they can be build output like everything else and never need to be
+   * committed at all.
+   *
+   * `preambleFile` holds whatever the `.htaccess` cannot say and is emitted ahead of the generated
+   * lines: a redirect carrying its own status or `force` (`301!` in the plain format), one from an
+   * absolute URL on another domain. Without it those lines have nowhere to live but the generated
+   * file itself, where every full build wipes them — which is exactly how one site's `ufoathome.org`
+   * redirects and its CORS headers disappeared twice. See ssg-api's HtAccessReplaceCommand; naming a
+   * file that is not there fails the build rather than dropping it in silence.
+   *
+   * Headers have no generator because `.htaccess` here carries no `Header` directive worth
+   * translating: in the plain format they are simply a static `_headers` file among the copies.
    */
-  netlifyPreambleFile?: string
+  netlify?: {
+    format: "toml" | "redirects"
+    outputPath: string
+    preambleFile?: string
+  }
   timeFormat: Intl.DateTimeFormatOptions
   directoryPages: string[]
   ufoCaseDirectoryFile: string
@@ -307,12 +323,15 @@ export class CMSGenerator implements CMSContext {
       }
     }()
 
+    const netlify = this.options.netlify ?? {format: "toml", outputPath: "netlify.toml"}
     const htAccessToNetlifyConfig: ContentStepConfig = {
       replacements: [
-        new HtAccessToNetlifyConfigReplaceCommand(this.options.siteBaseUrl, this.options.netlifyPreambleFile)
+        netlify.format === "redirects"
+          ? new HtAccessToNetlifyRedirectsReplaceCommand(this.options.siteBaseUrl, netlify.preambleFile)
+          : new HtAccessToNetlifyConfigReplaceCommand(this.options.siteBaseUrl, netlify.preambleFile)
       ],
       roots: [".htaccess"],
-      getOutputPath: (_context: SsgContext) => "netlify.toml"
+      getOutputPath: (_context: SsgContext) => netlify.outputPath
     }
     const contentRoots = this.options.contentRoots
     const contentStepOptions: RR0ContentStepOptions = {
