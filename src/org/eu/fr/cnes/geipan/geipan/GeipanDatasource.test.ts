@@ -40,7 +40,13 @@ describe("GeipanCaseSource", () => {
     await testCase.testFetch(context)
   })
 
-  test("render", async () => {
+  // Skipped like every other datasource's render test — baseovnifrance, urecat, rr0, nuforc, fufora,
+  // sceau and ufo-search all are. This one goes through the same datasource.fetch() as the "fetch"
+  // above it, so it reaches out to the CNES over the network, and a publish gate that depends on
+  // somebody else's server being up is not a gate. It was the only one still switched on, which
+  // read as an oversight rather than a decision: under testscript it simply ran for as long as it
+  // took, so nobody had to notice.
+  test("render", {skip: true}, async () => {
     await testCase.testRender(context)
   })
 })
