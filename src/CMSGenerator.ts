@@ -105,6 +105,18 @@ export interface CMSGeneratorOptions {
     org: DataOptions
   }
   siteBaseUrl: string
+  /**
+   * A file holding the part of `netlify.toml` that is NOT derived from `.htaccess` — what a host
+   * needs that Apache cannot say: a redirect carrying its own status or `force`, one to an absolute
+   * URL on another domain, a header scoped to anything narrower than the whole site, a build or
+   * plugin section.
+   *
+   * Without it those lines have nowhere to live but the generated file itself, where every full
+   * build wipes them — which is exactly how this site's `ufoathome.org` redirects and its CORS
+   * headers disappeared twice. See ssg-api's HtAccessReplaceCommand for the mechanism; naming a file
+   * that is not there fails the build rather than dropping it in silence.
+   */
+  netlifyPreambleFile?: string
   timeFormat: Intl.DateTimeFormatOptions
   directoryPages: string[]
   ufoCaseDirectoryFile: string
@@ -296,7 +308,9 @@ export class CMSGenerator implements CMSContext {
     }()
 
     const htAccessToNetlifyConfig: ContentStepConfig = {
-      replacements: [new HtAccessToNetlifyConfigReplaceCommand(this.options.siteBaseUrl)],
+      replacements: [
+        new HtAccessToNetlifyConfigReplaceCommand(this.options.siteBaseUrl, this.options.netlifyPreambleFile)
+      ],
       roots: [".htaccess"],
       getOutputPath: (_context: SsgContext) => "netlify.toml"
     }
