@@ -1,6 +1,6 @@
 import { UrecatCase } from "./UrecatCase.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
-import { cmsTestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/CMSTestUtil.js"
 
 const noWeekdayOptions = {...cmsTestUtil.intlOptions}
 noWeekdayOptions.weekday = undefined

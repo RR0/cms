@@ -1,5 +1,5 @@
-import { describe, expect, test } from "@javarome/testscript"
-import { cmsTestUtil } from "../../../test/index.js"
+import { describe, expect, test } from "vitest"
+import { cmsTestUtil } from "../../../test/CMSTestUtil.js"
 import { rr0TestCases } from "./RR0TestCases.js"
 import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper.js"
 import { RR0FileDatasource } from "./RR0FileDatasource.js"

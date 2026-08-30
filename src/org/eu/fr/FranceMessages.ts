@@ -13,7 +13,8 @@ import { AuvergneRhoneAlpesDepartementCode } from "./region/ara/AuvergneRhoneAlp
 import { BourgogneFrancheComteDepartementCode } from "./region/bfc/BourgogneFrancheComteDepartementCode.js"
 import { BretagneDepartementCode } from "./region/bre/BretagneDepartementCode.js"
 import { CollectiviteOutreMerDepartementCode } from "./region/com/CollectiviteOutreMerDepartementCode.js"
-import { DepartmentMessages, RegionMessages } from "../../country/index.js"
+import { RegionMessages } from "../../country/region/RegionMessages.js"
+import { DepartmentMessages } from "../../country/region/department/DepartmentMessages.js"
 
 export type FranceRegionsMessagesList = {
   ara: RegionMessages<{ [key in AuvergneRhoneAlpesDepartementCode]: DepartmentMessages<any> }>

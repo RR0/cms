@@ -1,9 +1,9 @@
 import { DirectoryStep, DirectoryStepConfig, FileWriteConfig, OutputFunc } from "ssg-api"
 import { TimeService } from "./TimeService.js"
 import { HtmlRR0Context, RR0Context } from "../RR0Context.js"
-import { StringUtil } from "../util/index.js"
+import { StringUtil } from "../util/string/StringUtil.js"
 import { RR0Event } from "@rr0/data"
-import { TimeElementFactory } from "./html/index.js"
+import { TimeElementFactory } from "./html/TimeElementFactory.js"
 
 /**
  * Builds a directory page for UFO times.

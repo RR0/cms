@@ -1,4 +1,5 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { LesserPolandDepartementCode } from "./LesserPolandDepartementCode.js"
 import { suchaMessages_en } from "./sucha/SuchaMessages_en.js"
 

@@ -1,7 +1,7 @@
 import { lyon69Messages } from "./Lyon/Lyon69Messages.js"
 import { RhoneCityCode } from "./RhoneCityCode.js"
 import { belleville69Messages } from "./Belleville/BellevilleMessages.js"
-import { DepartmentMessages } from "../../../../../country/index.js"
+import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
 
 export const rhoneMessages = DepartmentMessages.create("Rhône", {
   [RhoneCityCode.Lyon]: lyon69Messages,

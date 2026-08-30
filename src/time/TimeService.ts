@@ -8,7 +8,7 @@ import {
   RR0EventJson
 } from "@rr0/data"
 import { HtmlRR0Context, RR0ContextImpl } from "../RR0Context.js"
-import { StringUtil } from "../util/index.js"
+import { StringUtil } from "../util/string/StringUtil.js"
 import { TimeOptions } from "./TimeOptions.js"
 import { TimeContext } from "./TimeContext.mjs"
 

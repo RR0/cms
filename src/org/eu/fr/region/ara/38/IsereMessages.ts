@@ -4,7 +4,7 @@ import { DepartmentMessages } from "../../../../../country/region/department/Dep
 import { meylanMessages } from "./Meylan/MeylanMessages.js"
 import { domeneMessages } from "./Domene/DomeneMessages.js"
 import { valbonnaisMessages } from "./Valbonnais/ValbonnaisMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { saintGeoireEnValdaineMessages } from "./SaintGeoireEnValdaine/SaintGeoireEnValdaineMessages.js"
 import { chirensMessages } from "./Chirens/ChirensMessages.js"
 import { saintVerandMessages } from "./SaintVerand/SaintVerandMessages.js"

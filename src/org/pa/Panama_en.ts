@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
 import { PanamaRegionCode } from "./region/PanamaRegionCode.js"
 import { PanamaMessages } from "./PanamaMessages.js"
 import { algerRegion_en } from "./region/al/AlgerRegion_en.js"

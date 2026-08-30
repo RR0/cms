@@ -1,7 +1,7 @@
 import path from "path"
 import { RR0Case } from "./RR0Case.js"
 import { HtmlRR0Context } from "../../../../../RR0Context.js"
-import { TimeElementFactory } from "../../../../../time/index.js"
+import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
 import { CaseFactory } from "./CaseFactory.js"
 import { AbstractDataService, AllDataService } from "@rr0/data"
 import { RR0CaseJson } from "./RR0CaseJson.js"

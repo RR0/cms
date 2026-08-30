@@ -1,5 +1,6 @@
 import { SussexCityCode } from "./SussexCityCode.js"
-import { CityMessages, DepartmentMessages } from "../../../../country/index.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
+import { CityMessages } from "../../../../country/region/department/city/CityMessages.js"
 
 import { frantMessages } from "./frant/FrantMessages.js"
 

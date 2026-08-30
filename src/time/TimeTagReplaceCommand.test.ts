@@ -1,6 +1,6 @@
 import { TimeReplacerFactory } from "./html/TimeReplacerFactory.js"
-import { cmsTestUtil } from "../test/index.js"
-import { describe, expect, test } from "@javarome/testscript"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
+import { describe, expect, test } from "vitest"
 import { DomReplaceCommand } from "ssg-api"
 import { TimeReplacer } from "./html/TimeReplacer.js"
 import path from "path"

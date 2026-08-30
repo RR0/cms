@@ -1,8 +1,8 @@
-import { describe, expect, test } from "@javarome/testscript"
+import { describe, expect, test } from "vitest"
 import { RR0Event } from "@rr0/data"
 import { HtmlRR0Context } from "./RR0Context.js"
 import { DataContentVisitor } from "./DataContentVisitor.js"
-import { cmsTestUtil } from "./test/index.js"
+import { cmsTestUtil } from "./test/CMSTestUtil.js"
 
 class TestDataContentVisitor extends DataContentVisitor {
 

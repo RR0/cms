@@ -1,5 +1,5 @@
 import { GuadeloupeCityCode } from "./GuadeloupeCityCode.js"
-import { DepartmentMessages } from "../../../../../country/index.js"
+import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
 import { capesterreDeMarieGalanteMessages } from "./CapesterreMarieGalante/CapesterreMarieGalanteMessages.js"
 import { GuadeloupeCityMessage } from "./GuadeloupeCityMessage.js"
 import { leMouleMessages } from "./LeMoule/LeMouleMessages.js"

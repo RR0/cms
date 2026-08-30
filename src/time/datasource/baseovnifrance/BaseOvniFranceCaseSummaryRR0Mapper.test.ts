@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "vitest"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
-import { cmsTestUtil } from "../../../test/index.js"
+import { cmsTestUtil } from "../../../test/CMSTestUtil.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"

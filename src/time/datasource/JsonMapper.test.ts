@@ -1,10 +1,10 @@
-import { beforeEach, describe, expect, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "vitest"
 import fs from "fs"
-import { cmsTestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/CMSTestUtil.js"
 import { ufoSearchTestCases } from "./ufo-search/UfoSearchTestCases.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
 import path from "path"
-import { UfoSearchRR0Mapping } from "./ufo-search/index.js"
+import { UfoSearchRR0Mapping } from "./ufo-search/UfoSearchMapping.js"
 
 describe("JsonMapper", () => {
 

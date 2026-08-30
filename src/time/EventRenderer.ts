@@ -1,12 +1,13 @@
 import { HtmlRR0Context } from "../RR0Context.js"
-import { SourceFactory, SourceRenderer } from "../source/index.js"
-import { NoteRenderer } from "../note/index.js"
+import { SourceFactory } from "../source/SourceFactory.js"
+import { SourceRenderer } from "../source/SourceRenderer.js"
+import { NoteRenderer } from "../note/NoteRenderer.js"
 import { TimeElementFactory } from "./html/TimeElementFactory.js"
 import assert from "assert"
 import { RR0Data, RR0Event, RR0SourceType, Source } from "@rr0/data"
 import { PlaceRenderer } from "../place/PlaceRenderer.js"
 import { Place } from "@rr0/place"
-import { TimeRenderOptions } from "./html/index.js"
+import { TimeRenderOptions } from "./html/TimeRenderer.js"
 
 /**
  * Render a case summary as HTML.

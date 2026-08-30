@@ -1,12 +1,12 @@
-import { beforeEach, describe, test } from "@javarome/testscript"
-import { cmsTestUtil } from "../../../test/index.js"
+import { beforeEach, describe, test } from "vitest"
+import { cmsTestUtil } from "../../../test/CMSTestUtil.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { baseOvniFranceTestCases } from "./BaseOvniFranceTestCases.js"
 import { DatasourceTestCase } from "../DatasourceTestCase.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { BaseOvniFranceRR0Mapping, baseOvniFranceSortComparator } from "./BaseOvniFranceRR0Mapping.js"
-import { RR0CaseMapping } from "../rr0/index.js"
+import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
 
 describe("BaseOvniFranceCaseSource", () => {
 

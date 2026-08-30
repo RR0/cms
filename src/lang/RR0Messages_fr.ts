@@ -1,7 +1,8 @@
 import { placeMessages_fr } from "@rr0/place"
 import { CaseConclusionMessages, RR0Messages } from "./RR0Messages.js"
-import { peopleMessages_fr } from "../people/index.js"
-import { countryMessageList_fr, orgMessages_fr } from "../org/index.js"
+import { peopleMessages_fr } from "../people/PeopleMessages_fr.js"
+import { countryMessageList_fr } from "../org/CountryMessageList_fr.js"
+import { orgMessages_fr } from "../org/OrgRR0Messages_fr.js"
 import { RR0TimeMessages_fr } from "../time/RR0TimeMessages_fr.js"
 
 const caseConclusion_fr: CaseConclusionMessages = {

@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../country/index.js"
+import { RegionMessages } from "../../country/region/RegionMessages.js"
 import { FinlandRegionCode } from "./region/FinlandRegionCode.js"
 import { CountryMessages } from "../../country/CountryMessages.js"
 

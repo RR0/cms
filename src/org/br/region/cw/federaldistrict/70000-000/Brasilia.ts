@@ -1,6 +1,6 @@
 import { FederalDistrictCityCode } from "../FederalDistrictCityCode.js"
 import { federalDistrict } from "../FederalDistrict.js"
-import { City } from "../../../../../country/index.js"
+import { City } from "../../../../../country/region/department/city/City.js"
 import { Place } from "@rr0/place"
 
 export let brasilia = new City(FederalDistrictCityCode.Brasilia, federalDistrict,

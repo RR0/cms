@@ -1,4 +1,5 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { BourgogneFrancheComteDepartementCode } from "./BourgogneFrancheComteDepartementCode.js"
 import { coteDOrMessages } from "./21/CoteDOrMessages.js"
 import { juraMessages } from "./39/JuraMessages.js"

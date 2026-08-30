@@ -1,5 +1,6 @@
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
-import { AbstractDatasource, TimeContextFilter } from "../../../../../../time/index.js"
+import { AbstractDatasource } from "../../../../../../time/datasource/AbstractDatasource.js"
+import { TimeContextFilter } from "../../../../../../time/datasource/TimeContextFilter.js"
 import { HtmlRR0Context, RR0Context } from "../../../../../../RR0Context.js"
 
 export abstract class GeipanDatasource extends AbstractDatasource<GeipanCaseSummary> {

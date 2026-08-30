@@ -1,7 +1,7 @@
 import { OiseCityCode } from "./OiseCityCode.js"
 import { pontLEveque60Messages } from "./PontLEveque/PontLEvequeMessages.js"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { compiegneMessages } from "./compiegne/CompiegneMessages.js"
 import { neuillyEnThelleMessages } from "./NeuillyEnThelle/NeuillyEnThelleMessages.js"
 import { ribecourtDreslincourtMessages } from "./RibecourtDreslincourt/RibecourtDreslincourtMessages.js"

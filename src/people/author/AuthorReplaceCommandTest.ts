@@ -1,7 +1,7 @@
 import { AuthorReplaceCommand } from "./AuthorReplaceCommand.js"
-import { cmsTestUtil } from "../../test/index.js"
-import { describe, expect, test } from "@javarome/testscript"
-import { RelativeTimeTextBuilder } from "../../time/index.js"
+import { cmsTestUtil } from "../../test/CMSTestUtil.js"
+import { describe, expect, test } from "vitest"
+import { RelativeTimeTextBuilder } from "../../time/text/RelativeTimeTextBuilder.js"
 
 describe("AuthorReplaceCommand", async () => {
 

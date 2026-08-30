@@ -1,11 +1,9 @@
-import { CountryMessages } from "../country/index.js"
-import {
-  AustraliaRegionCode,
-  newSouthWales_fr,
-  southAustralia_fr,
-  victoria_fr,
-  westernAustralia_fr
-} from "./region/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
+import { AustraliaRegionCode } from "./region/AustraliaRegionCode.js"
+import { newSouthWales_fr } from "./region/nsw/NewSouthWalesMessages_fr.js"
+import { southAustralia_fr } from "./region/sa/SouthAustraliaMessages_fr.js"
+import { victoria_fr } from "./region/vic/VictoriaMessages_fr.js"
+import { westernAustralia_fr } from "./region/wa/WesternAustraliaMessages_fr.js"
 
 export const australia_fr = CountryMessages.create("Australie",
   {

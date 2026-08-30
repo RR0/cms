@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
 import { RussiaRegionCode } from "./region/RussiaRegionCode.js"
 import { northCaucasus_fr } from "./region/nc/NorthCaucasus_fr.js"
 

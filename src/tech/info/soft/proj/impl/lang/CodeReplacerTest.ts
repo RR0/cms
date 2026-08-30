@@ -1,6 +1,6 @@
-import { describe, expect, test } from "@javarome/testscript"
+import { describe, expect, test } from "vitest"
 import { CodeReplacer } from "./CodeReplacer.js"
-import { cmsTestUtil } from "../../../../../../test/index.js"
+import { cmsTestUtil } from "../../../../../../test/CMSTestUtil.js"
 import { HtmlCodeParser } from "./HtmlCodeParser.js"
 
 describe("CodeReplacer", () => {

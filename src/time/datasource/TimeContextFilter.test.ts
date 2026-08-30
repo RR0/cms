@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "vitest"
 import { TimeContextFilter } from "./TimeContextFilter.js"
 import { HtmlRR0Context } from "../../RR0Context.js"
-import { cmsTestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/CMSTestUtil.js"
 
 describe("TimeContextFilter", () => {
 

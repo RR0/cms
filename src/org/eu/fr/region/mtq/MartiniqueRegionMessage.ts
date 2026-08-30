@@ -1,4 +1,5 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { MartiniqueDepartementCode } from "./MartiniqueDepartementCode.js"
 import { martinique972Messages } from "./972/MartiniqueMessages.js"
 

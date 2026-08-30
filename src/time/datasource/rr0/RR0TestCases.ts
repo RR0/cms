@@ -1,6 +1,6 @@
 import { Level2Date as EdtfDate } from "@rr0/time"
 import { RR0CaseSummary } from "./RR0CaseSummary.js"
-import { UrlUtil } from "../../../util/index.js"
+import { UrlUtil } from "../../../util/url/UrlUtil.js"
 import { Book } from "../../../book/Book.js"
 import { Article, RR0SourceType, Source } from "@rr0/data"
 import { RR0HttpDatasource } from "./RR0HttpDatasource.js"

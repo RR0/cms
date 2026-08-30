@@ -1,6 +1,6 @@
 import { UsaStates } from "../../us/region/UsaStates.js"
 import { CanadaRegionCode } from "../../ca/region/CanadaRegionCode.js"
-import { AustraliaRegionCode } from "../../au/index.js"
+import { AustraliaRegionCode } from "../../au/region/AustraliaRegionCode.js"
 import { BrazilRegionCode } from "../../br/region/BrazilRegionCode.js"
 import { CmsOrganization } from "../../CmsOrganization.js"
 import { EuropeRegionCode } from "../../eu/EuropeRegionCode.js"

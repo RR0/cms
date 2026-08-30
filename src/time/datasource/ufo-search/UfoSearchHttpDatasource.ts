@@ -1,6 +1,6 @@
 import { RR0Context } from "../../../RR0Context.js"
 import { UfoSearchDatasource } from "./UfoSearchDatasource.js"
-import { UrlUtil } from "../../../util/index.js"
+import { UrlUtil } from "../../../util/url/UrlUtil.js"
 import { JSDOM } from "jsdom"
 import { HttpSource } from "../HttpSource.js"
 import { By } from "selenium-webdriver"

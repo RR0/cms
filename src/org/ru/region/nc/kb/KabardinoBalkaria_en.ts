@@ -1,5 +1,5 @@
 import { KabardinoBalkariaCityCode } from "./KabardinoBalkariaCityCode.js"
-import { DepartmentMessages } from "../../../../country/index.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { KabardinoBalkariaCityMessagesList } from "./KabardinoBalkariaMessages.js"
 import { elbrusMessages_en } from "./elbrus/ElbrusMessages_en.js"
 

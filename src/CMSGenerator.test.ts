@@ -1,17 +1,21 @@
 import { glob } from "glob"
-import { describe } from "@javarome/testscript"
+import { existsSync } from "fs"
+import path from "path"
+import { describe, expect, test } from "vitest"
+
+/** A whole site generation, which is minutes rather than the seconds a unit test takes. */
+const GENERATION_TIMEOUT_MS = 30 * 60 * 1000
 import { CMSGenerationOptions, CMSGenerator } from "./CMSGenerator.js"
-import {
-  BaseOvniFranceRR0Mapping,
-  ChronologyReplacerActions,
-  FuforaRR0Mapping,
-  NuforcRR0Mapping,
-  RR0CaseMapping,
-  RR0Mapping,
-  SceauRR0Mapping,
-  UrecatRR0Mapping
-} from "./time/index.js"
-import { PeopleDirectoryStepOptions, WitnessReplacerFactory } from "./people/index.js"
+import { ChronologyReplacerActions } from "./time/datasource/ChronologyReplacerActions.js"
+import { BaseOvniFranceRR0Mapping } from "./time/datasource/baseovnifrance/BaseOvniFranceRR0Mapping.js"
+import { FuforaRR0Mapping } from "./time/datasource/fufora/FuforaRR0Mapping.js"
+import { NuforcRR0Mapping } from "./time/datasource/nuforc/NuforcRR0Mapping.js"
+import { RR0CaseMapping } from "./time/datasource/rr0/RR0CaseMapping.js"
+import { RR0Mapping } from "./time/datasource/rr0/RR0Mapping.js"
+import { SceauRR0Mapping } from "./time/datasource/sceau/SceauRR0Mapping.js"
+import { UrecatRR0Mapping } from "./time/datasource/urecat/UrecatRR0Mapping.js"
+import { PeopleDirectoryStepOptions } from "./people/PeopleDirectoryStepFactory.js"
+import { WitnessReplacerFactory } from "./people/witness/WitnessReplacerFactory.js"
 import * as process from "node:process"
 import { GeipanRR0Mapping } from "./org/eu/fr/cnes/geipan/geipan/GeipanRR0Mapping.js"
 import { BaseReplaceCommand } from "./BaseReplaceCommand.js"
@@ -29,10 +33,12 @@ import {
 import { rr0DefaultCopyright } from "./RR0DefaultCopyright.js"
 import { DescriptionReplaceCommand } from "./DescriptionReplaceCommand.js"
 import { TimeOptions } from "./time/TimeOptions.js"
-import { CodeReplacerFactory } from "./tech/index.js"
-import { PlaceReplacerFactory } from "./place/index.js"
-import { DataOptions, IndexedReplacerFactory, UnitReplaceCommand } from "./index.js"
-import { cmsTestUtil } from "./test/index.js"
+import { CodeReplacerFactory } from "./tech/info/soft/proj/impl/lang/CodeReplacerFactory.js"
+import { PlaceReplacerFactory } from "./place/PlaceReplacerFactory.js"
+import { DataOptions } from "./DataOptions.js"
+import { IndexedReplacerFactory } from "./index/IndexedReplacerFactory.js"
+import { UnitReplaceCommand } from "./value/UnitReplaceCommand.js"
+import { cmsTestUtil } from "./test/CMSTestUtil.js"
 
 export async function getTimeFiles(): Promise<string[]> {
   const minusYearFiles = await glob(cmsTestUtil.filePath("time/-?/?/?/?/index.html"))
@@ -107,7 +113,13 @@ describe("Build", () => {
     "people/astronomes.html", "people/politicians.html", "people/dirigeants.html", "people/pilotes.html",
     "people/contactes.html", "people/ufologues.html", "tech/info/Personnes.html", "people/Contributeurs.html"
   ].map(path => cmsTestUtil.filePath(path))
-  getTimeFiles().then(async (timeFiles) => {
+  // A REAL TEST NOW, and it was not one before: the whole of this ran inside a `.then()` at describe
+  // time, with no test() anywhere and nothing asserted. testscript ran it as a side effect and
+  // reported the suite as passing, which is how a fifty-minute site build came to count as a green
+  // test. vitest collects synchronously, so a suite that registers its work in a promise registers
+  // nothing at all — which is what said "No test found in suite Build".
+  test("generates the site", async () => {
+    const timeFiles = await getTimeFiles()
     const orgFiles = await glob("test/org/**/index.html")
     const directoryOptions: PeopleDirectoryStepOptions = {
       root: cmsTestUtil.filePath("people/index.html"),
@@ -179,5 +191,10 @@ describe("Build", () => {
       contentReplacers: [...pageReplacers, ...contentsReplacers]
     })
     await generator.generate(args)
-  })
+    // The one thing worth asserting about a generation: that it put pages where it said it would.
+    // Before this the run could have produced nothing at all and still been green. The content roots
+    // are under test/, so that is where the output mirrors them.
+    expect(existsSync(path.join(outDir, "test", "index.html"))).toBe(true)
+    expect(existsSync(path.join(outDir, "casesDirs.json"))).toBe(true)
+  }, GENERATION_TIMEOUT_MS)
 })

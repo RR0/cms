@@ -1,4 +1,4 @@
-import { DepartmentMessages } from "../../../../country/index.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { ArlingtonCityCode } from "./ArlingtonCityCode.js"
 import { pentagon_en } from "./pentagon/Pentagon_en.js"
 

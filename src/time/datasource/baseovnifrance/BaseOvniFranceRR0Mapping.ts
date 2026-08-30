@@ -1,7 +1,7 @@
 import { BaseOvniFranceCaseSummaryRR0Mapper } from "./BaseOvniFranceCaseSummaryRR0Mapper.js"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { BaseOvniFranceHttpDatasource } from "./BaseOvniFranceHttpDatasource.js"
-import { RR0CaseMapping } from "../rr0/index.js"
+import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { CMSContext } from "../../../CMSContext.js"
 

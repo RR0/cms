@@ -1,8 +1,8 @@
 import { AnchorReplacer } from "./AnchorReplacer.js"
-import { cmsTestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
 
 import { JSDOM } from "jsdom"
-import { beforeEach, describe, expect, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "vitest"
 
 describe("AnchorReplacer", () => {
 

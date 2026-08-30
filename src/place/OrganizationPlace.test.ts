@@ -1,4 +1,4 @@
-import { describe, expect, test } from "@javarome/testscript"
+import { describe, expect, test } from "vitest"
 import { OrganizationPlace } from "./OrganizationPlace.js"
 import { parisCity } from "../org/eu/fr/region/idf/75/paris/Paris.js"
 import { RR0Datasource } from "../time/datasource/rr0/RR0Datasource.js"

@@ -1,11 +1,12 @@
-import { beforeEach, describe, test } from "@javarome/testscript"
+import { beforeEach, describe, test } from "vitest"
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
 import { geipanTestCaseSummaries } from "./GeipanTestCases.js"
 import { GeipanRR0Mapping } from "./GeipanRR0Mapping.js"
 import { DatasourceTestCase } from "../../../../../../time/datasource/DatasourceTestCase.js"
-import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
+import { ChronologyReplacerActions } from "../../../../../../time/datasource/ChronologyReplacerActions.js"
+import { RR0CaseMapping } from "../../../../../../time/datasource/rr0/RR0CaseMapping.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
-import { cmsTestUtil } from "../../../../../../test/index.js"
+import { cmsTestUtil } from "../../../../../../test/CMSTestUtil.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 
 describe("GeipanCaseSource", () => {

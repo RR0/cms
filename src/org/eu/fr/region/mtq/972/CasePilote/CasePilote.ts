@@ -1,6 +1,6 @@
 import { Place } from "@rr0/place"
 import { MartiniqueCityCode } from "../MartiniqueCityCode.js"
-import { City } from "../../../../../../country/index.js"
+import { City } from "../../../../../../country/region/department/city/City.js"
 import { martinique972 } from "../Martinique.js"
 
 export const casePilote = City.create(MartiniqueCityCode.CasePilote, martinique972,

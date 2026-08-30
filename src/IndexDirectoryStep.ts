@@ -1,6 +1,6 @@
 import { DirectoryStep, DirectoryStepConfig, FileWriteConfig, OutputFunc } from "ssg-api"
 import { HtmlRR0Context, RR0Context } from "./RR0Context.js"
-import { StringUtil } from "./util/index.js"
+import { StringUtil } from "./util/string/StringUtil.js"
 
 /**
  * Builds a directory index.

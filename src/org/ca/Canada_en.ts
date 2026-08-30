@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
 import { britishColumbiaMessages_en } from "./region/bc/BritishColumbiaMessages_en.js"
 import { CanadaRegionCode } from "./region/CanadaRegionCode.js"
 import { manitobaMessages_en } from "./region/mb/ManitobaMessages_en.js"

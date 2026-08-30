@@ -1,7 +1,7 @@
-import { describe, expect, test } from "@javarome/testscript"
+import { describe, expect, test } from "vitest"
 import { france } from "../eu/fr/France.js"
 import { usa } from "../us/Usa.js"
-import { cmsTestUtil } from "../../test/index.js"
+import { cmsTestUtil } from "../../test/CMSTestUtil.js"
 
 describe("CountryService", () => {
 

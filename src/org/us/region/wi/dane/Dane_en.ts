@@ -1,5 +1,5 @@
 import { DaneCityCode } from "./DaneCityCode.js"
-import { DepartmentMessages } from "../../../../country/index.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { madison_en } from "./Madison/Madison_en.js"
 
 export const dane_en = DepartmentMessages.create("Dane County", {

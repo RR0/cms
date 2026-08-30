@@ -1,5 +1,5 @@
 import { monroe_fr } from "./monroe/Monroe_fr.js"
-import { RegionMessages } from "../../../country/index.js"
+import { RegionMessages } from "../../../country/region/RegionMessages.js"
 import { elkhart_fr } from "./elkhart/Elkhart_fr.js"
 import { IndianaMessages } from "./IndianaMessages.js"
 import { whitley_fr } from "./whitley/Whitley_fr.js"

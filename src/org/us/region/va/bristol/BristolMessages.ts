@@ -1,4 +1,4 @@
-import { CityMessages } from "../../../../country/index.js"
+import { CityMessages } from "../../../../country/region/department/city/CityMessages.js"
 
 
 export let bristolMessages = CityMessages.create("Bristol")

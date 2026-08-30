@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
 import { YonneCityCode } from "./YonneCityCode.js"
 import { provencyMessages } from "./Provency/ProvencyMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { avallonMessages } from "./Avallon/AvallonMessages.js"
 import { flognyLaChapelleMessages } from "./FlognyLaChapelle/FlognyLaChapelleMessages.js"
 import { villy89Messages } from "./Villy/VillyMessages.js"

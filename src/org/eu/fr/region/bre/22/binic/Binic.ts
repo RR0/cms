@@ -1,6 +1,6 @@
 import { Place } from "@rr0/place"
 import { CotesDArmorCityCode } from "../CotesDArmorCityCode.js"
-import { City } from "../../../../../../country/index.js"
+import { City } from "../../../../../../country/region/department/city/City.js"
 import { cotesDArmor } from "../CotesDArmor.js"
 
 export const binic = new City(CotesDArmorCityCode.Binic, cotesDArmor,

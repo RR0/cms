@@ -1,5 +1,5 @@
 import { sofala } from "../Sofala.js"
-import { City } from "../../../../country/index.js"
+import { City } from "../../../../country/region/department/city/City.js"
 import { Place } from "@rr0/place"
 
 export const beiraCityCode = "beira"

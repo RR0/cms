@@ -1,10 +1,11 @@
 import { JSDOM } from "jsdom"
 import { HtmlRR0Context, RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
-import { ObjectUtil, UrlUtil } from "../../../util/index.js"
+import { ObjectUtil } from "../../../util/ObjectUtil.js"
+import { UrlUtil } from "../../../util/url/UrlUtil.js"
 import { UrecatCase, UrecatWitness } from "./UrecatCase.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
-import { MessageUtils } from "../../../lang/index.js"
+import { MessageUtils } from "../../../lang/RR0Messages.js"
 import { UrecatDatasource } from "./UrecatDatasource.js"
 import { Level2Date as EdtfDate } from "@rr0/time"
 

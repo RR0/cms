@@ -1,5 +1,5 @@
 import { HtmlRR0Context } from "../RR0Context.js"
-import { TimeTextBuilder } from "../time/index.js"
+import { TimeTextBuilder } from "../time/text/TimeTextBuilder.js"
 import { Source } from "@rr0/data"
 import { TimeContext } from "../time/TimeContext.mjs"
 

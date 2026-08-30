@@ -1,19 +1,15 @@
 import path from "path"
 import { HtmlRR0Context, RR0Context, RR0ContextImpl } from "../RR0Context.js"
 import { FileWriteConfig, HtmlFileContents, SsgContext } from "ssg-api"
-import {
-  cities,
-  CityService,
-  CmsOrganizationFactory,
-  countries,
-  departments,
-  DepartmentService,
-  OrganizationService,
-  regions,
-  RegionService
-} from "../org/index.js"
-import { CaseFactory } from "../science/index.js"
-import { APIFactory } from "../tech/index.js"
+import { cities } from "../org/Cities.js"
+import { CmsOrganizationFactory } from "../org/CmsOrganizationFactory.js"
+import { OrganizationService } from "../org/OrganizationService.js"
+import { countries } from "../org/country/Countries.js"
+import { RegionService, regions } from "../org/country/region/RegionService.js"
+import { DepartmentService, departments } from "../org/country/region/department/DepartmentService.js"
+import { CityService } from "../org/country/region/department/city/CityService.js"
+import { CaseFactory } from "../science/crypto/ufo/enquete/dossier/CaseFactory.js"
+import { APIFactory } from "../tech/info/soft/APIFactory.js"
 import { TimeTestUtil } from "../time/TimeTestUtil.js"
 import { FileContents } from "@javarome/fileutil"
 import { AllDataService, EventDataFactory, PeopleFactory, RR0EventFactory, TypedDataFactory } from "@rr0/data"

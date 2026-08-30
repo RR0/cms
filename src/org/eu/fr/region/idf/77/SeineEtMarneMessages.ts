@@ -1,7 +1,7 @@
 import { SeineEtMarneCityCode } from "./SeineEtMarneCityCode.js"
 import { sivryCourtryMessages } from "./SivryCourtry/SivryCourtryMessages.js"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 
 const seineEtMarneCityMessages: { [key in SeineEtMarneCityCode]: CityMessages } = {
   [SeineEtMarneCityCode.SivryCourtry]: sivryCourtryMessages

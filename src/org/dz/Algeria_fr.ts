@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
 import { AlgeriaRegionCode } from "./region/AlgeriaRegionCode.js"
 import { algerRegion_fr } from "./region/al/AlgerRegion_fr.js"
 

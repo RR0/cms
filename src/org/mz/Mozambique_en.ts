@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
 import { MozambiqueRegionMessagesList } from "./MozambiqueMessages.js"
 import { sofalaMessages_en } from "./region/sofala/SofalaMessages_en.js"
 import { MozambiqueRegionCode } from "./region/MozambiqueRegionCode.js"

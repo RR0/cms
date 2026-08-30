@@ -3,7 +3,8 @@ import { HtmlRR0Context } from "./RR0Context.js"
 import { Canvas, CanvasRenderingContext2D, createCanvas, loadImage } from "canvas"
 import fs from "fs"
 import path from "path"
-import { TimeService, TimeTextBuilder } from "./time/index.js"
+import { TimeService } from "./time/TimeService.js"
+import { TimeTextBuilder } from "./time/text/TimeTextBuilder.js"
 import assert from "assert"
 
 /**

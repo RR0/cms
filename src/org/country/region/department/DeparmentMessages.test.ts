@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, test } from "@javarome/testscript"
+import { beforeEach, describe, expect, test } from "vitest"
 import { RR0Context } from "../../../../RR0Context.js"
-import { cmsTestUtil } from "../../../../test/index.js"
+import { cmsTestUtil } from "../../../../test/CMSTestUtil.js"
 import { idfMessages } from "../../../eu/fr/region/idf/IdfMessages.js"
 import { france_fr } from "../../../eu/fr/France_fr.js"
 import { hautsDeSeineMessages } from "../../../eu/fr/region/idf/92/HautsDeSeineMessages.js"

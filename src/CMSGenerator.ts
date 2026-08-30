@@ -1,37 +1,32 @@
 import path from "path"
 import fs from "fs"
-import {
-  CaseSummaryRenderer,
-  ChronologyReplacerFactory,
-  CsvMapper,
-  EventReplacer,
-  EventReplacerFactory,
-  HttpSource,
-  RR0CaseMapping,
-  SsiTitleReplaceCommand,
-  TimeElementFactory,
-  TimeLinkDefaultHandler,
-  TimeRenderer,
-  TimeReplacer,
-  TimeReplacerFactory,
-  TimeService,
-  TimeTextBuilder,
-  TimeUrlBuilder
-} from "./time/index.js"
-import { CaseDirectoryStep, CaseFactory, CaseService } from "./science/crypto/ufo/enquete/dossier/index.js"
-import {
-  cities,
-  CityService,
-  CmsOrganizationFactory,
-  countries,
-  departments,
-  DepartmentService,
-  OrganizationService,
-  regions,
-  RegionService
-} from "./org/index.js"
+import { CaseSummaryRenderer } from "./time/CaseSummaryRenderer.js"
+import { EventReplacer, EventReplacerFactory } from "./time/EventReplacerFactory.js"
+import { SsiTitleReplaceCommand } from "./time/SsiTitleReplaceCommand.js"
+import { TimeLinkDefaultHandler } from "./time/TimeLinkDefaultHandler.js"
+import { TimeService } from "./time/TimeService.js"
+import { TimeUrlBuilder } from "./time/TimeUrlBuilder.js"
+import { ChronologyReplacerFactory } from "./time/datasource/ChronologyReplacerFactory.js"
+import { CsvMapper } from "./time/datasource/CsvMapper.js"
+import { HttpSource } from "./time/datasource/HttpSource.js"
+import { RR0CaseMapping } from "./time/datasource/rr0/RR0CaseMapping.js"
+import { TimeElementFactory } from "./time/html/TimeElementFactory.js"
+import { TimeRenderer } from "./time/html/TimeRenderer.js"
+import { TimeReplacer } from "./time/html/TimeReplacer.js"
+import { TimeReplacerFactory } from "./time/html/TimeReplacerFactory.js"
+import { TimeTextBuilder } from "./time/text/TimeTextBuilder.js"
+import { CaseDirectoryStep } from "./science/crypto/ufo/enquete/dossier/CaseDirectoryStep.js"
+import { CaseFactory } from "./science/crypto/ufo/enquete/dossier/CaseFactory.js"
+import { CaseService } from "./science/crypto/ufo/enquete/dossier/CaseService.js"
+import { cities } from "./org/Cities.js"
+import { CmsOrganizationFactory } from "./org/CmsOrganizationFactory.js"
+import { OrganizationService } from "./org/OrganizationService.js"
+import { countries } from "./org/country/Countries.js"
+import { RegionService, regions } from "./org/country/region/RegionService.js"
+import { DepartmentService, departments } from "./org/country/region/department/DepartmentService.js"
+import { CityService } from "./org/country/region/department/city/CityService.js"
 import { HtmlRR0Context, RR0ContextImpl } from "./RR0Context.js"
-import { HtmlTable } from "./util/index.js"
+import { HtmlTable } from "./util/html/HtmlTable.js"
 import {
   ClassDomReplaceCommand,
   ContentStepConfig,
@@ -52,29 +47,31 @@ import {
   SsiIncludeReplaceCommand,
   SsiIncludeReplaceCommandTransformer
 } from "ssg-api"
-import {
-  AuthorReplaceCommand,
-  PeopleDirectoryStepFactory,
-  PeopleDirectoryStepOptions,
-  PeopleReplacerFactory
-} from "./people/index.js"
-import {
-  PersistentSourceRegistry,
-  SourceFileCounter,
-  SourceIndexStep,
-  SourceRenderer,
-  SourceReplacer,
-  SourceReplacerFactory
-} from "./source/index.js"
-import { NoteFileCounter, NoteRenderer, NoteReplacer, NoteReplacerFactory } from "./note/index.js"
-import { AnchorReplaceCommand, CaseAnchorHandler, DataAnchorHandler } from "./anchor/index.js"
+import { PeopleDirectoryStepFactory, PeopleDirectoryStepOptions } from "./people/PeopleDirectoryStepFactory.js"
+import { PeopleReplacerFactory } from "./people/PeopleReplacerFactory.js"
+import { AuthorReplaceCommand } from "./people/author/AuthorReplaceCommand.js"
+import { PersistentSourceRegistry } from "./source/PersistentSourceRegistry.js"
+import { SourceFileCounter } from "./source/SourceFileCounter.js"
+import { SourceIndexStep } from "./source/SourceIndexStep.js"
+import { SourceRenderer } from "./source/SourceRenderer.js"
+import { SourceReplacer } from "./source/SourceReplacer.js"
+import { SourceReplacerFactory } from "./source/SourceReplacerFactory.js"
+import { NoteFileCounter } from "./note/NoteFileCounter.js"
+import { NoteRenderer } from "./note/NoteRenderer.js"
+import { NoteReplacer } from "./note/NoteReplacer.js"
+import { NoteReplacerFactory } from "./note/NoteReplacerFactory.js"
+import { AnchorReplaceCommand } from "./anchor/AnchorReplaceCommand.js"
+import { CaseAnchorHandler } from "./anchor/CaseAnchorHandler.js"
+import { DataAnchorHandler } from "./anchor/DataAnchorHandler.js"
 import { MetaLinkReplaceCommand } from "./MetaLinkReplaceCommand.js"
-import { OutlineReplaceCommand } from "./outline/index.js"
+import { OutlineReplaceCommand } from "./outline/OutlineReplaceCommand.js"
 import { ImageCommand } from "./ImageCommand.js"
-import { SearchIndexStep, SearchVisitor } from "./search/index.js"
+import { SearchIndexStep } from "./search/SearchIndexStep.js"
+import { SearchVisitor } from "./search/SearchVisitor.js"
 import { OpenGraphCommand } from "./OpenGraphCommand.js"
-import { BookContentVisitor, BookDirectoryStep } from "./book/index.js"
-import { APIFactory } from "./tech/index.js"
+import { BookContentVisitor } from "./book/BookContentVisitor.js"
+import { BookDirectoryStep } from "./book/BookDirectoryStep.js"
+import { APIFactory } from "./tech/info/soft/APIFactory.js"
 import { ContentVisitor, RR0ContentStep, RR0ContentStepOptions } from "./RR0ContentStep.js"
 import { DataContentVisitor } from "./DataContentVisitor.js"
 import { FileContents, writeFile } from "@javarome/fileutil"

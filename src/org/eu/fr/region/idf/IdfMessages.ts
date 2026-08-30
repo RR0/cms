@@ -1,4 +1,5 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { hautsDeSeineMessages } from "./92/HautsDeSeineMessages.js"
 import { IdfDepartmentCode } from "./IdfDepartmentCode.js"
 import { oiseMessages } from "./60/OiseCityMessages.js"

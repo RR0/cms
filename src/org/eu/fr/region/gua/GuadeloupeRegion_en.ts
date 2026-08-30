@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
 import { GuadeloupeDepartementCode } from "./GuadeloupeDepartementCode.js"
 import { guadeloupe971Messages_en } from "./971/Guadeloupe_en.js"
 import { GuadeloupeDepartmentsMessages } from "./GuadeloupeDepartmentsMessages.js"

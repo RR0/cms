@@ -1,6 +1,6 @@
 import { monroe_en } from "./monroe/Monroe_en.js"
 import { elkhart_en } from "./elkhart/Elkhart_en.js"
-import { RegionMessages } from "../../../country/index.js"
+import { RegionMessages } from "../../../country/region/RegionMessages.js"
 import { IndianaMessages } from "./IndianaMessages.js"
 import { whitley_en } from "./whitley/Whitley_en.js"
 

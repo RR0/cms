@@ -3,7 +3,8 @@ import { GeipanCaseSummaryRR0Mapper } from "./GeipanCaseSummaryRR0Mapper.js"
 import { GeipanFileDatasource } from "./GeipanFileDatasource.js"
 
 import { GeipanCaseSummary } from "./GeipanCaseSummary.js"
-import { ChronologyReplacerActions, RR0CaseMapping } from "../../../../../../time/index.js"
+import { ChronologyReplacerActions } from "../../../../../../time/datasource/ChronologyReplacerActions.js"
+import { RR0CaseMapping } from "../../../../../../time/datasource/rr0/RR0CaseMapping.js"
 import { CMSContext } from "../../../../../../CMSContext.js"
 
 export const geipanHttpDatasource = new GeipanHttpDatasource(new URL("https://geipan.fr"), "fr/recherche/cas")

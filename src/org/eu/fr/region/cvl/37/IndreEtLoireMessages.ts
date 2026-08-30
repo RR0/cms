@@ -1,7 +1,7 @@
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
 import { IndreEtLoireCityCode } from "./IndreEtLoireCityCode.js"
 import { blereMessages } from "./Blere/BlereMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { montsMessages } from "./Monts/MontsMessages.js"
 import { chambourgSurIndreMessages } from "./ChambourgSurIndre/ChambourgSurIndreMessages.js"
 

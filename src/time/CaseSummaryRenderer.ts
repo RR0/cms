@@ -1,7 +1,8 @@
-import { RR0CaseSummary } from "./datasource/index.js"
+import { RR0CaseSummary } from "./datasource/rr0/RR0CaseSummary.js"
 import { EventRenderer } from "./EventRenderer.js"
-import { SourceFactory, SourceRenderer } from "../source/index.js"
-import { NoteRenderer } from "../note/index.js"
+import { SourceFactory } from "../source/SourceFactory.js"
+import { SourceRenderer } from "../source/SourceRenderer.js"
+import { NoteRenderer } from "../note/NoteRenderer.js"
 import { TimeElementFactory } from "./html/TimeElementFactory.js"
 
 /**

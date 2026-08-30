@@ -1,7 +1,7 @@
 import { TimeUrlBuilder } from "./TimeUrlBuilder.js"
 import { RR0ContextImpl } from "../RR0Context.js"
-import { describe, expect, test } from "@javarome/testscript"
-import { cmsTestUtil } from "../test/index.js"
+import { describe, expect, test } from "vitest"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
 import path from "path"
 import { TimeContext } from "./TimeContext.mjs"
 

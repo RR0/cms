@@ -1,4 +1,4 @@
-import { City } from "../../../country/index.js"
+import { City } from "../../../country/region/department/city/City.js"
 import { fayetteCities } from "./fayette/FayetteCities.js"
 import { masonCities } from "./mason/MasonCities.js"
 

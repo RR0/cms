@@ -1,14 +1,14 @@
-import { describe, expect, test } from "@javarome/testscript"
+import { describe, expect, test } from "vitest"
 import { SsgContext } from "ssg-api"
 import { TimeDirectoryStep } from "./TimeDirectoryStep.js"
 import { FileContents } from "@javarome/fileutil"
-import { cmsTestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
 import { TimeOptions } from "./TimeOptions.js"
 import { getTimeFiles } from "../CMSGenerator.test.js"
 import path from "path"
 import { TimeService } from "./TimeService.js"
 import { AllDataService, RR0EventFactory } from "@rr0/data"
-import { TimeElementFactory } from "./html/index.js"
+import { TimeElementFactory } from "./html/TimeElementFactory.js"
 
 describe("TimeDirectoryStep", () => {
 

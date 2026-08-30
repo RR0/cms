@@ -1,7 +1,7 @@
 import { riomMessages } from "./Riom/RiomMessages.js"
 import { PuyDeDomeCityCode } from "./PuyDeDomeCityCode.js"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { billomMessages } from "./Billom/BillomMessages.js"
 import { chatelGuyonMessages } from "./ChatelGuyon/ChatelGuyonMessages.js"
 

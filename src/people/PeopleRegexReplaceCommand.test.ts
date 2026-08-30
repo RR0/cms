@@ -1,8 +1,8 @@
 import path from "path"
 import { ClassDomReplaceCommand } from "ssg-api"
-import { describe, expect, test } from "@javarome/testscript"
+import { describe, expect, test } from "vitest"
 import { PeopleReplacerFactory } from "./PeopleReplacerFactory.js"
-import { cmsTestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
 import { PeopleHtmlRenderer } from "./PeopleHtmlRenderer.js"
 import { PeopleService } from "@rr0/data"
 

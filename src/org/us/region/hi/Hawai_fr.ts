@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/index.js"
+import { RegionMessages } from "../../../country/region/RegionMessages.js"
 import { HawaiiMessages } from "./HawaiiMessages.js"
 import { HawaiiCountyCode } from "./HawaiiCountyCode.js"
 import { honolulu_fr } from "./honolulu/Honolulu_fr.js"

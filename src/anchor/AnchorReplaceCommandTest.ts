@@ -1,9 +1,11 @@
 import { AnchorReplaceCommand } from "./AnchorReplaceCommand.js"
-import { cmsTestUtil } from "../test/index.js"
-import { describe, expect, test } from "@javarome/testscript"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
+import { describe, expect, test } from "vitest"
 import { CaseAnchorHandler } from "./CaseAnchorHandler.js"
 import { CaseService } from "../science/crypto/ufo/enquete/dossier/CaseService.js"
-import { TimeElementFactory, TimeRenderer, TimeTextBuilder } from "../time/index.js"
+import { TimeElementFactory } from "../time/html/TimeElementFactory.js"
+import { TimeRenderer } from "../time/html/TimeRenderer.js"
+import { TimeTextBuilder } from "../time/text/TimeTextBuilder.js"
 import path from "path"
 
 describe("AnchorReplaceCommand", () => {

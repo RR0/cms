@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/index.js"
+import { RegionMessages } from "../../../country/region/RegionMessages.js"
 import { tarrant_fr } from "./tarrant/Tarrant_fr.js"
 import { houstonCityCode } from "./houston/Houston.js"
 import { houstonMessages } from "./houston/HoustonMessages.js"

@@ -1,6 +1,10 @@
 import path from "path"
-import { TimeElementFactory, TimeRenderer, TimeService, TimeTextBuilder, TimeUrlBuilder } from "../time/index.js"
-import { CMSTestUtil, cmsTestUtil } from "../test/index.js"
+import { TimeService } from "./TimeService.js"
+import { TimeUrlBuilder } from "./TimeUrlBuilder.js"
+import { TimeElementFactory } from "./html/TimeElementFactory.js"
+import { TimeRenderer } from "./html/TimeRenderer.js"
+import { TimeTextBuilder } from "./text/TimeTextBuilder.js"
+import { CMSTestUtil, cmsTestUtil } from "../test/CMSTestUtil.js"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { TimeOptions } from "./TimeOptions.js"
 

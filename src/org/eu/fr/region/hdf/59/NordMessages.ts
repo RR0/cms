@@ -1,7 +1,7 @@
 import { NordCityCode } from "./NordCityCode.js"
 import { aniche59Messages } from "./Aniche/AnicheMessages.js"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { thiantMessages } from "./Thiant/ThiantMessages.js"
 import { jeumontMessages } from "./Jeumont/JeumontMessages.js"
 import { avesnesLesAubertMessages } from "./AvesnesLesAubert/AvesnesLesAubertMessages.js"

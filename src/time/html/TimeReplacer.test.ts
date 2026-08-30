@@ -1,6 +1,6 @@
 import { TimeReplacer } from "./TimeReplacer.js"
-import { cmsTestUtil } from "../../test/index.js"
-import { describe, expect, test } from "@javarome/testscript"
+import { cmsTestUtil } from "../../test/CMSTestUtil.js"
+import { describe, expect, test } from "vitest"
 import { TimeRenderer } from "./TimeRenderer.js"
 import { TimeElementFactory } from "./TimeElementFactory.js"
 import { TimeTextBuilder } from "../text/TimeTextBuilder.js"

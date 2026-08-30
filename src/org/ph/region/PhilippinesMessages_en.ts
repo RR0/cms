@@ -1,3 +1,3 @@
-import { CountryMessages } from "../../country/index.js"
+import { CountryMessages } from "../../country/CountryMessages.js"
 
 export const philippinesMessages_en = CountryMessages.create("Philippines", {})

@@ -1,6 +1,6 @@
 import { algeria } from "../dz/Algeria.js"
 import { CountryCode } from "@rr0/data"
-import { australia } from "../au/index.js"
+import { australia } from "../au/Australia.js"
 import { brazil } from "../br/Brazil.js"
 import { canada } from "../ca/Canada.js"
 import { china } from "../cn/China.js"

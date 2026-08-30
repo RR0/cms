@@ -1,6 +1,6 @@
 import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
-import { UrlUtil } from "../../../util/index.js"
+import { UrlUtil } from "../../../util/url/UrlUtil.js"
 import { JSDOM } from "jsdom"
 import { BaseOvniFranceCaseSummary } from "./BaseOvniFranceCaseSummary.js"
 import { Level2Date as EdtfDate, Level2Timeshift } from "@rr0/time"

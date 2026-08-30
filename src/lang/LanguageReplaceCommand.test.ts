@@ -1,6 +1,6 @@
 import { LanguageReplaceCommand } from "./LanguageReplaceCommand.js"
-import { cmsTestUtil } from "../test/index.js"
-import { describe, expect, test } from "@javarome/testscript"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
+import { describe, expect, test } from "vitest"
 
 describe("LanguageReplaceCommand", () => {
 

@@ -1,5 +1,6 @@
 import { HtmlRR0Context } from "../RR0Context.js"
-import { HttpSource, TimeService } from "../time/index.js"
+import { TimeService } from "../time/TimeService.js"
+import { HttpSource } from "../time/datasource/HttpSource.js"
 import { SourceFactory } from "./SourceFactory.js"
 import { AllDataService, RR0SourceType, Source } from "@rr0/data"
 

@@ -1,5 +1,5 @@
 import { SceauHttpDatasource } from "./SceauHttpDatasource.js"
-import { RR0CaseMapping } from "../rr0/index.js"
+import { RR0CaseMapping } from "../rr0/RR0CaseMapping.js"
 import { SceauCaseSummary } from "./SceauCaseSummary.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper.js"

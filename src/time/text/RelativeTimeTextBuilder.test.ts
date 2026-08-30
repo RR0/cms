@@ -1,6 +1,6 @@
 import { RelativeTimeTextBuilder } from "./RelativeTimeTextBuilder.js"
-import { cmsTestUtil } from "../../test/index.js"
-import { describe, expect, test } from "@javarome/testscript"
+import { cmsTestUtil } from "../../test/CMSTestUtil.js"
+import { describe, expect, test } from "vitest"
 import { TimeTextBuilder } from "./TimeTextBuilder.js"
 
 describe("RelativeTimeTextBuilder", () => {

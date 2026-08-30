@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../country/index.js"
+import { RegionMessages } from "../../../country/region/RegionMessages.js"
 import { scottsBluff_fr } from "./ScottsBluff/ScottsBluff_fr.js"
 import { NebraskaCountyCode } from "./NebraskaCountyCode.js"
 

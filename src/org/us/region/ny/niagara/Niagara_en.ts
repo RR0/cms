@@ -1,4 +1,4 @@
-import { DepartmentMessages } from "../../../../country/index.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { NiagaraCityCode } from "./NiagaraCityCode.js"
 import { niagaraFallsMessages } from "./niagarafalls/NiagaraFallsMessages.js"
 

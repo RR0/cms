@@ -1,4 +1,4 @@
-import { DepartmentMessages } from "../../../../country/index.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { MasonCityCode } from "./MasonCityCode.js"
 import { pointPleasantMessages } from "./PointPleasant/PointPleasantMessages.js"
 

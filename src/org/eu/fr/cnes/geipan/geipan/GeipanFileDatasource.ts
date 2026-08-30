@@ -4,7 +4,9 @@ import { geipanHttpDatasource } from "./GeipanRR0Mapping.js"
 import { GeipanDatasource } from "./GeipanDatasource.js"
 import { GeipanSummaryToCaseMapper } from "./GeipanSummaryToCaseMapper.js"
 import { GeipanCase } from "./GeipanCase.js"
-import { CsvFileSource, Datasource, FileDatasource } from "../../../../../../time/index.js"
+import { CsvFileSource } from "../../../../../../time/datasource/CsvFileSource.js"
+import { Datasource } from "../../../../../../time/datasource/Datasource.js"
+import { FileDatasource } from "../../../../../../time/datasource/FileDatasource.js"
 import { HtmlRR0Context } from "../../../../../../RR0Context.js"
 
 export class GeipanFileDatasource extends GeipanDatasource implements Datasource<GeipanCaseSummary>, FileDatasource<GeipanCaseSummary> {

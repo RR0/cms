@@ -1,6 +1,6 @@
 import { RR0Context } from "../../../RR0Context.js"
 import { HttpSource } from "../HttpSource.js"
-import { UrlUtil } from "../../../util/index.js"
+import { UrlUtil } from "../../../util/url/UrlUtil.js"
 import { NuforcCaseSummary } from "./NuforcCaseSummary.js"
 import { ObjectUtil } from "../../../util/ObjectUtil.js"
 import { NuforcState } from "./NuforcState.js"

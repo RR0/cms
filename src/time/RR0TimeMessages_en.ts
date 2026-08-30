@@ -1,4 +1,5 @@
-import { MessageUtils, RR0TimeMessages } from "../lang/index.js"
+import { MessageUtils } from "../lang/RR0Messages.js"
+import { RR0TimeMessages } from "./RR0TimeMessages.js"
 
 export class RR0TimeMessages_en implements RR0TimeMessages {
   duration = {

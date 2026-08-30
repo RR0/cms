@@ -1,4 +1,4 @@
-import { City } from "../../../country/index.js"
+import { City } from "../../../country/region/department/city/City.js"
 import { bristol } from "./bristol/Bristol.js"
 import { arlingtonCities } from "./arlington/ArlingtonCities.js"
 

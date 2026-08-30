@@ -6,9 +6,10 @@ import {
   GeipanCaseClassification_minus
 } from "./GeipanCaseClassification.js"
 import { GeipanDatasource } from "./GeipanDatasource.js"
-import { HttpSource } from "../../../../../../time/index.js"
+import { HttpSource } from "../../../../../../time/datasource/HttpSource.js"
 import { RR0Context } from "../../../../../../RR0Context.js"
-import { ObjectUtil, UrlUtil } from "../../../../../../util/index.js"
+import { ObjectUtil } from "../../../../../../util/ObjectUtil.js"
+import { UrlUtil } from "../../../../../../util/url/UrlUtil.js"
 import { FranceDepartementCode } from "../../../region/FranceDepartementCode.js"
 import { FranceRegionCode } from "../../../region/FranceRegionCode.js"
 import { Level2Date as EdtfDate } from "@rr0/time"

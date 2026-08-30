@@ -38,6 +38,6 @@ export const franceDepartments: Department[] = [
   ...paysDeLoireDepartments
 ]
 
-export function franceDepartment(code: FranceDepartementCode, region: Region, place: Place) {
-  return Department.create(code, region, place)
-}
+// Lives in its own module now: every departement calls it, and this one
+// aggregates every departement, so a leaf reaching it through here closed a loop.
+export { franceDepartment } from "./FranceDepartment.js"

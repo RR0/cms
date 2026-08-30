@@ -1,4 +1,4 @@
-import { RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
 import { pieksamakiMessages_en } from "./Pieksamaki/PieksamakiMessages_en.js"
 import { SouthSavoDepartmentCode } from "./SouthSavoDepartmentCode.js"
 

@@ -1,4 +1,5 @@
-import { DepartmentMessages, RegionMessages } from "../../../../country/index.js"
+import { RegionMessages } from "../../../../country/region/RegionMessages.js"
+import { DepartmentMessages } from "../../../../country/region/department/DepartmentMessages.js"
 import { CentreValDeLoireDepartementCode } from "./CentreValDeLoireDepartementCode.js"
 import { indreMessages } from "./36/IndreMessages.js"
 import { loiretMessages } from "./45/LoiretMessages.js"

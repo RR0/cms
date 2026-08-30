@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, test } from "@javarome/testscript"
-import { cmsTestUtil } from "../../../test/index.js"
+import { beforeEach, describe, expect, test } from "vitest"
+import { cmsTestUtil } from "../../../test/CMSTestUtil.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { UrecatCase } from "./UrecatCase.js"
 import { urecatTestCases } from "./UrecatTestCases.js"

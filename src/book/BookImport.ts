@@ -5,7 +5,7 @@ import { AllDataService, PeopleService, RR0EventFactory, TypedDataFactory } from
 import { Book } from "./Book.js"
 import { BookService } from "./BookService.js"
 import { TimeUrlBuilder } from "../time/TimeUrlBuilder.js"
-import { cmsTestUtil } from "../test/index.js"
+import { cmsTestUtil } from "../test/CMSTestUtil.js"
 import { BookJson } from "./BookJson.js"
 
 interface BookImportArgs {

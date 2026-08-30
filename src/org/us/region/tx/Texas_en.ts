@@ -1,5 +1,5 @@
 import { tarrant_en } from "./tarrant/Tarrant_en.js"
-import { RegionMessages } from "../../../country/index.js"
+import { RegionMessages } from "../../../country/region/RegionMessages.js"
 import { houstonMessages } from "./houston/HoustonMessages.js"
 import { houstonCityCode } from "./houston/Houston.js"
 import { OrganizationKind } from "@rr0/data"

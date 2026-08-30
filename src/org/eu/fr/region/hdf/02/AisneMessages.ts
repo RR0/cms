@@ -1,6 +1,6 @@
 import { sainsRichaumontMessages } from "./SainsRichaumont/SainsRichaumontMessages.js"
 import { DepartmentMessages } from "../../../../../country/region/department/DepartmentMessages.js"
-import { CityMessages } from "../../../../../country/index.js"
+import { CityMessages } from "../../../../../country/region/department/city/CityMessages.js"
 import { AisneCityCode } from "./AisneCityCode.js"
 
 type AisneCityMessagesList = { [key in AisneCityCode]: CityMessages }

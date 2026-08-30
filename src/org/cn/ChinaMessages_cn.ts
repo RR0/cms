@@ -1,4 +1,4 @@
-import { CountryMessages } from "../country/index.js"
+import { CountryMessages } from "../country/CountryMessages.js"
 import { ChinaMessagesList } from "./ChinaMessages.js"
 import { northChinaMessages_cn } from "./region/n/NorthChinaMessages_cn.js"
 

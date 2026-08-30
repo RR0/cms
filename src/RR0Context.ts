@@ -1,4 +1,5 @@
-import { RR0Messages, ssgMessages } from "./lang/index.js"
+import { RR0Messages } from "./lang/RR0Messages.js"
+import { ssgMessages } from "./lang/ssgMessages.js"
 import { ConsoleLogger, FileWriteConfig, HtmlSsgContext, SsgContext, SsgContextImpl } from "ssg-api"
 import { FileContents } from "@javarome/fileutil"
 import { PlaceContext } from "@rr0/place"

@@ -1,6 +1,6 @@
 import { Place } from "@rr0/place"
 import { NouvelleCaledonieCityCode } from "../NouvelleCaledonieCityCode.js"
-import { City } from "../../../../../../country/index.js"
+import { City } from "../../../../../../country/region/department/city/City.js"
 import { nouvelleCaledonie } from "../NouvelleCaledonie.js"
 
 export const noumea = City.create(NouvelleCaledonieCityCode.Noumea, nouvelleCaledonie,
