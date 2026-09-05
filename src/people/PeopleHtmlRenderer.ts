@@ -15,7 +15,7 @@ export class PeopleHtmlRenderer {
     const classList = ["data-resolved", "people-resolved"]
     if (pseudoPeopleList.indexOf(people) >= 0 || people.pseudonyms.includes(content)) {
       classList.push("pseudonym")
-      titles.push(`(pseudonyme de ${people.firstAndLastName})`)
+      titles.push(`(pseudonyme de ${people.titleOverride || people.firstAndLastName})`)
     }
     if (people.hoax) {
       classList.push("canular")
@@ -58,7 +58,7 @@ export class PeopleHtmlRenderer {
         titles.push(occupationMsg(gender))
       }
     }
-    const text = content || people.lastAndFirstName || people.title
+    const text = content || people.titleOverride || people.lastAndFirstName || people.title
     const doc = context.file.document
     const link = doc.createElement("a")
     link.innerHTML = text

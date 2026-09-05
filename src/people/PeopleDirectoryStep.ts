@@ -31,20 +31,21 @@ export class PeopleDirectoryStep extends DirectoryStep {
     const outputPath = config.getOutputPath(context)
     const output = context.newOutput(outputPath)
     const pseudoPeopleList = peopleList.reduce((prevPeopleList: People[], peopleInfo: People) => {
-      if (peopleInfo.pseudonyms?.length > 0) {
-        for (const pseudonym of peopleInfo.pseudonyms) {
-          const pseudo = new People(peopleInfo.firstNames, peopleInfo.lastName, peopleInfo.pseudonyms,
-            peopleInfo.occupations, peopleInfo.countries,
-            peopleInfo.discredited, peopleInfo.gender, peopleInfo.id,
-            peopleInfo.dirName,
-            peopleInfo.image)
-          pseudo.lastAndFirstName = pseudonym
-          prevPeopleList.push(pseudo)
+      for (const pseudonym of peopleInfo.pseudonyms || []) {
+        prevPeopleList.push(this.alsoKnownAs(peopleInfo, pseudonym))
+      }
+      return prevPeopleList
+    }, [])
+    const surnamePeopleList = peopleList.reduce((prevPeopleList: People[], peopleInfo: People) => {
+      const lastName = peopleInfo.lastName
+      if (lastName) {  // A surname alone would say nothing about who it belongs to
+        for (const surname of peopleInfo.surnames) {
+          prevPeopleList.push(this.alsoKnownAs(peopleInfo, `${surname} ${lastName}`))
         }
       }
       return prevPeopleList
     }, [])
-    peopleList = peopleList.concat(pseudoPeopleList).sort(
+    peopleList = peopleList.concat(pseudoPeopleList, surnamePeopleList).sort(
       (p1, p2) => p1.lastAndFirstName.localeCompare(p2.lastAndFirstName))
     const allCountries = new Set<CountryCode>()
     const occupations = new Set<Occupation>()
@@ -76,6 +77,17 @@ export class PeopleDirectoryStep extends DirectoryStep {
         HtmlTag.toString("div", occupationsHtml, {id: "occupations"}))
     }
     await this.outputFunc(context, output)
+  }
+
+  /**
+   * An extra directory entry for another name the same people is known by (a pseudonym, a surname), pointing at that
+   * same people's page.
+   */
+  protected alsoKnownAs(people: People, name: string): People {
+    const alias = new People(people.firstNames, people.lastName, people.pseudonyms, people.occupations,
+      people.countries, people.discredited, people.gender, people.id, people.dirName, people.image)
+    alias.lastAndFirstName = name  // Which is both what the entry displays and where it sorts
+    return alias
   }
 
   protected toList(context: HtmlRR0Context, peopleList: People[], pseudoPeopleList: People[],
