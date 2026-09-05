@@ -72,7 +72,7 @@ import { OpenGraphCommand } from "./OpenGraphCommand.js"
 import { BookContentVisitor } from "./book/BookContentVisitor.js"
 import { BookDirectoryStep } from "./book/BookDirectoryStep.js"
 import { APIFactory } from "./tech/info/soft/APIFactory.js"
-import { ContentVisitor, RR0ContentStep, RR0ContentStepOptions } from "./RR0ContentStep.js"
+import { ContentVisitor, RR0ContentStep, RR0ContentStepConfig, RR0ContentStepOptions } from "./RR0ContentStep.js"
 import { DataContentVisitor } from "./DataContentVisitor.js"
 import { FileContents, writeFile } from "@javarome/fileutil"
 import {
@@ -321,13 +321,19 @@ export class CMSGenerator implements CMSContext {
     }()
 
     const netlify = this.options.netlify ?? {format: "toml", outputPath: "netlify.toml"}
-    const htAccessToNetlifyConfig: ContentStepConfig = {
+    const htAccessToNetlifyConfig: RR0ContentStepConfig = {
       replacements: [
         netlify.format === "redirects"
           ? new HtAccessToNetlifyRedirectsReplaceCommand(this.options.siteBaseUrl, netlify.preambleFile)
           : new HtAccessToNetlifyConfigReplaceCommand(this.options.siteBaseUrl, netlify.preambleFile)
       ],
       roots: [".htaccess"],
+      // The preamble is the output's OTHER half, and it is not walked as a root — so without this
+      // the incremental rule ("is .htaccess newer than the output?") never sees it change, and an
+      // edit to it produces a successful build that deploys the previous output. It happened: two
+      // dead redirect rules survived their own removal, and only a reading of the deployed file
+      // caught it.
+      alsoDerivedFrom: netlify.preambleFile ? [netlify.preambleFile] : [],
       getOutputPath: (_context: SsgContext) => netlify.outputPath
     }
     const contentRoots = this.options.contentRoots
