@@ -16,10 +16,14 @@ export class SearchIndexStep implements SsgStep {
   /**
    * @param fileName The index file path
    * @param searchCommand The command that collected the pages info.
+   * @param contentRoot
+   * @param prepareContext
+   * @param alternateNames Other names a page can be searched by, such as a people's surnames and pseudonyms.
    */
   constructor(protected fileName: string, protected searchCommand: SearchVisitor,
               protected contentRoot?: string,
-              protected prepareContext?: (context: HtmlRR0Context, fileName: string) => void) {
+              protected prepareContext?: (context: HtmlRR0Context, fileName: string) => void,
+              protected alternateNames?: (url: string) => string[]) {
   }
 
   /**
@@ -48,7 +52,9 @@ export class SearchIndexStep implements SsgStep {
         const titleMatch = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html)
         const outputTitle = titleMatch ? this.decodeTitle(titleMatch[1]) : ""
         const title = this.readSourceTitle(sourceFile) || outputTitle
-        const pageInfo = this.searchCommand.pageInfoFrom(title, url.split(path.sep).join("/"), pageContext)
+        const pageUrl = url.split(path.sep).join("/")
+        const pageInfo = this.searchCommand.pageInfoFrom(title, pageUrl, pageContext,
+          this.alternateNames?.(pageUrl))
         if (pageInfo) {
           const resultTitle = SearchVisitor.resultTitle(pageInfo)
           const titleIndexed = pagesByResultTitle.get(resultTitle)

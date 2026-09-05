@@ -9,6 +9,10 @@ export type PageInfo = {
   title: string
   url: string
   time: string
+  /**
+   * Other names the page can be searched by, such as a people's surnames and pseudonyms.
+   */
+  names?: string[]
   html?: string
 }
 
@@ -96,12 +100,17 @@ export class SearchVisitor implements FileVisitor {
     return this.pageInfoFrom(file.title, url, context)
   }
 
-  pageInfoFrom(title: string, url: string, context: HtmlRR0Context): PageInfo | undefined {
+  pageInfoFrom(title: string, url: string, context: HtmlRR0Context, names: string[] = []): PageInfo | undefined {
     if (!title || this.config.notIndexedUrls.includes(url)) {
       return undefined
     }
     const time = this.timeTextBuilder.build(context, {year: "numeric", month: "short", day: "numeric"}).toLowerCase()
-    return {title, url, time}
+    const pageInfo: PageInfo = {title, url, time}
+    const otherNames = Array.from(new Set(names.filter(name => name && name !== title)))
+    if (otherNames.length > 0) {
+      pageInfo.names = otherNames
+    }
+    return pageInfo
   }
 
   protected handleAlreadyIndexed(resultTitle: string, url: string, titleIndexed: PageInfo) {

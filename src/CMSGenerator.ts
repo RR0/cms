@@ -396,8 +396,10 @@ export class CMSGenerator implements CMSContext {
     }
     const reindex = args.reindex
     if (reindex?.includes("search")) {
+      const peopleNames = await this.peopleNames(peopleService)
       ssg.add(new SearchIndexStep("search/index.json", searchVisitor, outDir,
-        (context, fileName) => timeService.setContextFromFile(context, fileName)))
+        (context, fileName) => timeService.setContextFromFile(context, fileName),
+        url => peopleNames.get(url) || []))
     }
     if (reindex?.includes("sources")) {
       ssg.add(new SourceIndexStep(this.options.sourceRegistryFileName, sourceFactory))
@@ -441,6 +443,26 @@ export class CMSGenerator implements CMSContext {
     const timeElementFactory = new TimeElementFactory(this.timeRenderer)
     const timeReplacer = new TimeReplacer(timeElementFactory)
     return {timeFiles, timeElementFactory, timeReplacer}
+  }
+
+  /**
+   * The other names each people's page can be searched by — their pseudonyms and their surnames, the latter said as
+   * "<surname> <lastName>" so that a surname alone doesn't leave the reader guessing whose it is. Keyed by page URL,
+   * the people's own page only: their other pages (a CV, say) are not that person's name.
+   */
+  protected async peopleNames(peopleService: PeopleService): Promise<Map<string, string[]>> {
+    const namesByUrl = new Map<string, string[]>()
+    for (const people of await peopleService.getAll()) {
+      const lastName = people.lastName
+      const names = [
+        ...people.pseudonyms,
+        ...(lastName ? people.surnames.map(surname => `${surname} ${lastName}`) : [])
+      ]
+      if (names.length > 0 && people.dirName) {
+        namesByUrl.set(`${people.dirName}/index.html`, names)
+      }
+    }
+    return namesByUrl
   }
 
   protected async setupPeople(context: RR0ContextImpl, peopleRenderer: PeopleHtmlRenderer, copies: string[]) {
