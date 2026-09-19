@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest"
-import { RR0Event } from "@rr0/data"
+import { RR0Data, RR0Event } from "@rr0/data"
 import { HtmlRR0Context } from "./RR0Context.js"
 import { DataContentVisitor } from "./DataContentVisitor.js"
 import { cmsTestUtil } from "./test/CMSTestUtil.js"
@@ -12,6 +12,10 @@ class TestDataContentVisitor extends DataContentVisitor {
 
   renderImage(context: HtmlRR0Context, event: RR0Event) {
     return this.processImage(context, event)
+  }
+
+  renderEvent(context: HtmlRR0Context, event: RR0Event, data: RR0Data) {
+    return this.processEvent(context, event, data)
   }
 }
 
@@ -44,5 +48,37 @@ describe("DataContentVisitor", () => {
     await visitor.renderImage(context, portraitEvent)
 
     expect(context.file.document.querySelectorAll(".contents img[src=\"portrait.jpg\"]").length).toBe(1)
+  })
+
+  const sightingEvent = { type: "event", eventType: "sighting", url: "sighting.json" } as RR0Event
+  const aCase = { type: "case", events: [sightingEvent] } as unknown as RR0Data
+
+  test("inserts the UFO@home player on the case, for a case with a sighting and no player", async () => {
+    const context = cmsTestUtil.newHtmlContext("people/v/VertongenJeanLuc/index.html",
+      "<div class=\"contents\"><p>Le dossier</p></div>")
+    const visitor = new TestDataContentVisitor()
+
+    await visitor.renderEvent(context, sightingEvent, aCase)
+    await visitor.renderEvent(context, sightingEvent, aCase)
+
+    const players = context.file.document.querySelectorAll(".contents > rr0-sighting")
+    expect(players.length).toBe(1)
+    expect(players[0].getAttribute("src")).toBe("case.json")
+    const script = context.file.document.querySelector(".contents > script")
+    expect(script?.getAttribute("src")).toBe(DataContentVisitor.SIGHTING_PLAYER_SCRIPT)
+    expect(script?.getAttribute("type")).toBe("module")
+    // Nothing else: no dated paragraph per sighting, which a sighting without a time used to fail the build on.
+    expect(context.file.document.querySelectorAll(".contents > p").length).toBe(1)
+  })
+
+  test("leaves a player the page's author placed alone", async () => {
+    const context = cmsTestUtil.newHtmlContext("people/v/VertongenJeanLuc/index.html",
+      "<div class=\"contents\"><p>Le dossier</p><rr0-sighting src=\"case.json\" show-witness-map></rr0-sighting></div>")
+    const visitor = new TestDataContentVisitor()
+
+    await visitor.renderEvent(context, sightingEvent, aCase)
+
+    expect(context.file.document.querySelectorAll("rr0-sighting").length).toBe(1)
+    expect(context.file.document.querySelectorAll("script").length).toBe(0)
   })
 })

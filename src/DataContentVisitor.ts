@@ -57,11 +57,41 @@ export class DataContentVisitor implements ContentVisitor {
       case "death":
         await this.processDeath(context, event, data)
         break
+      case "sighting":
+        this.processSighting(context, data)
+        break
       default:
         const {eventP, timeEl} = this.timeParagraph(context, event)
         await this.eventRenderer.render(context, event, eventP)
         context.file.document.append(eventP)
     }
+  }
+
+  /** Where the UFO@home player that replays a case's sightings is served from. */
+  static readonly SIGHTING_PLAYER_SCRIPT = "https://ufoathome.org/lib/rr0-sighting.mjs"
+
+  /**
+   * A sighting event of a case points at a witness's recording (its `url`, a UFO@home
+   * `sighting.json`): the page shows them in the UFO@home player, reading the case.json itself so
+   * that every sighting of the case is offered, not only this one. Inserted at the end of the page's
+   * contents, once, and only if the page does not already embed a player where its author put one.
+   */
+  protected processSighting(context: HtmlRR0Context, data: RR0Data) {
+    const doc = context.file.document
+    if (data.type !== "case" || doc.querySelector("rr0-sighting")) {
+      return
+    }
+    const parentEl = doc.querySelector(".contents") || doc.body
+    if (!parentEl) {
+      context.warn("no .contents to insert the sighting player in", context.file.name)
+      return
+    }
+    const scriptEl = doc.createElement("script")
+    scriptEl.type = "module"
+    scriptEl.src = DataContentVisitor.SIGHTING_PLAYER_SCRIPT
+    const playerEl = doc.createElement("rr0-sighting")
+    playerEl.setAttribute("src", "case.json")
+    parentEl.append(scriptEl, playerEl)
   }
 
   protected timeParagraph(context: HtmlRR0Context, event: RR0Event) {
