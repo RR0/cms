@@ -97,6 +97,26 @@ describe("RelativeTimeTextBuilder", () => {
     }
   })
 
+  test("first day of a month page is not the day after the month", () => {
+    const monthContext = cmsTestUtil.time.newHtmlContext("1/9/4/7/07", "")
+    const firstDay = monthContext.clone()
+    firstDay.time.updateFromStr("1947-07-01")
+    expect(relativeTimeTextBuilder.build(monthContext, firstDay)).toBe("mardi 1")
+    const secondDay = firstDay.clone()
+    secondDay.time.updateFromStr("1947-07-02")
+    expect(relativeTimeTextBuilder.build(firstDay, secondDay)).toBe("le lendemain")
+  })
+
+  test("first month of a year page is not the month after the year", () => {
+    const yearContext = cmsTestUtil.time.newHtmlContext("1/9/4/7", "")
+    const january = yearContext.clone()
+    january.time.updateFromStr("1947-01")
+    expect(relativeTimeTextBuilder.build(yearContext, january)).toBe("janvier")
+    const february = january.clone()
+    february.time.updateFromStr("1947-02")
+    expect(relativeTimeTextBuilder.build(january, february)).toBe("le mois suivant")
+  })
+
   describe("hour", () => {
 
     test("next", () => {

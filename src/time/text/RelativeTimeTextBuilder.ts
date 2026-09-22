@@ -73,8 +73,10 @@ export class RelativeTimeTextBuilder {
         newContext = deltaContext
       }
 
+      // A relative wording ("the day after", "the month after"...) only makes sense against a previous time
+      // that is as precise: a month page (1947-07) is not "the day before" its first entry (1947-07-01).
       const messages = newContext.messages.context.time.relative
-      if (dayOfMonthDelta && sameYear && sameMonth) {
+      if (dayOfMonthDelta && sameYear && sameMonth && !noDay) {
         switch (dayOfMonthDelta) {
           case -1:
             text = messages.day.before
@@ -84,7 +86,7 @@ export class RelativeTimeTextBuilder {
             break
         }
       } else {
-        if (!dayOfMonth && sameYear) {
+        if (!dayOfMonth && sameYear && !noMonth) {
           switch (deltaDurationMonth) {
             case -1:
               text = messages.month.before
@@ -94,7 +96,7 @@ export class RelativeTimeTextBuilder {
               break
           }
         }
-        if (!month) {
+        if (!month && !noYear) {
           switch (yearDelta) {
             case -1:
               text = messages.year.before
@@ -104,7 +106,7 @@ export class RelativeTimeTextBuilder {
               break
           }
         }
-        if (!minutes) {
+        if (!minutes && previousTime.getHour() !== undefined) {
           switch (hourDelta) {
             case -1:
               text = messages.hour.before
