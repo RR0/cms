@@ -40,6 +40,16 @@ import { IndexedReplacerFactory } from "./index/IndexedReplacerFactory.js"
 import { UnitReplaceCommand } from "./value/UnitReplaceCommand.js"
 import { cmsTestUtil } from "./test/CMSTestUtil.js"
 
+/**
+ * Chronological order: a period's page comes before the pages of its sub-periods ("1960" before "April 1960"),
+ * which a plain sort does not do since "04/index.html" < "index.html".
+ */
+function periodFirst(a: string, b: string): number {
+  const dirA = a.substring(0, a.lastIndexOf("/") + 1)
+  const dirB = b.substring(0, b.lastIndexOf("/") + 1)
+  return dirA < dirB ? -1 : dirA > dirB ? 1 : 0
+}
+
 export async function getTimeFiles(): Promise<string[]> {
   const minusYearFiles = await glob(cmsTestUtil.filePath("time/-?/?/?/?/index.html"))
   const year1Files = await glob(cmsTestUtil.filePath("time/?/index.html"))
@@ -49,7 +59,7 @@ export async function getTimeFiles(): Promise<string[]> {
   const monthFiles = await glob(cmsTestUtil.filePath("time/?/?/?/?/??/index.html"))
   const dayFiles = await glob(cmsTestUtil.filePath("time/?/?/?/?/??/??/index.html"))
   return year1Files.concat(year2Files).concat(year3Files).concat(year4Files).concat(
-    minusYearFiles).concat(monthFiles).concat(dayFiles).sort()
+    minusYearFiles).concat(monthFiles).concat(dayFiles).sort(periodFirst)
 }
 
 describe("Build", () => {
