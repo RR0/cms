@@ -71,6 +71,22 @@ describe("TimeContext", () => {
     expect(timeContext.getMinutes()).toBe(55)
   })
 
+  test("updateFromStr with a time zone containing a P is a date, not a duration", () => {
+    for (const str of ["1957-02-27 21:45PST", "1991-09-18 00:38:42PDT", "1957-02-27 21:45 (PST)"]) {
+      const context = new TimeContext()
+      expect(context.updateFromStr(str)).toBe(true)
+      expect(context.duration).toBeUndefined()
+      expect(context.getYear()).toBeDefined()
+      expect(context.getHour()).toBeDefined()
+    }
+  })
+
+  test("updateFromStr duration", () => {
+    const context = new TimeContext()
+    expect(context.updateFromStr("~P1H")).toBe(true)
+    expect(context.duration).toBeDefined()
+  })
+
   test("fromDate", () => {
     const month = 12
     const date = new Date(2001, month - 1, 13)

@@ -166,6 +166,11 @@ export class TimeContext {
         this.duration = undefined
       } catch (e) {
         try {
+          // Only a duration starts with P ("P10M", "~P1H"): otherwise EdtfDuration also accepts a date whose
+          // time zone contains a P ("21:45PST", "00:38:42PDT") as an empty duration.
+          if (!/^\s*~?P/.test(timeStr)) {
+            throw new Error("Not a duration")
+          }
           this.duration = EdtfDuration.fromString(timeStr)
           this.interval = undefined
           this.date = undefined
