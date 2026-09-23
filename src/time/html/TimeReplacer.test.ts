@@ -126,6 +126,41 @@ describe("TimeReplacer", async () => {
     })
   })
 
+  describe("renders an EDTF season", () => {
+
+    async function render(locale: string, value: string): Promise<string> {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "", locale)
+      const el = context.file.document.createElement("time")
+      el.textContent = value
+      return (await replacer.replacement(context, el)).textContent
+    }
+
+    test("in French and English, instead of failing on month 23", async () => {
+      expect(await render("fr", "1954-23")).toBe("automne 1954")
+      expect(await render("en", "1954-22")).toBe("summer 1954")
+    })
+
+    test("after another date", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      const previous = context.file.document.createElement("time")
+      previous.textContent = "1954-10-16"
+      await replacer.replacement(context, previous)
+      const season = context.file.document.createElement("time")
+      season.textContent = "1954-24"
+      expect((await replacer.replacement(context, season)).textContent).toBe("hiver 1954")
+    })
+  })
+
+  test("leaves a time with data-format=\"none\" as written", async () => {
+    const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+    const el = context.file.document.createElement("time")
+    el.dataset.format = "none"
+    el.textContent = "Dans la nuit"
+    const replaced = await replacer.replacement(context, el)
+    expect(replaced).toBe(el)
+    expect(replaced.outerHTML).toBe(`<time data-format="none">Dans la nuit</time>`)
+  })
+
   test("parses unsupported", async () => {
     const interval = "moi"
     const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")

@@ -12,6 +12,9 @@ export class RelativeTimeTextBuilder {
     const time = newContext.time
     const previousTime = time.equals(oldContext?.time) ? undefined : oldContext.time
     let options: Intl.DateTimeFormatOptions | undefined
+    if (TimeTextBuilder.isSeason(time.getMonth()) || TimeTextBuilder.isSeason(previousTime?.getMonth())) {
+      return undefined  // A season has no position within a year: always render it in full
+    }
     if (previousTime?.isDefined()) {
       options = {}
       const deltaMs = time.date.compare(previousTime.date as any)

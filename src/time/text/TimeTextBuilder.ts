@@ -1,6 +1,18 @@
 import { RR0Context } from "../../RR0Context.js"
 
 export class TimeTextBuilder {
+
+  /**
+   * EDTF season codes (21-24) and their names, per language.
+   */
+  static readonly seasons: Record<string, Record<number, string>> = {
+    fr: {21: "printemps", 22: "été", 23: "automne", 24: "hiver"},
+    en: {21: "spring", 22: "summer", 23: "autumn", 24: "winter"}
+  }
+
+  static isSeason(month: number | undefined): boolean {
+    return month >= 21 && month <= 24
+  }
   /**
    * @param options The default date format.to use.
    */
@@ -15,6 +27,11 @@ export class TimeTextBuilder {
     const printOptions: Intl.DateTimeFormatOptions = {}
     const date = new Date(undefined, undefined, undefined)
     const year = time.getYear()
+    const season = time.getMonth()
+    if (TimeTextBuilder.isSeason(season)) {  // "1954-23": no Date can hold it
+      const names = TimeTextBuilder.seasons[context.locale] ?? TimeTextBuilder.seasons.en
+      return year ? `${names[season]} ${year}` : names[season]
+    }
     if (year) {
       date.setFullYear(year)
       printOptions.year = options.year

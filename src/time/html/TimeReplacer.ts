@@ -36,14 +36,19 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
 
   async replacement(context: HtmlRR0Context, origEl: HTMLTimeElement): Promise<HTMLElement> {
     let replacement: HTMLElement | undefined
-    if (origEl.dateTime) {  // Already done?
+    if (origEl.dateTime || origEl.dataset.format === "none") {  // Already done, or not to be interpreted
       replacement = origEl
     } else {
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
       const valid = context.time.updateFromStr(timeStr)
       const between = context.messages.context.time.between.test(TimeReplacer.precedingText(origEl))
-      replacement = valid && this.factory.create(context, previousContext, {url: true, contentOnly: true, between})
+      try {
+        replacement = valid && this.factory.create(context, previousContext, {url: true, contentOnly: true, between})
+      } catch (e) {  // One unrenderable time must not stop the others of the page
+        context.warn("Could not render time", timeStr, (e as Error).message)
+        replacement = undefined
+      }
       if (!replacement) {
         replacement = origEl
         // replacement.setAttribute("datetime", context.time.toString())
