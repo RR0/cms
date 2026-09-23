@@ -49,6 +49,16 @@ describe("timeTextBuilder", () => {
     }
   })
 
+  test("prints midnight hour (0) instead of dropping it", () => {
+    const context = new RR0ContextImpl("fr", new TimeContext(), config)
+    context.time.setYear(1991)
+    context.time.setMonth(9)
+    context.time.setDayOfMonth(18)
+    context.time.setHour(0)
+    context.time.setMinutes(38)
+    expect(timeTextBuilder.build(context)).toBe("mercredi 18 septembre 1991 à 00:38")
+  })
+
   test("prints hour", () => {
     {
       const context = new RR0ContextImpl("fr", new TimeContext(), config)

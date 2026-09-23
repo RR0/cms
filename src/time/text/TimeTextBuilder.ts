@@ -32,7 +32,9 @@ export class TimeTextBuilder {
       printOptions.weekday = options.weekday
     }
     const hour = time.getHour()
-    if (hour) {
+    // Hour 0 counts only with minutes (00:38): a bare 0 is also what a date without time (from a Date) carries
+    const hasHour = Boolean(hour) || (hour === 0 && Boolean(time.getMinutes()))
+    if (hasHour) {
       date.setHours(hour)
       printOptions.hour = options.hour
     }
@@ -56,7 +58,7 @@ export class TimeTextBuilder {
         printOptions.day = this.options.day
         printOptions.weekday = this.options.weekday
       }
-      if (hour) {
+      if (hasHour) {
         printOptions.hour = this.options.hour
       }
       if (minutes) {
