@@ -12,6 +12,10 @@ export interface TimeRenderOptions {
    * The text says "between" right before this interval, so it reads "between X and Y" rather than "between X to Y".
    */
   between?: boolean
+  /**
+   * If a wording like "the day after" may replace the time. Defaults to true.
+   */
+  relativeWords?: boolean
 }
 
 export class TimeRenderer {
@@ -44,7 +48,7 @@ export class TimeRenderer {
     const date = time.date
     const absoluteTimeUrl = this.urlBuilder.fromEdtf(date)
     const title = this.textBuilder.build(context, renderOptions)
-    const text = (previousContext ? this.relativeTextBuilder.build(previousContext, context) : undefined) || title
+    const text = (previousContext ? this.relativeTextBuilder.build(previousContext, context, options.relativeWords !== false) : undefined) || title
     const file = context.file
     const currentFileName = file.name
     const doc = file.document

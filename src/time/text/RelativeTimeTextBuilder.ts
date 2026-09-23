@@ -7,7 +7,12 @@ export class RelativeTimeTextBuilder {
   constructor(protected timeTextBuilder: TimeTextBuilder) {
   }
 
-  build(oldContext: RR0Context, newContext: RR0Context): string {
+  /**
+   * @param oldContext The time to render relatively to.
+   * @param newContext The time to render.
+   * @param words If a wording like "the day after" may replace the time.
+   */
+  build(oldContext: RR0Context, newContext: RR0Context, words = true): string {
     let text: string | undefined
     const time = newContext.time
     const previousTime = time.equals(oldContext?.time) ? undefined : oldContext.time
@@ -38,7 +43,8 @@ export class RelativeTimeTextBuilder {
       const deltaDurationMonth = deltaDuration.months?.value
       const sameMonth = !deltaDurationMonth || deltaDurationMonth < 1
       const noMonth = !previousMonth
-      const shouldSetMonth = deltaDurationMonth || (noMonth || shouldSetYear)
+      // Calendar fields are compared too: 22:00 to the next midnight is less than a day, but another day
+      const shouldSetMonth = deltaDurationMonth || (noMonth || shouldSetYear) || month !== previousMonth
       if (shouldSetMonth) {
         deltaTime.setMonth(month)
         options.month = "long"
@@ -48,7 +54,8 @@ export class RelativeTimeTextBuilder {
       const previousDay = previousTime.getDayOfMonth()
       const dayOfMonthDelta = deltaDuration.days?.value
       const sameDay = !dayOfMonthDelta || dayOfMonthDelta < 1
-      const shouldSetDay = dayOfMonthDelta || (!sameDay && sameYear && sameMonth)
+      const shouldSetDay = dayOfMonthDelta || (!sameDay && sameYear && sameMonth) || shouldSetMonth
+        || dayOfMonth !== previousDay
       const noDay = !previousDay
       if (shouldSetDay) {
         deltaTime.setDayOfMonth(dayOfMonth)
@@ -59,6 +66,7 @@ export class RelativeTimeTextBuilder {
       const hour = time.getHour()
       const hourDelta = deltaDuration.hours?.value
       const shouldSetHour = hourDelta || (hour && (noDay || (sameYear && sameMonth && sameDay))) || previousTime.getHour() !== time.getHour()
+        || (shouldSetDay && hour !== undefined)  // "12 05:45" after "03 05:00" is not just "45"
       if (shouldSetHour) {
         deltaTime.setHour(hour)
         options.hour = "2-digit"
@@ -68,7 +76,12 @@ export class RelativeTimeTextBuilder {
       const minutesDelta = deltaDuration.minutes?.value
       const sameHour = hourDelta === 0
       const shouldSetMinutes = minutesDelta || (minutes && (sameYear && sameMonth && sameDay && sameHour))
+        || (shouldSetHour && minutes)
       if (shouldSetMinutes) {
+        if (!shouldSetHour && hour !== undefined) {  // Minutes alone ("19") don't tell a time, even at hour 0
+          deltaTime.setHour(hour)
+          options.hour = "2-digit"
+        }
         deltaTime.setMinutes(minutes)
         options.minute = "2-digit"
       }
@@ -79,7 +92,9 @@ export class RelativeTimeTextBuilder {
       // A relative wording ("the day after", "the month after"...) only makes sense against a previous time
       // that is as precise: a month page (1947-07) is not "the day before" its first entry (1947-07-01).
       const messages = newContext.messages.context.time.relative
-      if (dayOfMonthDelta && sameYear && sameMonth && !noDay) {
+      if (!words) {
+        // Rendered in full
+      } else if (dayOfMonthDelta && sameYear && sameMonth && !noDay) {
         switch (dayOfMonthDelta) {
           case -1:
             text = messages.day.before

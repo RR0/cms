@@ -343,14 +343,19 @@ export class TimeContext {
   clone() {
     const date = this.date
     const interval = this.interval
-    return new TimeContext(
-      date?.year?.value, date?.month?.value, date?.day?.value,
+    const season = date?.month?.value > 12  // "1954-23": EdtfDate's constructor rejects it, only its parser accepts it
+    const clone = new TimeContext(
+      date?.year?.value, season ? undefined : date?.month?.value, date?.day?.value,
       date?.hour?.value, date?.minute?.value,
       date?.timeshift?.value,
       this.approximate, this.approximateTime,
       interval?.from, interval?.to,
       this.duration
     )
+    if (season) {
+      clone.date = EdtfDate.fromString(date.toString())
+    }
+    return clone
   }
 
   /**

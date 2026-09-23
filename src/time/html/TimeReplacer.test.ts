@@ -339,4 +339,80 @@ describe("TimeReplacer", async () => {
     test("with approximation", async () => {
     })
   })
+  describe("partial values", () => {
+
+    async function render(context, str: string): Promise<string> {
+      const timeEl = context.file.document.createElement("time")
+      timeEl.textContent = str
+      const replacement = await replacer.replacement(context, timeEl)
+      return replacement.textContent
+    }
+
+    test("day of the current month", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "19")).toBe("dimanche 19")
+      expect(context.time.toString()).toBe("1990-08-19")
+    })
+
+    test("hour of the current day", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      await render(context, "12")
+      expect(await render(context, "21:00")).toBe("21 h")
+      expect(context.time.getDayOfMonth()).toBe(12)
+      expect(context.time.getHour()).toBe(21)
+      expect(await render(context, "23T~01:45")).toBe("jeudi 23 01:45")
+      expect(await render(context, "00:19/00:30")).toBe("00:19 à 00:30")
+      expect(context.time.getYear()).toBe(1990)
+    })
+
+    test("hour of an unknown day is not read as a year", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/index.html", "")
+      expect(await render(context, "07:30")).toBe("07:30")
+      expect(context.time.getYear()).toBe(1990)
+    })
+
+    test("interval end relative to its start", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "1517-05-22 21:00/22:00")).toBe("mardi 22 mai 1517 à 21 h à 22 h")
+      expect(await render(context, "02 20:00/03 05:00")).toBe("mercredi 2 20 h à jeudi 3 05 h")
+      expect(await render(context, "27 23:00/03:00")).toBe("dimanche 27 23 h à lundi 28 03 h")
+    })
+
+    test("date without hour after an hour of the previous day", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      await render(context, "1998-08-09 22:00")
+      expect(await render(context, "1998-08-10")).toBe("lundi 10")
+    })
+
+    test("range of durations", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "P10M/12M")).toBe("10 minutes à 12 minutes")
+      expect(await render(context, "P15S/20s")).toBe("15 secondes à 20 secondes")
+    })
+
+    test("words around the value are kept", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "1964-04-27Tle soir")).toBe("lundi 27 avril 1964 le soir")
+      expect(await render(context, "28Tpeu après minuit")).toBe("le lendemain peu après minuit")
+      expect(await render(context, "vers\u00a010:50")).toBe("vers\u00a010:50")
+    })
+
+    test("words are not read as a time", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "1 h après le coucher du soleil")).toBe("1 h après le coucher du soleil")
+      expect(await render(context, "12 mars 1977")).toBe("12 mars 1977")
+      expect(context.time.toString()).toBe("1990-08")
+    })
+
+    test("time zone is part of the value", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "1947-06-24 21:45PST")).toBe("mardi 24 juin 1947 à 21:45")
+    })
+
+    test("season does not break the next time", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "1990-21")).toBe("printemps 1990")
+      expect(await render(context, "-0033")).toBe("33 av. J.-C.")
+    })
+  })
 })

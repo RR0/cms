@@ -2,6 +2,8 @@ import { HtmlRR0Context } from "../../RR0Context.js"
 import { DomReplacement } from "../DomReplacement.js"
 import { ObjectUtils } from "@rr0/common"
 import { TimeElementFactory } from "./TimeElementFactory.js"
+import { TimeRenderOptions } from "./TimeRenderer.js"
+import { TimeStringCompleter } from "./TimeStringCompleter.js"
 
 /**
  * Replaces a <time> tag.
@@ -13,6 +15,8 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
    * ("between <strong><time>1989/1994</time></strong>").
    */
   static readonly inlineTags = ["STRONG", "EM", "B", "I", "U", "SPAN", "A"]
+
+  protected readonly completer = new TimeStringCompleter()
 
   constructor(readonly factory: TimeElementFactory) {
   }
@@ -41,19 +45,52 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
     } else {
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
-      const valid = context.time.updateFromStr(timeStr)
-      const between = context.messages.context.time.between.test(TimeReplacer.precedingText(origEl))
+      const {prefix, value, suffix} = this.completer.split(timeStr)
+      const between = context.messages.context.time.between.test(TimeReplacer.precedingText(origEl) + prefix)
+      const options = {url: true, contentOnly: true, between}
       try {
-        replacement = valid && this.factory.create(context, previousContext, {url: true, contentOnly: true, between})
+        const durations = /^(~?)P([^/]+)\/P?([^/]+)$/.exec(value.trim())  // "P10M/12M"
+        if (durations) {
+          replacement = this.durationRange(context, previousContext, durations, options)
+        } else {
+          const completed = this.completer.complete(value.trim(), context.time)
+          if (!this.completer.isInterpretable(completed)) {
+            context.warn("Could not interpret time", timeStr)
+          } else if (this.completer.isDayless(completed)) {
+            context.warn("Could not resolve the day of time", timeStr)
+          } else if (context.time.updateFromStr(completed)) {
+            replacement = this.factory.create(context, previousContext, options)
+          }
+        }
       } catch (e) {  // One unrenderable time must not stop the others of the page
         context.warn("Could not render time", timeStr, (e as Error).message)
         replacement = undefined
       }
       if (!replacement) {
         replacement = origEl
-        // replacement.setAttribute("datetime", context.time.toString())
+      } else if (prefix || suffix) {  // Keep the words written around the time ("vers", "le soir")
+        const wrapper = context.file.document.createElement("span")
+        wrapper.className = "time-described"
+        wrapper.append(prefix, replacement, suffix)
+        replacement = wrapper
       }
       context.debug("\tReplacing time", origEl.outerHTML, "with", ObjectUtils.asSet<HTMLElement>(replacement).outerHTML)
+    }
+    return replacement
+  }
+
+  /**
+   * Renders a range of durations ("P10M/12M") as "from 10 to 12 minutes".
+   */
+  protected durationRange(context: HtmlRR0Context, previousContext: HtmlRR0Context | undefined,
+                          durations: RegExpExecArray, options: TimeRenderOptions): HTMLElement | undefined {
+    const [, approximate, from, to] = durations
+    const fromContext = context.clone()
+    const toContext = context.clone()
+    let replacement: HTMLElement | undefined
+    if (fromContext.time.updateFromStr(`${approximate}P${from.toUpperCase()}`)
+      && toContext.time.updateFromStr(`${approximate}P${to.toUpperCase()}`)) {
+      replacement = this.factory.createInterval(fromContext, toContext, previousContext, options)
     }
     return replacement
   }

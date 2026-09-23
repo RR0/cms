@@ -35,12 +35,19 @@ export class TimeElementFactory {
     return replacement
   }
 
-  protected createInterval(fromContext: HtmlRR0Context, toContext: HtmlRR0Context, previousContext: HtmlRR0Context,
+  createInterval(fromContext: HtmlRR0Context, toContext: HtmlRR0Context, previousContext: HtmlRR0Context,
                  options: TimeRenderOptions): HTMLElement | undefined {
     let replacement: HTMLElement
+    options = {...options, relativeWords: false}  // "the day after at 22 h" can't start or end an interval
     const startReplacement = this.valueReplacement(fromContext, previousContext, options)
     if (startReplacement) {
-      const endReplacement = this.valueReplacement(toContext, previousContext, options)
+      const from = fromContext.time
+      const to = toContext.time
+      const sameDay = from.getDayOfMonth() && from.getYear() === to.getYear() && from.getMonth() === to.getMonth()
+        && from.getDayOfMonth() === to.getDayOfMonth()
+      const endReplacement = sameDay  // "21:00/22:00" ends at "22 h", not at "Tuesday 22 May 1517 at 22 h"
+        ? this.valueReplacement(toContext, fromContext, options)
+        : this.valueReplacement(toContext, previousContext, options)
       if (endReplacement && endReplacement.outerHTML !== startReplacement.outerHTML) {
         replacement = fromContext.file.document.createElement("span")
         replacement.className = "time-interval"
