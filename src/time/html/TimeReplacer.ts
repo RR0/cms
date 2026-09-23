@@ -8,6 +8,12 @@ import { TimeElementFactory } from "./TimeElementFactory.js"
  */
 export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElement> {
 
+  /**
+   * Elements that don't break a sentence, so that the text before them is the text before the <time> they contain
+   * ("between <strong><time>1989/1994</time></strong>").
+   */
+  static readonly inlineTags = ["STRONG", "EM", "B", "I", "U", "SPAN", "A"]
+
   constructor(readonly factory: TimeElementFactory) {
   }
 
@@ -15,6 +21,17 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
     const replacement = context.file.document.createElement("time") as HTMLTimeElement
     replacement.dateTime = dateTime
     return replacement
+  }
+
+  /**
+   * @return The text that precedes an element in its sentence.
+   */
+  static precedingText(el: Element): string {
+    let node: Node = el
+    while (!node.previousSibling && node.parentElement && TimeReplacer.inlineTags.includes(node.parentElement.tagName)) {
+      node = node.parentElement
+    }
+    return node.previousSibling?.textContent ?? ""
   }
 
   async replacement(context: HtmlRR0Context, origEl: HTMLTimeElement): Promise<HTMLElement> {
@@ -25,7 +42,8 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
       const valid = context.time.updateFromStr(timeStr)
-      replacement = valid && this.factory.create(context, previousContext, {url: true, contentOnly: true})
+      const between = context.messages.context.time.between.test(TimeReplacer.precedingText(origEl))
+      replacement = valid && this.factory.create(context, previousContext, {url: true, contentOnly: true, between})
       if (!replacement) {
         replacement = origEl
         // replacement.setAttribute("datetime", context.time.toString())

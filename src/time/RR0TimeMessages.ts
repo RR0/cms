@@ -27,6 +27,11 @@ export type RR0TimeMessages = {
     }
   },
   fromTo(startReplacement: string, endReplacement: string): string
+  /**
+   * The word that, written right before an interval, asks for it to be rendered as `betweenAnd` ("between", "entre").
+   */
+  between: RegExp
+  betweenAnd(startReplacement: string, endReplacement: string): string
   on(approximate: boolean): string
   in(approximate: boolean): string
   starting(approximate: boolean): string

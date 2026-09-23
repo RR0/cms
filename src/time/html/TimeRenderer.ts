@@ -8,6 +8,10 @@ import { TimeUrlBuilder } from "../TimeUrlBuilder.js"
 export interface TimeRenderOptions {
   url: boolean
   contentOnly: boolean
+  /**
+   * The text says "between" right before this interval, so it reads "between X and Y" rather than "between X to Y".
+   */
+  between?: boolean
 }
 
 export class TimeRenderer {

@@ -102,6 +102,30 @@ describe("TimeReplacer", async () => {
       `<span class="time-interval"><span class="time-resolved"><time datetime="1951">1951</time></span> à <span class="time-resolved"><time datetime="1955">1955</time></span></span>`)
   })
 
+  describe("renders an interval after \"between\" as \"between X and Y\"", () => {
+
+    async function renderIn(locale: string, html: string): Promise<string> {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "", locale)
+      const p = context.file.document.createElement("p")
+      p.innerHTML = html
+      const replaced = await replacer.replacement(context, p.querySelector("time"))
+      return replaced.textContent
+    }
+
+    test("in French", async () => {
+      expect(await renderIn("fr", "entre <time>1951/1955</time>")).toBe("1951 et 1955")
+    })
+
+    test("in English, through an inline element", async () => {
+      expect(await renderIn("en", "anywhere between <strong><time>1951/1955</time></strong>")).toBe("1951 and 1955")
+    })
+
+    test("but not without the word", async () => {
+      expect(await renderIn("fr", "de <time>1951/1955</time>")).toBe("1951 à 1955")
+      expect(await renderIn("en", "from <time>1951/1955</time>")).toBe("1951 to 1955")
+    })
+  })
+
   test("parses unsupported", async () => {
     const interval = "moi"
     const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")

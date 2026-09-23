@@ -34,5 +34,7 @@ export class RR0TimeMessages_en implements RR0TimeMessages {
   }
   in = (approximate: boolean): string => (approximate ? "around " : "")
   fromTo = (startReplacement: string, endReplacement: string): string => startReplacement + " to " + endReplacement
+  between = /\bbetween\s*$/i
+  betweenAnd = (startReplacement: string, endReplacement: string): string => startReplacement + " and " + endReplacement
   starting = (approximate: boolean): string => "starting " + (approximate ? "" : "the ")
 }

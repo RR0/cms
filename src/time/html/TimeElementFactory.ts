@@ -44,8 +44,10 @@ export class TimeElementFactory {
       if (endReplacement && endReplacement.outerHTML !== startReplacement.outerHTML) {
         replacement = fromContext.file.document.createElement("span")
         replacement.className = "time-interval"
-        replacement.innerHTML = fromContext.messages.context.time.fromTo(startReplacement.outerHTML,
-          endReplacement.outerHTML)
+        const timeMessages = fromContext.messages.context.time
+        replacement.innerHTML = options.between
+          ? timeMessages.betweenAnd(startReplacement.outerHTML, endReplacement.outerHTML)
+          : timeMessages.fromTo(startReplacement.outerHTML, endReplacement.outerHTML)
       }
     }
     return replacement
