@@ -33,6 +33,16 @@ describe("TitleReplaceCommand", () => {
         `<html><head><title>1954</title></head><body>This is about 1954!</body></html>`)
     })
 
+    test("title set by a SSI directive prevails over the default handler", async () => {
+      const command = new SsiTitleReplaceCommand([timeDefaultHandler])
+      const context = cmsTestUtil.newHtmlContext(fileName,
+        `<!--#set var="title" value="Les visiteurs du ciel" -->\nThis is about <!--#echo var="title" -->!`)
+      await command.execute(context)
+      expect(context.file.title).toBe("Les visiteurs du ciel")
+      expect(context.file.contents).toBe(
+        `<html><head><title>Les visiteurs du ciel</title></head><body>This is about Les visiteurs du ciel!</body></html>`)
+    })
+
     test("default month title with handler", async () => {
       const command = new SsiTitleReplaceCommand([timeDefaultHandler])
       const context = cmsTestUtil.time.newHtmlContext("1/9/5/4/10/index.html",

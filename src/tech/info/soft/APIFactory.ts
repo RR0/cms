@@ -9,7 +9,7 @@ export class APIFactory extends TypedDataFactory<API, APIJson> {
   }
 
   parse(apiJson: APIJson): API {
-    const events = apiJson.events.map(this.eventFactory.parse)
-    return {type: "api", id: apiJson.id, dirName: apiJson.dirName, url: apiJson.url, events}
+    const events = (apiJson.events || []).map(this.eventFactory.parse)
+    return {type: "api", id: apiJson.id, dirName: apiJson.dirName, title: apiJson.title, url: apiJson.url, events}
   }
 }
