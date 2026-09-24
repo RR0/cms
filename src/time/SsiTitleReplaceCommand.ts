@@ -1,5 +1,7 @@
 import { RegexReplacer, SsiEchoVarReplaceCommand, StringContextHandler } from "ssg-api"
 import { HtmlRR0Context } from "../RR0Context.js"
+import { StringUtil } from "../util/string/StringUtil.js"
+import path from "path"
 
 /**
  * Replaces the SSI expression "<!--#echo var="title" -->" by the page's <title> content,
@@ -52,8 +54,18 @@ export class SsiTitleReplaceCommand extends SsiEchoVarReplaceCommand {
       this.defaultHandlers.some(handle => !title && (title = handle(context)))
     }
     if (!title) {
-      title = context.file.name
+      title = this.nameTitle(context.file.name)
     }
     return title
+  }
+
+  /**
+   * @return The title implied by a file name: its directory's name for an index page (org/eu/fr/.../paris/index.html
+   * gives "Paris"), its own name otherwise.
+   */
+  protected nameTitle(fileName: string): string {
+    const baseName = path.basename(fileName, path.extname(fileName))
+    const name = /^index(_[a-z]{2})?$/.test(baseName) ? path.basename(path.dirname(fileName)) : baseName
+    return StringUtil.camelToText(name)
   }
 }

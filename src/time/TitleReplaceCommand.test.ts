@@ -18,10 +18,15 @@ describe("TitleReplaceCommand", () => {
       const command = new SsiTitleReplaceCommand()
       const context = cmsTestUtil.newHtmlContext(fileName, `This is about <!--#echo var="title" -->!`)
       await command.execute(context)
-      const fullPath = cmsTestUtil.filePath(fileName)
-      expect(context.file.title).toBe(fullPath)
-      expect(context.file.contents).toBe(`<html><head><title>${cmsTestUtil.filePath(
-        fileName)}</title></head><body>This is about ${fullPath}!</body></html>`)
+      expect(context.file.title).toBe("4")
+      expect(context.file.contents).toBe(`<html><head><title>4</title></head><body>This is about 4!</body></html>`)
+    })
+
+    test("year beyond 4 digits", async () => {
+      const command = new SsiTitleReplaceCommand([timeDefaultHandler])
+      const context = cmsTestUtil.newHtmlContext("time/-10000/index.html", `This is about <!--#echo var="title" -->!`)
+      await command.execute(context)
+      expect(context.file.title).toBe("10000 av. J.-C.")
     })
 
     test("default title with handler", async () => {
@@ -63,5 +68,13 @@ describe("TitleReplaceCommand", () => {
         `<html><head><title>Vendredi 1 octobre 1954</title></head><body>This is about Vendredi 1 octobre 1954!</body></html>`)
     })
 
+  })
+
+  test("directory name of an index page with no title", async () => {
+    const command = new SsiTitleReplaceCommand([timeDefaultHandler])
+    const context = cmsTestUtil.newHtmlContext("org/eu/fr/cobeps/index.html",
+      `This is about <!--#echo var="title" -->!`)
+    await command.execute(context)
+    expect(context.file.title).toBe("Cobeps")
   })
 })

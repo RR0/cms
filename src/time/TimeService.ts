@@ -16,6 +16,11 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
 
   static readonly defaultRegex = /time\/(-)?(\d)\/(\d)\/(\d)\/(\d)\/?(\d{2})?\/?(\d{2})?\/?(index(_[a-z]{2})?.html)?/
 
+  /**
+   * A year beyond 4 digits, which has its own directory (time/-10000/index.html).
+   */
+  static readonly yearDirRegex = /time\/(-?\d{5,})\/(index(_[a-z]{2})?\.html)?$/
+
   constructor(dataService: AllDataService, protected options: TimeOptions,
               readonly timePathRegex = TimeService.defaultRegex) {
     super(dataService, new EventDataFactory(new RR0EventFactory(),
@@ -41,6 +46,16 @@ export class TimeService extends AbstractDataService<RR0Event, RR0EventJson> {
 
   contextFromFileName(context: HtmlRR0Context, fileName = context.file.name): TimeContext | undefined {
     let timeContext: TimeContext | undefined
+    const yearDirExec = TimeService.yearDirRegex.exec(fileName)
+    if (yearDirExec) {
+      timeContext = context.clone().time
+      timeContext.setYear(parseInt(yearDirExec[1], 10))
+      timeContext.setMonth(undefined)
+      timeContext.setDayOfMonth(undefined)
+      timeContext.setHour(undefined)
+      timeContext.setMinutes(undefined)
+      return timeContext
+    }
     let elems
     if (fileName.endsWith("index.html")) {
       while ((elems = fileName.split("/")).length < 6) {
