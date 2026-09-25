@@ -47,7 +47,10 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
       const timeStr = origEl.textContent
       const {prefix, value, suffix} = this.completer.split(timeStr)
       const between = context.messages.context.time.between.test(TimeReplacer.precedingText(origEl) + prefix)
-      const options = {url: true, contentOnly: true, between}
+      // A <time> already inside a link keeps that link: a link of its own would nest <a> in <a>, which the HTML
+      // parser splits, closing the enclosing elements (a note, a source) early.
+      const url = !origEl.closest("a")
+      const options = {url, contentOnly: true, between}
       try {
         const durations = /^(~?)P([^/]+)\/P?([^/]+)$/.exec(value.trim())  // "P10M/12M"
         if (durations) {

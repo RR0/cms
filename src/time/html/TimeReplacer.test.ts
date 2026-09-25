@@ -409,6 +409,20 @@ describe("TimeReplacer", async () => {
       expect(await render(context, "1947-06-24 21:45PST")).toBe("mardi 24 juin 1947 à 21:45")
     })
 
+    test("time inside a link gets no link of its own", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      const doc = context.file.document
+      const a = doc.createElement("a")
+      a.href = "/science/crypto/ufo/enquete/dossier/5Novembre/index.html"
+      const timeEl = doc.createElement("time")
+      timeEl.textContent = "2003"
+      a.append(timeEl)
+      doc.body.append(a)
+      const replacement = await replacer.replacement(context, timeEl)
+      expect(replacement.querySelector("a")).toBe(null)
+      expect(replacement.textContent).toBe("2003")
+    })
+
     test("season does not break the next time", async () => {
       const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
       expect(await render(context, "1990-21")).toBe("printemps 1990")
