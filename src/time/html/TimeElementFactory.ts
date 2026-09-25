@@ -62,12 +62,13 @@ export class TimeElementFactory {
 
   protected createStarting(fromContext: HtmlRR0Context, previousContext: HtmlRR0Context,
                  options: TimeRenderOptions): HTMLElement | undefined {
+    options = {...options, relativeWords: false}  // Not "à partir de l'année suivante"
     const {result, replacement} = this.renderer.renderContent(fromContext, previousContext, options)
     let startingReplacement: HTMLElement
     startingReplacement = fromContext.file.document.createElement("span")
     startingReplacement.className = "time-interval"
     const approximate = !fromContext.time.getDayOfMonth()
-    startingReplacement.innerHTML = fromContext.messages.context.time.starting(approximate) + " " + result.outerHTML
+    startingReplacement.textContent = fromContext.messages.context.time.starting(approximate)
     result.append(startingReplacement, replacement)
     return result
   }

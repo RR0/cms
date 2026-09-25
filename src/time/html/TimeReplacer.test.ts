@@ -282,6 +282,11 @@ describe("TimeReplacer", async () => {
     test("but not without one", async () => {
       expect(await renderAfter("fr", "<time>2005</time>. Puis, <time>2006</time>")).toBe("l'année suivante")
     })
+
+    test("including the one of an open interval", async () => {
+      expect(await renderAfter("fr", "<time>2005</time>. <time>2006/</time>")).toBe("à partir de 2006")
+      expect(await renderAfter("en", "<time>2005</time>. <time>2006/</time>")).toBe("starting 2006")
+    })
   })
 
   test("avoids linking to current file", async () => {
