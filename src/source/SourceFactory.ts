@@ -99,7 +99,7 @@ export class SourceFactory {
       context.error("Could not fetch source from " + href, e.message)
       title = href
     }
-    publisher = resOut.headers.get("host")
+    publisher = resOut.headers?.get("host") ?? new URL(href).host  // No response when the fetch failed
     const time = lastModif ? EdtfDate.fromDate(new Date(lastModif)) : context.time.date
     const publication: Publication = {publisher, time}
     return {
