@@ -31,7 +31,9 @@ export class LanguageReplaceCommand extends DomReplaceCommand<HTMLElement, HtmlR
               fileLang = fileName.includes("_" + pageLang) ? pageLang : ""
             }
           } else {
-            pageLang = "fr"
+            // A file without variant is French, unless it declares otherwise (an English document not translated yet)
+            const declared = inputFile.document.querySelector<HTMLMetaElement>("meta[http-equiv='content-language' i]")
+            pageLang = declared?.content.trim().substring(0, 2).toLowerCase() || "fr"
           }
           inputFile.document.documentElement.lang = inputFile.lang.lang = pageLang
           const langVariants = variants.length == 1 && variants[0] == "" ? [pageLang == "fr" ? "en" : "fr"] : variants

@@ -283,6 +283,12 @@ describe("TimeReplacer", async () => {
       expect(await renderAfter("fr", "<time>2005</time>. Puis, <time>2006</time>")).toBe("l'année suivante")
     })
 
+    test("in the language of its passage", async () => {
+      expect(await renderAfter("fr", "<time>2005</time>. <q lang=\"en\">in <time>2006</time></q>")).toBe("2006")
+      expect(await renderAfter("fr", "<time>2005</time>. <q lang=\"en\">Then <time>2006</time></q>")).toBe("the year after")
+      expect(await renderAfter("fr", "<q lang=\"en\"><time>2006</time></q>. <time>2007</time>")).toBe("l'année suivante")
+    })
+
     test("including the one of an open interval", async () => {
       expect(await renderAfter("fr", "<time>2005</time>. <time>2006/</time>")).toBe("à partir de 2006")
       expect(await renderAfter("en", "<time>2005</time>. <time>2006/</time>")).toBe("starting 2006")

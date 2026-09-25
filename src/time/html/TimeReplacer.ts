@@ -38,11 +38,22 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
     return node.previousSibling?.textContent ?? ""
   }
 
-  async replacement(context: HtmlRR0Context, origEl: HTMLTimeElement): Promise<HTMLElement> {
+  /**
+   * @return The language of the passage holding an element, if it differs from its page's.
+   */
+  static passageLang(context: HtmlRR0Context, el: Element): string | undefined {
+    const lang = el.closest("[lang]")?.getAttribute("lang")?.trim().substring(0, 2).toLowerCase()
+    return lang && lang !== context.locale.substring(0, 2) ? lang : undefined
+  }
+
+  async replacement(pageContext: HtmlRR0Context, origEl: HTMLTimeElement): Promise<HTMLElement> {
     let replacement: HTMLElement | undefined
     if (origEl.dateTime || origEl.dataset.format === "none") {  // Already done, or not to be interpreted
       replacement = origEl
     } else {
+      // A time in a passage of another language ("<blockquote lang='en'>") is rendered in that language
+      const passageLang = TimeReplacer.passageLang(pageContext, origEl)
+      const context = passageLang ? pageContext.clone(passageLang) : pageContext
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
       const {prefix, value, suffix} = this.completer.split(timeStr)
@@ -79,6 +90,9 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
         wrapper.className = "time-described"
         wrapper.append(prefix, replacement, suffix)
         replacement = wrapper
+      }
+      if (context !== pageContext) {
+        pageContext.time = context.time  // The next times of the page follow this one
       }
       context.debug("\tReplacing time", origEl.outerHTML, "with", ObjectUtils.asSet<HTMLElement>(replacement).outerHTML)
     }

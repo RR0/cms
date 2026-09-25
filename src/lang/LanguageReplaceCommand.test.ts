@@ -14,6 +14,14 @@ describe("LanguageReplaceCommand", () => {
           "1/9/6/8/CondonReport/index.html"))}">English version</a></span></body></html>`)
   })
 
+  test("declared language of a file without variant", async () => {
+    const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html",
+      `<meta http-equiv="content-language" content="en"><span id="alternate"/>`)
+    await new LanguageReplaceCommand().execute(context)
+    expect(context.file.lang.lang).toBe("en")
+    expect(context.file.document.documentElement.lang).toBe("en")
+  })
+
   test("add english translation", async () => {
     const context = cmsTestUtil.time.newHtmlContext("0/6/4/0/ChronicaMinor/index_fr.html", `<span id="alternate"/>`)
     const command = new LanguageReplaceCommand()

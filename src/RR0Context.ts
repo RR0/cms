@@ -32,12 +32,20 @@ export class RR0ContextImpl extends SsgContextImpl {
   readonly images = new Set<string>()
   protected readonly fileMap = new Map<string, FileContents>()
   place: PlaceContext
+  /**
+   * The language of a passage that differs from its page's (<blockquote lang="en"> in a French page).
+   */
+  protected localeOverride?: string
 
   constructor(locale: string, readonly time: TimeContext, readonly config: FileWriteConfig,
               readonly people = undefined, currentFile: FileContents | undefined = undefined,
               protected _messages?: RR0Messages, readonly cms: CMSContext = undefined) {
     super(locale, new Map(), "RR0", new ConsoleLogger("RR0"), currentFile)
     this.place = new PlaceContext(locale, this.messages.context.place)
+  }
+
+  get locale(): string {
+    return this.localeOverride ?? super.locale
   }
 
   get messages(): RR0Messages {
@@ -70,8 +78,11 @@ export class RR0ContextImpl extends SsgContextImpl {
   }
 
   clone(locale = this.locale): RR0ContextImpl {
-    return new RR0ContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file, this.messages,
-      this.cms)
+    const sameLocale = locale === this.locale
+    const clone = new RR0ContextImpl(locale, this.time.clone(), this.config, this.people?.clone(), this._file,
+      sameLocale ? this._messages : undefined, this.cms)
+    clone.localeOverride = sameLocale ? this.localeOverride : locale
+    return clone
   }
 
   toString() {
