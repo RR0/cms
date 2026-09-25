@@ -46,11 +46,14 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
       const {prefix, value, suffix} = this.completer.split(timeStr)
-      const between = context.messages.context.time.between.test(TimeReplacer.precedingText(origEl) + prefix)
+      const preceding = TimeReplacer.precedingText(origEl) + prefix
+      const between = context.messages.context.time.between.test(preceding)
+      // "en l'année suivante" is not French: after a preposition, the time is rendered in full
+      const relativeWords = !context.messages.context.time.preposition.test(preceding)
       // A <time> already inside a link keeps that link: a link of its own would nest <a> in <a>, which the HTML
       // parser splits, closing the enclosing elements (a note, a source) early.
       const url = !origEl.closest("a")
-      const options = {url, contentOnly: true, between}
+      const options = {url, contentOnly: true, between, relativeWords}
       try {
         const durations = /^(~?)P([^/]+)\/P?([^/]+)$/.exec(value.trim())  // "P10M/12M"
         if (durations) {

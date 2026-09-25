@@ -31,6 +31,11 @@ export type RR0TimeMessages = {
    * The word that, written right before an interval, asks for it to be rendered as `betweenAnd` ("between", "entre").
    */
   between: RegExp
+  /**
+   * The words that, written right before a time, need it rendered in full: a relative wording can't follow them
+   * ("en l'année suivante", "in the year after").
+   */
+  preposition: RegExp
   betweenAnd(startReplacement: string, endReplacement: string): string
   on(approximate: boolean): string
   in(approximate: boolean): string

@@ -255,6 +255,35 @@ describe("TimeReplacer", async () => {
       "2/0/0/6/")}"><time datetime="${datetime}" title="2006">l'année suivante</time></a></span>`)
   })
 
+  describe("renders a time in full after a preposition", () => {
+
+    async function renderAfter(locale: string, html: string): Promise<string> {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "", locale)
+      const p = context.file.document.createElement("p")
+      p.innerHTML = html
+      const times = p.querySelectorAll("time")
+      let replaced: HTMLElement
+      for (const time of times) {
+        replaced = await replacer.replacement(context, time)
+      }
+      return replaced.textContent
+    }
+
+    test("in French", async () => {
+      expect(await renderAfter("fr", "<time>2005</time>. En <time>2006</time>")).toBe("2006")
+      expect(await renderAfter("fr", "<time>2005</time>, jusqu'à <time>2006</time>")).toBe("2006")
+      expect(await renderAfter("fr", "<time>2005</time>, d’<time>2006</time>")).toBe("2006")
+    })
+
+    test("in English", async () => {
+      expect(await renderAfter("en", "<time>2005</time>. In <time>2006</time>")).toBe("2006")
+    })
+
+    test("but not without one", async () => {
+      expect(await renderAfter("fr", "<time>2005</time>. Puis, <time>2006</time>")).toBe("l'année suivante")
+    })
+  })
+
   test("avoids linking to current file", async () => {
     const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
     const timeEl = context.file.document.createElement("time")

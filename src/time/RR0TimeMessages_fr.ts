@@ -35,6 +35,7 @@ export class RR0TimeMessages_fr implements RR0TimeMessages {
   in = (approximate: boolean): string => (approximate ? "vers " : "en ")
   fromTo = (startReplacement: string, endReplacement: string): string => `${startReplacement} à ${endReplacement}`
   between = /\bentre\s*$/i
+  preposition = /(?:^|[^\p{L}])(?:(?:en|de|du|des|à|au|aux|jusque|dès|depuis|vers|avant|après|pour|par|fin|début|entre|le|la|les|ce|cet|cette)\s*|(?:d|l|jusqu|qu)['’]\s*|mi-\s*)$/iu
   betweenAnd = (startReplacement: string, endReplacement: string): string => `${startReplacement} et ${endReplacement}`
   starting = (approximate: boolean): string => "à partir " + (approximate ? "de " : "du ")
 }
