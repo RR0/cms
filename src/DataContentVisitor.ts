@@ -44,7 +44,8 @@ export class DataContentVisitor implements ContentVisitor {
   }
 
   protected async processEvent(context: HtmlRR0Context, event: RR0Event, data: RR0Data) {
-    switch (event.eventType) {
+    // Widened by "interpretation", which @rr0/data's RR0EventType has from its next release on.
+    switch (event.eventType as RR0Event["eventType"] | "interpretation") {
       case "birth":
         await this.processBirth(context, event, data)
         break
@@ -58,6 +59,10 @@ export class DataContentVisitor implements ContentVisitor {
         await this.processDeath(context, event, data)
         break
       case "sighting":
+      // An analyst's reading of one of the case's sightings (a UFO@home interpretation: bodies in
+      // metres, which the player stands in the scene and measures against the account). Nothing
+      // to write in the page: the player reads it from the case.json, so it only needs the player.
+      case "interpretation":
         this.processSighting(context, data)
         break
       default:

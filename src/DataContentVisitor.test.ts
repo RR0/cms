@@ -71,6 +71,20 @@ describe("DataContentVisitor", () => {
     expect(context.file.document.querySelectorAll(".contents > p").length).toBe(1)
   })
 
+  test("shows an analyst's interpretation through the same player, and writes nothing else", async () => {
+    const interpretation = { type: "event", eventType: "interpretation", sighting: "2015-05-31-T1", by: [{ org: "GEIPAN" }] } as unknown as RR0Event
+    const context = cmsTestUtil.newHtmlContext("people/v/VertongenJeanLuc/index.html",
+      "<div class=\"contents\"><p>Le dossier</p></div>")
+    const visitor = new TestDataContentVisitor()
+
+    await visitor.renderEvent(context, sightingEvent, aCase)
+    // No time: it used to fail the build, then to be appended outside the page.
+    await visitor.renderEvent(context, interpretation, aCase)
+
+    expect(context.file.document.querySelectorAll(".contents > rr0-sighting").length).toBe(1)
+    expect(context.file.document.querySelectorAll("p").length).toBe(1)
+  })
+
   test("leaves a player the page's author placed alone", async () => {
     const context = cmsTestUtil.newHtmlContext("people/v/VertongenJeanLuc/index.html",
       "<div class=\"contents\"><p>Le dossier</p><rr0-sighting src=\"case.json\" show-witness-map></rr0-sighting></div>")
