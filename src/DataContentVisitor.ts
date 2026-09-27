@@ -44,8 +44,7 @@ export class DataContentVisitor implements ContentVisitor {
   }
 
   protected async processEvent(context: HtmlRR0Context, event: RR0Event, data: RR0Data) {
-    // Widened by "interpretation", which @rr0/data's RR0EventType has from its next release on.
-    switch (event.eventType as RR0Event["eventType"] | "interpretation") {
+    switch (event.eventType) {
       case "birth":
         await this.processBirth(context, event, data)
         break
