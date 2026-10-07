@@ -31,10 +31,10 @@
   "dependencies": {
     "@javarome/fileutil": "^0.3.9",
     "@rr0/common": "^1.1.5",
-    "@rr0/data": "^0.3.48",
+    "@rr0/data": "^0.3.49",
     "@rr0/lang": "^0.1.13",
     "@rr0/place": "^0.5.4",
-    "@rr0/time": "^2.0.0",
+    "@rr0/time": "^2.2.0",
     "canvas": "^3.2.1",
     "csv-parser": "^3.2.0",
     "glob": "^11.0.3",
