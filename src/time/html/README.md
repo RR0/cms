@@ -79,3 +79,15 @@ classDiagram
     TimeRenderer --> TimeTextBuilder: textBuilder
     TimeRenderer --> RelativeTimeTextBuilder: relativeTimeTextBuilder
 ```
+
+## Time zones
+
+A time zone that follows a time is read as [@rr0/time](https://www.npmjs.com/package/@rr0/time) writes it, right after the time (`21:45EST`), whatever way it is written in the page:
+`<time>1968-08-02 21:45 (EST)</time>` and `<time>1968-08-02 21:45 EST</time>` are both read as `21:45EST`.
+Only the time zones that @rr0/time knows are read that way. Anything else remains text around the time, like the `(LST)` (local sidereal time, which is no time zone) of `<time>15:40 (LST)</time>`.
+
+## `datetime` and `data-edtf`
+
+The `datetime` attribute of the `<time>` elements that are created holds what HTML can read (`2004-06-11T09:12:33+01:00`, `PT2H`), as built by [`HtmlDatetime`](HtmlDatetime.ts).
+HTML knows neither the qualifications of EDTF (`2004-~06`, `~P2H`) nor its time zones (`+01`), nor durations in years or months, so the time as @rr0/time writes it
+is kept in a `data-edtf` attribute, which is only set when it is not what `datetime` holds. When HTML has no equivalent at all (a duration in months), there is only `data-edtf`.

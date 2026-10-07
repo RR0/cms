@@ -1,6 +1,8 @@
 import { HtmlRR0Context } from "../../RR0Context.js"
 import { DomReplacement } from "../DomReplacement.js"
 import { ObjectUtils } from "@rr0/common"
+import { Level2Date, Level2Duration } from "@rr0/time"
+import { HtmlDatetime } from "./HtmlDatetime.js"
 import { TimeElementFactory } from "./TimeElementFactory.js"
 import { TimeRenderOptions } from "./TimeRenderer.js"
 import { TimeStringCompleter } from "./TimeStringCompleter.js"
@@ -21,9 +23,13 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
   constructor(readonly factory: TimeElementFactory) {
   }
 
-  static resolvedTime(context: HtmlRR0Context, dateTime: string): HTMLTimeElement {
+  /**
+   * @param context The context to create the element in.
+   * @param time The time the element is about, which `datetime` and `data-edtf` are set from.
+   */
+  static resolvedTime(context: HtmlRR0Context, time: Level2Date | Level2Duration): HTMLTimeElement {
     const replacement = context.file.document.createElement("time") as HTMLTimeElement
-    replacement.dateTime = dateTime
+    HtmlDatetime.apply(replacement, time)
     return replacement
   }
 
@@ -48,7 +54,7 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
 
   async replacement(pageContext: HtmlRR0Context, origEl: HTMLTimeElement): Promise<HTMLElement> {
     let replacement: HTMLElement | undefined
-    if (origEl.dateTime || origEl.dataset.format === "none") {  // Already done, or not to be interpreted
+    if (origEl.dateTime || origEl.dataset.edtf || origEl.dataset.format === "none") {  // Already done, or not to be interpreted
       replacement = origEl
     } else {
       // A time in a passage of another language ("<blockquote lang='en'>") is rendered in that language

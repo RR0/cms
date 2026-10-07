@@ -53,7 +53,7 @@ export class TimeRenderer {
     const currentFileName = file.name
     const doc = file.document
     let replacement: HTMLElement | undefined
-    const timeEl = TimeReplacer.resolvedTime(context, date.toString())
+    const timeEl = TimeReplacer.resolvedTime(context, date)
     if (title !== text) {
       timeEl.title = title
     }

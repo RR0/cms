@@ -88,7 +88,6 @@ export class TimeElementFactory {
     const duration = context.time.duration
     const items = []
     const messages = context.messages.context.time.duration
-    const datetime = duration.toString()
     const spec = duration.toSpec()
     const days = spec.days
     if (days) {
@@ -116,7 +115,7 @@ export class TimeElementFactory {
       if (context.time.approximate) {
         replacementStr = messages.approximate(replacementStr)
       }
-      replacement = TimeReplacer.resolvedTime(context, datetime)
+      replacement = TimeReplacer.resolvedTime(context, duration)
       replacement.classList.add("duration")
       replacement.textContent = replacementStr
     }

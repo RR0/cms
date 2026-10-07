@@ -1,3 +1,4 @@
+import { timeZones } from "@rr0/time"
 import { TimeContext } from "../TimeContext.mjs"
 
 /**
@@ -22,7 +23,17 @@ export class TimeStringCompleter {
   /**
    * A trailing time zone ("PST", "(CDT)", "UTC+1") is part of the value, not free text.
    */
-  protected static readonly timeZone = /^\(?(?:[A-Z]{1,5}|UTC[+-]?\d*)\)?$/
+  protected static readonly timeZone = /^\(?([A-Z]{1,5}|UTC[+-]?\d*)\)?$/
+
+  /**
+   * @param str A word following a time.
+   * @return The time zone it names, as EDTF writes it right after the time ("EST" for "(EST)"), or undefined if it is not a time zone
+   * EDTF knows ("(LST)" is a local sidereal time, whose offset is unknown, so it remains free text).
+   */
+  protected static zone(str: string): string | undefined {
+    const name = TimeStringCompleter.timeZone.exec(str)?.[1]
+    return name && (/^UTC[+-]?\d*$/.test(name) || timeZones.some(zone => zone.name === name && zone.timeshift !== "?")) ? name : undefined
+  }
 
   /**
    * A duration ("P10M", "~P1H"), or a range of durations ("P10M/12M").
@@ -44,9 +55,14 @@ export class TimeStringCompleter {
     // A bare number followed by a space may be a quantity ("1 h", "30 mn après", "8 jours plus tard"), so a day of the
     // month needs a T before its text ("18Tla nuit").
     const quantity = post && /^\d{1,2}$/.test(post[1]) && !post[2].includes("T")
-    if (post && !quantity && !TimeStringCompleter.timeZone.test(post[3].trim())) {
-      value = post[1]
-      suffix = (post[2].includes("T") ? " " : post[2]) + post[3]
+    if (post && !quantity) {
+      const zone = TimeStringCompleter.zone(post[3].trim())
+      if (zone) {
+        value = post[1] + zone  // EDTF reads "21:45EST", not "21:45 EST" nor "21:45 (EST)"
+      } else {
+        value = post[1]
+        suffix = (post[2].includes("T") ? " " : post[2]) + post[3]
+      }
     }
     return {prefix, value, suffix}
   }

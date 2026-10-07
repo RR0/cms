@@ -184,7 +184,7 @@ describe("TimeReplacer", async () => {
       const replacement = await replacer.replacement(context, original)
       expect(replacement.outerHTML)
         .toBe(`<span class="time-resolved"><a href="${path.join("/", timeOptions.rootDir,
-          "2/0/0/3/12/24/")}"><time datetime="2003-12-24T10:22-05">mercredi 24 décembre 2003 à 10:22</time></a></span>`)  // TODO: Text should have timezone info
+          "2/0/0/3/12/24/")}"><time datetime="2003-12-24T10:22-05:00" data-edtf="2003-12-24T10:22-05">mercredi 24 décembre 2003 à 10:22</time></a></span>`)  // TODO: Text should have timezone info
       expect(context.time.getYear()).toBe(2003)
       expect(context.time.getMonth()).toBe(12)
       expect(context.time.getDayOfMonth()).toBe(24)
@@ -314,7 +314,7 @@ describe("TimeReplacer", async () => {
       timeEl.textContent = datetime
       const replacement = await replacer.replacement(context, timeEl)
       expect(replacement.outerHTML).toBe(
-        `<time datetime="${datetime}" class="duration">2 jours, 10 heures, 23 minutes et 45 secondes</time>`)
+        `<time datetime="P2DT10H23M45S" data-edtf="${datetime}" class="duration">2 jours, 10 heures, 23 minutes et 45 secondes</time>`)
     })
 
     test("with context", async () => {
@@ -330,7 +330,7 @@ describe("TimeReplacer", async () => {
         const element = context.file.document.createElement("time")
         element.textContent = "P20M"
         const replacement = await replacer.replacement(context, element)
-        expect(replacement.outerHTML).toBe(`<time datetime="P20M" class="duration">20 minutes</time>`)
+        expect(replacement.outerHTML).toBe(`<time datetime="PT20M" data-edtf="P20M" class="duration">20 minutes</time>`)
       }
     })
 
@@ -339,7 +339,7 @@ describe("TimeReplacer", async () => {
       const original = context.file.document.createElement("time")
       original.textContent = "P~2H"
       const replacement = await replacer.replacement(context, original)
-      expect(replacement.outerHTML).toBe(`<time datetime="P2H" class="duration">environ 2 heures</time>`)
+      expect(replacement.outerHTML).toBe(`<time datetime="PT2H" data-edtf="P~2H" class="duration">environ 2 heures</time>`)
     })
   })
 
@@ -447,6 +447,20 @@ describe("TimeReplacer", async () => {
     test("time zone is part of the value", async () => {
       const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
       expect(await render(context, "1947-06-24 21:45PST")).toBe("mardi 24 juin 1947 à 21:45")
+    })
+
+    test("a time zone in parentheses, as pages write it, is read as a time zone", async () => {
+      for (const str of ["1947-06-24 21:45 (PST)", "1947-06-24 21:45 PST"]) {
+        const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+        expect(await render(context, str)).toBe("mardi 24 juin 1947 à 21:45")
+        expect(context.time.date?.timeshift?.value, str).toBe(-480)
+      }
+    })
+
+    test("a sidereal time is not a time zone, and is kept as text", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      expect(await render(context, "1967-05-13 15:40 (LST)")).toBe("samedi 13 mai 1967 à 15:40 (LST)")
+      expect(context.time.date?.timeshift).toBeUndefined()
     })
 
     test("time inside a link gets no link of its own", async () => {

@@ -72,7 +72,7 @@ describe("TimeContext", () => {
   })
 
   test("updateFromStr with a time zone containing a P is a date, not a duration", () => {
-    for (const str of ["1957-02-27 21:45PST", "1991-09-18 00:38:42PDT", "1957-02-27 21:45 (PST)"]) {
+    for (const str of ["1957-02-27 21:45PST", "1991-09-18 00:38:42PDT"]) {
       const context = new TimeContext()
       expect(context.updateFromStr(str)).toBe(true)
       expect(context.duration).toBeUndefined()
