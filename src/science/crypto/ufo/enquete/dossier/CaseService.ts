@@ -3,7 +3,7 @@ import { RR0Case } from "./RR0Case.js"
 import { HtmlRR0Context } from "../../../../../RR0Context.js"
 import { TimeElementFactory } from "../../../../../time/html/TimeElementFactory.js"
 import { CaseFactory } from "./CaseFactory.js"
-import { AbstractDataService, AllDataService } from "@rr0/data"
+import { EventTime, AbstractDataService, AllDataService } from "@rr0/data"
 import { RR0CaseJson } from "./RR0CaseJson.js"
 import { TimeContext } from "../../../../../time/TimeContext.mjs"
 
@@ -23,7 +23,7 @@ export class CaseService extends AbstractDataService<RR0Case, RR0CaseJson> {
       const classificationLabels = context.messages.case.classification.hynek[hynek]
       details.push(classificationLabels.short)
     }
-    const time = aCase.time
+    const time = EventTime.start(aCase.time)  // The year of an interval is the one it starts at
     const caseContext = context.clone()
     if (time) {
       caseContext.time = new TimeContext(time.year?.value, time.month?.value, time.day?.value, time.hour?.value,

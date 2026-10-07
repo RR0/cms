@@ -8,6 +8,7 @@ import { Book } from "./Book.js"
 import { StringUtil } from "../util/string/StringUtil.js"
 import { HtmlTag } from "../util/html/HtmlTag.js"
 import { Chapter } from "./Chapters.js"
+import { EventTime } from "@rr0/data"
 
 /**
  * Scan directories for book information, then populates a template with collected data.
@@ -87,7 +88,7 @@ export class BookDirectoryStep extends DirectoryStep {
     const details: string[] = []
     const authors = dirBook.authors
     const authorStr = authors ? authors.join(" & ") + ": " : ""
-    const time = dirBook.publication.time
+    const time = EventTime.start(dirBook.publication.time)
     if (time) {
       const timeDetail = time.year.value
       details.push(HtmlTag.toString("time", timeDetail.toString()))

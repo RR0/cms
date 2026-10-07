@@ -1,8 +1,7 @@
 import { RR0Case } from "./RR0Case.js"
-import { RR0EventFactory, TypedDataFactory } from "@rr0/data"
+import { EventTime, RR0EventFactory, TypedDataFactory } from "@rr0/data"
 import { RR0CaseJson } from "./RR0CaseJson.js"
 import { NamedPlace } from "@rr0/place"
-import { Level2Date as EdtfDate } from "@rr0/time"
 
 export class CaseFactory extends TypedDataFactory<RR0Case, RR0CaseJson> {
 
@@ -10,7 +9,7 @@ export class CaseFactory extends TypedDataFactory<RR0Case, RR0CaseJson> {
     const parsedCase = super.parse(dataJson)
     const time = dataJson.time
     if (time) {
-      Object.assign(parsedCase, {time: EdtfDate.fromString(time)})
+      Object.assign(parsedCase, {time: EventTime.parse(time)})
     }
     const placeName = dataJson.place
     if (placeName) {

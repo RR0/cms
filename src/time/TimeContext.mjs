@@ -370,6 +370,19 @@ export class TimeContext {
   }
 
   /**
+   * Sets what this context is about: a date, or an interval when the time is only known to be within bounds.
+   *
+   * @param {EdtfDate | EdtfInterval | undefined} time
+   * @return {this}
+   */
+  set(time) {
+    this.date = time instanceof EdtfInterval ? undefined : time
+    this.interval = time instanceof EdtfInterval ? time : undefined
+    this.duration = undefined
+    return this
+  }
+
+  /**
    * @param {TimeContext} other
    * @return {boolean}
    */

@@ -457,6 +457,20 @@ describe("TimeReplacer", async () => {
       }
     })
 
+    test("a time zone that depends on the date", async () => {
+      for (const [str, hours] of [["1969-07-20 20:17 (PT)", -7], ["1969-12-20 20:17 PT", -8], ["2009-07-19 05:54 PT", -7]] as const) {
+        const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+        await render(context, str)
+        expect(context.time.date?.timeshift?.value, str).toBe(hours * 60)
+      }
+    })
+
+    test("GMT is a time zone", async () => {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+      await render(context, "1969-07-20 20:17:40 GMT")
+      expect(context.time.date?.timeshift?.value).toBe(0)
+    })
+
     test("a sidereal time is not a time zone, and is kept as text", async () => {
       const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
       expect(await render(context, "1967-05-13 15:40 (LST)")).toBe("samedi 13 mai 1967 à 15:40 (LST)")

@@ -45,8 +45,9 @@ export class EventRenderer<E extends RR0Event> {
   async render(context: HtmlRR0Context, event: E, container: HTMLElement,
                options: TimeRenderOptions = {url: true, contentOnly: false}) {
     const eventContext = context.clone()
-    const eventTime = eventContext.time.date = event.time
+    const eventTime = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time`)
+    eventContext.time.set(eventTime)
     container.dataset.time = eventTime.toString()
     const timeEl = this.timeElementFactory.create(eventContext, context, options)
     container.append(timeEl)

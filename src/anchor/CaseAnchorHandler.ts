@@ -4,6 +4,7 @@ import { TimeTextBuilder } from "../time/text/TimeTextBuilder.js"
 import { CaseService } from "../science/crypto/ufo/enquete/dossier/CaseService.js"
 import path from "path"
 import { TimeContext } from "../time/TimeContext.mjs"
+import { EventTime } from "@rr0/data"
 
 export class CaseAnchorHandler implements AnchorHandler {
 
@@ -35,8 +36,9 @@ export class CaseAnchorHandler implements AnchorHandler {
               caseContext.time.updateFromStr(caseTime)
             }
           } else {
-            caseContext.time = new TimeContext(caseTime.year?.value, caseTime.month?.value, caseTime.day?.value,
-              caseTime.hour?.value, caseTime.minute?.value, caseTime.timeshift?.toString())
+            const startTime = EventTime.start(caseTime)
+            caseContext.time = new TimeContext(startTime.year?.value, startTime.month?.value, startTime.day?.value,
+              startTime.hour?.value, startTime.minute?.value, startTime.timeshift?.toString())
           }
           titles.push(this.timeTextBuilder.build(caseContext))
         }

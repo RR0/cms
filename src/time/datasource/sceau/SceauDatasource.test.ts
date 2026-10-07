@@ -10,7 +10,7 @@ import { cmsTestUtil } from "../../../test/CMSTestUtil.js"
 import { HtmlRR0Context } from "../../../RR0Context.js"
 import { sceauDatasource } from "./SceauRR0Mapping.js"
 import { sceauTestCases } from "./SceauTestCases.js"
-import { RR0SourceType, Source } from "@rr0/data"
+import { RR0SourceType, Source, EventTime } from "@rr0/data"
 import { SceauCaseSummaryRR0Mapper } from "./SceauCaseSummaryRR0Mapper.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 
@@ -81,7 +81,7 @@ describe("SCEAUCaseSource", () => {
           }
           if (publication.time) {
             const sourceContext = context.clone()
-            sourceContext.time.date = source.publication.time
+            sourceContext.time.set(source.publication.time)
             const timeStr = this.timeTextBuilder.build(sourceContext)
             sourceItems.push(timeStr)
           }

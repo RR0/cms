@@ -11,7 +11,7 @@ import { RR0Datasource } from "./RR0Datasource.js"
 import { Datasource } from "../Datasource.js"
 import { ChronologyReplacerActions } from "../ChronologyReplacerActions.js"
 import { TimeTextBuilder } from "../../text/TimeTextBuilder.js"
-import { RR0SourceType, Source } from "@rr0/data"
+import { RR0SourceType, Source, EventTime } from "@rr0/data"
 import { RR0CaseSummaryMapper } from "./RR0CaseSummaryMapper.js"
 import { RR0FileDatasource } from "./RR0FileDatasource.js"
 
@@ -59,12 +59,14 @@ describe("RR0CaseSource", () => {
     }
 
     protected getTime(c: RR0CaseSummary): EdtfDate {
-      return c.time
+      return EventTime.start(c.time)
     }
 
     protected sortComparator(c1: RR0CaseSummary, c2: RR0CaseSummary): number {
-      return !c1.time || c2.time && c1.time.isBefore(
-        c2.time) ? -1 : !c2.time || c1.time.isAfter(c2.time) ? 1 : 0
+      const time1 = EventTime.start(c1.time)
+      const time2 = EventTime.start(c2.time)
+      return !time1 || time2 && time1.isBefore(
+        time2) ? -1 : !time2 || time1.isAfter(time2) ? 1 : 0
     }
 
     /**
@@ -88,7 +90,7 @@ describe("RR0CaseSource", () => {
           }
           if (publication.time) {
             const sourceContext = context.clone()
-            sourceContext.time.date = source.publication.time
+            sourceContext.time.set(source.publication.time)
             const timeStr = this.timeTextBuilder.build(sourceContext)
             sourceItems.push(timeStr)
           }

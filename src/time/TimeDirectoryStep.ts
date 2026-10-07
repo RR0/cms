@@ -58,7 +58,7 @@ export class TimeDirectoryStep extends DirectoryStep {
     const eventContext = context.clone()
     this.service.setContextFromFile(eventContext, event.dirName)
     if (event.time) {
-      eventContext.time.date = event.time
+      eventContext.time.set(event.time)
     }
     const ref = this.elementFactory.create(eventContext, context, {url: true, contentOnly: true})
     item.appendChild(ref)

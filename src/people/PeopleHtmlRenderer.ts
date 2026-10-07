@@ -1,7 +1,7 @@
 import path from "path"
 import { HtmlRR0Context } from "../RR0Context.js"
 import { Gender } from "@rr0/common"
-import { AbstractDataFactory, CountryCode, Occupation, People } from "@rr0/data"
+import { EventTime, AbstractDataFactory, CountryCode, Occupation, People } from "@rr0/data"
 
 export class PeopleHtmlRenderer {
 
@@ -20,8 +20,8 @@ export class PeopleHtmlRenderer {
     if (people.hoax) {
       classList.push("canular")
     }
-    const birthTimeStr = people.birthTime?.year.toString()
-    const deathTimeStr = people.deathTime?.year.toString()
+    const birthTimeStr = EventTime.start(people.birthTime)?.year.toString()
+    const deathTimeStr = EventTime.start(people.deathTime)?.year.toString()
     if (people.isDeceased()) {
       classList.push("deceased")
     }

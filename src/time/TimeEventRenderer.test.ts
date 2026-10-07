@@ -9,7 +9,7 @@ import { SourceRenderer } from "../source/SourceRenderer.js"
 import { NoteFileCounter } from "../note/NoteFileCounter.js"
 import { NoteRenderer } from "../note/NoteRenderer.js"
 import { HautsDeSeineCityCode } from "../org/eu/fr/region/idf/92/HautsDeSeineCityCode.js"
-import { AllDataService, RR0SourceType, Source } from "@rr0/data"
+import { AllDataService, EventTime, RR0SourceType, Source } from "@rr0/data"
 import { Place } from "@rr0/place"
 import { OrganizationPlace } from "../place/OrganizationPlace.js"
 import { hautsDeSeine } from "../org/eu/fr/region/idf/92/HautsDeSeine.js"
@@ -56,5 +56,53 @@ describe("TimeEventRenderer", () => {
     await renderer.render(context, c, elem)
     expect(elem.innerHTML).toBe(
       `<span class="time-resolved">en <time datetime="1970-03">mars 1970</time></span> À <span class="place">Nanterre (Hauts-de-Seine (Île-de-France (France)))</span>, some sighting <span class="source"><span class="peopl">Some Author</span>&nbsp;: <a href="https://somesite.com/case1">Case 1</a>, <i>Some site</i>, jeudi 13 décembre 2001</span>.`)
+  })
+
+  describe("time", () => {
+
+    async function renderTime(time: string): Promise<{ html: string, dataTime: string }> {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/7/0/03/index.html")
+      const c: RR0CaseSummary = {
+        events: [], type: "event", eventType: "sighting", time: EventTime.parse(time), description: "some sighting",
+        sources: []
+      }
+      const elem = context.file.document.createElement("li")
+      await renderer.render(context, c, elem)
+      return {html: elem.innerHTML, dataTime: elem.dataset.time}
+    }
+
+    test("a date", async () => {
+      const {html, dataTime} = await renderTime("1970-03-05")
+      expect(dataTime).toBe("1970-03-05")
+      expect(html).toContain(`<time datetime="1970-03-05"`)
+      expect(html).not.toContain("time-interval")
+    })
+
+    test("between x and y", async () => {
+      const {html, dataTime} = await renderTime("1970-03-05/1970-03-09")
+      expect(dataTime).toBe("1970-03-05/1970-03-09")
+      expect(html).toContain(`<span class="time-interval">`)
+      expect(html).toContain(`<time datetime="1970-03-05"`)
+      expect(html).toContain(`<time datetime="1970-03-09"`)
+    })
+
+    test("years", async () => {
+      const {html} = await renderTime("1966/1993")
+      expect(html).toContain(`<time datetime="1966"`)
+      expect(html).toContain(`<time datetime="1993"`)
+    })
+
+    test("from x", async () => {
+      const {html, dataTime} = await renderTime("1970-03/..")
+      expect(dataTime).toBe("1970-03/")
+      expect(html).toContain(`<time datetime="1970-03"`)
+      expect(html).toContain(`<span class="time-interval">`)
+    })
+
+    test("around x", async () => {
+      const {html, dataTime} = await renderTime("~1970-03")
+      expect(dataTime).toBe("~1970-03")
+      expect(html).toContain(`<time datetime="1970-03"`)
+    })
   })
 })

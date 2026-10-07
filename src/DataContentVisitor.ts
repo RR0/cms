@@ -4,7 +4,7 @@ import { TimeElementFactory } from "./time/html/TimeElementFactory.js"
 import { ContentVisitor } from "./RR0ContentStep.js"
 import { HtmlRR0Context } from "./RR0Context.js"
 import { EventRenderer } from "./time/EventRenderer.js"
-import { AllDataService, People, RR0Data, RR0Event } from "@rr0/data"
+import { EventTime, AllDataService, People, RR0Data, RR0Event } from "@rr0/data"
 
 /**
  * Insert content in context file, according to data found in .json files aside of it.
@@ -36,7 +36,7 @@ export class DataContentVisitor implements ContentVisitor {
     this.processTitle(context, data)
     this.processURL(context, data)
     const events = data.events.sort(
-      (event1, event2) => event1.time ? event2.time ? event1.time.isBefore(event2.time) ? -1 : 1 : -1 : 1)
+      (event1, event2) => event1.time ? event2.time ? EventTime.start(event1.time).isBefore(EventTime.start(event2.time)) ? -1 : 1 : -1 : 1)
     for (const event of events) {
       await this.processEvent(context, event, data)
     }
@@ -101,8 +101,9 @@ export class DataContentVisitor implements ContentVisitor {
   protected timeParagraph(context: HtmlRR0Context, event: RR0Event) {
     const container = context.file.document.createElement("p")
     const eventContext = context.clone()
-    const eventTime = eventContext.time.date = event.time
+    const eventTime = event.time
     assert.ok(eventTime, `Event of type "${event.type}" has no time for paragraph`)
+    eventContext.time.set(eventTime)
     container.dataset.time = eventTime.toString()
     const timeEl = this.timeElementFactory.create(eventContext, context, {url: true, contentOnly: false})
     return {eventP: container, timeEl}

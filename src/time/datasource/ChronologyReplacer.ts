@@ -5,6 +5,7 @@ import { RR0CaseSummary } from "./rr0/RR0CaseSummary.js"
 import { RR0CaseMapping } from "./rr0/RR0CaseMapping.js"
 import { RR0HttpDatasource } from "./rr0/RR0HttpDatasource.js"
 import { HttpSource } from "./HttpSource.js"
+import { EventTime } from "@rr0/data"
 
 /**
  * Replaces a (ul) tag from (chronology) files with case summaries from external datasources.
@@ -111,7 +112,7 @@ export class ChronologyReplacer implements DomReplacement<HtmlRR0Context, HTMLUL
     const casesToMerge = sourceCases.map(sourceCase => mapping.mapper.map(context, sourceCase, fetchTime))
     const casesToAdd: RR0CaseSummary[] = []
     for (const caseToMerge of casesToMerge) {
-      const foundExisting = existingCases.find(existingCase => existingCase.time.isEqual(caseToMerge.time)
+      const foundExisting = existingCases.find(existingCase => EventTime.equals(existingCase.time, caseToMerge.time)
         && existingCase.place === caseToMerge.place)
       if (foundExisting) {
         context.logger.debug("Merging ", caseToMerge, " into ", foundExisting)

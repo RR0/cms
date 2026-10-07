@@ -12,7 +12,7 @@ import { HttpSource } from "./HttpSource.js"
 import { TimeElementFactory } from "../html/TimeElementFactory.js"
 import { TimeRenderer } from "../html/TimeRenderer.js"
 import { cmsTestUtil } from "../../test/CMSTestUtil.js"
-import { AllDataService, RR0SourceType, Source } from "@rr0/data"
+import { AllDataService, RR0SourceType, Source, EventTime } from "@rr0/data"
 import { PlaceRenderer } from "../../place/PlaceRenderer.js"
 
 export abstract class DatasourceTestCase<S> {
@@ -90,7 +90,7 @@ export abstract class DatasourceTestCase<S> {
     const datasource = this.mapping.datasource
     const source = expectedSources[0]
     const sourceContext = context.clone()
-    sourceContext.time.date = source.publication.time
+    sourceContext.time.set(source.publication.time)
     const publicationStr = source.publication ? `, ${this.timeTextBuilder.build(sourceContext)}` : ""
     const indexStr = source.index ? `, ${source.index}` : ""
     const authorStr = datasource.authors.map(authorStr => `<span class="people">${authorStr}</span>`).join(" &amp; ")

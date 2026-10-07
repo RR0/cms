@@ -1,5 +1,6 @@
 import { TimeContext } from "./TimeContext.mjs"
 import { describe, expect, test } from "vitest"
+import { Level2Date, Level2Interval } from "@rr0/time"
 
 describe("TimeContext", () => {
 
@@ -109,5 +110,38 @@ describe("TimeContext", () => {
     expect(clone.getDayOfMonth()).toBe(14)
     expect(clone.getHour()).toBe(17)
     expect(clone.getMinutes()).toBe(56)
+  })
+
+  describe("set", () => {
+
+    test("a date", () => {
+      const context = new TimeContext().set(Level2Date.fromString("1952-07-19"))
+      expect(context.date.toString()).toBe("1952-07-19")
+      expect(context.interval).toBeUndefined()
+    })
+
+    test("an interval", () => {
+      const context = new TimeContext().set(Level2Interval.fromString("1952-07-19/1952-07-26"))
+      expect(context.date).toBeUndefined()
+      expect(context.interval.toString()).toBe("1952-07-19/1952-07-26")
+      expect(context.from.day.value).toBe(19)
+      expect(context.to.day.value).toBe(26)
+    })
+
+    test("replaces what was set before", () => {
+      const context = new TimeContext()
+      context.updateFromStr("1952-07-19")
+      context.set(Level2Interval.fromString("1966/1993"))
+      expect(context.date).toBeUndefined()
+      context.set(Level2Date.fromString("1970"))
+      expect(context.interval).toBeUndefined()
+      expect(context.date.toString()).toBe("1970")
+    })
+
+    test("nothing", () => {
+      const context = new TimeContext().set(undefined)
+      expect(context.date).toBeUndefined()
+      expect(context.interval).toBeUndefined()
+    })
   })
 })
