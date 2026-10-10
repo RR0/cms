@@ -312,9 +312,10 @@ export class CMSGenerator implements CMSContext {
     // page raw (its includes unresolved, so unstyled). So every such page must be forced through the
     // content step, and be part of its roots even when a build is limited to some pages (--contents).
     // The people directories are listed by their steps rather than by the site, or the per-letter pages
-    // (people/a/index.html…), which no site lists, would be left out.
+    // (people/a/index.html…), which no site lists, would be left out. Likewise the UFO cases directory.
     const directoryFiles = [...new Set([
       ...this.options.directoryPages,
+      this.options.ufoCaseDirectoryFile,
       ...peopleSteps.map(step => (step.config as DirectoryStepConfig).templateFileName)
     ])]
     const toProcess = new Set<string>(directoryFiles)
