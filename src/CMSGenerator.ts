@@ -31,6 +31,7 @@ import {
   ClassDomReplaceCommand,
   ContentStepConfig,
   CopyStep,
+  DirectoryStepConfig,
   DomReplaceCommand,
   FileCopyConfig,
   FileWriteConfig,
@@ -306,7 +307,17 @@ export class CMSGenerator implements CMSContext {
     )
     const eventReplacer = new EventReplacer(caseRenderer, dataService)
     const getOutputPath = (context: SsgContext): string => path.join(outDir, context.file.name)
-    const toProcess = new Set<string>(this.options.directoryPages)
+    // What a directory step writes is its TEMPLATE, filled in: the same path as its source, with a fresh
+    // mtime. The content step then finds that output newer than the source and skips it, leaving the
+    // page raw (its includes unresolved, so unstyled). So every such page must be forced through the
+    // content step, and be part of its roots even when a build is limited to some pages (--contents).
+    // The people directories are listed by their steps rather than by the site, or the per-letter pages
+    // (people/a/index.html…), which no site lists, would be left out.
+    const directoryFiles = [...new Set([
+      ...this.options.directoryPages,
+      ...peopleSteps.map(step => (step.config as DirectoryStepConfig).templateFileName)
+    ])]
+    const toProcess = new Set<string>(directoryFiles)
     const csvTransformer = new class implements SsiIncludeReplaceCommandTransformer {
       transform(context: SsgContext, file: FileContents): string | undefined {
         const fileName = file.name
@@ -336,7 +347,7 @@ export class CMSGenerator implements CMSContext {
       alsoDerivedFrom: netlify.preambleFile ? [netlify.preambleFile] : [],
       getOutputPath: (_context: SsgContext) => netlify.outputPath
     }
-    const contentRoots = this.options.contentRoots
+    const contentRoots = this.options.contentRoots && [...new Set([...this.options.contentRoots, ...directoryFiles])]
     const contentStepOptions: RR0ContentStepOptions = {
       contentConfigs: [htAccessToNetlifyConfig, {
         roots: contentRoots,
