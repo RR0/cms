@@ -1,3 +1,4 @@
+import { MetricFormat } from "../value/MetricFormat.js"
 import { placeMessages_fr } from "@rr0/place"
 import { CaseConclusionMessages, RR0Messages } from "./RR0Messages.js"
 import { peopleMessages_fr } from "../people/PeopleMessages_fr.js"
@@ -75,9 +76,12 @@ export class RR0Messages_fr implements RR0Messages {
     next: "Suivant"
   }
   unit = {
-    smi: (miles: number): string => (miles * 1.60934).toFixed(0) + " km",
-    fot: (feet: number): string => (feet * 0.3048).toFixed(0) + " m",
+    smi: (miles: number): string => MetricFormat.format(miles * 1.609344, "fr-FR") + " km",
+    fot: (feet: number): string => MetricFormat.format(feet * 0.3048, "fr-FR") + " m",
     hm: (milesPerHour: number): string => this.unit.smi(milesPerHour) + "/h",
-    inh: (inches: number): string => (inches * 2.54).toFixed(0) + " cm"
+    inh: (inches: number): string => MetricFormat.format(inches * 2.54, "fr-FR") + " cm",
+    nmi: (nauticalMiles: number): string => MetricFormat.format(nauticalMiles * 1.852, "fr-FR") + " km",
+    kts: (knots: number): string => this.unit.nmi(knots) + "/h",
+    lbr: (pounds: number): string => MetricFormat.format(pounds * 0.45359237, "fr-FR") + " kg"
   }
 }

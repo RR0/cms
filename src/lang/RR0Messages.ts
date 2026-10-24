@@ -84,5 +84,8 @@ export interface RR0Messages {
     fot: (feet: number) => string
     hm: (milesPerHour: number) => string
     inh: (inches: number) => string
+    nmi: (nauticalMiles: number) => string
+    kts: (knots: number) => string
+    lbr: (pounds: number) => string
   }
 }
