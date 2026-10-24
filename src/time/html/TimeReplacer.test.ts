@@ -400,7 +400,7 @@ describe("TimeReplacer", async () => {
       expect(await render(context, "21:00")).toBe("21 h")
       expect(context.time.getDayOfMonth()).toBe(12)
       expect(context.time.getHour()).toBe(21)
-      expect(await render(context, "23T~01:45")).toBe("jeudi 23 01:45")
+      expect(await render(context, "23T~01:45")).toBe("jeudi 23 vers 01:45")
       expect(await render(context, "00:19/00:30")).toBe("00:19 à 00:30")
       expect(context.time.getYear()).toBe(1990)
     })
@@ -414,8 +414,8 @@ describe("TimeReplacer", async () => {
     test("interval end relative to its start", async () => {
       const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
       expect(await render(context, "1517-05-22 21:00/22:00")).toBe("mardi 22 mai 1517 à 21 h à 22 h")
-      expect(await render(context, "02 20:00/03 05:00")).toBe("mercredi 2 20 h à jeudi 3 05 h")
-      expect(await render(context, "27 23:00/03:00")).toBe("dimanche 27 23 h à lundi 28 03 h")
+      expect(await render(context, "02 20:00/03 05:00")).toBe("mercredi 2 à 20 h à jeudi 3 à 05 h")
+      expect(await render(context, "27 23:00/03:00")).toBe("dimanche 27 à 23 h à lundi 28 à 03 h")
     })
 
     test("date without hour after an hour of the previous day", async () => {
@@ -428,6 +428,88 @@ describe("TimeReplacer", async () => {
       const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
       expect(await render(context, "P10M/12M")).toBe("10 minutes à 12 minutes")
       expect(await render(context, "P15S/20s")).toBe("15 secondes à 20 secondes")
+    })
+
+    /**
+     * @return A context whose current time is October 2023.
+     */
+    async function octoberContext(locale = "fr") {
+      const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "", locale)
+      await render(context, "2023-10")
+      return context
+    }
+
+    test("hour of a day of the month", async () => {
+      const context = await octoberContext()
+      expect(await render(context, "2023-10-12 19:00")).toBe("jeudi 12 à 19 h")
+    })
+
+    describe("approximate time of day", () => {
+
+      async function renderAfter(context, before: string, str: string): Promise<string> {
+        const p = context.file.document.createElement("p")
+        const timeEl = context.file.document.createElement("time")
+        timeEl.textContent = str
+        p.append(before, timeEl)
+        context.file.document.body.append(p)
+        const replacement = await replacer.replacement(context, timeEl)
+        return replacement.textContent
+      }
+
+      test("qualified after the time, the whole date-time is approximate", async () => {
+        for (const str of ["2023-10-12 19:00~", "2023-10-12T19:00~"]) {
+          const context = await octoberContext()
+          expect(await render(context, str), str).toBe("vers le jeudi 12 à 19 h")
+          expect(context.time.approximate).toBe(true)
+        }
+      })
+
+      test("qualified before the hour, the hour only is approximate", async () => {
+        const context = await octoberContext()
+        expect(await render(context, "2023-10-12 ~19:00")).toBe("jeudi 12 vers 19 h")
+        expect(await render(context, "~21:00")).toBe("vers 21 h")
+      })
+
+      test("of an unspecified day", async () => {
+        const context = await octoberContext()
+        expect(await render(context, "2023-10-XX 19:00~")).toBe("vers 19 h")
+        expect(await render(context, "2023-10-XX 21:00")).toBe("21 h")
+      })
+
+      test("is not told twice", async () => {
+        const context = await octoberContext()
+        expect(await renderAfter(context, "Il voit vers ", "2023-10-XX 19:00~")).toBe("19 h")
+        expect(await render(context, "vers 2023-10-12 19:00~")).toBe("vers jeudi 12 à 19 h")
+      })
+
+      test("is told after the date when a preposition precedes it", async () => {
+        const context = cmsTestUtil.time.newHtmlContext("1/9/9/0/08/index.html", "")
+        expect(await renderAfter(context, "le ", "1978-06-19 ~01:00")).toBe("lundi 19 juin 1978 vers 01 h")
+      })
+
+      test("in English", async () => {
+        const context = await octoberContext("en")
+        expect(await render(context, "2023-10-12 19:00~")).toMatch(/^around .*12.* at 07 PM$/)
+        expect(await render(context, "2023-10-12 ~20:00")).toBe("around 08 PM")
+      })
+    })
+
+    test("a time of a source is not the context of the next times", async () => {
+      for (const sourceHtml of [`<span class="source">Article, <time>2026-06-12</time></span>`,
+        `<time data-context="none">2026-06-12</time>`]) {
+        const context = await octoberContext()
+        await render(context, "2023-10-12")
+        const doc = context.file.document
+        const p = doc.createElement("p")
+        p.innerHTML = sourceHtml
+        doc.body.append(p)
+        const sourceTime = p.querySelector("time")
+        await replacer.replacement(context, sourceTime)
+        expect(context.time.toString(), sourceHtml).toBe("2023-10-12")
+        expect(await render(context, "19:00")).toBe("19 h")
+        expect(context.time.toString()).toBe("2023-10-12T19:00")
+        expect(await render(context, "2023-10-XX 20:00")).toBe("20 h")
+      }
     })
 
     test("words around the value are kept", async () => {

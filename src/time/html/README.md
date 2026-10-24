@@ -80,6 +80,21 @@ classDiagram
     TimeRenderer --> RelativeTimeTextBuilder: relativeTimeTextBuilder
 ```
 
+## Approximation
+
+An approximate time is told as EDTF scopes its qualification:
+- written after the time, it applies to the whole date and time: `<time>2023-10-12 19:00~</time>` is rendered "vers le jeudi 12 à 19 h" ("around …" in English), or "vers 19 h" when only the hour differs from the previous time;
+- written before the hour, it applies to the time of day only: `<time>2023-10-12 ~19:00</time>` is rendered "jeudi 12 vers 19 h".
+
+An approximation already written right before the time ("vers <time>…~</time>", "environ", "around") is not told again,
+and one that would come right after a preposition ("le vers jeudi 12") is not told before the time.
+An approximate time is never rendered with a relative wording ("une heure plus tard"), which could not tell it.
+
+## Context
+
+Each time is the context that the next one is rendered relatively to ("19 h" after "jeudi 12"),
+except a time of a source (`<span class="source">`) or one marked `data-context="none"`, which a narrative does not follow.
+
 ## Time zones
 
 A time zone that follows a time is read as [@rr0/time](https://www.npmjs.com/package/@rr0/time) writes it, right after the time (`21:45EST`), whatever way it is written in the page:

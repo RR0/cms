@@ -59,18 +59,22 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
     } else {
       // A time in a passage of another language ("<blockquote lang='en'>") is rendered in that language
       const passageLang = TimeReplacer.passageLang(pageContext, origEl)
-      const context = passageLang ? pageContext.clone(passageLang) : pageContext
+      // The time of a source (its publication date), or one out of context, is not the time the next times of the text follow
+      const isolated = origEl.dataset.context === "none" || Boolean(origEl.closest(".source"))
+      const context = passageLang ? pageContext.clone(passageLang) : isolated ? pageContext.clone() : pageContext
       const previousContext = origEl.dataset.context === "none" ? undefined : context.clone()
       const timeStr = origEl.textContent
       const {prefix, value, suffix} = this.completer.split(timeStr)
       const preceding = TimeReplacer.precedingText(origEl) + prefix
       const between = context.messages.context.time.between.test(preceding)
       // "en l'année suivante" is not French: after a preposition, the time is rendered in full
-      const relativeWords = !context.messages.context.time.preposition.test(preceding)
+      const preposition = context.messages.context.time.preposition.test(preceding)
+      const relativeWords = !preposition
+      const approximated = context.messages.context.time.approximation.test(preceding)
       // A <time> already inside a link keeps that link: a link of its own would nest <a> in <a>, which the HTML
       // parser splits, closing the enclosing elements (a note, a source) early.
       const url = !origEl.closest("a")
-      const options = {url, contentOnly: true, between, relativeWords}
+      const options = {url, contentOnly: true, between, relativeWords, approximated, preposition}
       try {
         const durations = /^(~?)P([^/]+)\/P?([^/]+)$/.exec(value.trim())  // "P10M/12M"
         if (durations) {
@@ -97,7 +101,7 @@ export class TimeReplacer implements DomReplacement<HtmlRR0Context, HTMLTimeElem
         wrapper.append(prefix, replacement, suffix)
         replacement = wrapper
       }
-      if (context !== pageContext) {
+      if (context !== pageContext && !isolated) {
         pageContext.time = context.time  // The next times of the page follow this one
       }
       context.debug("\tReplacing time", origEl.outerHTML, "with", ObjectUtils.asSet<HTMLElement>(replacement).outerHTML)

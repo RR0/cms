@@ -16,6 +16,14 @@ export interface TimeRenderOptions {
    * If a wording like "the day after" may replace the time. Defaults to true.
    */
   relativeWords?: boolean
+  /**
+   * The text already tells, right before the time, that it is approximate ("vers"): it is not told again.
+   */
+  approximated?: boolean
+  /**
+   * The text has a preposition right before the time ("le"): an approximation cannot be told before it ("le vers jeudi 12").
+   */
+  preposition?: boolean
 }
 
 export class TimeRenderer {
@@ -47,8 +55,12 @@ export class TimeRenderer {
     const time = context.time
     const date = time.date
     const absoluteTimeUrl = this.urlBuilder.fromEdtf(date)
-    const title = this.textBuilder.build(context, renderOptions)
-    const text = (previousContext ? this.relativeTextBuilder.build(previousContext, context, options.relativeWords !== false) : undefined) || title
+    const approximation = TimeTextBuilder.approximation(context, options.approximated, !options.preposition)
+    const title = this.textBuilder.build(context, renderOptions, approximation)
+    const text = (previousContext
+      // "une heure plus tard" can't tell that a time is approximate
+      ? this.relativeTextBuilder.build(previousContext, context, options.relativeWords !== false && !TimeTextBuilder.tells(approximation), approximation)
+      : undefined) || title
     const file = context.file
     const currentFileName = file.name
     const doc = file.document

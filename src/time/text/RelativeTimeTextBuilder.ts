@@ -1,4 +1,4 @@
-import { TimeTextBuilder } from "./TimeTextBuilder.js"
+import { TimeApproximation, TimeTextBuilder } from "./TimeTextBuilder.js"
 import { RR0Context } from "../../RR0Context.js"
 import { Level0Duration } from "@rr0/time"
 
@@ -11,8 +11,9 @@ export class RelativeTimeTextBuilder {
    * @param oldContext The time to render relatively to.
    * @param newContext The time to render.
    * @param words If a wording like "the day after" may replace the time.
+   * @param approximation The approximation of the time to tell. None by default.
    */
-  build(oldContext: RR0Context, newContext: RR0Context, words = true): string {
+  build(oldContext: RR0Context, newContext: RR0Context, words = true, approximation = TimeTextBuilder.exact): string {
     let text: string | undefined
     const time = newContext.time
     const previousTime = time.equals(oldContext?.time) ? undefined : oldContext.time
@@ -137,7 +138,7 @@ export class RelativeTimeTextBuilder {
       }
     }
     if (!text) {
-      text = this.timeTextBuilder.build(newContext, options)
+      text = this.timeTextBuilder.build(newContext, options, approximation)
     }
     return text
   }
