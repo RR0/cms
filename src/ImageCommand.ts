@@ -36,6 +36,16 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
           }
         }
         context.debug(context.file.name, "requires image", src)
+        // Attributes, not properties: jsdom implements neither HTMLImageElement.loading nor .decoding, so assigning
+        // them is a silent no-op that never reaches the generated HTML.
+        // The first image is likely the top of the page (its largest paint), which lazy loading would delay.
+        const isFirst = imgEl === imgEl.ownerDocument.querySelector(this.selector)
+        if (!isFirst && !imgEl.hasAttribute("loading")) {
+          imgEl.setAttribute("loading", "lazy")
+        }
+        if (!imgEl.hasAttribute("decoding")) {
+          imgEl.setAttribute("decoding", "async")
+        }
         try {
           let isExternal = src.startsWith("http")
           let isAbsolute = src.startsWith("/")
@@ -45,7 +55,6 @@ export class ImageCommand extends DomReplaceCommand<HTMLImageElement> {
           let imgPath = isExternal ? src : isAbsolute ? path.join(".", src) : path.join(
             path.dirname(context.file.name),
             src)
-          imgEl.loading = "lazy"
           if (!isExternal && !imgEl.width && !imgEl.height) {
             const dimensions = await imageSizeFromFile(imgPath)
             let width = dimensions.width
