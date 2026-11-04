@@ -11,6 +11,7 @@ export class CmsOrganizationFactory extends OrganizationFactory<CmsOrganization,
     const base = super.parse(dataJson)
     const org = new CmsOrganization(base.id, base.places, base.kind)
     org.title = base.title
+    org.url = base.url
     return org
   }
 }
