@@ -11,9 +11,10 @@ export class CaseFactory extends TypedDataFactory<RR0Case, RR0CaseJson> {
     if (time) {
       Object.assign(parsedCase, {time: EventTime.parse(time)})
     }
-    const placeName = dataJson.place
-    if (placeName) {
-      parsedCase.place = new NamedPlace(placeName)
+    // A place of RR0 by its name, or the place itself (PlaceJson), as @rr0/data reads an event's.
+    const place = dataJson.place
+    if (place) {
+      parsedCase.place = NamedPlace.fromJson(place)
     }
     parsedCase.classification = dataJson.classification
     parsedCase.conclusion = dataJson.conclusion
