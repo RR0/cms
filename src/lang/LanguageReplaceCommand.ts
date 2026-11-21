@@ -1,3 +1,4 @@
+import path from "path"
 import { DomReplaceCommand, DomReplacer } from "ssg-api"
 import { HtmlRR0Context } from "RR0Context.js"
 import { TextLanguageDetector } from "./TextLanguageDetector.js"
@@ -38,7 +39,10 @@ export class LanguageReplaceCommand extends DomReplaceCommand<HTMLElement, HtmlR
             // not translated yet)
             const doc = inputFile.document
             const declared = doc.querySelector<HTMLMetaElement>("meta[http-equiv='content-language' i]")
-            pageLang = declared?.content.trim().substring(0, 2).toLowerCase()
+            // A file named for its language (index_fr.html next to index.html) is in that language, whatever it quotes.
+            // Only the name counts: a file read without variant is given the default locale as its lang.
+            const namedLang = fileLang && path.basename(fileName).includes("_" + fileLang + ".") ? fileLang : undefined
+            pageLang = namedLang || declared?.content.trim().substring(0, 2).toLowerCase()
               || (doc.body && languageDetector.detect(doc.body) === "en" ? "en" : "fr")
           }
           inputFile.document.documentElement.lang = inputFile.lang.lang = pageLang
