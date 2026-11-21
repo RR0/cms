@@ -1,4 +1,5 @@
 export * from "./LanguageReplaceCommand.js"
+export * from "./TextLanguageDetector.js"
 export * from "./RR0Messages.js"
 export * from "./RR0Messages_en.js"
 export * from "./RR0Messages_fr.js"

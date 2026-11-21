@@ -51,6 +51,7 @@ import {
 import { PeopleDirectoryStepFactory, PeopleDirectoryStepOptions } from "./people/PeopleDirectoryStepFactory.js"
 import { PeopleReplacerFactory } from "./people/PeopleReplacerFactory.js"
 import { AuthorReplaceCommand } from "./people/author/AuthorReplaceCommand.js"
+import { LanguageReplaceCommand } from "./lang/LanguageReplaceCommand.js"
 import { PersistentSourceRegistry } from "./source/PersistentSourceRegistry.js"
 import { SourceFileCounter } from "./source/SourceFileCounter.js"
 import { SourceIndexStep } from "./source/SourceIndexStep.js"
@@ -373,6 +374,9 @@ export class CMSGenerator implements CMSContext {
         context,
         context.file.name, this.timeTextBuilder)
       const pageReplaceCommands = [
+        // First: the page's language decides how its title, its author's date and every other time are written
+        // (an English page left out of it was dated in French). Idempotent if contentReplacers holds one too.
+        new LanguageReplaceCommand(),
         new SsiTitleReplaceCommand([timeDefaultHandler]),
         new AuthorReplaceCommand(timeRenderer),
         ...this.options.contentReplacers
