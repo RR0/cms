@@ -85,6 +85,20 @@ describe("DataContentVisitor", () => {
     expect(context.file.document.querySelectorAll("p").length).toBe(1)
   })
 
+  test("writes nothing for the interviews a case's sightings cite", async () => {
+    const interview = { type: "event", eventType: "interview", interviewOf: "arnold", time: "1947-06-25", url: "interview.json" } as unknown as RR0Event
+    const context = cmsTestUtil.newHtmlContext("people/v/VertongenJeanLuc/index.html",
+      "<div class=\"contents\"><p>Le dossier</p></div>")
+    const visitor = new TestDataContentVisitor()
+
+    await visitor.renderEvent(context, sightingEvent, aCase)
+    // It used to be appended as a dated paragraph to the document itself, which failed the build.
+    await visitor.renderEvent(context, interview, aCase)
+
+    expect(context.file.document.querySelectorAll(".contents > rr0-sighting").length).toBe(1)
+    expect(context.file.document.querySelectorAll("p").length).toBe(1)
+  })
+
   test("leaves a player the page's author placed alone", async () => {
     const context = cmsTestUtil.newHtmlContext("people/v/VertongenJeanLuc/index.html",
       "<div class=\"contents\"><p>Le dossier</p><rr0-sighting src=\"case.json\" show-witness-map></rr0-sighting></div>")

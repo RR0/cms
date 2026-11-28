@@ -62,6 +62,9 @@ export class DataContentVisitor implements ContentVisitor {
       // metres, which the player stands in the scene and measures against the account). Nothing
       // to write in the page: the player reads it from the case.json, so it only needs the player.
       case "interpretation":
+      // A witness's account that a sighting's values cite (a UFO@home interview: its transcript, by
+      // segment). The player opens it from the case.json too: nothing to write in the page either.
+      case "interview":
         this.processSighting(context, data)
         break
       default:
